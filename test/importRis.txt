@@ -1,0 +1,63 @@
+uuuuuuu
+TY  - CONF
+AU  - Nunnez,Roberto
+TI  - The woman
+DA  - 0202/07
+N1  - nn
+VL  - vol.5
+T3  - 2x
+AD  - 4202
+ER  - 
+TY  - GEN
+AU  - Torres-Nunnez,Roberto
+TI  - Photos
+DA  - 0020/11
+N1  - ee
+PB  - NO SE
+AD  - ave45,no76
+ER  - 
+TY  - THES
+AU  - Diaz-Nunnez,Marynes
+TI  - Reference
+DA  - 0008/01
+N1  - jj
+PB  - Fructuoso Rodriguez
+M3  - Masters
+AD  - ave65
+ER  - 
+TY  - SECC
+AU  - Gomez,Mario
+A2  - Borges,Juan
+A3  - Nuñez,Rolandi
+TI  - plan x
+PY  - 2019
+N1  - mm
+PB  - Education
+VL  - vol1
+T3  - 4
+AD  - no76
+ET  - Maria Elena B.
+EP  - II
+SP  - 12
+ER  - 
+TY  - BOOK
+AU  - Borges,Juan
+TI  - Plan B
+DA  - 2018/12
+N1  - XX
+PB  - Prencite Hall
+VL  - vol3
+T2  - xx8
+AD  - ave51
+ET  - Maria Elena B.
+ER  - 
+TY  - JOUR
+AU  - Gomez,Mario
+TI  - Complexity
+DA  - 2020/04
+N1  - zz
+JO  - Science
+VL  - vol30
+IS  - 2
+SP  - 10
+ER  - 

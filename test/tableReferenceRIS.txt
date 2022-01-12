@@ -1,0 +1,57 @@
+TY  - THES
+AU  - Navarro-Gener,Enrique
+A2  - Martin-Gonzalez,Jacob
+A3  - Fernandez-Diaz,Maria
+TI  - Reference
+DA  - 2019/05
+N1  - hh
+PB  - Cespedes
+M3  - phd
+AD  - ave61
+ER  -
+TY  - CONF
+AU  - Nunnez,Roberto
+TI  - The men
+DA  - 2020/08
+N1  - ff
+VL  - vol34
+T3  - xl3
+AD  - ave76,no87
+ER  -
+TY  - THES
+AU  - Navarro-Gener,Enrique
+A2  - Martin-Gonzalez,Jacob
+A3  - Fernandez-Diaz,Maria
+TI  - help of Windows
+DA  - 2018/07
+N1  - dd
+PB  - Fructuoso Rodriguez
+M3  - Masters
+AD  - ave45,no 43
+ER  -
+TY  - SECC
+PB  - Education
+VL  - vol35
+AD  - ave 76 no74
+ET  - Ing Olga Domigz
+T3  - ja4
+EP  - I
+SP  - 1234
+ER  -
+TY  - BOOK
+PB  - Prencite Hall
+VL  - vol35
+AD  - ave67 no02
+ET  - Ing Isis Perez
+T2  - xx7
+ER  -
+TY  - JOUR
+AU  - Martin-Gonzalez,Jacob
+TI  - project of education
+DA  - 2008/03
+N1  - aa
+JO  - Sciences and education
+VL  - vol132
+IS  - no3443
+SP  - p1011
+ER  -

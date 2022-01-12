@@ -1,0 +1,166 @@
+@phdthesis{7,
+  author = {Navarro-Gener,Enrique and Martin-Gonzalez,Jacob and Fernandez-Diaz,Maria},
+  title = {Reference},
+  month = MAY,
+  note = {hh},
+  year = {2019},
+  school = {Cespedes},
+  type = {phd},
+  address = {ave61}
+}
+
+@inproceedings{6,
+  author = {Nunnez,Roberto},
+  title = {The men},
+  month = AUG,
+  note = {ff},
+  year = {2020},
+  volume = {vol34},
+  series = {xl3},
+  address = {ave76,no87}
+}
+
+@booklet{5,
+  author = {Torres-Nunnez,Roberto},
+  title = {Images},
+  month = NOV,
+  note = {ee},
+  year = {2009},
+  howpublished = {NO SE},
+  address = {ave45,no76}
+}
+
+@mastersthesis{4,
+  author = {Navarro-Gener,Enrique and Martin-Gonzalez,Jacob and Fernandez-Diaz,Maria},
+  title = {help of Windows},
+  month = JUL,
+  note = {dd},
+  year = {2018},
+  school = {Fructuoso Rodriguez},
+  type = {Masters},
+  address = {ave45,no 43}
+}
+
+@inbook{3,
+  chapter = {I},
+  pages = {1234},
+  author = {Fernandez-Diaz,Maria},
+  title = {introduction to Windows},
+  month = FEB,
+  note = {cc},
+  year = {2012},
+  publisher = {Education},
+  volume = {vol35},
+  series = {ja4},
+  address = {ave 76 no74},
+  edition = {Ing Olga Domigz}
+}
+
+@book{2,
+  author = {Navarro-Gener,Enrique and Martin-Gonzalez,Jacob},
+  title = {relations and your career},
+  month = APR,
+  note = {bb},
+  year = {1987},
+  publisher = {Prencite Hall},
+  volume = {vol35},
+  series = {xx7},
+  address = {ave67 no02},
+  edition = {Ing Isis Perez}
+}
+
+@article{1,
+  author = {Martin-Gonzalez,Jacob},
+  title = {project of education},
+  month = MAR,
+  note = {aa},
+  year = {2008},
+  journal = {Sciences and education},
+  volume = {vol132},
+  number = {no3443},
+  pages = {p1011}
+}
+
+@phdthesis{7,
+  author = {Navarro-Gener,Enrique and Martin-Gonzalez,Jacob and Fernandez-Diaz,Maria},
+  title = {Reference},
+  month = MAY,
+  note = {hh},
+  year = {2019},
+  school = {Cespedes},
+  type = {phd},
+  address = {ave61}
+}
+
+@inproceedings{6,
+  author = {Nunnez,Roberto},
+  title = {The men},
+  month = AUG,
+  note = {ff},
+  year = {2020},
+  volume = {vol34},
+  series = {xl3},
+  address = {ave76,no87}
+}
+
+@booklet{5,
+  author = {Torres-Nunnez,Roberto},
+  title = {Images},
+  month = NOV,
+  note = {ee},
+  year = {2009},
+  howpublished = {NO SE},
+  address = {ave45,no76}
+}
+
+@mastersthesis{4,
+  author = {Navarro-Gener,Enrique and Martin-Gonzalez,Jacob and Fernandez-Diaz,Maria},
+  title = {help of Windows},
+  month = JUL,
+  note = {dd},
+  year = {2018},
+  school = {Fructuoso Rodriguez},
+  type = {Masters},
+  address = {ave45,no 43}
+}
+
+@inbook{3,
+  chapter = {I},
+  pages = {1234},
+  author = {Fernandez-Diaz,Maria},
+  title = {introduction to Windows},
+  month = FEB,
+  note = {cc},
+  year = {2012},
+  publisher = {Education},
+  volume = {vol35},
+  series = {ja4},
+  address = {ave 76 no74},
+  edition = {Ing Olga Domigz}
+}
+
+@book{2,
+  author = {Navarro-Gener,Enrique and Martin-Gonzalez,Jacob},
+  title = {relations and your career},
+  month = APR,
+  note = {bb},
+  year = {1987},
+  publisher = {Prencite Hall},
+  volume = {vol35},
+  series = {xx7},
+  address = {ave67 no02},
+  edition = {Ing Isis Perez}
+}
+
+@article{1,
+  author = {Martin-Gonzalez,Jacob},
+  title = {project of education},
+  month = MAR,
+  note = {aa},
+  year = {2008},
+  journal = {Sciences and education},
+  volume = {vol132},
+  number = {no3443},
+  pages = {p1011}
+}
+

@@ -1,0 +1,122 @@
+@article{nunnez-musa_celebro_1983,
+
+	title = {El celebro de Dovernan},
+
+	volume = {3},
+
+	author = {Nunnez-Musa, Yulier},
+
+	month = sep,
+
+	journal = {Ciencia y Educacion},
+	number = {45},
+	note = {rr},
+	year = {1983},
+
+	pages = {121}
+
+}
+@book{navarro-gener_aprender_2005,
+
+	edition = {Ing Sara Gutierrez},
+
+	series = {36391},
+
+	title = {Aprender a vivir},
+
+	volume = {4},
+
+	note = {ss},
+	address = {ave 61 no 4002},
+	publisher = {Cientifico Tecnica},
+
+	author = {Navarro-Gener, Enrique
+ and Martin-Gonzalez, Jacob},
+
+	month = jan,
+
+	year = {2005}
+
+}
+@mastersthesis{perez_lenguajes_201,
+
+	title = {Lenguajes de {Programacion}},
+
+	school = {Frank Pais},
+
+	author = {Perez, Juan},
+
+	note = {ss},
+	address = {Carretera Central},
+	month = mar,
+
+	year = {2015}
+
+}
+@phdthesis{guerrero_reference_2019,
+
+	type = {dph},
+
+	title = {Reference},
+
+	school = {Cespedes},
+
+	note = {hh},
+	author = {Guerrero, Jany},
+
+	address = {ave 61},
+	month = jun,
+
+	year = {2019}
+
+}
+@inbook{martinez_plantas_2001,
+
+	edition = {Ing Olga Dominguez},
+
+	series = {x63},
+
+	title = {Las plantas},
+
+	volume = {5},
+
+	publisher = {Cientifico Tecnica},
+
+	author = {Martinez, Maria},
+
+	month = feb,
+
+	address = {ave 41 no 2301},
+	note = {qq},
+	chapter = {V},
+	year = {2001},
+	pages = {21}
+
+}
+@inproceedings{6,
+	series = {2},
+
+	title = {Los animales},
+
+	volume = {1},
+
+	author = {Arroyo, Ricardo and Acosta, Manuel and Cruz,Celia},
+
+	month = may,
+
+	address = {ave 51},
+	note = {rr},
+	year = {2009}
+}
+@booklet{5,
+	title = {La vida},
+
+	author = {Guerrero, Jany},
+
+	month = apr,
+
+	address = {ave 61},
+	howpublished = {adm},
+	note = {oo},
+	year = {2012}
+}
