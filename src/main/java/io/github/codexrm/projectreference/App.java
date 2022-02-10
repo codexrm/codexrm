@@ -8,53 +8,55 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
+
 import java.io.IOException;
-import io.github.codexrm.projectreference.Controller.ReferenceLibraryManager;
+
+import io.github.codexrm.projectreference.Model.Controller.ReferenceLibraryManager;
 import io.github.codexrm.projectreference.view.RootLayoutController;
 
 public class App extends Application {
-  private final KeyCombination ctrlN = KeyCodeCombination.keyCombination("Ctrl+N");
-  private RootLayoutController rootLayoutController;
-  private VBox rootLayout;
+    private final KeyCombination ctrlN = KeyCodeCombination.keyCombination("Ctrl+N");
+    private RootLayoutController rootLayoutController;
+    private VBox rootLayout;
 
-  
-  public App() {
-      FXMLLoader rootLayoutLoader = new FXMLLoader();
-      rootLayoutLoader.setLocation(getClass().getResource("view/RootLayout.fxml"));
 
-      try {
-          ReferenceLibraryManager manager = ReferenceLibraryManager.getReferenceLibraryManager();
-          rootLayoutController = new RootLayoutController(manager);
-          rootLayoutLoader.setController(rootLayoutController);
-          rootLayout = rootLayoutLoader.load();
-      } catch (IOException e) {
-          e.printStackTrace();
-      }
-  }
+    public App() {
+        FXMLLoader rootLayoutLoader = new FXMLLoader();
+        rootLayoutLoader.setLocation(getClass().getResource("view/RootLayout.fxml"));
 
-  public static void main(String[] args) {
-      launch();
-  }
+        try {
+            ReferenceLibraryManager manager = ReferenceLibraryManager.getReferenceLibraryManager();
+            rootLayoutController = new RootLayoutController(manager);
+            rootLayoutLoader.setController(rootLayoutController);
+            rootLayout = rootLayoutLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-  @Override
-  public void start(Stage stage) {
-      stage.setTitle("Codex");
+    public static void main(String[] args) {
+        launch();
+    }
 
-      stage.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
-          if (ctrlN.match(keyEvent)) {
-              rootLayoutController.addReference();
-          }
-      });
+    @Override
+    public void start(Stage stage) {
+        stage.setTitle("Codex");
 
-      Scene scene = new Scene(rootLayout);
-      stage.setScene(scene);
-      stage.show();
-  }
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
+            if (ctrlN.match(keyEvent)) {
+                rootLayoutController.addReference();
+            }
+        });
+
+        Scene scene = new Scene(rootLayout);
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }
 
 class AppLauncher {
-  public static void main(String[] args) {
-    App.main(args);
-  }
+    public static void main(String[] args) {
+        App.main(args);
+    }
 }
