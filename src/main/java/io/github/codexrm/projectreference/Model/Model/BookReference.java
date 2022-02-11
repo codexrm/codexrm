@@ -1,5 +1,7 @@
 package io.github.codexrm.projectreference.Model.Model;
 
+import java.time.LocalDate;
+
 public class BookReference extends Reference {
 
     protected String publisher;
@@ -10,6 +12,20 @@ public class BookReference extends Reference {
 
     public BookReference() {
         super();
+        this.publisher = "";
+        this.volume = "";
+        this.series = "";
+        this.address = "";
+        this.edition = "";
+    }
+
+    public BookReference(Integer id, String author, String title, LocalDate date, String note) {
+        super(id, author, title, date, note);
+        this.publisher = "";
+        this.volume = "";
+        this.series = "";
+        this.address = "";
+        this.edition = "";
     }
 
     public String getPublisher() {

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.Model.Controller.ReferenceLibraryManager;
-import io.github.codexrm.projectreference.Model.Enum.ReferenceType;
 import io.github.codexrm.projectreference.Model.Model.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;

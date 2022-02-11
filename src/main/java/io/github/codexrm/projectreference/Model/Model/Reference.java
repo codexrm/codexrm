@@ -1,6 +1,7 @@
 package io.github.codexrm.projectreference.Model.Model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,6 +28,18 @@ public class Reference {
 
     public Reference() {
         authorIdList = new ArrayList<>();
+        this.title = "";
+        this.date = null;
+        this.note = "";
+    }
+
+    public Reference(Integer id, String author, String title, LocalDate date, String note) {
+        authorIdList = new ArrayList<>();
+        this.authorIdList = authorLibrary.createAuthor(author);
+        this.title = title;
+        this.date = date;
+        this.note = note;
+        this.id = id;
     }
 
     @JsonIgnore

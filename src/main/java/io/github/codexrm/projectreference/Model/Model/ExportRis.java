@@ -80,7 +80,7 @@ public class ExportRis implements Export {
         return entry;
     }
 
-    private void addAuthors(ArrayList<Integer> listId, ArrayList<String> listAuthorReference ) {
+    private void addAuthors(ArrayList<Integer> listId, ArrayList<String> listAuthorReference) {
 
         ArrayList<Author> listAuthors = authorLibrary.readAuthorList(listId);
         for (int i = 0; i < listAuthors.size(); i++) {
@@ -98,7 +98,7 @@ public class ExportRis implements Export {
         JournalArticle jour = new JournalArticle();
 
         commonField(reference, jour);
-        addAuthors(reference.getAuthorIdList(),jour.getListAuthor());
+        addAuthors(reference.getAuthorIdList(), jour.getListAuthor());
         jour.setTitle(reference.getTitle());
         jour.setDate(reference.getDate());
         jour.setJournal(reference.getJournal());
@@ -113,7 +113,7 @@ public class ExportRis implements Export {
 
         Book book = new Book();
         commonField(reference, book);
-        addAuthors(reference.getAuthorIdList(),book.getListAuthor());
+        addAuthors(reference.getAuthorIdList(), book.getListAuthor());
         book.setTitle(reference.getTitle());
         book.setDate(reference.getDate());
         book.setPublisher(reference.getPublisher());
@@ -129,7 +129,7 @@ public class ExportRis implements Export {
 
         BookSection section = new BookSection();
         commonField(reference, section);
-        addAuthors(reference.getAuthorIdList(),section.getListAuthor());
+        addAuthors(reference.getAuthorIdList(), section.getListAuthor());
         section.setTitle(reference.getTitle());
         section.setDate(reference.getDate());
         section.setPublisher(reference.getPublisher());
@@ -146,7 +146,8 @@ public class ExportRis implements Export {
     private Thesis createThesis(ThesisReference reference) {
 
         Thesis thesis = new Thesis();
-        commonField(reference, thesis);addAuthors(reference.getAuthorIdList(),thesis.getListAuthor());
+        commonField(reference, thesis);
+        addAuthors(reference.getAuthorIdList(), thesis.getListAuthor());
         thesis.setTitle(reference.getTitle());
         thesis.setDate(reference.getDate());
         thesis.setSchool(reference.getSchool());
@@ -164,7 +165,8 @@ public class ExportRis implements Export {
 
         ConferenceProceedings proceedings = new ConferenceProceedings();
         commonField(reference, proceedings);
-        ;addAuthors(reference.getAuthorIdList(),proceedings.getListAuthor());
+        ;
+        addAuthors(reference.getAuthorIdList(), proceedings.getListAuthor());
         proceedings.setTitle(reference.getTitle());
         proceedings.setDate(reference.getDate());
         proceedings.setVolume(reference.getVolume());

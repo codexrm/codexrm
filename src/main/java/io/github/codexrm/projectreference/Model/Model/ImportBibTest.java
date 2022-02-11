@@ -4,6 +4,7 @@ import java.io.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+
 import io.github.codexrm.projectreference.Model.Enum.ThesisType;
 import org.jbibtex.*;
 
@@ -88,42 +89,44 @@ public class ImportBibTest implements Import {
         if (value != null) {
             reference.setTitle(value.toUserString());
         }
-        establishDate(entry,reference);
+        establishDate(entry, reference);
 
         value = entry.getField(BibTeXEntry.KEY_NOTE);
         if (value != null) {
             reference.setNote(value.toUserString());
         }
     }
-  private String getMonth(String date) {
 
-    switch (date) {
-      case "January":
-        return "01";
-      case "February":
-        return "02";
-      case "March":
-        return "03";
-      case "April":
-        return "04";
-      case "May":
-        return "05";
-      case "June":
-        return "06";
-      case "July":
-        return "07";
-      case "August":
-        return "08";
-      case "September":
-        return "09";
-      case "October":
-        return "10";
-      case "November":
-        return "11";
-      default:
-        return "12";
+    private String getMonth(String date) {
+
+        switch (date) {
+            case "January":
+                return "01";
+            case "February":
+                return "02";
+            case "March":
+                return "03";
+            case "April":
+                return "04";
+            case "May":
+                return "05";
+            case "June":
+                return "06";
+            case "July":
+                return "07";
+            case "August":
+                return "08";
+            case "September":
+                return "09";
+            case "October":
+                return "10";
+            case "November":
+                return "11";
+            default:
+                return "12";
+        }
     }
-  }
+
     private boolean isNumero(final String numero) {
         try {
             Long.valueOf(numero);
@@ -133,6 +136,7 @@ public class ImportBibTest implements Import {
             return false;
         }
     }
+
     private void establishDate(BibTeXEntry entry, Reference reference) {
 
         String year = null;
@@ -148,15 +152,15 @@ public class ImportBibTest implements Import {
         if (value != null && isNumero(value.toUserString())) {
             year = value.toUserString();
         }
-        if (year != null && month != null){
-          date = year + "/" + month + "/01";
-        }else{
-          if (month == null){
-            date = year + "/01/02";
-          }
+        if (year != null && month != null) {
+            date = year + "/" + month + "/01";
+        } else {
+            if (month == null) {
+                date = year + "/01/02";
+            }
         }
         if (date != null)
-        reference.setDate(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+            reference.setDate(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd")));
     }
 
     private Reference createArticleReference(BibTeXEntry entry) {

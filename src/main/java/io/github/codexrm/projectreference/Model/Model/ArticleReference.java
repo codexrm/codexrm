@@ -1,5 +1,7 @@
 package io.github.codexrm.projectreference.Model.Model;
 
+import java.time.LocalDate;
+
 public class ArticleReference extends Reference {
 
     private String journal;
@@ -9,6 +11,18 @@ public class ArticleReference extends Reference {
 
     public ArticleReference() {
         super();
+        this.journal = "";
+        this.volume = "";
+        this.number = "";
+        this.pages = "";
+    }
+
+    public ArticleReference(Integer id, String author, String title, LocalDate date, String note) {
+        super(id, author, title, date, note);
+        this.journal = "";
+        this.volume = "";
+        this.number = "";
+        this.pages = "";
     }
 
     public String getJournal() {

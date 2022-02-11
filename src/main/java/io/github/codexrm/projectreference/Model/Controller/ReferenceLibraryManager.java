@@ -3,6 +3,7 @@ package io.github.codexrm.projectreference.Model.Controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 import io.github.codexrm.projectreference.Model.Enum.Format;
@@ -103,7 +104,23 @@ public class ReferenceLibraryManager {
 
     }
 
-    public void replaceReferenceType(Reference newReference) {
+    public void deleteReferences(ArrayList<Integer> referenceIdList) throws IOException {
+        for (Integer id : referenceIdList) {
+            referenceLibrary.getReferenceTable().remove(id);
+        }
+        saveTables();
+    }
+
+    public void updateReference(Reference reference) throws IOException {
+
+        if (referenceLibrary.getReferenceTable().equals(reference.getId())) {
+            referenceLibrary.getReferenceTable().remove(reference.getId());
+            referenceLibrary.getReferenceTable().put(reference.getId(), reference);
+            saveTables();
+        }
+    }
+
+    public Reference replaceReferenceType(Reference newReference) throws IOException {
 
         if (referenceLibrary.getReference(newReference.getId()) != null) {
 
@@ -116,6 +133,8 @@ public class ReferenceLibraryManager {
             newReference.setId(removedReference.getId());
             referenceLibrary.getReferenceTable().put(newReference.getId(), newReference);
         }
+        saveTables();
+        return newReference;
     }
 
     public void exportReference(String path, Reference reference, Format format) throws IOException {

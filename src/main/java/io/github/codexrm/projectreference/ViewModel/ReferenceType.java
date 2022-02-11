@@ -1,6 +1,7 @@
-package io.github.codexrm.projectreference.Model.Enum;
+package io.github.codexrm.projectreference.ViewModel;
 
 public enum ReferenceType {
+
     ARTICLE("Article"),
     BOOK("Book"),
     BOOKSECCION("Book Seccion"),

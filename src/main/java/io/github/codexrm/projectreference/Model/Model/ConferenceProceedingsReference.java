@@ -1,5 +1,7 @@
 package io.github.codexrm.projectreference.Model.Model;
 
+import java.time.LocalDate;
+
 public class ConferenceProceedingsReference extends Reference {
 
     private String volume;
@@ -8,6 +10,16 @@ public class ConferenceProceedingsReference extends Reference {
 
     public ConferenceProceedingsReference() {
         super();
+        this.volume = "";
+        this.serie = "";
+        this.address = "";
+    }
+
+    public ConferenceProceedingsReference(Integer id, String author, String title, LocalDate date, String note) {
+        super(id, author, title, date, note);
+        this.volume = "";
+        this.serie = "";
+        this.address = "";
     }
 
     public String getVolume() {

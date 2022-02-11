@@ -1,5 +1,7 @@
 package io.github.codexrm.projectreference.Model.Model;
 
+import java.time.LocalDate;
+
 public class BookLetReference extends Reference {
 
     private String howpublished;
@@ -7,6 +9,14 @@ public class BookLetReference extends Reference {
 
     public BookLetReference() {
         super();
+        this.howpublished = "";
+        this.address = "";
+    }
+
+    public BookLetReference(Integer id, String author, String title, LocalDate date, String note) {
+        super(id, author, title, date, note);
+        this.howpublished = "";
+        this.address = "";
     }
 
     public String getHowpublished() {
