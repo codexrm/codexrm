@@ -1,25 +1,20 @@
 package io.github.codexrm.projectreference.view;
 
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
+
 import java.util.ResourceBundle;
 
-import io.github.codexrm.projectreference.Model.Controller.ReferenceLibraryManager;
-import io.github.codexrm.projectreference.Model.Enum.*;
-import io.github.codexrm.projectreference.Model.Model.*;
+import io.github.codexrm.projectreference.ViewModel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 public class DetailsBookReferenceController implements Initializable {
 
-    private final ReferenceLibraryManager manager;
-    private final RootLayoutController rootLayoutController;
-    private int referenceId;
     @FXML
     private TextField author;
 
@@ -27,10 +22,7 @@ public class DetailsBookReferenceController implements Initializable {
     private TextField title;
 
     @FXML
-    private TextField year;
-
-    @FXML
-    private ComboBox<Month> month;
+    private DatePicker date;
 
     @FXML
     private TextField note;
@@ -52,206 +44,174 @@ public class DetailsBookReferenceController implements Initializable {
 
     @FXML
     private ComboBox<ReferenceType> referenceType;
-    private ChangeListener<ReferenceType> referenceTypeListener;
+    private ReferenceLibraryManagerVM referenceManager;
+    private BookReferenceVM currentBookReference;
+    private BookReferenceVM previousBookReference;
 
-    public DetailsBookReferenceController(ReferenceLibraryManager manager,
-                                          RootLayoutController rootLayoutController) {
-        this.manager = manager;
-        this.rootLayoutController = rootLayoutController;
+    private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
+        if (oldReference != null) {
+            if ((oldReference instanceof ArticleReferenceVM)) {
+                author.textProperty().unbindBidirectional(oldReference.authorProperty());
+                title.textProperty().unbindBidirectional(oldReference.titleProperty());
+                date.valueProperty().unbindBidirectional((oldReference).dateProperty());
+                note.textProperty().unbindBidirectional(oldReference.noteProperty());
+                publisher.textProperty().unbindBidirectional(((BookReferenceVM) oldReference).publisherProperty());
+                volume.textProperty().unbindBidirectional(((BookReferenceVM) oldReference).volumeProperty());
+                series.textProperty().unbindBidirectional(((BookReferenceVM) oldReference).seriesProperty());
+                address.textProperty().unbindBidirectional(((BookReferenceVM) oldReference).addressProperty());
+                edition.textProperty().unbindBidirectional(((BookReferenceVM) oldReference).editionProperty());
+                referenceType.valueProperty().unbindBidirectional(((BookReferenceVM) oldReference).referenceTypeProperty());
 
+                previousBookReference = new BookReferenceVM(oldReference.getId(), oldReference.getAuthor(), oldReference.getTitle(),
+                        oldReference.getDate(),oldReference.getNote(),
+                        ((BookReferenceVM) oldReference).getPublisher(),
+                        ((BookReferenceVM) oldReference).getVolume(),
+                        ((BookReferenceVM) oldReference).getSeries(),
+                        ((BookReferenceVM) oldReference).getAddress(),
+                        ((BookReferenceVM) oldReference).getEdition());
+            }
+        }
 
+        if (newReference != null) {
+            if ((newReference instanceof BookReferenceVM)) {
+                author.textProperty().bindBidirectional(newReference.authorProperty());
+                title.textProperty().bindBidirectional(newReference.titleProperty());
+                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                note.textProperty().bindBidirectional(newReference.noteProperty());
+                publisher.textProperty().bindBidirectional(((BookReferenceVM) newReference).publisherProperty());
+                volume.textProperty().bindBidirectional(((BookReferenceVM) newReference).volumeProperty());
+                series.textProperty().bindBidirectional(((BookReferenceVM) newReference).seriesProperty());
+                address.textProperty().bindBidirectional(((BookReferenceVM) newReference).addressProperty());
+                edition.textProperty().bindBidirectional(((BookReferenceVM) newReference).editionProperty());
+                referenceType.valueProperty().bindBidirectional(((BookReferenceVM) newReference).referenceTypeProperty());
+
+                currentBookReference = new BookReferenceVM(
+                        newReference.getId(),
+                        newReference.getAuthor(),
+                        newReference.getTitle(),
+                        newReference.getDate(),
+                        newReference.getNote(),
+                        ((BookReferenceVM) newReference).getPublisher(),
+                        ((BookReferenceVM) newReference).getVolume(),
+                        ((BookReferenceVM) newReference).getSeries(),
+                        ((BookReferenceVM) newReference).getAddress(),
+                        ((BookReferenceVM) newReference).getEdition());
+            }
+        } else {
+            author.clear();
+            title.clear();
+            //falta date
+            note.clear();
+            publisher.clear();
+            volume.clear();
+            series.clear();
+            address.clear();
+            edition.clear();
+        }
+    };
+
+    public TextField getAuthor() {
+        return author;
     }
 
-    public void setReferenceId(int referenceId) {
-        this.referenceId = referenceId;
+    public void setAuthor(TextField author) {
+        this.author = author;
     }
 
-
-    public String getAuthor() {
-        return author.getText();
+    public TextField getTitle() {
+        return title;
     }
 
-    public void setAuthor(String author) {
-        this.author.setText(author);
+    public void setTitle(TextField title) {
+        this.title = title;
     }
 
-    public String getTitle() {
-        return title.getText();
+    public DatePicker getDate() {
+        return date;
     }
 
-    public void setTitle(String title) {
-        this.title.setText(title);
+    public void setDate(DatePicker date) {
+        this.date = date;
     }
 
-    public String getYear() {
-        return year.getText();
+    public TextField getNote() {
+        return note;
     }
 
-    public void setYear(String year) {
-        this.year.setText(year);
+    public void setNote(TextField note) {
+        this.note = note;
     }
 
-    public Month getMonth() {
-        return month.getValue();
+    public TextField getPublisher() {
+        return publisher;
     }
 
-    public void setMonth(Month month) {
-        this.month.getSelectionModel().select(month);
+    public void setPublisher(TextField publisher) {
+        this.publisher = publisher;
     }
 
-    public String getNote() {
-        return note.getText();
+    public TextField getVolume() {
+        return volume;
     }
 
-    public void setNote(String note) {
-        this.note.setText(note);
+    public void setVolume(TextField volume) {
+        this.volume = volume;
     }
 
-    public String getPublisher() {
-        return publisher.getText();
+    public TextField getSeries() {
+        return series;
     }
 
-    public void setPublisher(String publisher) {
-        this.publisher.setText(publisher);
+    public void setSeries(TextField series) {
+        this.series = series;
     }
 
-    public String getVolume() {
-        return volume.getText();
+    public TextField getAddress() {
+        return address;
     }
 
-    public void setVolume(String volume) {
-        this.volume.setText(volume);
+    public void setAddress(TextField address) {
+        this.address = address;
     }
 
-    public String getSeries() {
-        return series.getText();
+    public TextField getEdition() {
+        return edition;
     }
 
-    public void setSeries(String series) {
-        this.series.setText(series);
-    }
-
-    public String getAddress() {
-        return address.getText();
-    }
-
-    public void setAddress(String address) {
-        this.address.setText(address);
-    }
-
-    public String getEdition() {
-        return edition.getText();
-    }
-
-    public void setEdition(String edition) {
-        this.edition.setText(edition);
+    public void setEdition(TextField edition) {
+        this.edition = edition;
     }
 
     public void setReferenceType(ReferenceType referenceType) {
-        this.referenceType.getSelectionModel().selectedItemProperty()
-                .removeListener(referenceTypeListener);
         this.referenceType.getSelectionModel().select(referenceType);
-        this.referenceType.getSelectionModel().selectedItemProperty()
-                .addListener(referenceTypeListener);
-
     }
 
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        loadMonth();
+    public void initialize(URL location, ResourceBundle resources) {
         loadReferenceType();
-        initializeOnAction();
         initializeFocusLost();
+        initializeOnAction();
     }
 
-    private void loadMonth() {
-        this.month.getItems().setAll(Month.JAN, Month.FEB, Month.MAR, Month.APR, Month.MAY, Month.JUN,
-                Month.JUL, Month.AUG, Month.SEP, Month.OCT, Month.NOV, Month.DEC);
-    }
-
-    private void loadReferenceType() {
-        for (ReferenceType ref : ReferenceType.values()) {
-            referenceType.getItems().add(ref);
+    public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
+        if (this.referenceManager != null) {
+            this.referenceManager.currentReferenceProperty().removeListener(referenceVMListener);
         }
 
-        referenceTypeListener = (options, oldValue, newValue) -> {
-            if (newValue != ReferenceType.BOOK) {
-                Reference updatedReference = null;
-                switch (newValue) {
-                    case ARTICLE:
-                        updatedReference = new ArticleReference();
-                        break;
-                    case BOOKSECCION:
-                        updatedReference = new BookSectionReference();
-                        break;
-                    case BOOKLET:
-                        updatedReference = new BookLetReference();
-                        break;
-                    case CONFERENCEPROCEEDINGS:
-                        updatedReference = new ConferenceProceedingsReference();
-                        break;
-                    case THESIS:
-                        updatedReference = new ThesisReference();
-                        break;
-                    default:
-                }
-
-                if (updatedReference != null) {
-                    updatedReference.setId(referenceId);
-                }
-
-                try {
-                    rootLayoutController.updateReference(updatedReference, updatedReference, true);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
+        this.referenceManager = dataViewModel;
+        this.referenceManager.currentReferenceProperty().addListener(referenceVMListener);
     }
 
     private void initializeOnAction() {
-
         author.setOnAction(e -> updateReference());
         title.setOnAction(e -> updateReference());
-        year.setOnAction(e -> updateReference());
-        month.setOnAction(e -> updateReference());
+        date.setOnAction(e -> updateReference());
         note.setOnAction(e -> updateReference());
         publisher.setOnAction(e -> updateReference());
         volume.setOnAction(e -> updateReference());
         series.setOnAction(e -> updateReference());
         address.setOnAction(e -> updateReference());
         edition.setOnAction(e -> updateReference());
-    }
-
-    public boolean isDifferentReference(BookReference bookReference) {
-        if (bookReference == null)
-            return true;
-
-        return (referenceId != bookReference.getId())
-                || !Objects.equals(author.getText(), bookReference.getAuthor())
-                || !Objects.equals(title.getText(), bookReference.getTitle())
-                || !Objects.equals(year.getText(), bookReference.getYear())
-                || !Objects.equals(month, bookReference.getMonth())
-                || !Objects.equals(note.getText(), bookReference.getNote())
-                || !Objects.equals(publisher.getText(), bookReference.getPublisher())
-                || !Objects.equals(volume.getText(), bookReference.getVolume())
-                || !Objects.equals(series.getText(), bookReference.getSeries())
-                || !Objects.equals(address.getText(), bookReference.getAddress())
-                || !Objects.equals(edition.getText(), bookReference.getEdition());
-    }
-
-    private void updateReference() {
-        BookReference reference = (BookReference) manager.getReference(referenceId);
-
-        if (isDifferentReference(reference)) {
-            try {
-                rootLayoutController.updateReference(reference, null, false);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     private void initializeFocusLost() {
@@ -263,8 +223,7 @@ public class DetailsBookReferenceController implements Initializable {
 
         author.focusedProperty().addListener(bookDetailListener);
         title.focusedProperty().addListener(bookDetailListener);
-        year.focusedProperty().addListener(bookDetailListener);
-        month.focusedProperty().addListener(bookDetailListener);
+        date.focusedProperty().addListener(bookDetailListener);
         note.focusedProperty().addListener(bookDetailListener);
         publisher.focusedProperty().addListener(bookDetailListener);
         volume.focusedProperty().addListener(bookDetailListener);
@@ -272,4 +231,78 @@ public class DetailsBookReferenceController implements Initializable {
         address.focusedProperty().addListener(bookDetailListener);
         edition.focusedProperty().addListener(bookDetailListener);
     }
+
+    private void updateReference() {
+        BookReferenceVM bookReference = new BookReferenceVM();
+        bookReference.setId(this.currentBookReference.getId());
+        bookReference.setAuthor(author.getText());
+        bookReference.setTitle(title.getText());
+        bookReference.setDate(date.getValue());
+        bookReference.setNote(note.getText());
+        bookReference.setPublisher(publisher.getText());
+        bookReference.setVolume(volume.getText());
+        bookReference.setSeries(series.getText());
+        bookReference.setAddress(address.getText());
+        bookReference.setEdition(edition.getText());
+
+        /*Esta condicional es que se pierde el foco del TextField porque se selecciona
+         * una fila en la tabla, que es de tipo book y se pierden los valores anteriores
+         * que estaban almacenados en la interfaz grafica*/
+        if (previousBookReference != null && bookReference.getId() != previousBookReference.getId()) {
+            try {
+                /*Aqui no tengo como determinar si hay cambios o no, con lo cual siempre salvo la informacion*/
+                referenceManager.updateReference(previousBookReference);
+            } catch (IOException e) {
+                /* Mostrar algun dialogo de error al usuario */
+                e.printStackTrace();
+            }
+        } else if (!bookReference.equals(currentBookReference)) { //Sobrescribi el metodo equals
+            try {
+                currentBookReference = bookReference;
+                referenceManager.updateReference(bookReference);
+            } catch (IOException e) {
+                /* Mostrar algun dialogo de error al usuario */
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void loadReferenceType() {
+        referenceType.getItems().addAll(ReferenceType.values());
+
+        ChangeListener<ReferenceType> referenceTypeListener = (options, oldValue, newValue) -> {
+            if (newValue != ReferenceType.BOOK) {
+                ReferenceVM updatedReference = null;
+                switch (newValue) { // Aqui se podria hacer un factory que devuelva un objeto dado el tipo
+                    case ARTICLE:
+                        updatedReference = new ArticleReferenceVM();
+                        break;
+                    case BOOKSECTION:
+                        updatedReference = new BookSectionReferenceVM();
+                        break;
+                    case BOOKLET:
+                        updatedReference = new BookLetReferenceVM();
+                        break;
+                    case THESIS:
+                        updatedReference = new ThesisReferenceVM();
+                        break;
+                    default: updatedReference = new ConferenceProceedingsReferenceVM();
+                }
+
+                if (updatedReference != null) {
+                    updatedReference.setId(currentBookReference.getId());
+                }
+
+                try {
+                    referenceManager.replaceReferenceType(updatedReference);
+                } catch (IOException e) {
+                    /* Mostrar algun dialogo de error al usuario */
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
+    }
+
 }

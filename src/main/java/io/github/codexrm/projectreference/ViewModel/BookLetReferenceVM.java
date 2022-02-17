@@ -10,29 +10,30 @@ import javafx.beans.property.StringProperty;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class BookLetVM extends ReferenceVM {
+public class BookLetReferenceVM extends ReferenceVM {
 
     ObjectProperty<ReferenceType> referenceType;
     private StringProperty howpublished;
     private StringProperty address;
 
-    public BookLetVM() {
+    public BookLetReferenceVM() {
         super();
         createEmptyBookLetReferenceVM();
     }
 
-    public BookLetVM(final int id, final String author, final String title, LocalDate date, String note,
-                     final String howpublished, final String address) {
+    public BookLetReferenceVM(final int id, final String author, final String title, LocalDate date, String note,
+                              final String howpublished, final String address) {
         super(id, author, title, date, note);
 
+        createEmptyBookLetReferenceVM();
         setHowpublished(howpublished);
         setAddress(address);
 
-        createEmptyBookLetReferenceVM();
+
 
     }
 
-    public BookLetVM(BookLetReference bookLetReference) {
+    public BookLetReferenceVM(BookLetReference bookLetReference) {
         super(bookLetReference.getId(), bookLetReference.getAuthor(), bookLetReference.getTitle(), bookLetReference.getDate(), bookLetReference.getNote());
 
         createEmptyBookLetReferenceVM();
@@ -96,9 +97,9 @@ public class BookLetVM extends ReferenceVM {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof BookLetVM)) return false;
+        if (!(o instanceof BookLetReferenceVM)) return false;
         if (!super.equals(o)) return false;
-        final BookLetVM that = (BookLetVM) o;
+        final BookLetReferenceVM that = (BookLetReferenceVM) o;
         return getReferenceType().equals(that.getReferenceType()) &&
                 Objects.equals(getHowpublished(), that.getHowpublished()) &&
                 Objects.equals(getAddress(), that.getAddress());

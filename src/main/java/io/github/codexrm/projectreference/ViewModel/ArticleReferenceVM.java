@@ -22,7 +22,7 @@ public class ArticleReferenceVM extends ReferenceVM {
         createEmptyArticleReferenceVM();
     }
 
-    public ArticleReferenceVM(final int id, final String author, final String title, LocalDate date, String note,
+    public ArticleReferenceVM(final Integer id, final String author, final String title, LocalDate date, String note,
                               final String journal, final String volume, final String number, final String pages) {
         super(id, author, title, date, note);
 
@@ -115,12 +115,13 @@ public class ArticleReferenceVM extends ReferenceVM {
 
     @Override
     public ArticleReference toModel() {
-        ArticleReference journalReference = new ArticleReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
-        journalReference.setJournal(this.getJournal());
-        journalReference.setNumber(this.getNumber());
-        journalReference.setVolume(this.getVolume());
+        ArticleReference articleReference = new ArticleReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
+        articleReference.setJournal(this.getJournal());
+        articleReference.setNumber(this.getNumber());
+        articleReference.setVolume(this.getVolume());
+        articleReference.setPages(this.getPages());
 
-        return journalReference;
+        return articleReference;
     }
 
     @Override

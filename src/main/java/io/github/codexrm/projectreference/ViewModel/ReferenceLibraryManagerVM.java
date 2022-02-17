@@ -77,9 +77,9 @@ public class ReferenceLibraryManagerVM {
             } else if (valorReference instanceof ArticleReference) {
                 referenceList.add(new ArticleReferenceVM((ArticleReference) valorReference));
             } else if (valorReference instanceof BookSectionReference) {
-                referenceList.add(new BookSectionVM((BookSectionReference) valorReference));
+                referenceList.add(new BookSectionReferenceVM((BookSectionReference) valorReference));
             } else if (valorReference instanceof BookLetReference) {
-                referenceList.add(new BookLetVM((BookLetReference) valorReference));
+                referenceList.add(new BookLetReferenceVM((BookLetReference) valorReference));
             } else if (valorReference instanceof ConferenceProceedingsReference) {
                 referenceList.add(new ConferenceProceedingsReferenceVM((ConferenceProceedingsReference) valorReference));
             } else if (valorReference instanceof ThesisReference) {
@@ -125,6 +125,7 @@ public class ReferenceLibraryManagerVM {
     }
 
     public void replaceReferenceType(ReferenceVM referenceVM) throws IOException {
+
 
         Reference reference = manager.replaceReferenceType(referenceVM.toModel());
 

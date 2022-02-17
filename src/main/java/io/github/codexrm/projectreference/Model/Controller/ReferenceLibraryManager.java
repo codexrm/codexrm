@@ -88,7 +88,7 @@ public class ReferenceLibraryManager {
     }
 
     public void loadTables() throws IOException {
-        File fileDBA = new File(dbReferenceName);
+        File fileDBA = new File(dbAuthorName);
         if (fileDBA.exists() && fileDBA.isFile()) {
             setAuthorLibrary(libraryFiles.loadAuthorTable(dbAuthorName));
         } else {
@@ -121,6 +121,7 @@ public class ReferenceLibraryManager {
     }
 
     public Reference replaceReferenceType(Reference newReference) throws IOException {
+
 
         if (referenceLibrary.getReference(newReference.getId()) != null) {
 

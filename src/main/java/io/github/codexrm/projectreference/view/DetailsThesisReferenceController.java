@@ -2,23 +2,19 @@ package io.github.codexrm.projectreference.view;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
-import io.github.codexrm.projectreference.Model.Controller.ReferenceLibraryManager;
 import io.github.codexrm.projectreference.Model.Enum.*;
-import io.github.codexrm.projectreference.Model.Model.*;
+import io.github.codexrm.projectreference.ViewModel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 public class DetailsThesisReferenceController implements Initializable {
 
-    private final ReferenceLibraryManager manager;
-    private final RootLayoutController rootLayoutController;
-    private int referenceId;
     @FXML
     private TextField author;
 
@@ -26,10 +22,7 @@ public class DetailsThesisReferenceController implements Initializable {
     private TextField title;
 
     @FXML
-    private TextField year;
-
-    @FXML
-    private ComboBox<Month> month;
+    private DatePicker date;
 
     @FXML
     private TextField note;
@@ -46,185 +39,146 @@ public class DetailsThesisReferenceController implements Initializable {
 
     @FXML
     private ComboBox<ReferenceType> referenceType;
-    private ChangeListener<ReferenceType> referenceTypeListener;
+    private ReferenceLibraryManagerVM referenceManager;
+    private ThesisReferenceVM currentThesisReference;
+    private ThesisReferenceVM previousThesisReference;
 
-    public DetailsThesisReferenceController(ReferenceLibraryManager manager,
-                                            RootLayoutController rootLayoutController) {
-        this.manager = manager;
-        this.rootLayoutController = rootLayoutController;
+    private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
+        if (oldReference != null) {
+            if ((oldReference instanceof ThesisReferenceVM)) {
+                author.textProperty().unbindBidirectional(oldReference.authorProperty());
+                title.textProperty().unbindBidirectional(oldReference.titleProperty());
+                date.valueProperty().unbindBidirectional((oldReference).dateProperty());
+                note.textProperty().unbindBidirectional(oldReference.noteProperty());
+                school.textProperty().unbindBidirectional(((ThesisReferenceVM) oldReference).schoolProperty());
+                type.valueProperty().unbindBidirectional(((ThesisReferenceVM) oldReference).typeProperty());
+                address.textProperty().unbindBidirectional(((ThesisReferenceVM) oldReference).addressProperty());
+                referenceType.valueProperty().unbindBidirectional(((ThesisReferenceVM) oldReference).referenceTypeProperty());
+
+                previousThesisReference = new ThesisReferenceVM(oldReference.getId(), oldReference.getAuthor(), oldReference.getTitle(),
+                        oldReference.getDate(),oldReference.getNote(),
+                        ((ThesisReferenceVM) oldReference).getSchool(),
+                        ((ThesisReferenceVM) oldReference).getType(),
+                        ((ThesisReferenceVM) oldReference).getAddress());
+            }
+        }
+
+        if (newReference != null) {
+            if ((newReference instanceof ThesisReferenceVM)) {
+                author.textProperty().bindBidirectional(newReference.authorProperty());
+                title.textProperty().bindBidirectional(newReference.titleProperty());
+                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                note.textProperty().bindBidirectional(newReference.noteProperty());
+                school.textProperty().bindBidirectional(((ThesisReferenceVM) newReference).schoolProperty());
+                type.valueProperty().bindBidirectional(((ThesisReferenceVM) newReference).typeProperty());
+                address.textProperty().bindBidirectional(((ThesisReferenceVM) newReference).addressProperty());
+                referenceType.valueProperty().bindBidirectional(((ThesisReferenceVM) newReference).referenceTypeProperty());
+
+                currentThesisReference = new ThesisReferenceVM(
+                        newReference.getId(),
+                        newReference.getAuthor(),
+                        newReference.getTitle(),
+                        newReference.getDate(),
+                        newReference.getNote(),
+                        ((ThesisReferenceVM) newReference).getSchool(),
+                        ((ThesisReferenceVM) newReference).getType(),
+                        ((ThesisReferenceVM) newReference).getAddress());
+            }
+        } else {
+            author.clear();
+            title.clear();
+            //falta date
+            note.clear();
+            school.clear();
+            //falta type
+            address.clear();
+        }
+    };
+
+    public TextField getAuthor() {
+        return author;
     }
 
-    public void setReferenceId(int referenceId) {
-        this.referenceId = referenceId;
+    public void setAuthor(TextField author) {
+        this.author = author;
     }
 
-    public String getAuthor() {
-        return author.getText();
+    public TextField getTitle() {
+        return title;
     }
 
-    public void setAuthor(String author) {
-        this.author.setText(author);
+    public void setTitle(TextField title) {
+        this.title = title;
     }
 
-    public String getTitle() {
-        return title.getText();
+    public DatePicker getDate() {
+        return date;
     }
 
-    public void setTitle(String title) {
-        this.title.setText(title);
+    public void setDate(DatePicker date) {
+        this.date = date;
     }
 
-    public String getYear() {
-        return year.getText();
+    public TextField getNote() {
+        return note;
     }
 
-    public void setYear(String year) {
-        this.year.setText(year);
+    public void setNote(TextField note) {
+        this.note = note;
     }
 
-    public Month getMonth() {
-        return month.getValue();
+    public TextField getSchool() {
+        return school;
     }
 
-    public void setMonth(Month month) {
-        this.month.getSelectionModel().select(month);
+    public void setSchool(TextField school) {
+        this.school = school;
     }
 
-    public String getNote() {
-        return note.getText();
+    public ComboBox<ThesisType> getType() {
+        return type;
     }
 
-    public void setNote(String note) {
-        this.note.setText(note);
+    public void setType(ComboBox<ThesisType> type) {
+        this.type = type;
     }
 
-    public String getSchool() {
-        return school.getText();
+    public TextField getAddress() {
+        return address;
     }
 
-    public void setSchool(String school) {
-        this.school.setText(school);
-    }
-
-    public ThesisType getType() {
-        return type.getValue();
-    }
-
-    public void setType(ThesisType type) {
-        this.type.getSelectionModel().select(type);
-    }
-
-    public String getAddress() {
-        return address.getText();
-    }
-
-    public void setAddress(String address) {
-        this.address.setText(address);
+    public void setAddress(TextField address) {
+        this.address = address;
     }
 
     public void setReferenceType(ReferenceType referenceType) {
-        this.referenceType.getSelectionModel().selectedItemProperty()
-                .removeListener(referenceTypeListener);
         this.referenceType.getSelectionModel().select(referenceType);
-        this.referenceType.getSelectionModel().selectedItemProperty()
-                .addListener(referenceTypeListener);
     }
 
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
+    public void initialize(URL location, ResourceBundle resources) {
         loadReferenceType();
-        loadComboBox();
-        initializeOnAction();
         initializeFocusLost();
+        initializeOnAction();
     }
 
-    private void loadComboBox() {
-        for (ThesisType the : ThesisType.values()) {
-            type.getItems().add(the);
-        }
-        for (Month mon : Month.values()) {
-            month.getItems().add(mon);
-        }
-    }
-
-    private void loadReferenceType() {
-        for (ReferenceType ref : ReferenceType.values()) {
-            referenceType.getItems().add(ref);
+    public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
+        if (this.referenceManager != null) {
+            this.referenceManager.currentReferenceProperty().removeListener(referenceVMListener);
         }
 
-        referenceTypeListener = (options, oldValue, newValue) -> {
-            if (newValue != ReferenceType.THESIS) {
-                Reference updatedReference = null;
-                switch (newValue) {
-                    case BOOK:
-                        updatedReference = new BookReference();
-                        break;
-                    case BOOKSECCION:
-                        updatedReference = new BookSectionReference();
-                        break;
-                    case BOOKLET:
-                        updatedReference = new BookLetReference();
-                        break;
-                    case CONFERENCEPROCEEDINGS:
-                        updatedReference = new ConferenceProceedingsReference();
-                        break;
-                    case ARTICLE:
-                        updatedReference = new ArticleReference();
-                        break;
-                    default:
-
-                }
-
-                if (updatedReference != null) {
-                    updatedReference.setId(referenceId);
-                }
-
-                try {
-                    rootLayoutController.updateReference(updatedReference, updatedReference, true);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
+        this.referenceManager = dataViewModel;
+        this.referenceManager.currentReferenceProperty().addListener(referenceVMListener);
     }
 
     private void initializeOnAction() {
         author.setOnAction(e -> updateReference());
         title.setOnAction(e -> updateReference());
-        year.setOnAction(e -> updateReference());
-        month.setOnAction(e -> updateReference());
+        date.setOnAction(e -> updateReference());
         note.setOnAction(e -> updateReference());
         school.setOnAction(e -> updateReference());
         type.setOnAction(e -> updateReference());
         address.setOnAction(e -> updateReference());
-    }
-
-    public boolean isDifferentReference(ThesisReference thesis) {
-        if (thesis == null)
-            return true;
-
-        return (referenceId != thesis.getId()) || !Objects.equals(author.getText(), thesis.getAuthor())
-                || !Objects.equals(title.getText(), thesis.getTitle())
-                || !Objects.equals(year.getText(), thesis.getYear())
-                || !Objects.equals(month, thesis.getMonth())
-                || !Objects.equals(note.getText(), thesis.getNote())
-                || !Objects.equals(school.getText(), thesis.getSchool())
-                || !Objects.equals(type, thesis.getType())
-                || !Objects.equals(address.getText(), thesis.getAddress());
-    }
-
-    private void updateReference() {
-        ThesisReference reference = (ThesisReference) manager.getReference(referenceId);
-
-        if (isDifferentReference(reference)) {
-            try {
-                rootLayoutController.updateReference(reference, null, false);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     private void initializeFocusLost() {
@@ -236,11 +190,82 @@ public class DetailsThesisReferenceController implements Initializable {
 
         author.focusedProperty().addListener(bookDetailListener);
         title.focusedProperty().addListener(bookDetailListener);
-        year.focusedProperty().addListener(bookDetailListener);
-        month.focusedProperty().addListener(bookDetailListener);
+        date.focusedProperty().addListener(bookDetailListener);
         note.focusedProperty().addListener(bookDetailListener);
         school.focusedProperty().addListener(bookDetailListener);
         type.focusedProperty().addListener(bookDetailListener);
         address.focusedProperty().addListener(bookDetailListener);
     }
+
+    private void updateReference() {
+        ThesisReferenceVM thesisReference = new ThesisReferenceVM();
+        thesisReference.setId(this.currentThesisReference.getId());
+        thesisReference.setAuthor(author.getText());
+        thesisReference.setTitle(title.getText());
+        thesisReference.setDate(date.getValue());
+        thesisReference.setNote(note.getText());
+        thesisReference.setSchool(school.getText());
+        thesisReference.setType(type.getValue());
+        thesisReference.setAddress(address.getText());
+
+        /*Esta condicional es que se pierde el foco del TextField porque se selecciona
+         * una fila en la tabla, que es de tipo book y se pierden los valores anteriores
+         * que estaban almacenados en la interfaz grafica*/
+        if (previousThesisReference != null && thesisReference.getId() != previousThesisReference.getId()) {
+            try {
+                /*Aqui no tengo como determinar si hay cambios o no, con lo cual siempre salvo la informacion*/
+                referenceManager.updateReference(previousThesisReference);
+            } catch (IOException e) {
+                /* Mostrar algun dialogo de error al usuario */
+                e.printStackTrace();
+            }
+        } else if (!thesisReference.equals(currentThesisReference)) { //Sobrescribi el metodo equals
+            try {
+                currentThesisReference = thesisReference;
+                referenceManager.updateReference(thesisReference);
+            } catch (IOException e) {
+                /* Mostrar algun dialogo de error al usuario */
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void loadReferenceType() {
+        referenceType.getItems().addAll(ReferenceType.values());
+
+        ChangeListener<ReferenceType> referenceTypeListener = (options, oldValue, newValue) -> {
+            if (newValue != ReferenceType.THESIS) {
+                ReferenceVM updatedReference = null;
+                switch (newValue) { // Aqui se podria hacer un factory que devuelva un objeto dado el tipo
+                    case BOOK:
+                        updatedReference = new BookReferenceVM();
+                        break;
+                    case BOOKSECTION:
+                        updatedReference = new BookSectionReferenceVM();
+                        break;
+                    case BOOKLET:
+                        updatedReference = new BookLetReferenceVM();
+                        break;
+                    case ARTICLE:
+                        updatedReference = new ArticleReferenceVM();
+                        break;
+                    default: updatedReference = new ConferenceProceedingsReferenceVM();
+                }
+
+                if (updatedReference != null) {
+                    updatedReference.setId(currentThesisReference.getId());
+                }
+
+                try {
+                    referenceManager.replaceReferenceType(updatedReference);
+                } catch (IOException e) {
+                    /* Mostrar algun dialogo de error al usuario */
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
+    }
+
 }

@@ -27,13 +27,15 @@ public class BookReferenceVM extends ReferenceVM {
                            final String publisher, final String volume, final String series, final String address, final String edition) {
         super(id, author, title, date, note);
 
+        createEmptyBookReferenceVM();
+
         setPublisher(publisher);
         setVolume(volume);
         setSeries(series);
         setAddress(address);
         setEdition(edition);
 
-        createEmptyBookReferenceVM();
+
 
     }
 

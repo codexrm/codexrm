@@ -4,7 +4,7 @@ public enum ReferenceType {
 
     ARTICLE("Article"),
     BOOK("Book"),
-    BOOKSECCION("Book Seccion"),
+    BOOKSECTION("Book Section"),
     BOOKLET("Book Let"),
     CONFERENCEPROCEEDINGS("Conference Proceedings"),
     THESIS("Thesis");

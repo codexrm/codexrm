@@ -2,23 +2,18 @@ package io.github.codexrm.projectreference.view;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
-import io.github.codexrm.projectreference.Model.Controller.ReferenceLibraryManager;
-import io.github.codexrm.projectreference.Model.Enum.*;
-import io.github.codexrm.projectreference.Model.Model.*;
+import io.github.codexrm.projectreference.ViewModel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 public class DetailsConferenceProceedingsReferenceController implements Initializable {
 
-    private final ReferenceLibraryManager manager;
-    private final RootLayoutController rootLayoutController;
-    private int referenceId;
     @FXML
     private TextField author;
 
@@ -26,10 +21,7 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
     private TextField title;
 
     @FXML
-    private TextField year;
-
-    @FXML
-    private ComboBox<Month> month;
+    private DatePicker date;
 
     @FXML
     private TextField note;
@@ -45,183 +37,147 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
 
     @FXML
     private ComboBox<ReferenceType> referenceType;
-    private ChangeListener<ReferenceType> referenceTypeListener;
 
-    public DetailsConferenceProceedingsReferenceController(ReferenceLibraryManager manager,
-                                                           RootLayoutController rootLayoutController) {
-        this.manager = manager;
-        this.rootLayoutController = rootLayoutController;
+    private ReferenceLibraryManagerVM referenceManager;
+    private ConferenceProceedingsReferenceVM currentConferenceProceedingsReference;
+    private ConferenceProceedingsReferenceVM previousConferenceProceedingsReference;
+
+    private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
+        if (oldReference != null) {
+            if ((oldReference instanceof ConferenceProceedingsReferenceVM)) {
+                author.textProperty().unbindBidirectional(oldReference.authorProperty());
+                title.textProperty().unbindBidirectional(oldReference.titleProperty());
+                date.valueProperty().unbindBidirectional((oldReference).dateProperty());
+                note.textProperty().unbindBidirectional(oldReference.noteProperty());
+                volume.textProperty().unbindBidirectional(((ConferenceProceedingsReferenceVM) oldReference).volumeProperty());
+                serie.textProperty().unbindBidirectional(((ConferenceProceedingsReferenceVM) oldReference).serieProperty());
+                address.textProperty().unbindBidirectional(((ConferenceProceedingsReferenceVM) oldReference).addressProperty());
+                referenceType.valueProperty().unbindBidirectional(((ConferenceProceedingsReferenceVM) oldReference).referenceTypeProperty());
+
+                previousConferenceProceedingsReference = new ConferenceProceedingsReferenceVM(oldReference.getId(), oldReference.getAuthor(), oldReference.getTitle(),
+                        oldReference.getDate(),oldReference.getNote(),
+                        ((ConferenceProceedingsReferenceVM) oldReference).getVolume(),
+                        ((ConferenceProceedingsReferenceVM) oldReference).getSerie(),
+                        ((ConferenceProceedingsReferenceVM) oldReference).getAddress());
+            }
+        }
+
+        if (newReference != null) {
+            if ((newReference instanceof ConferenceProceedingsReferenceVM)) {
+                author.textProperty().bindBidirectional(newReference.authorProperty());
+                title.textProperty().bindBidirectional(newReference.titleProperty());
+                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                note.textProperty().bindBidirectional(newReference.noteProperty());
+                volume.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).volumeProperty());
+                serie.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).serieProperty());
+                address.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).addressProperty());
+                referenceType.valueProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).referenceTypeProperty());
+
+                currentConferenceProceedingsReference = new ConferenceProceedingsReferenceVM(
+                        newReference.getId(),
+                        newReference.getAuthor(),
+                        newReference.getTitle(),
+                        newReference.getDate(),
+                        newReference.getNote(),
+                        ((ConferenceProceedingsReferenceVM) newReference).getVolume(),
+                        ((ConferenceProceedingsReferenceVM) newReference).getSerie(),
+                        ((ConferenceProceedingsReferenceVM) newReference).getAddress());
+            }
+        } else {
+            author.clear();
+            title.clear();
+            //falta date
+            note.clear();
+            volume.clear();
+            serie.clear();
+            address.clear();
+        }
+    };
+
+    public TextField getAuthor() {
+        return author;
     }
 
-    public void setReferenceId(int referenceId) {
-        this.referenceId = referenceId;
+    public void setAuthor(TextField author) {
+        this.author = author;
     }
 
-    public String getAuthor() {
-        return author.getText();
+    public TextField getTitle() {
+        return title;
     }
 
-    public void setAuthor(String author) {
-        this.author.setText(author);
+    public void setTitle(TextField title) {
+        this.title = title;
     }
 
-    public String getTitle() {
-        return title.getText();
+    public DatePicker getDate() {
+        return date;
     }
 
-    public void setTitle(String title) {
-        this.title.setText(title);
+    public void setDate(DatePicker date) {
+        this.date = date;
     }
 
-    public String getYear() {
-        return year.getText();
+    public TextField getNote() {
+        return note;
     }
 
-    public void setYear(String year) {
-        this.year.setText(year);
+    public void setNote(TextField note) {
+        this.note = note;
     }
 
-    public Month getMonth() {
-        return month.getValue();
+    public TextField getVolume() {
+        return volume;
     }
 
-    public void setMonth(Month month) {
-        this.month.getSelectionModel().select(month);
+    public void setVolume(TextField volume) {
+        this.volume = volume;
     }
 
-    public String getNote() {
-        return note.getText();
+    public TextField getSerie() {
+        return serie;
     }
 
-    public void setNote(String note) {
-        this.note.setText(note);
+    public void setSerie(TextField serie) {
+        this.serie = serie;
     }
 
-    public String getVolume() {
-        return volume.getText();
+    public TextField getAddress() {
+        return address;
     }
 
-    public void setVolume(String volume) {
-        this.volume.setText(volume);
-    }
-
-    public String getSerie() {
-        return serie.getText();
-    }
-
-    public void setSerie(String serie) {
-        this.serie.setText(serie);
-    }
-
-    public String getAddress() {
-        return address.getText();
-    }
-
-    public void setAddress(String address) {
-        this.address.setText(address);
+    public void setAddress(TextField address) {
+        this.address = address;
     }
 
     public void setReferenceType(ReferenceType referenceType) {
-        this.referenceType.getSelectionModel().selectedItemProperty()
-                .removeListener(referenceTypeListener);
         this.referenceType.getSelectionModel().select(referenceType);
-        this.referenceType.getSelectionModel().selectedItemProperty()
-                .addListener(referenceTypeListener);
     }
 
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
+    public void initialize(URL location, ResourceBundle resources) {
         loadReferenceType();
-        loadMonth();
-        initializeOnAction();
         initializeFocusLost();
+        initializeOnAction();
     }
 
-    private void loadMonth() {
-        this.month.getItems().setAll(Month.JAN, Month.FEB, Month.MAR, Month.APR, Month.MAY, Month.JUN,
-                Month.JUL, Month.AUG, Month.SEP, Month.OCT, Month.NOV, Month.DEC);
-    }
-
-    private void loadReferenceType() {
-        for (ReferenceType ref : ReferenceType.values()) {
-            referenceType.getItems().add(ref);
+    public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
+        if (this.referenceManager != null) {
+            this.referenceManager.currentReferenceProperty().removeListener(referenceVMListener);
         }
 
-        referenceTypeListener = (options, oldValue, newValue) -> {
-            if (newValue != ReferenceType.CONFERENCEPROCEEDINGS) {
-                Reference updatedReference = null;
-                switch (newValue) {
-                    case BOOK:
-                        updatedReference = new BookReference();
-                        break;
-                    case BOOKSECCION:
-                        updatedReference = new BookSectionReference();
-                        break;
-                    case BOOKLET:
-                        updatedReference = new BookLetReference();
-                        break;
-                    case ARTICLE:
-                        updatedReference = new ArticleReference();
-                        break;
-                    case THESIS:
-                        updatedReference = new ThesisReference();
-                        break;
-                    default:
-
-                }
-
-                if (updatedReference != null) {
-                    updatedReference.setId(referenceId);
-                }
-
-                try {
-                    rootLayoutController.updateReference(updatedReference, updatedReference, true);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
+        this.referenceManager = dataViewModel;
+        this.referenceManager.currentReferenceProperty().addListener(referenceVMListener);
     }
 
     private void initializeOnAction() {
         author.setOnAction(e -> updateReference());
         title.setOnAction(e -> updateReference());
-        year.setOnAction(e -> updateReference());
-        month.setOnAction(e -> updateReference());
+        date.setOnAction(e -> updateReference());
         note.setOnAction(e -> updateReference());
         volume.setOnAction(e -> updateReference());
         serie.setOnAction(e -> updateReference());
         address.setOnAction(e -> updateReference());
-    }
-
-    public boolean isDifferentReference(ConferenceProceedingsReference proceedings) {
-        if (proceedings == null)
-            return true;
-
-        return (referenceId != proceedings.getId())
-                || !Objects.equals(author.getText(), proceedings.getAuthor())
-                || !Objects.equals(title.getText(), proceedings.getTitle())
-                || !Objects.equals(year.getText(), proceedings.getYear())
-                || !Objects.equals(month, proceedings.getMonth())
-                || !Objects.equals(note.getText(), proceedings.getNote())
-                || !Objects.equals(volume.getText(), proceedings.getVolume())
-                || !Objects.equals(serie.getText(), proceedings.getSerie())
-                || !Objects.equals(address.getText(), proceedings.getAddress());
-    }
-
-    private void updateReference() {
-        ConferenceProceedingsReference reference =
-                (ConferenceProceedingsReference) manager.getReference(referenceId);
-
-        if (isDifferentReference(reference)) {
-            try {
-                rootLayoutController.updateReference(reference, null, false);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     private void initializeFocusLost() {
@@ -233,11 +189,82 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
 
         author.focusedProperty().addListener(bookDetailListener);
         title.focusedProperty().addListener(bookDetailListener);
-        year.focusedProperty().addListener(bookDetailListener);
-        month.focusedProperty().addListener(bookDetailListener);
+        date.focusedProperty().addListener(bookDetailListener);
         note.focusedProperty().addListener(bookDetailListener);
         volume.focusedProperty().addListener(bookDetailListener);
         serie.focusedProperty().addListener(bookDetailListener);
         address.focusedProperty().addListener(bookDetailListener);
     }
+
+    private void updateReference() {
+        ConferenceProceedingsReferenceVM conferenceProceedingsReference = new ConferenceProceedingsReferenceVM();
+        conferenceProceedingsReference.setId(this.currentConferenceProceedingsReference.getId());
+        conferenceProceedingsReference.setAuthor(author.getText());
+        conferenceProceedingsReference.setTitle(title.getText());
+        conferenceProceedingsReference.setDate(date.getValue());
+        conferenceProceedingsReference.setNote(note.getText());
+        conferenceProceedingsReference.setVolume(volume.getText());
+        conferenceProceedingsReference.setSerie(serie.getText());
+        conferenceProceedingsReference.setAddress(address.getText());
+
+        /*Esta condicional es que se pierde el foco del TextField porque se selecciona
+         * una fila en la tabla, que es de tipo book y se pierden los valores anteriores
+         * que estaban almacenados en la interfaz grafica*/
+        if (previousConferenceProceedingsReference != null && conferenceProceedingsReference.getId() != previousConferenceProceedingsReference.getId()) {
+            try {
+                /*Aqui no tengo como determinar si hay cambios o no, con lo cual siempre salvo la informacion*/
+                referenceManager.updateReference(previousConferenceProceedingsReference);
+            } catch (IOException e) {
+                /* Mostrar algun dialogo de error al usuario */
+                e.printStackTrace();
+            }
+        } else if (!conferenceProceedingsReference.equals(currentConferenceProceedingsReference)) { //Sobrescribi el metodo equals
+            try {
+                currentConferenceProceedingsReference = conferenceProceedingsReference;
+                referenceManager.updateReference(conferenceProceedingsReference);
+            } catch (IOException e) {
+                /* Mostrar algun dialogo de error al usuario */
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void loadReferenceType() {
+        referenceType.getItems().addAll(ReferenceType.values());
+
+        ChangeListener<ReferenceType> referenceTypeListener = (options, oldValue, newValue) -> {
+            if (newValue != ReferenceType.CONFERENCEPROCEEDINGS) {
+                ReferenceVM updatedReference = null;
+                switch (newValue) { // Aqui se podria hacer un factory que devuelva un objeto dado el tipo
+                    case BOOK:
+                        updatedReference = new BookReferenceVM();
+                        break;
+                    case BOOKSECTION:
+                        updatedReference = new BookSectionReferenceVM();
+                        break;
+                    case BOOKLET:
+                        updatedReference = new BookLetReferenceVM();
+                        break;
+                    case THESIS:
+                        updatedReference = new ThesisReferenceVM();
+                        break;
+                    default: updatedReference = new ArticleReferenceVM();
+                }
+
+                if (updatedReference != null) {
+                    updatedReference.setId(currentConferenceProceedingsReference.getId());
+                }
+
+                try {
+                    referenceManager.replaceReferenceType(updatedReference);
+                } catch (IOException e) {
+                    /* Mostrar algun dialogo de error al usuario */
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
+    }
+
 }

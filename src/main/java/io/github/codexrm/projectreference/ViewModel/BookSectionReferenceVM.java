@@ -9,29 +9,31 @@ import javafx.beans.property.StringProperty;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class BookSectionVM extends BookReferenceVM {
+public class BookSectionReferenceVM extends BookReferenceVM {
 
     ObjectProperty<ReferenceType> referenceType;
     protected StringProperty chapter;
     protected StringProperty pages;
 
-    public BookSectionVM() {
+    public BookSectionReferenceVM() {
         super();
         createEmptyBookSectionReferenceVM();
     }
 
-    public BookSectionVM(final int id, final String author, final String title, LocalDate date, String note, final String publisher,
-                         final String volume, final String series, final String address, final String edition,
-                         final String chapter, final String pages) {
+    public BookSectionReferenceVM(final int id, final String author, final String title, LocalDate date, String note, final String publisher,
+                                  final String volume, final String series, final String address, final String edition,
+                                  final String chapter, final String pages) {
         super(id, author, title, date, note, publisher, volume, series, address, edition);
+
+        createEmptyBookSectionReferenceVM();
 
         setChapter(chapter);
         setPages(pages);
 
-        createEmptyBookSectionReferenceVM();
+
     }
 
-    public BookSectionVM(BookSectionReference bookSectionReference) {
+    public BookSectionReferenceVM(BookSectionReference bookSectionReference) {
         super(bookSectionReference.getId(), bookSectionReference.getAuthor(), bookSectionReference.getTitle(), bookSectionReference.getDate(), bookSectionReference.getNote(), bookSectionReference.getPublisher(), bookSectionReference.getVolume(), bookSectionReference.getSeries(), bookSectionReference.getAddress(), bookSectionReference.getEdition());
 
         createEmptyBookSectionReferenceVM();
@@ -46,7 +48,7 @@ public class BookSectionVM extends BookReferenceVM {
         this.series = new SimpleStringProperty();
         this.address = new SimpleStringProperty();
         this.edition = new SimpleStringProperty();
-        this.referenceType = new SimpleObjectProperty<>(ReferenceType.BOOKSECCION);
+        this.referenceType = new SimpleObjectProperty<>(ReferenceType.BOOKSECTION);
     }
 
     public ReferenceType getReferenceType() {
@@ -97,9 +99,9 @@ public class BookSectionVM extends BookReferenceVM {
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
-        if (!(o instanceof BookSectionVM)) return false;
+        if (!(o instanceof BookSectionReferenceVM)) return false;
         if (!super.equals(o)) return false;
-        final BookSectionVM that = (BookSectionVM) o;
+        final BookSectionReferenceVM that = (BookSectionReferenceVM) o;
         return getReferenceType().equals(that.getReferenceType()) &&
                 Objects.equals(getChapter(), that.getChapter()) &&
                 Objects.equals(getPages(), that.getPages());
