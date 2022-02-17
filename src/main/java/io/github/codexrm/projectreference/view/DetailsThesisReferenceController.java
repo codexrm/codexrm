@@ -55,11 +55,12 @@ public class DetailsThesisReferenceController implements Initializable {
                 address.textProperty().unbindBidirectional(((ThesisReferenceVM) oldReference).addressProperty());
                 referenceType.valueProperty().unbindBidirectional(((ThesisReferenceVM) oldReference).referenceTypeProperty());
 
-                previousThesisReference = new ThesisReferenceVM(oldReference.getId(), oldReference.getAuthor(), oldReference.getTitle(),
+                previousThesisReference = new ThesisReferenceVM(oldReference.getId(), oldReference.getAuthorIdList(), oldReference.getTitle(),
                         oldReference.getDate(),oldReference.getNote(),
                         ((ThesisReferenceVM) oldReference).getSchool(),
                         ((ThesisReferenceVM) oldReference).getType(),
-                        ((ThesisReferenceVM) oldReference).getAddress());
+                        ((ThesisReferenceVM) oldReference).getAddress(),
+                        referenceManager.getAuthorLibrary());
             }
         }
 
@@ -76,13 +77,14 @@ public class DetailsThesisReferenceController implements Initializable {
 
                 currentThesisReference = new ThesisReferenceVM(
                         newReference.getId(),
-                        newReference.getAuthor(),
+                        newReference.getAuthorIdList(),
                         newReference.getTitle(),
                         newReference.getDate(),
                         newReference.getNote(),
                         ((ThesisReferenceVM) newReference).getSchool(),
                         ((ThesisReferenceVM) newReference).getType(),
-                        ((ThesisReferenceVM) newReference).getAddress());
+                        ((ThesisReferenceVM) newReference).getAddress(),
+                        referenceManager.getAuthorLibrary());
             }
         } else {
             author.clear();

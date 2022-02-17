@@ -1,12 +1,14 @@
 package io.github.codexrm.projectreference.ViewModel;
 
 import io.github.codexrm.projectreference.Model.Model.ArticleReference;
+import io.github.codexrm.projectreference.Model.Model.AuthorLibrary;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ArticleReferenceVM extends ReferenceVM {
@@ -22,9 +24,9 @@ public class ArticleReferenceVM extends ReferenceVM {
         createEmptyArticleReferenceVM();
     }
 
-    public ArticleReferenceVM(final Integer id, final String author, final String title, LocalDate date, String note,
-                              final String journal, final String volume, final String number, final String pages) {
-        super(id, author, title, date, note);
+    public ArticleReferenceVM(final Integer id, final ArrayList<Integer> authorIdList, final String title, LocalDate date, String note,
+                              final String journal, final String volume, final String number, final String pages, final AuthorLibrary authorLibrary) {
+        super(id, authorIdList, title, date, note,authorLibrary);
 
         createEmptyArticleReferenceVM();
 
@@ -34,8 +36,8 @@ public class ArticleReferenceVM extends ReferenceVM {
         setPages(pages);
     }
 
-    public ArticleReferenceVM(ArticleReference articleReference) {
-        super(articleReference.getId(), articleReference.getAuthor(), articleReference.getTitle(), articleReference.getDate(), articleReference.getNote());
+    public ArticleReferenceVM(ArticleReference articleReference, AuthorLibrary authorLibrary) {
+        super(articleReference.getId(),articleReference.getAuthorIdList(), articleReference.getTitle(), articleReference.getDate(), articleReference.getNote(),authorLibrary);
 
         createEmptyArticleReferenceVM();
 
@@ -115,7 +117,7 @@ public class ArticleReferenceVM extends ReferenceVM {
 
     @Override
     public ArticleReference toModel() {
-        ArticleReference articleReference = new ArticleReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
+        ArticleReference articleReference = new ArticleReference(this.getId(), this.getAuthorIdList(), this.getTitle(), this.getDate(), this.getNote());
         articleReference.setJournal(this.getJournal());
         articleReference.setNumber(this.getNumber());
         articleReference.setVolume(this.getVolume());

@@ -1,6 +1,7 @@
 package io.github.codexrm.projectreference.Model.Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class ConferenceProceedingsReference extends Reference {
 
@@ -15,8 +16,8 @@ public class ConferenceProceedingsReference extends Reference {
         this.address = "";
     }
 
-    public ConferenceProceedingsReference(Integer id, String author, String title, LocalDate date, String note) {
-        super(id, author, title, date, note);
+    public ConferenceProceedingsReference(Integer id, ArrayList<Integer> authorIdList, String title, LocalDate date, String note) {
+        super(id, authorIdList, title, date, note);
         this.volume = "";
         this.serie = "";
         this.address = "";

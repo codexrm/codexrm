@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference.ViewModel;
 
+import io.github.codexrm.projectreference.Model.Model.AuthorLibrary;
 import io.github.codexrm.projectreference.Model.Model.ConferenceProceedingsReference;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -7,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ConferenceProceedingsReferenceVM extends ReferenceVM {
@@ -21,9 +23,9 @@ public class ConferenceProceedingsReferenceVM extends ReferenceVM {
         createEmptyConferenceProceedingsReferenceVM();
     }
 
-    public ConferenceProceedingsReferenceVM(final int id, final String author, final String title, LocalDate date, String note,
-                                            final String volume, final String serie, final String address) {
-        super(id, author, title, date, note);
+    public ConferenceProceedingsReferenceVM(final int id, final ArrayList<Integer> authorIdList, final String title, LocalDate date, String note,
+                                            final String volume, final String serie, final String address, final AuthorLibrary authorLibrary) {
+        super(id, authorIdList, title, date, note, authorLibrary);
 
         createEmptyConferenceProceedingsReferenceVM();
 
@@ -32,8 +34,8 @@ public class ConferenceProceedingsReferenceVM extends ReferenceVM {
         setAddress(address);
     }
 
-    public ConferenceProceedingsReferenceVM(ConferenceProceedingsReference conferenceProceedingsReference) {
-        super(conferenceProceedingsReference.getId(), conferenceProceedingsReference.getAuthor(), conferenceProceedingsReference.getTitle(), conferenceProceedingsReference.getDate(), conferenceProceedingsReference.getNote());
+    public ConferenceProceedingsReferenceVM(ConferenceProceedingsReference conferenceProceedingsReference, AuthorLibrary authorLibrary) {
+        super(conferenceProceedingsReference.getId(), conferenceProceedingsReference.getAuthorIdList(), conferenceProceedingsReference.getTitle(), conferenceProceedingsReference.getDate(), conferenceProceedingsReference.getNote(),authorLibrary);
 
         createEmptyConferenceProceedingsReferenceVM();
 
@@ -99,7 +101,7 @@ public class ConferenceProceedingsReferenceVM extends ReferenceVM {
 
     @Override
     public ConferenceProceedingsReference toModel() {
-        ConferenceProceedingsReference conferenceProceedingsReference = new ConferenceProceedingsReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
+        ConferenceProceedingsReference conferenceProceedingsReference = new ConferenceProceedingsReference(this.getId(), this.getAuthorIdList(), this.getTitle(), this.getDate(), this.getNote());
         conferenceProceedingsReference.setVolume(this.getVolume());
         conferenceProceedingsReference.setSerie(this.getSerie());
         conferenceProceedingsReference.setAddress(this.getAddress());

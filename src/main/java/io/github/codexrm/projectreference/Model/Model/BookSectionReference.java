@@ -1,6 +1,7 @@
 package io.github.codexrm.projectreference.Model.Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class BookSectionReference extends BookReference {
 
@@ -13,8 +14,8 @@ public class BookSectionReference extends BookReference {
         this.pages = "";
     }
 
-    public BookSectionReference(Integer id, String author, String title, LocalDate date, String note, String publisher, String volume, String series, String address, String edition) {
-        super(id, author, title, date, note);
+    public BookSectionReference(Integer id, ArrayList<Integer> authorIdList, String title, LocalDate date, String note, String publisher, String volume, String series, String address, String edition) {
+        super(id, authorIdList, title, date, note);
         this.chapter = "";
         this.pages = "";
     }

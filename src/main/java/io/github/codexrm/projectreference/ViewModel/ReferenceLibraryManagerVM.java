@@ -34,6 +34,10 @@ public class ReferenceLibraryManagerVM {
         return referenceTypeReplaced.get();
     }
 
+    public AuthorLibrary getAuthorLibrary() {
+        return manager.getAuthorLibrary();
+    }
+
     public void setReferenceTypeReplaced(final boolean referenceTypeReplaced) {
         this.referenceTypeReplaced.set(referenceTypeReplaced);
     }
@@ -73,17 +77,17 @@ public class ReferenceLibraryManagerVM {
             keyReference = e.nextElement();
             valorReference = manager.getReferenceTable().get(keyReference);
             if (valorReference instanceof BookReference) {
-                referenceList.add(new BookReferenceVM((BookReference) valorReference));
+                referenceList.add(new BookReferenceVM((BookReference) valorReference, manager.getAuthorLibrary()));
             } else if (valorReference instanceof ArticleReference) {
-                referenceList.add(new ArticleReferenceVM((ArticleReference) valorReference));
+                referenceList.add(new ArticleReferenceVM((ArticleReference) valorReference,manager.getAuthorLibrary()));
             } else if (valorReference instanceof BookSectionReference) {
-                referenceList.add(new BookSectionReferenceVM((BookSectionReference) valorReference));
+                referenceList.add(new BookSectionReferenceVM((BookSectionReference) valorReference,manager.getAuthorLibrary()));
             } else if (valorReference instanceof BookLetReference) {
-                referenceList.add(new BookLetReferenceVM((BookLetReference) valorReference));
+                referenceList.add(new BookLetReferenceVM((BookLetReference) valorReference,manager.getAuthorLibrary()));
             } else if (valorReference instanceof ConferenceProceedingsReference) {
-                referenceList.add(new ConferenceProceedingsReferenceVM((ConferenceProceedingsReference) valorReference));
+                referenceList.add(new ConferenceProceedingsReferenceVM((ConferenceProceedingsReference) valorReference,manager.getAuthorLibrary()));
             } else if (valorReference instanceof ThesisReference) {
-                referenceList.add(new ThesisReferenceVM((ThesisReference) valorReference));
+                referenceList.add(new ThesisReferenceVM((ThesisReference) valorReference,manager.getAuthorLibrary()));
             }
         }
     }
@@ -95,7 +99,7 @@ public class ReferenceLibraryManagerVM {
         Reference reference = manager.addEmptyBookReference();
 
         /*Add reference to view-model*/
-        referenceList.add(new BookReferenceVM((BookReference) reference));
+        referenceList.add(new BookReferenceVM((BookReference) reference,manager.getAuthorLibrary()));
     }
 
     public void deleteReferences(ArrayList<ReferenceVM> referenceList) throws IOException {
@@ -130,9 +134,10 @@ public class ReferenceLibraryManagerVM {
         Reference reference = manager.replaceReferenceType(referenceVM.toModel());
 
         referenceVM.setTitle(reference.getTitle());
-        referenceVM.setAuthor(reference.getAuthor());
+        referenceVM.setAuthor(reference.getAuthorIdList());
         referenceVM.setDate(reference.getDate());
         referenceVM.setNote(reference.getNote());
+        referenceVM.setAuthorLibrary(getAuthorLibrary());
 
         /*Update reference type from view-model*/
         for (ReferenceVM ref : referenceList) {

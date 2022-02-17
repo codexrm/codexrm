@@ -10,13 +10,12 @@ public class ReferenceLibrary {
         referenceTable = new Hashtable<>();
     }
 
-    public Reference addEmptyReference(AuthorLibrary authorLibrary) {
+    public Reference addEmptyReference() {
         int id = maxValueKeys() + 1;
         BookReference reference = new BookReference();
-        reference.setAuthorLibrary(authorLibrary);
         reference.setId(id);
         reference.setTitle("No Title");
-        reference.setAuthor("lastName,Name;lastName2,Name2");
+        reference.setAuthorIdList(null);
         reference.setDate(null);
         referenceTable.put(id, reference);
 
@@ -50,17 +49,5 @@ public class ReferenceLibrary {
             }
         }
         return keyMax;
-    }
-
-    public void addAuthorLibraryToReference(AuthorLibrary authorLibrary) {
-        Enumeration<Integer> e = referenceTable.keys();
-        Integer keyReference;
-        Reference valorReference;
-
-        while (e.hasMoreElements()) {
-            keyReference = e.nextElement();
-            valorReference = referenceTable.get(keyReference);
-            valorReference.setAuthorLibrary(authorLibrary);
-        }
     }
 }

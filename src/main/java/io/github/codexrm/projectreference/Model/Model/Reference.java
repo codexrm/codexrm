@@ -24,7 +24,6 @@ public class Reference {
     protected LocalDate date;
     protected String note;
     protected Integer id;
-    protected AuthorLibrary authorLibrary;
 
     public Reference() {
         authorIdList = new ArrayList<>();
@@ -33,29 +32,13 @@ public class Reference {
         this.note = "";
     }
 
-    public Reference(Integer id, String author, String title, LocalDate date, String note) {
+    public Reference(Integer id, ArrayList<Integer> authorIdList, String title, LocalDate date, String note) {
         authorIdList = new ArrayList<>();
-        this.authorIdList = authorLibrary.createAuthor(author);
+        this.authorIdList = authorIdList;
         this.title = title;
         this.date = date;
         this.note = note;
         this.id = id;
-    }
-
-    @JsonIgnore
-    public String getAuthor() {
-        if (!authorIdList.isEmpty()) {
-            return authorLibrary.readAuthorsViewList(authorIdList);
-        } else {
-            return "lastName,Name;lastName2,Name2";
-        }
-    }
-
-    @JsonIgnore
-    public void setAuthor(String authorLine) {
-        if (authorLine != "lastName,Name;lastName2,Name2") {
-            authorIdList = authorLibrary.createAuthor(authorLine);
-        }
     }
 
     public ArrayList<Integer> getAuthorIdList() {
@@ -96,16 +79,6 @@ public class Reference {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    @JsonIgnore
-    public AuthorLibrary getAuthorLibrary() {
-        return authorLibrary;
-    }
-
-    @JsonIgnore
-    public void setAuthorLibrary(AuthorLibrary authorLibrary) {
-        this.authorLibrary = authorLibrary;
     }
 
     public void addAuthorId(ArrayList<Integer> idAuthorlist) {

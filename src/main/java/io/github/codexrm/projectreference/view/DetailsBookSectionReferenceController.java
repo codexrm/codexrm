@@ -70,7 +70,7 @@ public class DetailsBookSectionReferenceController implements Initializable {
                 pages.textProperty().unbindBidirectional(((BookSectionReferenceVM) oldReference).pagesProperty());
                 referenceType.valueProperty().unbindBidirectional(((BookSectionReferenceVM) oldReference).referenceTypeProperty());
 
-                previousBookSectionReference = new BookSectionReferenceVM(oldReference.getId(), oldReference.getAuthor(), oldReference.getTitle(),
+                previousBookSectionReference = new BookSectionReferenceVM(oldReference.getId(), oldReference.getAuthorIdList(), oldReference.getTitle(),
                         oldReference.getDate(),oldReference.getNote(),
                         ((BookSectionReferenceVM) oldReference).getPublisher(),
                         ((BookSectionReferenceVM) oldReference).getVolume(),
@@ -78,7 +78,8 @@ public class DetailsBookSectionReferenceController implements Initializable {
                         ((BookSectionReferenceVM) oldReference).getAddress(),
                         ((BookSectionReferenceVM) oldReference).getEdition(),
                         ((BookSectionReferenceVM) oldReference).getChapter(),
-                        ((BookSectionReferenceVM) oldReference).getPages());
+                        ((BookSectionReferenceVM) oldReference).getPages(),
+                        referenceManager.getAuthorLibrary());
             }
         }
 
@@ -99,7 +100,7 @@ public class DetailsBookSectionReferenceController implements Initializable {
 
                 currentBookSectionReference = new BookSectionReferenceVM(
                         newReference.getId(),
-                        newReference.getAuthor(),
+                        newReference.getAuthorIdList(),
                         newReference.getTitle(),
                         newReference.getDate(),
                         newReference.getNote(),
@@ -109,7 +110,8 @@ public class DetailsBookSectionReferenceController implements Initializable {
                         ((BookSectionReferenceVM) newReference).getAddress(),
                         ((BookSectionReferenceVM) newReference).getEdition(),
                         ((BookSectionReferenceVM) newReference).getChapter(),
-                        ((BookSectionReferenceVM) newReference).getPages());
+                        ((BookSectionReferenceVM) newReference).getPages(),
+                        referenceManager.getAuthorLibrary());
             }
         } else {
             author.clear();

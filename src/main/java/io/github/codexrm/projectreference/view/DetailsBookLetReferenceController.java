@@ -49,10 +49,11 @@ public class DetailsBookLetReferenceController implements Initializable {
                 address.textProperty().unbindBidirectional(((BookLetReferenceVM) oldReference).addressProperty());
                 referenceType.valueProperty().unbindBidirectional(((BookLetReferenceVM) oldReference).referenceTypeProperty());
 
-                previousBookLetReference = new BookLetReferenceVM(oldReference.getId(), oldReference.getAuthor(), oldReference.getTitle(),
+                previousBookLetReference = new BookLetReferenceVM(oldReference.getId(), oldReference.getAuthorIdList(), oldReference.getTitle(),
                         oldReference.getDate(),oldReference.getNote(),
                         ((BookLetReferenceVM) oldReference).getHowpublished(),
-                        ((BookLetReferenceVM) oldReference).getAddress());
+                        ((BookLetReferenceVM) oldReference).getAddress(),
+                        referenceManager.getAuthorLibrary());
             }
         }
 
@@ -68,12 +69,13 @@ public class DetailsBookLetReferenceController implements Initializable {
 
                 currentBookLetReference = new BookLetReferenceVM(
                         newReference.getId(),
-                        newReference.getAuthor(),
+                        newReference.getAuthorIdList(),
                         newReference.getTitle(),
                         newReference.getDate(),
                         newReference.getNote(),
                         ((BookLetReferenceVM) newReference).getHowpublished(),
-                        ((BookLetReferenceVM) newReference).getAddress());
+                        ((BookLetReferenceVM) newReference).getAddress(),
+                        referenceManager.getAuthorLibrary());
             }
         } else {
             author.clear();

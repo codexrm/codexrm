@@ -58,12 +58,13 @@ public class DetailsArticleReferenceController implements Initializable {
                 pages.textProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).pagesProperty());
                 referenceType.valueProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).referenceTypeProperty());
 
-                previousArticleReference = new ArticleReferenceVM(oldReference.getId(), oldReference.getAuthor(), oldReference.getTitle(),
+                previousArticleReference = new ArticleReferenceVM(oldReference.getId(), oldReference.getAuthorIdList(), oldReference.getTitle(),
                         oldReference.getDate(),oldReference.getNote(),
                         ((ArticleReferenceVM) oldReference).getJournal(),
                         ((ArticleReferenceVM) oldReference).getVolume(),
                         ((ArticleReferenceVM) oldReference).getNumber(),
-                        ((ArticleReferenceVM) oldReference).getPages());
+                        ((ArticleReferenceVM) oldReference).getPages(),
+                        referenceManager.getAuthorLibrary());
             }
         }
 
@@ -81,14 +82,15 @@ public class DetailsArticleReferenceController implements Initializable {
 
                 currentArticleReference = new ArticleReferenceVM(
                         newReference.getId(),
-                        newReference.getAuthor(),
+                        newReference.getAuthorIdList(),
                         newReference.getTitle(),
                         newReference.getDate(),
                         newReference.getNote(),
                         ((ArticleReferenceVM) newReference).getJournal(),
                         ((ArticleReferenceVM) newReference).getVolume(),
                         ((ArticleReferenceVM) newReference).getNumber(),
-                        ((ArticleReferenceVM) newReference).getPages());
+                        ((ArticleReferenceVM) newReference).getPages(),
+                        referenceManager.getAuthorLibrary());
             }
         } else {
             author.clear();

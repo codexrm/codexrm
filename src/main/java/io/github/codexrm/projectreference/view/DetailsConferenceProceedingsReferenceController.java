@@ -54,11 +54,12 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
                 address.textProperty().unbindBidirectional(((ConferenceProceedingsReferenceVM) oldReference).addressProperty());
                 referenceType.valueProperty().unbindBidirectional(((ConferenceProceedingsReferenceVM) oldReference).referenceTypeProperty());
 
-                previousConferenceProceedingsReference = new ConferenceProceedingsReferenceVM(oldReference.getId(), oldReference.getAuthor(), oldReference.getTitle(),
+                previousConferenceProceedingsReference = new ConferenceProceedingsReferenceVM(oldReference.getId(), oldReference.getAuthorIdList(), oldReference.getTitle(),
                         oldReference.getDate(),oldReference.getNote(),
                         ((ConferenceProceedingsReferenceVM) oldReference).getVolume(),
                         ((ConferenceProceedingsReferenceVM) oldReference).getSerie(),
-                        ((ConferenceProceedingsReferenceVM) oldReference).getAddress());
+                        ((ConferenceProceedingsReferenceVM) oldReference).getAddress(),
+                        referenceManager.getAuthorLibrary());
             }
         }
 
@@ -75,13 +76,14 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
 
                 currentConferenceProceedingsReference = new ConferenceProceedingsReferenceVM(
                         newReference.getId(),
-                        newReference.getAuthor(),
+                        newReference.getAuthorIdList(),
                         newReference.getTitle(),
                         newReference.getDate(),
                         newReference.getNote(),
                         ((ConferenceProceedingsReferenceVM) newReference).getVolume(),
                         ((ConferenceProceedingsReferenceVM) newReference).getSerie(),
-                        ((ConferenceProceedingsReferenceVM) newReference).getAddress());
+                        ((ConferenceProceedingsReferenceVM) newReference).getAddress(),
+                        referenceManager.getAuthorLibrary());
             }
         } else {
             author.clear();

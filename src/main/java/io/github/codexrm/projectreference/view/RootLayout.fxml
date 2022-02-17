@@ -27,7 +27,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
@@ -49,11 +48,6 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <Menu mnemonicParsing="false" text="Unspecified Menu">
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Action 1" />
-                            </items>
-                        </Menu>
                         <Menu mnemonicParsing="false" text="Import">
                             <items>
                                 <MenuItem mnemonicParsing="false" text="BibTex" />
@@ -90,16 +84,7 @@
         </MenuBar>
         <ToolBar prefHeight="40.0" prefWidth="200.0">
             <items>
-                <MenuButton mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Add...">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Article " />
-                        <MenuItem mnemonicParsing="false" text="Book " />
-                        <MenuItem mnemonicParsing="false" text="Book Seccion" />
-                        <MenuItem mnemonicParsing="false" text="Book Let" />
-                        <MenuItem mnemonicParsing="false" text="Conference Proceedings" />
-                        <MenuItem mnemonicParsing="false" text="Thesis" />
-                    </items>
-                </MenuButton>
+            <Button mnemonicParsing="false" text="Add" />
                 <Button mnemonicParsing="false" text="Delete" />
                 <Button mnemonicParsing="false" text="Sync" />
                 <Button mnemonicParsing="false" text="Help" />

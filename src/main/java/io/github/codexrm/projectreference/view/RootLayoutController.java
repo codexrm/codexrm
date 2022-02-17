@@ -3,10 +3,8 @@ package io.github.codexrm.projectreference.view;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import io.github.codexrm.projectreference.Model.Model.*;
 import io.github.codexrm.projectreference.ViewModel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
@@ -38,6 +36,12 @@ public class RootLayoutController implements Initializable {
     private AnchorPane referenceDetail;
     @FXML
     private Label noReferenceDetailInfo;
+
+    @FXML
+    private Button add;
+    @FXML
+    private Button delete;
+
     private ChangeListener<ReferenceVM> updateViewListener;
     private int selectedIndex;
 

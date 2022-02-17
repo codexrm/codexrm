@@ -62,13 +62,14 @@ public class DetailsBookReferenceController implements Initializable {
                 edition.textProperty().unbindBidirectional(((BookReferenceVM) oldReference).editionProperty());
                 referenceType.valueProperty().unbindBidirectional(((BookReferenceVM) oldReference).referenceTypeProperty());
 
-                previousBookReference = new BookReferenceVM(oldReference.getId(), oldReference.getAuthor(), oldReference.getTitle(),
+                previousBookReference = new BookReferenceVM(oldReference.getId(), oldReference.getAuthorIdList(), oldReference.getTitle(),
                         oldReference.getDate(),oldReference.getNote(),
                         ((BookReferenceVM) oldReference).getPublisher(),
                         ((BookReferenceVM) oldReference).getVolume(),
                         ((BookReferenceVM) oldReference).getSeries(),
                         ((BookReferenceVM) oldReference).getAddress(),
-                        ((BookReferenceVM) oldReference).getEdition());
+                        ((BookReferenceVM) oldReference).getEdition(),
+                        referenceManager.getAuthorLibrary());
             }
         }
 
@@ -87,7 +88,7 @@ public class DetailsBookReferenceController implements Initializable {
 
                 currentBookReference = new BookReferenceVM(
                         newReference.getId(),
-                        newReference.getAuthor(),
+                        newReference.getAuthorIdList(),
                         newReference.getTitle(),
                         newReference.getDate(),
                         newReference.getNote(),
@@ -95,7 +96,8 @@ public class DetailsBookReferenceController implements Initializable {
                         ((BookReferenceVM) newReference).getVolume(),
                         ((BookReferenceVM) newReference).getSeries(),
                         ((BookReferenceVM) newReference).getAddress(),
-                        ((BookReferenceVM) newReference).getEdition());
+                        ((BookReferenceVM) newReference).getEdition(),
+                        referenceManager.getAuthorLibrary());
             }
         } else {
             author.clear();

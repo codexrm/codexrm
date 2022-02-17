@@ -1,6 +1,7 @@
 package io.github.codexrm.projectreference.ViewModel;
 
 
+import io.github.codexrm.projectreference.Model.Model.AuthorLibrary;
 import io.github.codexrm.projectreference.Model.Model.BookLetReference;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -8,6 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class BookLetReferenceVM extends ReferenceVM {
@@ -21,9 +23,9 @@ public class BookLetReferenceVM extends ReferenceVM {
         createEmptyBookLetReferenceVM();
     }
 
-    public BookLetReferenceVM(final int id, final String author, final String title, LocalDate date, String note,
-                              final String howpublished, final String address) {
-        super(id, author, title, date, note);
+    public BookLetReferenceVM(final int id, final ArrayList<Integer> authorIdList, final String title, LocalDate date, String note,
+                              final String howpublished, final String address, final AuthorLibrary authorLibrary) {
+        super(id, authorIdList, title, date, note, authorLibrary);
 
         createEmptyBookLetReferenceVM();
         setHowpublished(howpublished);
@@ -33,8 +35,8 @@ public class BookLetReferenceVM extends ReferenceVM {
 
     }
 
-    public BookLetReferenceVM(BookLetReference bookLetReference) {
-        super(bookLetReference.getId(), bookLetReference.getAuthor(), bookLetReference.getTitle(), bookLetReference.getDate(), bookLetReference.getNote());
+    public BookLetReferenceVM(BookLetReference bookLetReference, AuthorLibrary authorLibrary) {
+        super(bookLetReference.getId(), bookLetReference.getAuthorIdList(), bookLetReference.getTitle(), bookLetReference.getDate(), bookLetReference.getNote(),authorLibrary);
 
         createEmptyBookLetReferenceVM();
 
@@ -87,7 +89,7 @@ public class BookLetReferenceVM extends ReferenceVM {
 
     @Override
     public BookLetReference toModel() {
-        BookLetReference bookLetReference = new BookLetReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
+        BookLetReference bookLetReference = new BookLetReference(this.getId(), this.getAuthorIdList(), this.getTitle(), this.getDate(), this.getNote());
         bookLetReference.setHowpublished(this.getHowpublished());
         bookLetReference.setAddress(this.getAddress());
 

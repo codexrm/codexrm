@@ -5,6 +5,7 @@ import io.github.codexrm.projectreference.Model.Model.Reference;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ReferenceVM {
@@ -14,6 +15,7 @@ public class ReferenceVM {
     protected final StringProperty title;
     protected final ObjectProperty<LocalDate> date;
     protected final StringProperty note;
+    protected  AuthorLibrary authorLibrary;
 
     public ReferenceVM() {
         id = new SimpleIntegerProperty();
@@ -21,19 +23,20 @@ public class ReferenceVM {
         title = new SimpleStringProperty();
         date = new SimpleObjectProperty<>();
         note = new SimpleStringProperty();
+        this.authorLibrary = null;
     }
 
-    public ReferenceVM(final int id, final String author, final String title, LocalDate date, String note ) {
+    public ReferenceVM(final int id, final ArrayList<Integer> authorIdList , final String title, LocalDate date, String note,AuthorLibrary authorLibrary ) {
 
         this.id = new SimpleIntegerProperty();
         this.author = new SimpleStringProperty();
         this.title = new SimpleStringProperty();
         this.date = new SimpleObjectProperty<>();
         this.note = new SimpleStringProperty();
-
+        this.authorLibrary = authorLibrary;
 
         setId(id);
-        setAuthor(author);
+        setAuthor(authorIdList);
         setTitle(title);
         setDate(date);
         setNote(note);
@@ -55,6 +58,13 @@ public class ReferenceVM {
         return author.get();
     }
 
+    public void setAuthor(final ArrayList<Integer> authorIdList) {
+        if (authorIdList != null) {
+            this.author.set(authorLibrary.readAuthorsViewList(authorIdList));
+        } else{
+            this.author.set("lastName1,Name1;lastNameN,nameN...");
+        }
+    }
     public void setAuthor(final String author) {
         this.author.set(author);
     }
@@ -99,8 +109,24 @@ public class ReferenceVM {
         return title;
     }
 
+    public AuthorLibrary getAuthorLibrary() {
+        return authorLibrary;
+    }
+    public void setAuthorLibrary(AuthorLibrary authorLibrary) {
+        this.authorLibrary = authorLibrary;
+    }
+
+    public ArrayList<Integer> getAuthorIdList(){
+        if (!this.getAuthor().equals("lastName1,Name1;lastNameN,nameN...")) {
+            return authorLibrary.createAuthor(this.getAuthor());
+        } else{
+            ArrayList<Integer> listVoid = new ArrayList<>();
+            return listVoid;
+        }
+    }
+
     public Reference toModel() {
-        return new Reference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
+        return new Reference(this.getId(), this.getAuthorIdList(), this.getTitle(), this.getDate(), this.getNote());
     }
 
     @Override

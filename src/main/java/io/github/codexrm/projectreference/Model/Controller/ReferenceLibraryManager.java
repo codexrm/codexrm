@@ -72,7 +72,7 @@ public class ReferenceLibraryManager {
     }
 
     public Reference addEmptyBookReference() {
-        return referenceLibrary.addEmptyReference(authorLibrary);
+        return referenceLibrary.addEmptyReference();
     }
 
     public Reference getReference(int id) {
@@ -97,7 +97,6 @@ public class ReferenceLibraryManager {
         File fileDBR = new File(dbReferenceName);
         if (fileDBR.exists() && fileDBR.isFile()) {
             setReferenceLibrary(libraryFiles.loadReferenceTable(dbReferenceName));
-            referenceLibrary.addAuthorLibraryToReference(authorLibrary);
         } else {
             saveTables();
         }
@@ -126,8 +125,7 @@ public class ReferenceLibraryManager {
         if (referenceLibrary.getReference(newReference.getId()) != null) {
 
             Reference removedReference = referenceLibrary.getReferenceTable().remove(newReference.getId());
-            newReference.setAuthorLibrary(authorLibrary);
-            newReference.setAuthor(removedReference.getAuthor());
+            newReference.setAuthorIdList(removedReference.getAuthorIdList());
             newReference.setTitle(removedReference.getTitle());
             newReference.setDate(removedReference.getDate());
             newReference.setNote(removedReference.getNote());
