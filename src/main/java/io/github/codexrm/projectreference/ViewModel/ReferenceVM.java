@@ -59,10 +59,11 @@ public class ReferenceVM {
     }
 
     public void setAuthor(final ArrayList<Integer> authorIdList) {
-        if (authorIdList != null) {
-            this.author.set(authorLibrary.readAuthorsViewList(authorIdList));
-        } else{
+        if ( authorIdList == null) {
             this.author.set("lastName1,Name1;lastNameN,nameN...");
+        } else{
+            this.author.set(authorLibrary.readAuthorsViewList(authorIdList));
+
         }
     }
     public void setAuthor(final String author) {
@@ -116,12 +117,15 @@ public class ReferenceVM {
         this.authorLibrary = authorLibrary;
     }
 
-    public ArrayList<Integer> getAuthorIdList(){
-        if (!this.getAuthor().equals("lastName1,Name1;lastNameN,nameN...")) {
-            return authorLibrary.createAuthor(this.getAuthor());
-        } else{
-            ArrayList<Integer> listVoid = new ArrayList<>();
-            return listVoid;
+    public ArrayList<Integer> getAuthorIdList() {
+        if (this.getAuthor() == null)
+            return null;
+        else {
+            if (!this.getAuthor().equals("lastName1,Name1;lastNameN,nameN...")) {
+                return authorLibrary.createAuthor(this.getAuthor());
+            } else {
+                return null;
+            }
         }
     }
 

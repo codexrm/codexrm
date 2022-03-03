@@ -2,6 +2,7 @@ package io.github.codexrm.projectreference.view;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.ViewModel.*;
@@ -128,93 +129,79 @@ public class DetailsBookSectionReferenceController implements Initializable {
         }
     };
 
-    public TextField getAuthor() {
-        return author;
+    public String getAuthor() {
+        return author.getText();
     }
 
-    public void setAuthor(TextField author) {
-        this.author = author;
+    public void setAuthor(String author) {this.author.setText(author);}
+
+    public String getTitle() {
+        return title.getText();
     }
 
-    public TextField getTitle() {
-        return title;
+    public void setTitle(String title) {this.title.setText(title);}
+
+    public LocalDate getDate() {
+        return date.getValue();
     }
 
-    public void setTitle(TextField title) {
-        this.title = title;
+    public void setDate(LocalDate date) {this.date.setValue(date);}
+
+    public String getNote() {
+        return note.getText();
     }
 
-    public DatePicker getDate() {
-        return date;
+    public void setNote(String note) {
+        this.note.setText(note);
     }
 
-    public void setDate(DatePicker date) {
-        this.date = date;
+    public String getPublisher() {
+        return publisher.getText();
     }
 
-    public TextField getNote() {
-        return note;
+    public void setPublisher(String publisher) {
+        this.publisher.setText(publisher);
     }
 
-    public void setNote(TextField note) {
-        this.note = note;
+    public String getVolume() {
+        return volume.getText();
     }
 
-    public TextField getPublisher() {
-        return publisher;
+    public void setVolume(String volume) {
+        this.volume.setText(volume);
     }
 
-    public void setPublisher(TextField publisher) {
-        this.publisher = publisher;
+    public String getSeries() {
+        return series.getText();
     }
 
-    public TextField getVolume() {
-        return volume;
+    public void setSeries(String series) {
+        this.series.setText(series);
     }
 
-    public void setVolume(TextField volume) {
-        this.volume = volume;
+    public String getAddress() {
+        return address.getText();
     }
 
-    public TextField getSeries() {
-        return series;
+    public void setAddress(String address) {this.address.setText(address);}
+
+    public String getEdition() {
+        return edition.getText();
     }
 
-    public void setSeries(TextField series) {
-        this.series = series;
+    public void setEdition(String edition) {this.edition.setText(edition);}
+
+    public String getChapter() {
+        return chapter.getText();
     }
 
-    public TextField getAddress() {
-        return address;
+    public void setChapter(String chapter) {this.chapter.setText(chapter);}
+
+    public String getPages() {
+        return pages.getText();
     }
 
-    public void setAddress(TextField address) {
-        this.address = address;
-    }
-
-    public TextField getEdition() {
-        return edition;
-    }
-
-    public void setEdition(TextField edition) {
-        this.edition = edition;
-    }
-
-    public TextField getChapter() {
-        return chapter;
-    }
-
-    public void setChapter(TextField chapter) {
-        this.chapter = chapter;
-    }
-
-    public TextField getPages() {
-        return pages;
-    }
-
-    public void setPages(TextField pages) {
-        this.pages = pages;
-    }
+    public void setPages(String pages) {this.pages.setText(pages);}
 
     public void setReferenceType(ReferenceType referenceType) {
         this.referenceType.getSelectionModel().select(referenceType);
@@ -284,6 +271,7 @@ public class DetailsBookSectionReferenceController implements Initializable {
         bookSectionReference.setEdition(edition.getText());
         bookSectionReference.setChapter(chapter.getText());
         bookSectionReference.setPages(pages.getText());
+        bookSectionReference.setAuthorLibrary(referenceManager.getAuthorLibrary());
 
         /*Esta condicional es que se pierde el foco del TextField porque se selecciona
          * una fila en la tabla, que es de tipo book y se pierden los valores anteriores

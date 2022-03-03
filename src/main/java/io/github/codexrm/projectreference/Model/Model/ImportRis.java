@@ -38,11 +38,6 @@ public class ImportRis implements Import {
         return listReference;
     }
 
-    private String getYear(String date) throws NumberFormatException {
-        date = date.trim();
-        return date;
-    }
-
     private Reference createReference(BaseReference entry) {
         Reference reference;
         if (entry instanceof JournalArticle) {

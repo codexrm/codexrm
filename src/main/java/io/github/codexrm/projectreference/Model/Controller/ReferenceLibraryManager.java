@@ -3,13 +3,13 @@ package io.github.codexrm.projectreference.Model.Controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Hashtable;
 
 import io.github.codexrm.projectreference.Model.Enum.Format;
 import io.github.codexrm.projectreference.Model.Model.*;
 import org.jbibtex.ParseException;
 import org.jbibtex.TokenMgrException;
+import org.jetbrains.annotations.NotNull;
 
 public class ReferenceLibraryManager {
 
@@ -112,16 +112,13 @@ public class ReferenceLibraryManager {
 
     public void updateReference(Reference reference) throws IOException {
 
-        if (referenceLibrary.getReferenceTable().equals(reference.getId())) {
+
             referenceLibrary.getReferenceTable().remove(reference.getId());
             referenceLibrary.getReferenceTable().put(reference.getId(), reference);
             saveTables();
-        }
     }
 
-    public Reference replaceReferenceType(Reference newReference) throws IOException {
-
-
+    public Reference replaceReferenceType(@NotNull Reference newReference) throws IOException {
         if (referenceLibrary.getReference(newReference.getId()) != null) {
 
             Reference removedReference = referenceLibrary.getReferenceTable().remove(newReference.getId());

@@ -2,6 +2,7 @@ package io.github.codexrm.projectreference.view;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.Model.Enum.*;
@@ -97,61 +98,51 @@ public class DetailsThesisReferenceController implements Initializable {
         }
     };
 
-    public TextField getAuthor() {
-        return author;
+    public String getAuthor() {
+        return author.getText();
     }
 
-    public void setAuthor(TextField author) {
-        this.author = author;
+    public void setAuthor(String author) {this.author.setText(author);}
+
+    public String getTitle() {
+        return title.getText();
     }
 
-    public TextField getTitle() {
-        return title;
+    public void setTitle(String title) {this.title.setText(title);}
+
+    public LocalDate getDate() {
+        return date.getValue();
     }
 
-    public void setTitle(TextField title) {
-        this.title = title;
+    public void setDate(LocalDate date) {this.date.setValue(date);}
+
+    public String getNote() {
+        return note.getText();
     }
 
-    public DatePicker getDate() {
-        return date;
+    public void setNote(String note) {
+        this.note.setText(note);
     }
 
-    public void setDate(DatePicker date) {
-        this.date = date;
+    public String getSchool() {
+        return school.getText();
     }
 
-    public TextField getNote() {
-        return note;
+    public void setSchool(String school) {this.school.setText(school);}
+
+    public ThesisType getType() {
+        return type.getValue();
     }
 
-    public void setNote(TextField note) {
-        this.note = note;
+    public void setType(ThesisType type) {
+        this.type.getSelectionModel().select(type);
     }
 
-    public TextField getSchool() {
-        return school;
+    public String getAddress() {
+        return address.getText();
     }
 
-    public void setSchool(TextField school) {
-        this.school = school;
-    }
-
-    public ComboBox<ThesisType> getType() {
-        return type;
-    }
-
-    public void setType(ComboBox<ThesisType> type) {
-        this.type = type;
-    }
-
-    public TextField getAddress() {
-        return address;
-    }
-
-    public void setAddress(TextField address) {
-        this.address = address;
-    }
+    public void setAddress(String address) {this.address.setText(address);}
 
     public void setReferenceType(ReferenceType referenceType) {
         this.referenceType.getSelectionModel().select(referenceType);
@@ -160,6 +151,7 @@ public class DetailsThesisReferenceController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadReferenceType();
+        loadThesisType();
         initializeFocusLost();
         initializeOnAction();
     }
@@ -209,6 +201,7 @@ public class DetailsThesisReferenceController implements Initializable {
         thesisReference.setSchool(school.getText());
         thesisReference.setType(type.getValue());
         thesisReference.setAddress(address.getText());
+        thesisReference.setAuthorLibrary(referenceManager.getAuthorLibrary());
 
         /*Esta condicional es que se pierde el foco del TextField porque se selecciona
          * una fila en la tabla, que es de tipo book y se pierden los valores anteriores
@@ -232,6 +225,11 @@ public class DetailsThesisReferenceController implements Initializable {
         }
     }
 
+    private void loadThesisType(){
+        for (ThesisType thesis : ThesisType.values()) {
+            type.getItems().add(thesis);
+        }
+    }
     private void loadReferenceType() {
         referenceType.getItems().addAll(ReferenceType.values());
 

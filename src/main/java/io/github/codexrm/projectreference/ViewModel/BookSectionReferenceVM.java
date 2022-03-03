@@ -50,6 +50,8 @@ public class BookSectionReferenceVM extends BookReferenceVM {
         this.series = new SimpleStringProperty();
         this.address = new SimpleStringProperty();
         this.edition = new SimpleStringProperty();
+        this.chapter = new SimpleStringProperty();
+        this.pages = new SimpleStringProperty();
         this.referenceType = new SimpleObjectProperty<>(ReferenceType.BOOKSECTION);
     }
 

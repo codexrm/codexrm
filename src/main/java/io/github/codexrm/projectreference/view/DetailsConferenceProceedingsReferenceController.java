@@ -2,6 +2,7 @@ package io.github.codexrm.projectreference.view;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.ViewModel.*;
@@ -96,61 +97,51 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
         }
     };
 
-    public TextField getAuthor() {
-        return author;
+    public String getAuthor() {
+        return author.getText();
     }
 
-    public void setAuthor(TextField author) {
-        this.author = author;
+    public void setAuthor(String author) {this.author.setText(author);}
+
+    public String getTitle() {
+        return title.getText();
     }
 
-    public TextField getTitle() {
-        return title;
+    public void setTitle(String title) {this.title.setText(title);}
+
+    public LocalDate getDate() {
+        return date.getValue();
     }
 
-    public void setTitle(TextField title) {
-        this.title = title;
+    public void setDate(LocalDate date) {this.date.setValue(date);}
+
+    public String getNote() {
+        return note.getText();
     }
 
-    public DatePicker getDate() {
-        return date;
+    public void setNote(String note) {
+        this.note.setText(note);
     }
 
-    public void setDate(DatePicker date) {
-        this.date = date;
+    public String getVolume() {
+        return volume.getText();
     }
 
-    public TextField getNote() {
-        return note;
+    public void setVolume(String volume) {this.volume.setText(volume);}
+
+    public String getSerie() {
+        return serie.getText();
     }
 
-    public void setNote(TextField note) {
-        this.note = note;
+    public void setSerie(String serie) {
+        this.serie.setText(serie);
     }
 
-    public TextField getVolume() {
-        return volume;
+    public String getAddress() {
+        return address.getText();
     }
 
-    public void setVolume(TextField volume) {
-        this.volume = volume;
-    }
-
-    public TextField getSerie() {
-        return serie;
-    }
-
-    public void setSerie(TextField serie) {
-        this.serie = serie;
-    }
-
-    public TextField getAddress() {
-        return address;
-    }
-
-    public void setAddress(TextField address) {
-        this.address = address;
-    }
+    public void setAddress(String address) {this.address.setText(address);}
 
     public void setReferenceType(ReferenceType referenceType) {
         this.referenceType.getSelectionModel().select(referenceType);
@@ -208,6 +199,7 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
         conferenceProceedingsReference.setVolume(volume.getText());
         conferenceProceedingsReference.setSerie(serie.getText());
         conferenceProceedingsReference.setAddress(address.getText());
+        conferenceProceedingsReference.setAuthorLibrary(referenceManager.getAuthorLibrary());
 
         /*Esta condicional es que se pierde el foco del TextField porque se selecciona
          * una fila en la tabla, que es de tipo book y se pierden los valores anteriores

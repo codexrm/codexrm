@@ -1,1 +1,1 @@
-{"referenceTable":{}}
+{"referenceTable":{"0":{"type":"book","authorIdList":[],"title":"No Title","date"

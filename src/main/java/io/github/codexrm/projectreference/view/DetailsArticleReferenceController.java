@@ -2,6 +2,7 @@ package io.github.codexrm.projectreference.view;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.ViewModel.*;
@@ -104,69 +105,51 @@ public class DetailsArticleReferenceController implements Initializable {
         }
     };
 
-    public TextField getAuthor() {
-        return author;
+    public String getAuthor() {return author.getText();}
+
+    public void setAuthor(String author) {this.author.setText(author);}
+
+    public String getTitle() {
+        return title.getText();
     }
 
-    public void setAuthor(TextField author) {
-        this.author = author;
+    public void setTitle(String title) {this.title.setText(title);}
+
+    public LocalDate getDate() {
+        return date.getValue();
     }
 
-    public TextField getTitle() {
-        return title;
+    public void setDate(LocalDate date) {this.date.setValue(date);}
+
+    public String getNote() {
+        return note.getText();
     }
 
-    public void setTitle(TextField title) {
-        this.title = title;
+    public void setNote(String note) {this.note.setText(note);}
+
+    public String getJournal() {
+        return journal.getText();
     }
 
-    public DatePicker getDate() {
-        return date;
+    public void setJournal(String journal) {this.journal.setText(journal);}
+
+    public String getVolume() {
+        return volume.getText();
     }
 
-    public void setDate(DatePicker date) {
-        this.date = date;
+    public void setVolume(String volume) {this.volume.setText(volume);}
+
+    public String getNumber() {
+        return number.getText();
     }
 
-    public TextField getNote() {
-        return note;
+    public void setNumber(String number) {this.number.setText(number);}
+
+    public String getPages() {
+        return pages.getText();
     }
 
-    public void setNote(TextField note) {
-        this.note = note;
-    }
-
-    public TextField getJournal() {
-        return journal;
-    }
-
-    public void setJournal(TextField journal) {
-        this.journal = journal;
-    }
-
-    public TextField getVolume() {
-        return volume;
-    }
-
-    public void setVolume(TextField volume) {
-        this.volume = volume;
-    }
-
-    public TextField getNumber() {
-        return number;
-    }
-
-    public void setNumber(TextField number) {
-        this.number = number;
-    }
-
-    public TextField getPages() {
-        return pages;
-    }
-
-    public void setPages(TextField pages) {
-        this.pages = pages;
-    }
+    public void setPages(String pages) {this.pages.setText(pages);}
 
     public void setReferenceType(ReferenceType referenceType) {
         this.referenceType.getSelectionModel().select(referenceType);
@@ -226,7 +209,8 @@ public class DetailsArticleReferenceController implements Initializable {
         articleReference.setJournal(journal.getText());
         articleReference.setVolume(volume.getText());
         articleReference.setNumber(number.getText());
-        articleReference.setNumber(pages.getText());
+        articleReference.setPages(pages.getText());
+        articleReference.setAuthorLibrary(referenceManager.getAuthorLibrary());
 
         /*Esta condicional es que se pierde el foco del TextField porque se selecciona
          * una fila en la tabla, que es de tipo book y se pierden los valores anteriores

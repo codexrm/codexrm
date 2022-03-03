@@ -1,10 +1,8 @@
 package io.github.codexrm.projectreference.Model.Model;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -12,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({@Type(value = ArticleReference.class, name = "article"),
         @Type(value = BookReference.class, name = "book"),
-        @Type(value = BookSectionReference.class, name = "bookSeccion"),
+        @Type(value = BookSectionReference.class, name = "bookSection"),
         @Type(value = ThesisReference.class, name = "thesis"),
         @Type(value = BookLetReference.class, name = "bookLet"),
         @Type(value = ConferenceProceedingsReference.class, name = "proceedings")})
@@ -41,9 +39,7 @@ public class Reference {
         this.id = id;
     }
 
-    public ArrayList<Integer> getAuthorIdList() {
-        return authorIdList;
-    }
+    public ArrayList<Integer> getAuthorIdList() {return authorIdList;}
 
     public void setAuthorIdList(ArrayList<Integer> authorIdList) {
         this.authorIdList = authorIdList;

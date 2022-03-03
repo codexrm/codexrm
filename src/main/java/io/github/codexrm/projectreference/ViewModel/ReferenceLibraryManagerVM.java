@@ -130,7 +130,7 @@ public class ReferenceLibraryManagerVM {
 
     public void replaceReferenceType(ReferenceVM referenceVM) throws IOException {
 
-
+        referenceVM.setAuthorLibrary(manager.getAuthorLibrary());
         Reference reference = manager.replaceReferenceType(referenceVM.toModel());
 
         referenceVM.setTitle(reference.getTitle());

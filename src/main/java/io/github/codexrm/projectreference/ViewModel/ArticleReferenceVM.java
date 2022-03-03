@@ -117,6 +117,7 @@ public class ArticleReferenceVM extends ReferenceVM {
 
     @Override
     public ArticleReference toModel() {
+
         ArticleReference articleReference = new ArticleReference(this.getId(), this.getAuthorIdList(), this.getTitle(), this.getDate(), this.getNote());
         articleReference.setJournal(this.getJournal());
         articleReference.setNumber(this.getNumber());
