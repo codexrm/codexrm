@@ -78,37 +78,21 @@ public class ReferenceVM {
         return title.get();
     }
 
-    public void setTitle(final String title) {
-        this.title.set(title);
-    }
+    public void setTitle(final String title) {this.title.set(title);}
 
-    public LocalDate getDate() {
-        return date.get();
-    }
+    public LocalDate getDate() {return date.get();}
 
-    public ObjectProperty<LocalDate> dateProperty() {
-        return date;
-    }
+    public ObjectProperty<LocalDate> dateProperty() {return date;}
 
-    public void setDate(LocalDate date) {
-        this.date.set(date);
-    }
+    public void setDate(LocalDate date) {this.date.set(date);}
 
-    public String getNote() {
-        return note.get();
-    }
+    public String getNote() {return note.get();}
 
-    public StringProperty noteProperty() {
-        return note;
-    }
+    public StringProperty noteProperty() {return note;}
 
-    public void setNote(String note) {
-        this.note.set(note);
-    }
+    public void setNote(String note) {this.note.set(note);}
 
-    public StringProperty titleProperty() {
-        return title;
-    }
+    public StringProperty titleProperty() {return title;}
 
     public AuthorLibrary getAuthorLibrary() {
         return authorLibrary;

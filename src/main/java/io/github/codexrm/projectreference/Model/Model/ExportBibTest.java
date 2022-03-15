@@ -101,15 +101,15 @@ public class ExportBibTest implements Export {
             bufferedWriter.write("  title = {" + reference.getTitle() + "},");
             bufferedWriter.newLine();
         }
-        if (reference.getDate().getMonth() != null) {
-            bufferedWriter.write("  month = " + reference.getDate().getMonth() + ",");
+        if (reference.getLocalDate().getMonth() != null) {
+            bufferedWriter.write("  month = " + reference.getLocalDate().getMonth() + ",");
             bufferedWriter.newLine();
         }
         if (reference.getNote() != null) {
             bufferedWriter.write("  note = {" + reference.getNote() + "},");
             bufferedWriter.newLine();
         }
-        bufferedWriter.write("  year = {" + reference.getDate().getYear() + "},");
+        bufferedWriter.write("  year = {" + reference.getLocalDate().getYear() + "},");
         bufferedWriter.newLine();
     }
 

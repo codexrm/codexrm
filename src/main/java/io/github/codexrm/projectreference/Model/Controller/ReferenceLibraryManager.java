@@ -124,7 +124,7 @@ public class ReferenceLibraryManager {
             Reference removedReference = referenceLibrary.getReferenceTable().remove(newReference.getId());
             newReference.setAuthorIdList(removedReference.getAuthorIdList());
             newReference.setTitle(removedReference.getTitle());
-            newReference.setDate(removedReference.getDate());
+            newReference.setLocalDate(removedReference.getLocalDate());
             newReference.setNote(removedReference.getNote());
             newReference.setId(removedReference.getId());
             referenceLibrary.getReferenceTable().put(newReference.getId(), newReference);

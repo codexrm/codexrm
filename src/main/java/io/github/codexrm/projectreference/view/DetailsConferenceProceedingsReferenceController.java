@@ -66,15 +66,6 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
 
         if (newReference != null) {
             if ((newReference instanceof ConferenceProceedingsReferenceVM)) {
-                author.textProperty().bindBidirectional(newReference.authorProperty());
-                title.textProperty().bindBidirectional(newReference.titleProperty());
-                date.valueProperty().bindBidirectional(newReference.dateProperty());
-                note.textProperty().bindBidirectional(newReference.noteProperty());
-                volume.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).volumeProperty());
-                serie.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).serieProperty());
-                address.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).addressProperty());
-                referenceType.valueProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).referenceTypeProperty());
-
                 currentConferenceProceedingsReference = new ConferenceProceedingsReferenceVM(
                         newReference.getId(),
                         newReference.getAuthorIdList(),
@@ -85,11 +76,20 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
                         ((ConferenceProceedingsReferenceVM) newReference).getSerie(),
                         ((ConferenceProceedingsReferenceVM) newReference).getAddress(),
                         referenceManager.getAuthorLibrary());
+
+                author.textProperty().bindBidirectional(newReference.authorProperty());
+                title.textProperty().bindBidirectional(newReference.titleProperty());
+                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                note.textProperty().bindBidirectional(newReference.noteProperty());
+                volume.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).volumeProperty());
+                serie.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).serieProperty());
+                address.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).addressProperty());
+                referenceType.valueProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).referenceTypeProperty());
             }
         } else {
             author.clear();
             title.clear();
-            //falta date
+            date.setValue(null);
             note.clear();
             volume.clear();
             serie.clear();
@@ -230,11 +230,11 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
             if (newValue != ReferenceType.CONFERENCEPROCEEDINGS) {
                 ReferenceVM updatedReference = null;
                 switch (newValue) { // Aqui se podria hacer un factory que devuelva un objeto dado el tipo
-                    case BOOK:
-                        updatedReference = new BookReferenceVM();
-                        break;
                     case BOOKSECTION:
                         updatedReference = new BookSectionReferenceVM();
+                        break;
+                    case BOOK:
+                        updatedReference = new BookReferenceVM();
                         break;
                     case BOOKLET:
                         updatedReference = new BookLetReferenceVM();

@@ -60,14 +60,6 @@ public class DetailsBookLetReferenceController implements Initializable {
 
         if (newReference != null) {
             if ((newReference instanceof BookLetReferenceVM)) {
-                author.textProperty().bindBidirectional(newReference.authorProperty());
-                title.textProperty().bindBidirectional(newReference.titleProperty());
-                date.valueProperty().bindBidirectional(newReference.dateProperty());
-                note.textProperty().bindBidirectional(newReference.noteProperty());
-                howpublished.textProperty().bindBidirectional(((BookLetReferenceVM) newReference).howpublishedProperty());
-                address.textProperty().bindBidirectional(((BookLetReferenceVM) newReference).addressProperty());
-                referenceType.valueProperty().bindBidirectional(((BookLetReferenceVM) newReference).referenceTypeProperty());
-
                 currentBookLetReference = new BookLetReferenceVM(
                         newReference.getId(),
                         newReference.getAuthorIdList(),
@@ -77,11 +69,19 @@ public class DetailsBookLetReferenceController implements Initializable {
                         ((BookLetReferenceVM) newReference).getHowpublished(),
                         ((BookLetReferenceVM) newReference).getAddress(),
                         referenceManager.getAuthorLibrary());
+
+                author.textProperty().bindBidirectional(newReference.authorProperty());
+                title.textProperty().bindBidirectional(newReference.titleProperty());
+                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                note.textProperty().bindBidirectional(newReference.noteProperty());
+                howpublished.textProperty().bindBidirectional(((BookLetReferenceVM) newReference).howpublishedProperty());
+                address.textProperty().bindBidirectional(((BookLetReferenceVM) newReference).addressProperty());
+                referenceType.valueProperty().bindBidirectional(((BookLetReferenceVM) newReference).referenceTypeProperty());
             }
         } else {
             author.clear();
             title.clear();
-            //falta date
+            date.setValue(null);
             note.clear();
             howpublished.clear();
             address.clear();
@@ -208,11 +208,11 @@ public class DetailsBookLetReferenceController implements Initializable {
             if (newValue != ReferenceType.BOOKLET) {
                 ReferenceVM updatedReference = null;
                 switch (newValue) { // Aqui se podria hacer un factory que devuelva un objeto dado el tipo
-                    case BOOK:
-                        updatedReference = new BookReferenceVM();
-                        break;
                     case BOOKSECTION:
                         updatedReference = new BookSectionReferenceVM();
+                        break;
+                    case BOOK:
+                        updatedReference = new BookReferenceVM();
                         break;
                     case ARTICLE:
                         updatedReference = new ArticleReferenceVM();

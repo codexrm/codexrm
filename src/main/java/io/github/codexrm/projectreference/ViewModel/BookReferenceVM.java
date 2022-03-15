@@ -42,7 +42,7 @@ public class BookReferenceVM extends ReferenceVM {
     }
 
     public BookReferenceVM(BookReference bookReference, AuthorLibrary authorLibrary) {
-        super(bookReference.getId(), bookReference.getAuthorIdList(), bookReference.getTitle(), bookReference.getDate(), bookReference.getNote(), authorLibrary);
+        super(bookReference.getId(), bookReference.getAuthorIdList(), bookReference.getTitle(), bookReference.getLocalDate(), bookReference.getNote(), authorLibrary);
 
         createEmptyBookReferenceVM();
 

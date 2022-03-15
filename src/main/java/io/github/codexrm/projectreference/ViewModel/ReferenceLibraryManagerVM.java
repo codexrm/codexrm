@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 public class ReferenceLibraryManagerVM {
 
@@ -102,7 +103,7 @@ public class ReferenceLibraryManagerVM {
         referenceList.add(new BookReferenceVM((BookReference) reference,manager.getAuthorLibrary()));
     }
 
-    public void deleteReferences(ArrayList<ReferenceVM> referenceList) throws IOException {
+    public void deleteReferences(List<ReferenceVM> referenceList) throws IOException {
 
         /*Get de references id to delete */
         ArrayList<Integer> referenceIdList = new ArrayList<>();
@@ -131,11 +132,11 @@ public class ReferenceLibraryManagerVM {
     public void replaceReferenceType(ReferenceVM referenceVM) throws IOException {
 
         referenceVM.setAuthorLibrary(manager.getAuthorLibrary());
-        Reference reference = manager.replaceReferenceType(referenceVM.toModel());
+         Reference reference = manager.replaceReferenceType(referenceVM.toModel());
 
         referenceVM.setTitle(reference.getTitle());
         referenceVM.setAuthor(reference.getAuthorIdList());
-        referenceVM.setDate(reference.getDate());
+        referenceVM.setDate(reference.getLocalDate());
         referenceVM.setNote(reference.getNote());
         referenceVM.setAuthorLibrary(getAuthorLibrary());
 

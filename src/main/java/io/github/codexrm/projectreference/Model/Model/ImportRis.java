@@ -74,7 +74,7 @@ public class ImportRis implements Import {
         commonField(entry, article);
         article.addAuthorId(authorLibrary.addAuthor(entry.getListAuthor()));
         article.setTitle(entry.getTitle());
-        article.setDate(entry.getDate());
+        article.setLocalDate(entry.getDate());
         article.setJournal(entry.getJournal());
         article.setVolume(entry.getVolume());
         article.setNumber(entry.getNumber());
@@ -89,7 +89,7 @@ public class ImportRis implements Import {
         commonField(entry, book);
         book.addAuthorId(authorLibrary.addAuthor(entry.getListAuthor()));
         book.setTitle(entry.getTitle());
-        book.setDate(entry.getDate());
+        book.setLocalDate(entry.getDate());
         book.setAddress(entry.getAddress());
         book.setPublisher(entry.getPublisher());
         book.setVolume(entry.getVolume());
@@ -105,7 +105,7 @@ public class ImportRis implements Import {
         commonField(entry, section);
         section.addAuthorId(authorLibrary.addAuthor(entry.getListAuthor()));
         section.setTitle(entry.getTitle());
-        section.setDate(entry.getDate());
+        section.setLocalDate(entry.getDate());
         section.setAddress(entry.getAddress());
         section.setPublisher(entry.getPublisher());
         section.setVolume(entry.getVolume());
@@ -123,7 +123,7 @@ public class ImportRis implements Import {
         commonField(entry, thesis);
         thesis.addAuthorId(authorLibrary.addAuthor(entry.getListAuthor()));
         thesis.setTitle(entry.getTitle());
-        thesis.setDate(entry.getDate());
+        thesis.setLocalDate(entry.getDate());
         thesis.setAddress(entry.getAddress());
         thesis.setSchool(entry.getSchool());
         if (entry.getThesisType().equals("Masters")) {
@@ -142,7 +142,7 @@ public class ImportRis implements Import {
         commonField(entry, proceedings);
         proceedings.addAuthorId(authorLibrary.addAuthor(entry.getListAuthor()));
         proceedings.setTitle(entry.getTitle());
-        proceedings.setDate(entry.getDate());
+        proceedings.setLocalDate(entry.getDate());
         proceedings.setVolume(entry.getVolume());
         proceedings.setSerie(entry.getSerie());
         proceedings.setAddress(entry.getAddress());

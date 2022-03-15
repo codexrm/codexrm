@@ -71,16 +71,6 @@ public class DetailsArticleReferenceController implements Initializable {
 
         if (newReference != null) {
             if ((newReference instanceof ArticleReferenceVM)) {
-                author.textProperty().bindBidirectional(newReference.authorProperty());
-                title.textProperty().bindBidirectional(newReference.titleProperty());
-                date.valueProperty().bindBidirectional(newReference.dateProperty());
-                note.textProperty().bindBidirectional(newReference.noteProperty());
-                journal.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).journalProperty());
-                volume.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).volumeProperty());
-                number.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).numberProperty());
-                pages.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).pagesProperty());
-                referenceType.valueProperty().bindBidirectional(((ArticleReferenceVM) newReference).referenceTypeProperty());
-
                 currentArticleReference = new ArticleReferenceVM(
                         newReference.getId(),
                         newReference.getAuthorIdList(),
@@ -92,11 +82,21 @@ public class DetailsArticleReferenceController implements Initializable {
                         ((ArticleReferenceVM) newReference).getNumber(),
                         ((ArticleReferenceVM) newReference).getPages(),
                         referenceManager.getAuthorLibrary());
+
+                author.textProperty().bindBidirectional(newReference.authorProperty());
+                title.textProperty().bindBidirectional(newReference.titleProperty());
+                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                note.textProperty().bindBidirectional(newReference.noteProperty());
+                journal.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).journalProperty());
+                volume.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).volumeProperty());
+                number.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).numberProperty());
+                pages.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).pagesProperty());
+                referenceType.valueProperty().bindBidirectional(((ArticleReferenceVM) newReference).referenceTypeProperty());
             }
         } else {
             author.clear();
             title.clear();
-            //falta date
+            date.setValue(null);
             note.clear();
             journal.clear();
             volume.clear();
@@ -241,11 +241,11 @@ public class DetailsArticleReferenceController implements Initializable {
             if (newValue != ReferenceType.ARTICLE) {
                 ReferenceVM updatedReference = null;
                 switch (newValue) { // Aqui se podria hacer un factory que devuelva un objeto dado el tipo
-                    case BOOK:
-                        updatedReference = new BookReferenceVM();
-                        break;
                     case BOOKSECTION:
                         updatedReference = new BookSectionReferenceVM();
+                        break;
+                    case BOOK:
+                        updatedReference = new BookReferenceVM();
                         break;
                     case BOOKLET:
                         updatedReference = new BookLetReferenceVM();

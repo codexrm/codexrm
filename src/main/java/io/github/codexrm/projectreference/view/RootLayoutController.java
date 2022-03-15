@@ -3,6 +3,7 @@ package io.github.codexrm.projectreference.view;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.ViewModel.*;
@@ -126,13 +127,13 @@ public class RootLayoutController implements Initializable {
                     showReferenceDetails(bookDetail);
                 } else if (newValue instanceof ArticleReferenceVM) {
                     showReferenceDetails(articleDetail);
-                }else if (newValue instanceof BookSectionReferenceVM) {
+                } else if (newValue instanceof BookSectionReferenceVM) {
                     showReferenceDetails(bookSectionDetail);
-                }else if (newValue instanceof BookLetReferenceVM) {
+                } else if (newValue instanceof BookLetReferenceVM) {
                     showReferenceDetails(bookLetDetail);
-                }else if (newValue instanceof ThesisReferenceVM) {
+                } else if (newValue instanceof ThesisReferenceVM) {
                     showReferenceDetails(thesisDetail);
-                }else if (newValue instanceof ConferenceProceedingsReferenceVM) {
+                } else if (newValue instanceof ConferenceProceedingsReferenceVM) {
                     showReferenceDetails(conferenceDetail);
                 }
             }
@@ -144,7 +145,7 @@ public class RootLayoutController implements Initializable {
             if (keyEvent.getCode() == KeyCode.DELETE) {
                 ObservableList<ReferenceVM> selectedReferences = referenceTable.getSelectionModel().getSelectedItems();
                 try {
-                    deleteReference((ArrayList<ReferenceVM>) selectedReferences);
+                    deleteReference(selectedReferences);
                 } catch (IOException e) {
                     /* Mostrar algun dialogo de error al usuario */
                     e.printStackTrace();
@@ -153,11 +154,11 @@ public class RootLayoutController implements Initializable {
         });
     }
 
-    public void deleteReference(ArrayList<ReferenceVM> referenceList) throws IOException {
+    public void deleteReference(List<ReferenceVM> referenceList) throws IOException {
         if (referenceList != null) {
             referenceTable.getSelectionModel().selectedItemProperty().removeListener(updateViewListener);
 
-           managerVM.deleteReferences(referenceList);
+            managerVM.deleteReferences(referenceList);
 
             referenceTable.refresh();
             referenceTable.getSelectionModel().clearSelection();

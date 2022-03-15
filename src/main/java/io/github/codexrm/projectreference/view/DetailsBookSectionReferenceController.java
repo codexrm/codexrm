@@ -86,19 +86,6 @@ public class DetailsBookSectionReferenceController implements Initializable {
 
         if (newReference != null) {
             if ((newReference instanceof BookSectionReferenceVM)) {
-                author.textProperty().bindBidirectional(newReference.authorProperty());
-                title.textProperty().bindBidirectional(newReference.titleProperty());
-                date.valueProperty().bindBidirectional(newReference.dateProperty());
-                note.textProperty().bindBidirectional(newReference.noteProperty());
-                publisher.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).publisherProperty());
-                volume.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).volumeProperty());
-                series.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).seriesProperty());
-                address.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).addressProperty());
-                edition.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).editionProperty());
-                chapter.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).chapterProperty());
-                pages.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).pagesProperty());
-                referenceType.valueProperty().bindBidirectional(((BookSectionReferenceVM) newReference).referenceTypeProperty());
-
                 currentBookSectionReference = new BookSectionReferenceVM(
                         newReference.getId(),
                         newReference.getAuthorIdList(),
@@ -113,11 +100,24 @@ public class DetailsBookSectionReferenceController implements Initializable {
                         ((BookSectionReferenceVM) newReference).getChapter(),
                         ((BookSectionReferenceVM) newReference).getPages(),
                         referenceManager.getAuthorLibrary());
+
+                author.textProperty().bindBidirectional(newReference.authorProperty());
+                title.textProperty().bindBidirectional(newReference.titleProperty());
+                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                note.textProperty().bindBidirectional(newReference.noteProperty());
+                publisher.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).publisherProperty());
+                volume.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).volumeProperty());
+                series.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).seriesProperty());
+                address.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).addressProperty());
+                edition.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).editionProperty());
+                chapter.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).chapterProperty());
+                pages.textProperty().bindBidirectional(((BookSectionReferenceVM) newReference).pagesProperty());
+                referenceType.valueProperty().bindBidirectional(((BookSectionReferenceVM) newReference).referenceTypeProperty());
             }
         } else {
             author.clear();
             title.clear();
-            //falta date
+            date.setValue(null);
             note.clear();
             publisher.clear();
             volume.clear();

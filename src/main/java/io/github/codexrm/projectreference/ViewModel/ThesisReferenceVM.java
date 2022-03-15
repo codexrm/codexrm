@@ -36,7 +36,7 @@ public class ThesisReferenceVM extends ReferenceVM {
     }
 
     public ThesisReferenceVM(ThesisReference thesisReference, AuthorLibrary authorLibrary) {
-        super(thesisReference.getId(), thesisReference.getAuthorIdList(), thesisReference.getTitle(), thesisReference.getDate(), thesisReference.getNote(),authorLibrary);
+        super(thesisReference.getId(), thesisReference.getAuthorIdList(), thesisReference.getTitle(), thesisReference.getLocalDate(), thesisReference.getNote(),authorLibrary);
 
         createEmptyThesisReferenceVM();
 

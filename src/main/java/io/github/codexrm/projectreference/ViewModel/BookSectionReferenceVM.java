@@ -36,7 +36,7 @@ public class BookSectionReferenceVM extends BookReferenceVM {
     }
 
     public BookSectionReferenceVM(BookSectionReference bookSectionReference,AuthorLibrary authorLibrary) {
-        super(bookSectionReference.getId(), bookSectionReference.getAuthorIdList(), bookSectionReference.getTitle(), bookSectionReference.getDate(), bookSectionReference.getNote(), bookSectionReference.getPublisher(), bookSectionReference.getVolume(), bookSectionReference.getSeries(), bookSectionReference.getAddress(), bookSectionReference.getEdition(),authorLibrary);
+        super(bookSectionReference.getId(), bookSectionReference.getAuthorIdList(), bookSectionReference.getTitle(), bookSectionReference.getLocalDate(), bookSectionReference.getNote(), bookSectionReference.getPublisher(), bookSectionReference.getVolume(), bookSectionReference.getSeries(), bookSectionReference.getAddress(), bookSectionReference.getEdition(),authorLibrary);
 
         createEmptyBookSectionReferenceVM();
 

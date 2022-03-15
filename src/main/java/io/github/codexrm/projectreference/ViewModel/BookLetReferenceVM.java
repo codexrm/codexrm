@@ -36,7 +36,7 @@ public class BookLetReferenceVM extends ReferenceVM {
     }
 
     public BookLetReferenceVM(BookLetReference bookLetReference, AuthorLibrary authorLibrary) {
-        super(bookLetReference.getId(), bookLetReference.getAuthorIdList(), bookLetReference.getTitle(), bookLetReference.getDate(), bookLetReference.getNote(),authorLibrary);
+        super(bookLetReference.getId(), bookLetReference.getAuthorIdList(), bookLetReference.getTitle(), bookLetReference.getLocalDate(), bookLetReference.getNote(),authorLibrary);
 
         createEmptyBookLetReferenceVM();
 

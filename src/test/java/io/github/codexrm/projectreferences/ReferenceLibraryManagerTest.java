@@ -23,7 +23,7 @@ class ReferenceLibraryManagerTest {
         ArticleReference article = new ArticleReference();
         article.setAuthorIdList(manager.addAuthor("Martin-Gonzalez, Jacob"));
         article.setJournal("Sciences and education");
-        article.setDate(LocalDate.of(2008, 03, 01));
+        article.setLocalDate(LocalDate.of(2008, 03, 01));
         article.setNote("aa");
         article.setNumber("no3443");
         article.setPages("p1011");
@@ -35,7 +35,7 @@ class ReferenceLibraryManagerTest {
         book.setAddress("ave67 no02");
         book.setEdition("Ing Isis Perez");
         book.setAuthorIdList(manager.addAuthor("Navarro-Gener,Enrique;Martin-Gonzalez, Jacob"));
-        book.setDate(LocalDate.of(1987, 04, 01));
+        book.setLocalDate(LocalDate.of(1987, 04, 01));
         book.setNote("bb");
         book.setPublisher("Prencite Hall");
         book.setSeries("xx7");
@@ -48,7 +48,7 @@ class ReferenceLibraryManagerTest {
         section.setChapter("I");
         section.setEdition("Ing Olga Domigz");
         section.setAuthorIdList(manager.addAuthor("Fernandez-Diaz,Maria"));
-        section.setDate(LocalDate.of(2011, 02, 01));
+        section.setLocalDate(LocalDate.of(2011, 02, 01));
         section.setNote("cc");
         section.setPages("1234");
         section.setPublisher("Education");
@@ -60,7 +60,7 @@ class ReferenceLibraryManagerTest {
         ThesisReference thesis = new ThesisReference();
         thesis.setAddress("ave45,no 43");
         thesis.setAuthorIdList(manager.addAuthor("Navarro-Gener,Enrique;Martin-Gonzalez, Jacob;Fernandez-Diaz,Maria"));
-        thesis.setDate(LocalDate.of(2018, 07, 01));
+        thesis.setLocalDate(LocalDate.of(2018, 07, 01));
         thesis.setNote("dd");
         thesis.setSchool("Fructuoso Rodriguez");
         thesis.setTitle("help of Windows");
@@ -71,7 +71,7 @@ class ReferenceLibraryManagerTest {
         bookLet.setAddress("ave45,no76");
         bookLet.setHowpublished("NO SE");
         bookLet.setAuthorIdList(manager.addAuthor("Torres-Nunnez,Roberto"));
-        bookLet.setDate(LocalDate.of(2009, 11, 01));
+        bookLet.setLocalDate(LocalDate.of(2009, 11, 01));
         bookLet.setNote("ee");
         bookLet.setTitle("Images");
         // manager.addReference(bookLet);
@@ -79,7 +79,7 @@ class ReferenceLibraryManagerTest {
         ConferenceProceedingsReference proceedings = new ConferenceProceedingsReference();
         proceedings.setAddress("ave76,no87");
         proceedings.setAuthorIdList(manager.addAuthor("Nunnez,Roberto"));
-        proceedings.setDate(LocalDate.of(2020, 8, 01));
+        proceedings.setLocalDate(LocalDate.of(2020, 8, 01));
         proceedings.setNote("ff");
         proceedings.setSerie("xl3");
         proceedings.setTitle("The men");
@@ -93,7 +93,7 @@ class ReferenceLibraryManagerTest {
 
         // reference.setYear(2012);
         // manager.updateReference(reference);
-        Assertions.assertEquals(manager.getReferenceLibrary().getReferenceTable().get(3).getDate().getYear(),
+        Assertions.assertEquals(manager.getReferenceLibrary().getReferenceTable().get(3).getLocalDate().getYear(),
                 2012);
 
         try {
@@ -106,7 +106,7 @@ class ReferenceLibraryManagerTest {
             ThesisReference thesis2 = new ThesisReference();
             thesis2.setAddress("ave61");
             thesis2.setAuthorIdList(manager.addAuthor("Navarro-Gener,Enrique;Martin-Gonzalez, Jacob;Fernandez-Diaz,Maria"));
-            thesis2.setDate(LocalDate.of(2019, 05, 01));
+            thesis2.setLocalDate(LocalDate.of(2019, 05, 01));
             thesis2.setNote("hh");
             thesis2.setSchool("Cespedes");
             thesis2.setTitle("Reference");

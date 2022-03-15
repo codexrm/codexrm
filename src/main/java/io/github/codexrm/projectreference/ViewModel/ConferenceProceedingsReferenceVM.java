@@ -35,7 +35,7 @@ public class ConferenceProceedingsReferenceVM extends ReferenceVM {
     }
 
     public ConferenceProceedingsReferenceVM(ConferenceProceedingsReference conferenceProceedingsReference, AuthorLibrary authorLibrary) {
-        super(conferenceProceedingsReference.getId(), conferenceProceedingsReference.getAuthorIdList(), conferenceProceedingsReference.getTitle(), conferenceProceedingsReference.getDate(), conferenceProceedingsReference.getNote(),authorLibrary);
+        super(conferenceProceedingsReference.getId(), conferenceProceedingsReference.getAuthorIdList(), conferenceProceedingsReference.getTitle(), conferenceProceedingsReference.getLocalDate(), conferenceProceedingsReference.getNote(),authorLibrary);
 
         createEmptyConferenceProceedingsReferenceVM();
 

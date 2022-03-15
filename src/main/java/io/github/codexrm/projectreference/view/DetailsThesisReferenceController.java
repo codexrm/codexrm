@@ -67,15 +67,6 @@ public class DetailsThesisReferenceController implements Initializable {
 
         if (newReference != null) {
             if ((newReference instanceof ThesisReferenceVM)) {
-                author.textProperty().bindBidirectional(newReference.authorProperty());
-                title.textProperty().bindBidirectional(newReference.titleProperty());
-                date.valueProperty().bindBidirectional(newReference.dateProperty());
-                note.textProperty().bindBidirectional(newReference.noteProperty());
-                school.textProperty().bindBidirectional(((ThesisReferenceVM) newReference).schoolProperty());
-                type.valueProperty().bindBidirectional(((ThesisReferenceVM) newReference).typeProperty());
-                address.textProperty().bindBidirectional(((ThesisReferenceVM) newReference).addressProperty());
-                referenceType.valueProperty().bindBidirectional(((ThesisReferenceVM) newReference).referenceTypeProperty());
-
                 currentThesisReference = new ThesisReferenceVM(
                         newReference.getId(),
                         newReference.getAuthorIdList(),
@@ -86,14 +77,22 @@ public class DetailsThesisReferenceController implements Initializable {
                         ((ThesisReferenceVM) newReference).getType(),
                         ((ThesisReferenceVM) newReference).getAddress(),
                         referenceManager.getAuthorLibrary());
+
+                author.textProperty().bindBidirectional(newReference.authorProperty());
+                title.textProperty().bindBidirectional(newReference.titleProperty());
+                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                note.textProperty().bindBidirectional(newReference.noteProperty());
+                school.textProperty().bindBidirectional(((ThesisReferenceVM) newReference).schoolProperty());
+                type.valueProperty().bindBidirectional(((ThesisReferenceVM) newReference).typeProperty());
+                address.textProperty().bindBidirectional(((ThesisReferenceVM) newReference).addressProperty());
+                referenceType.valueProperty().bindBidirectional(((ThesisReferenceVM) newReference).referenceTypeProperty());
             }
         } else {
             author.clear();
             title.clear();
-            //falta date
+            date.setValue(null);
             note.clear();
             school.clear();
-            //falta type
             address.clear();
         }
     };
@@ -237,11 +236,11 @@ public class DetailsThesisReferenceController implements Initializable {
             if (newValue != ReferenceType.THESIS) {
                 ReferenceVM updatedReference = null;
                 switch (newValue) { // Aqui se podria hacer un factory que devuelva un objeto dado el tipo
-                    case BOOK:
-                        updatedReference = new BookReferenceVM();
-                        break;
                     case BOOKSECTION:
                         updatedReference = new BookSectionReferenceVM();
+                        break;
+                    case BOOK:
+                        updatedReference = new BookReferenceVM();
                         break;
                     case BOOKLET:
                         updatedReference = new BookLetReferenceVM();

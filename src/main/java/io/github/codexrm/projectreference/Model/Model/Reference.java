@@ -1,8 +1,10 @@
 package io.github.codexrm.projectreference.Model.Model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -31,7 +33,7 @@ public class Reference {
     }
 
     public Reference(Integer id, ArrayList<Integer> authorIdList, String title, LocalDate date, String note) {
-        authorIdList = new ArrayList<>();
+        this.authorIdList = new ArrayList<>();
         this.authorIdList = authorIdList;
         this.title = title;
         this.date = date;
@@ -53,14 +55,32 @@ public class Reference {
         this.title = title;
     }
 
-    public LocalDate getDate() {
+    @JsonIgnore
+    public LocalDate getLocalDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    @JsonIgnore
+    public void setLocalDate(LocalDate date) {
         this.date = date;
     }
 
+    public String getDate() {
+        if (date == null){
+        return "0000-00-00";
+        } else{
+            return date.toString();
+        }
+    }
+
+    public void setDate(String date) {
+        if (date.equals("0000-00-00")) {
+           this.date = null;
+        }else{
+            String[] partDate = date.split("-", 3);
+            this.date = LocalDate.of(Integer.parseInt(partDate[0]),Integer.parseInt(partDate[1]),Integer.parseInt(partDate[2]));
+        }
+    }
     public String getNote() {
         return note;
     }

@@ -100,7 +100,7 @@ public class ExportRis implements Export {
         commonField(reference, jour);
         addAuthors(reference.getAuthorIdList(), jour.getListAuthor());
         jour.setTitle(reference.getTitle());
-        jour.setDate(reference.getDate());
+        jour.setDate(reference.getLocalDate());
         jour.setJournal(reference.getJournal());
         jour.setVolume(reference.getVolume());
         jour.setNumber(reference.getNumber());
@@ -115,7 +115,7 @@ public class ExportRis implements Export {
         commonField(reference, book);
         addAuthors(reference.getAuthorIdList(), book.getListAuthor());
         book.setTitle(reference.getTitle());
-        book.setDate(reference.getDate());
+        book.setDate(reference.getLocalDate());
         book.setPublisher(reference.getPublisher());
         book.setVolume(reference.getVolume());
         book.setSerie(reference.getSeries());
@@ -131,7 +131,7 @@ public class ExportRis implements Export {
         commonField(reference, section);
         addAuthors(reference.getAuthorIdList(), section.getListAuthor());
         section.setTitle(reference.getTitle());
-        section.setDate(reference.getDate());
+        section.setDate(reference.getLocalDate());
         section.setPublisher(reference.getPublisher());
         section.setVolume(reference.getVolume());
         section.setSerie(reference.getSeries());
@@ -149,7 +149,7 @@ public class ExportRis implements Export {
         commonField(reference, thesis);
         addAuthors(reference.getAuthorIdList(), thesis.getListAuthor());
         thesis.setTitle(reference.getTitle());
-        thesis.setDate(reference.getDate());
+        thesis.setDate(reference.getLocalDate());
         thesis.setSchool(reference.getSchool());
         thesis.setAddress(reference.getAddress());
         if (reference.getType().equals(ThesisType.Masters)) {
@@ -168,7 +168,7 @@ public class ExportRis implements Export {
         ;
         addAuthors(reference.getAuthorIdList(), proceedings.getListAuthor());
         proceedings.setTitle(reference.getTitle());
-        proceedings.setDate(reference.getDate());
+        proceedings.setDate(reference.getLocalDate());
         proceedings.setVolume(reference.getVolume());
         proceedings.setSerie(reference.getSerie());
         proceedings.setAddress(reference.getAddress());

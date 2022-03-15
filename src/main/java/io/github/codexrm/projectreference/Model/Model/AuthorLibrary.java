@@ -29,7 +29,7 @@ public class AuthorLibrary {
         while (e.hasMoreElements()) {
             keyAuthor = e.nextElement();
             valorAuthor = authorTable.get(keyAuthor);
-            if (valorAuthor.equals(author)) {
+            if (valorAuthor.getAuthor().equals(author)) {
                 id = valorAuthor.getId();
                 break;
             }

@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference.Model.Model;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class ReferenceLibrary {
@@ -16,7 +17,7 @@ public class ReferenceLibrary {
         reference.setId(id);
         reference.setTitle("No Title");
         reference.setAuthorIdList(null);
-        reference.setDate(null);
+        reference.setLocalDate(null);
         referenceTable.put(id, reference);
 
         return reference;

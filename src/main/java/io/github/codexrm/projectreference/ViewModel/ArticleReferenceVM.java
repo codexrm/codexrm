@@ -37,7 +37,7 @@ public class ArticleReferenceVM extends ReferenceVM {
     }
 
     public ArticleReferenceVM(ArticleReference articleReference, AuthorLibrary authorLibrary) {
-        super(articleReference.getId(),articleReference.getAuthorIdList(), articleReference.getTitle(), articleReference.getDate(), articleReference.getNote(),authorLibrary);
+        super(articleReference.getId(),articleReference.getAuthorIdList(), articleReference.getTitle(), articleReference.getLocalDate(), articleReference.getNote(),authorLibrary);
 
         createEmptyArticleReferenceVM();
 

@@ -1,1 +1,36 @@
-{"authorTable":{}}
+{
+   "authorTable":{
+      "7":{
+         "author":"Fernandez,Maria",
+         "id":7
+      },
+      "6":{
+         "author":"Avila,Pedro",
+         "id":6
+      },
+      "5":{
+         "author":"Nunnez,Roberto",
+         "id":5
+      },
+      "4":{
+         "author":"Jimenez,Luis",
+         "id":4
+      },
+      "3":{
+         "author":"Torres,Roberto",
+         "id":3
+      },
+      "2":{
+         "author":" Martin,Jacob",
+         "id":2
+      },
+      "1":{
+         "author":"Ulloa,Julio",
+         "id":1
+      },
+      "0":{
+         "author":"Navarro,Enrique",
+         "id":0
+      }
+   }
+}

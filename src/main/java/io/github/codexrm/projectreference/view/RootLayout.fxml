@@ -84,8 +84,6 @@
         </MenuBar>
         <ToolBar prefHeight="40.0" prefWidth="200.0">
             <items>
-            <Button mnemonicParsing="false" text="Add" />
-                <Button mnemonicParsing="false" text="Delete" />
                 <Button mnemonicParsing="false" text="Sync" />
                 <Button mnemonicParsing="false" text="Help" />
             </items>

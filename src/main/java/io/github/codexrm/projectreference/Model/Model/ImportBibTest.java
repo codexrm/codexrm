@@ -160,7 +160,7 @@ public class ImportBibTest implements Import {
             }
         }
         if (date != null)
-            reference.setDate(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+            reference.setLocalDate(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy/MM/dd")));
     }
 
     private Reference createArticleReference(BibTeXEntry entry) {

@@ -1,1 +1,100 @@
-{"referenceTable":{"0":{"type":"book","authorIdList":[],"title":"No Title","date"
+{
+   "referenceTable":{
+      "6":{
+         "type":"book",
+         "authorIdList":[
+            7
+         ],
+         "title":"introduccion a windows",
+         "date":"2018-07-10",
+         "note":"cc",
+         "id":6,
+         "publisher":"educacion",
+         "volume":"3",
+         "series":"4",
+         "address":"ave 76",
+         "edition":"ing Olga Hernandez"
+      },
+      "5":{
+         "type":"thesis",
+         "authorIdList":[
+            5
+         ],
+         "title":"Ayuda para windows",
+         "date":"2018-07-10",
+         "note":"dd",
+         "id":5,
+         "school":"Fructuoso Rodriguez",
+         "type":"Masters",
+         "address":"ave 45"
+      },
+      "4":{
+         "type":"thesis",
+         "authorIdList":[
+            6
+         ],
+         "title":"referencias bibliograficas",
+         "date":"2019-05-10",
+         "note":"hh",
+         "id":4,
+         "school":"cespedes",
+         "type":"phd",
+         "address":"ave 41"
+      },
+      "3":{
+         "type":"proceedings",
+         "authorIdList":[
+            3
+         ],
+         "title":"Codigo de la familia",
+         "date":"2018-07-10",
+         "note":"ff",
+         "id":3,
+         "volume":"2",
+         "serie":"3",
+         "address":"ave 63"
+      },
+      "2":{
+         "type":"bookLet",
+         "authorIdList":[
+            4
+         ],
+         "title":"Imagenes",
+         "date":"2018-07-10",
+         "note":"dd",
+         "id":2,
+         "howpublished":"no se",
+         "address":"ave 45"
+      },
+      "1":{
+         "type":"article",
+         "authorIdList":[
+            1
+         ],
+         "title":"Proyecto de educacion ambiental",
+         "date":"2018-07-10",
+         "note":"aa",
+         "id":1,
+         "journal":"ciencia y educacion",
+         "volume":"1",
+         "number":"3",
+         "pages":"10"
+      },
+      "0":{
+         "type":"bookSection",
+         "authorIdList":[
+            0,
+            2
+         ],
+         "title":"relacion de las carreras",
+         "date":"1997-04-01",
+         "note":"bb",
+         "id":0,
+         "publisher":" Prencite Hall",
+         "volume":" 3",
+         "series":" 7",
+         "address":" ave 67",
+         "edition":" ing Isis Perez"
+      }
+   }
+}
