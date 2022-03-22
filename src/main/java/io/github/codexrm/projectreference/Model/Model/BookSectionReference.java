@@ -14,7 +14,7 @@ public class BookSectionReference extends BookReference {
         this.pages = "";
     }
 
-    public BookSectionReference(Integer id, ArrayList<Integer> authorIdList, String title, LocalDate date, String note, String publisher, String volume, String series, String address, String edition) {
+    public BookSectionReference(Integer id, ArrayList<Integer> authorIdList, String title, LocalDate date, String note) {
         super(id, authorIdList, title, date, note);
         this.chapter = "";
         this.pages = "";

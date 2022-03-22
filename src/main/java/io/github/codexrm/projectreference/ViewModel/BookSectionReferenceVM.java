@@ -45,11 +45,6 @@ public class BookSectionReferenceVM extends BookReferenceVM {
     }
 
     private void createEmptyBookSectionReferenceVM() {
-        this.publisher = new SimpleStringProperty();
-        this.volume = new SimpleStringProperty();
-        this.series = new SimpleStringProperty();
-        this.address = new SimpleStringProperty();
-        this.edition = new SimpleStringProperty();
         this.chapter = new SimpleStringProperty();
         this.pages = new SimpleStringProperty();
         this.referenceType = new SimpleObjectProperty<>(ReferenceType.BOOKSECTION);
@@ -93,26 +88,15 @@ public class BookSectionReferenceVM extends BookReferenceVM {
 
     @Override
     public BookSectionReference toModel() {
-        BookSectionReference bookSectionReference = new BookSectionReference(this.getId(), this.getAuthorIdList(), this.getTitle(), this.getDate(), this.getNote(), this.getPublisher(), this.getVolume(), this.getSeries(), this.getAddress(), this.getEdition());
+        BookSectionReference bookSectionReference = new BookSectionReference(this.getId(), this.getAuthorIdList(), this.getTitle(), this.getDate(), this.getNote());
 
+        bookSectionReference.setPublisher(this.getPublisher());
+        bookSectionReference.setVolume(this.getVolume());
+        bookSectionReference.setSeries(this.getSeries());
+        bookSectionReference.setAddress(this.getAddress());
+        bookSectionReference.setEdition(this.getEdition());
         bookSectionReference.setChapter(this.getChapter());
         bookSectionReference.setPages(this.getPages());
         return bookSectionReference;
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BookSectionReferenceVM)) return false;
-        if (!super.equals(o)) return false;
-        final BookSectionReferenceVM that = (BookSectionReferenceVM) o;
-        return getReferenceType().equals(that.getReferenceType()) &&
-                Objects.equals(getChapter(), that.getChapter()) &&
-                Objects.equals(getPages(), that.getPages());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getReferenceType(), getChapter(), getPages());
     }
 }

@@ -1,11 +1,8 @@
 package io.github.codexrm.projectreference.view;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 
+import io.github.codexrm.projectreference.Model.Model.BookSectionReference;
+import io.github.codexrm.projectreference.Model.Model.ThesisReference;
 import io.github.codexrm.projectreference.ViewModel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
@@ -15,7 +12,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class RootLayoutController implements Initializable {
 
@@ -38,11 +41,6 @@ public class RootLayoutController implements Initializable {
     @FXML
     private Label noReferenceDetailInfo;
 
-    @FXML
-    private Button add;
-    @FXML
-    private Button delete;
-
     private ChangeListener<ReferenceVM> updateViewListener;
     private int selectedIndex;
 
@@ -61,18 +59,19 @@ public class RootLayoutController implements Initializable {
         articleDetailLoader.setLocation(getClass().getResource("DetailsArticleReference.fxml"));
         bookSectionDetailLoader.setLocation(getClass().getResource("DetailsBookSectionReference.fxml"));
         bookLetDetailLoader.setLocation(getClass().getResource("DetailsBookLetReference.fxml"));
-        thesisDetailLoader.setLocation(getClass().getResource("DetailsThesisReference.fxml"));
+         thesisDetailLoader.setLocation(getClass().getResource("DetailsThesisReference.fxml"));
         conferenceDetailLoader.setLocation(getClass().getResource("DetailsConferenceReference.fxml"));
 
-        DetailsArticleReferenceController articleDetailViewController = new DetailsArticleReferenceController();
         DetailsBookReferenceController bookDetailViewController = new DetailsBookReferenceController();
+        DetailsArticleReferenceController articleDetailViewController = new DetailsArticleReferenceController();
         DetailsBookSectionReferenceController bookSectionDetailViewController = new DetailsBookSectionReferenceController();
         DetailsBookLetReferenceController bookLetDetailViewController = new DetailsBookLetReferenceController();
         DetailsThesisReferenceController thesisDetailViewController = new DetailsThesisReferenceController();
         DetailsConferenceProceedingsReferenceController conferenceDetailViewController = new DetailsConferenceProceedingsReferenceController();
 
-        articleDetailViewController.setDataModel(managerVM);
+
         bookDetailViewController.setDataModel(managerVM);
+        articleDetailViewController.setDataModel(managerVM);
         bookSectionDetailViewController.setDataModel(managerVM);
         bookLetDetailViewController.setDataModel(managerVM);
         thesisDetailViewController.setDataModel(managerVM);
@@ -123,18 +122,18 @@ public class RootLayoutController implements Initializable {
         updateViewListener = (observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedIndex = referenceTable.getSelectionModel().getSelectedIndex();
-                if (newValue instanceof BookReferenceVM) {
-                    showReferenceDetails(bookDetail);
+                if (newValue instanceof BookSectionReferenceVM) {
+                    showReferenceDetails(bookSectionDetail);
                 } else if (newValue instanceof ArticleReferenceVM) {
                     showReferenceDetails(articleDetail);
-                } else if (newValue instanceof BookSectionReferenceVM) {
-                    showReferenceDetails(bookSectionDetail);
                 } else if (newValue instanceof BookLetReferenceVM) {
                     showReferenceDetails(bookLetDetail);
-                } else if (newValue instanceof ThesisReferenceVM) {
-                    showReferenceDetails(thesisDetail);
                 } else if (newValue instanceof ConferenceProceedingsReferenceVM) {
                     showReferenceDetails(conferenceDetail);
+                } else if (newValue instanceof ThesisReferenceVM) {
+                    showReferenceDetails(thesisDetail);
+                }    else if(newValue instanceof  BookReferenceVM){
+                    showReferenceDetails(bookDetail);
                 }
             }
         };
@@ -149,6 +148,10 @@ public class RootLayoutController implements Initializable {
                 } catch (IOException e) {
                     /* Mostrar algun dialogo de error al usuario */
                     e.printStackTrace();
+                }
+            } else {
+                if (KeyCodeCombination.keyCombination("Ctrl+S").match(keyEvent)) {
+                    save();
                 }
             }
         });
@@ -171,11 +174,10 @@ public class RootLayoutController implements Initializable {
     private void loadReferenceDetail() {
         loadReferencePane(bookDetail);
         loadReferencePane(articleDetail);
-        loadReferencePane(bookSectionDetail);
         loadReferencePane(bookLetDetail);
-        loadReferencePane(thesisDetail);
         loadReferencePane(conferenceDetail);
-
+        loadReferencePane(thesisDetail);
+        loadReferencePane(bookSectionDetail);
     }
 
     private void loadReferencePane(Node node) {
@@ -206,5 +208,14 @@ public class RootLayoutController implements Initializable {
         referenceTable.getSelectionModel().selectedItemProperty().addListener(updateViewListener);
 
         showReferenceDetails(noReferenceDetailInfo);
+    }
+
+    @FXML
+    private void save() {
+        try {
+            managerVM.saveDataToModel();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

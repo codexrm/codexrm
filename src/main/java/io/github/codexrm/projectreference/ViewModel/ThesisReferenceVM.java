@@ -109,21 +109,4 @@ public class ThesisReferenceVM extends ReferenceVM {
 
         return thesisReference;
     }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ThesisReferenceVM)) return false;
-        if (!super.equals(o)) return false;
-        final ThesisReferenceVM that = (ThesisReferenceVM) o;
-        return getReferenceType().equals(that.getReferenceType()) &&
-                Objects.equals(getSchool(), that.getSchool()) &&
-                Objects.equals(getType(), that.getType()) &&
-                Objects.equals(getAddress(), that.getAddress());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getReferenceType(), getSchool(), getType(), getAddress());
-    }
 }

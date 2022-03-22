@@ -63,9 +63,9 @@ public class ReferenceVM {
             this.author.set("lastName1,Name1;lastNameN,nameN...");
         } else{
             this.author.set(authorLibrary.readAuthorsViewList(authorIdList));
-
         }
     }
+
     public void setAuthor(final String author) {
         this.author.set(author);
     }
@@ -115,22 +115,5 @@ public class ReferenceVM {
 
     public Reference toModel() {
         return new Reference(this.getId(), this.getAuthorIdList(), this.getTitle(), this.getDate(), this.getNote());
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ReferenceVM)) return false;
-        final ReferenceVM that = (ReferenceVM) o;
-        return (getId() == that.getId()) &&
-                Objects.equals(getAuthor(), that.getAuthor()) &&
-                Objects.equals(getTitle(), that.getTitle()) &&
-                Objects.equals(getDate(), that.getDate()) &&
-                Objects.equals(getNote(), that.getNote());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getAuthor(), getTitle(), getDate(), getNote());
     }
 }

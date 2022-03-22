@@ -1,17 +1,18 @@
 package io.github.codexrm.projectreference.view;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.ViewModel.*;
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.util.converter.NumberStringConverter;
 
 public class DetailsArticleReferenceController implements Initializable {
 
@@ -42,47 +43,26 @@ public class DetailsArticleReferenceController implements Initializable {
     @FXML
     private ComboBox<ReferenceType> referenceType;
 
-    private ReferenceLibraryManagerVM referenceManager;
-    private ArticleReferenceVM currentArticleReference;
-    private ArticleReferenceVM previousArticleReference;
+    private ReferenceLibraryManagerVM managerVM;
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
         if (oldReference != null) {
             if ((oldReference instanceof ArticleReferenceVM)) {
                 author.textProperty().unbindBidirectional(oldReference.authorProperty());
                 title.textProperty().unbindBidirectional(oldReference.titleProperty());
-                date.valueProperty().unbindBidirectional((oldReference).dateProperty());
+                date.valueProperty().unbindBidirectional(oldReference.dateProperty());
                 note.textProperty().unbindBidirectional(oldReference.noteProperty());
                 journal.textProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).journalProperty());
                 volume.textProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).volumeProperty());
                 number.textProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).numberProperty());
                 pages.textProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).pagesProperty());
-                referenceType.valueProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).referenceTypeProperty());
 
-                previousArticleReference = new ArticleReferenceVM(oldReference.getId(), oldReference.getAuthorIdList(), oldReference.getTitle(),
-                        oldReference.getDate(),oldReference.getNote(),
-                        ((ArticleReferenceVM) oldReference).getJournal(),
-                        ((ArticleReferenceVM) oldReference).getVolume(),
-                        ((ArticleReferenceVM) oldReference).getNumber(),
-                        ((ArticleReferenceVM) oldReference).getPages(),
-                        referenceManager.getAuthorLibrary());
+                referenceType.valueProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).referenceTypeProperty());
             }
         }
 
         if (newReference != null) {
             if ((newReference instanceof ArticleReferenceVM)) {
-                currentArticleReference = new ArticleReferenceVM(
-                        newReference.getId(),
-                        newReference.getAuthorIdList(),
-                        newReference.getTitle(),
-                        newReference.getDate(),
-                        newReference.getNote(),
-                        ((ArticleReferenceVM) newReference).getJournal(),
-                        ((ArticleReferenceVM) newReference).getVolume(),
-                        ((ArticleReferenceVM) newReference).getNumber(),
-                        ((ArticleReferenceVM) newReference).getPages(),
-                        referenceManager.getAuthorLibrary());
-
                 author.textProperty().bindBidirectional(newReference.authorProperty());
                 title.textProperty().bindBidirectional(newReference.titleProperty());
                 date.valueProperty().bindBidirectional(newReference.dateProperty());
@@ -91,12 +71,13 @@ public class DetailsArticleReferenceController implements Initializable {
                 volume.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).volumeProperty());
                 number.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).numberProperty());
                 pages.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).pagesProperty());
+
                 referenceType.valueProperty().bindBidirectional(((ArticleReferenceVM) newReference).referenceTypeProperty());
             }
         } else {
             author.clear();
             title.clear();
-            date.setValue(null);
+            date.setValue(LocalDate.now());
             note.clear();
             journal.clear();
             volume.clear();
@@ -158,118 +139,27 @@ public class DetailsArticleReferenceController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadReferenceType();
-        initializeFocusLost();
-        initializeOnAction();
     }
 
     public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
-        if (this.referenceManager != null) {
-            this.referenceManager.currentReferenceProperty().removeListener(referenceVMListener);
+        if (this.managerVM != null) {
+            this.managerVM.currentReferenceProperty().removeListener(referenceVMListener);
         }
 
-        this.referenceManager = dataViewModel;
-        this.referenceManager.currentReferenceProperty().addListener(referenceVMListener);
-    }
-
-    private void initializeOnAction() {
-        author.setOnAction(e -> updateReference());
-        title.setOnAction(e -> updateReference());
-        date.setOnAction(e -> updateReference());
-        note.setOnAction(e -> updateReference());
-        journal.setOnAction(e -> updateReference());
-        volume.setOnAction(e -> updateReference());
-        number.setOnAction(e -> updateReference());
-        pages.setOnAction(e -> updateReference());
-    }
-
-    private void initializeFocusLost() {
-        ChangeListener<Boolean> bookDetailListener = (observable, oldValue, newValue) -> {
-            if (newValue != null && !newValue) {
-                updateReference();
-            }
-        };
-
-        author.focusedProperty().addListener(bookDetailListener);
-        title.focusedProperty().addListener(bookDetailListener);
-        date.focusedProperty().addListener(bookDetailListener);
-        note.focusedProperty().addListener(bookDetailListener);
-        journal.focusedProperty().addListener(bookDetailListener);
-        volume.focusedProperty().addListener(bookDetailListener);
-        number.focusedProperty().addListener(bookDetailListener);
-        pages.focusedProperty().addListener(bookDetailListener);
-    }
-
-    private void updateReference() {
-        ArticleReferenceVM articleReference = new ArticleReferenceVM();
-        articleReference.setId(this.currentArticleReference.getId());
-        articleReference.setAuthor(author.getText());
-        articleReference.setTitle(title.getText());
-        articleReference.setDate(date.getValue());
-        articleReference.setNote(note.getText());
-        articleReference.setJournal(journal.getText());
-        articleReference.setVolume(volume.getText());
-        articleReference.setNumber(number.getText());
-        articleReference.setPages(pages.getText());
-        articleReference.setAuthorLibrary(referenceManager.getAuthorLibrary());
-
-        /*Esta condicional es que se pierde el foco del TextField porque se selecciona
-         * una fila en la tabla, que es de tipo book y se pierden los valores anteriores
-         * que estaban almacenados en la interfaz grafica*/
-        if (previousArticleReference != null && articleReference.getId() != previousArticleReference.getId()) {
-            try {
-                /*Aqui no tengo como determinar si hay cambios o no, con lo cual siempre salvo la informacion*/
-                referenceManager.updateReference(previousArticleReference);
-            } catch (IOException e) {
-                /* Mostrar algun dialogo de error al usuario */
-                e.printStackTrace();
-            }
-        } else if (!articleReference.equals(currentArticleReference)) { //Sobrescribi el metodo equals
-            try {
-                currentArticleReference = articleReference;
-                referenceManager.updateReference(articleReference);
-            } catch (IOException e) {
-                /* Mostrar algun dialogo de error al usuario */
-                e.printStackTrace();
-            }
-        }
+        this.managerVM = dataViewModel;
+        this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
     }
 
     private void loadReferenceType() {
         referenceType.getItems().addAll(ReferenceType.values());
 
-        ChangeListener<ReferenceType> referenceTypeListener = (options, oldValue, newValue) -> {
-            if (newValue != ReferenceType.ARTICLE) {
-                ReferenceVM updatedReference = null;
-                switch (newValue) { // Aqui se podria hacer un factory que devuelva un objeto dado el tipo
-                    case BOOKSECTION:
-                        updatedReference = new BookSectionReferenceVM();
-                        break;
-                    case BOOK:
-                        updatedReference = new BookReferenceVM();
-                        break;
-                    case BOOKLET:
-                        updatedReference = new BookLetReferenceVM();
-                        break;
-                    case THESIS:
-                        updatedReference = new ThesisReferenceVM();
-                        break;
-                    default: updatedReference = new ConferenceProceedingsReferenceVM();
-                }
-
-                if (updatedReference != null) {
-                    updatedReference.setId(currentArticleReference.getId());
-                }
-
-                try {
-                    referenceManager.replaceReferenceType(updatedReference);
-                } catch (IOException e) {
-                    /* Mostrar algun dialogo de error al usuario */
-                    e.printStackTrace();
-                }
+        ChangeListener<ReferenceType> referenceTypeListener = (options, oldReferenceType, newReferenceType) -> {
+            if (newReferenceType != ReferenceType.ARTICLE) {
+                managerVM.replaceCurrentReferenceType(newReferenceType);
             }
         };
 
         referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
     }
+    }
 
-}

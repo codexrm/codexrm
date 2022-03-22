@@ -13,11 +13,11 @@ public class BookReference extends Reference {
 
     public BookReference() {
         super();
-        this.publisher = " ";
-        this.volume = " ";
-        this.series = " ";
-        this.address = " ";
-        this.edition = " ";
+        this.publisher = "";
+        this.volume = "";
+        this.series = "";
+        this.address = "";
+        this.edition = "";
     }
 
     public BookReference(Integer id, ArrayList<Integer> authorIdList, String title, LocalDate date, String note) {

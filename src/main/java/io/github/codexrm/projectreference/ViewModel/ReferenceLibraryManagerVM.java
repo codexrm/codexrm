@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Comparator.comparing;
 
 public class ReferenceLibraryManagerVM {
 
@@ -77,12 +80,12 @@ public class ReferenceLibraryManagerVM {
         while (e.hasMoreElements()) {
             keyReference = e.nextElement();
             valorReference = manager.getReferenceTable().get(keyReference);
-            if (valorReference instanceof BookReference) {
-                referenceList.add(new BookReferenceVM((BookReference) valorReference, manager.getAuthorLibrary()));
-            } else if (valorReference instanceof ArticleReference) {
-                referenceList.add(new ArticleReferenceVM((ArticleReference) valorReference,manager.getAuthorLibrary()));
+            if (valorReference instanceof ArticleReference) {
+                referenceList.add(new ArticleReferenceVM((ArticleReference) valorReference, manager.getAuthorLibrary()));
             } else if (valorReference instanceof BookSectionReference) {
                 referenceList.add(new BookSectionReferenceVM((BookSectionReference) valorReference,manager.getAuthorLibrary()));
+            } else if (valorReference instanceof BookReference) {
+                referenceList.add(new BookReferenceVM((BookReference) valorReference,manager.getAuthorLibrary()));
             } else if (valorReference instanceof BookLetReference) {
                 referenceList.add(new BookLetReferenceVM((BookLetReference) valorReference,manager.getAuthorLibrary()));
             } else if (valorReference instanceof ConferenceProceedingsReference) {
@@ -92,27 +95,28 @@ public class ReferenceLibraryManagerVM {
             }
         }
     }
-
-
     public void addEmptyBookReference() throws IOException {
 
-        /*Add reference to model*/
-        Reference reference = manager.addEmptyBookReference();
+        int id = 0;
+        Optional<ReferenceVM> maxReferenceId = referenceList.stream().max(comparing(ReferenceVM::getId));
+        if (maxReferenceId.isPresent()) {
+            id = maxReferenceId.get().getId() + 1;
+        }
 
-        /*Add reference to view-model*/
-        referenceList.add(new BookReferenceVM((BookReference) reference,manager.getAuthorLibrary()));
+        BookReferenceVM reference = new BookReferenceVM();
+        reference.setId(id);
+        reference.setTitle("No Title");
+        reference.setAuthor("lastName1,Name1;lastNameN,nameN...");
+        referenceList.add(reference);
     }
 
     public void deleteReferences(List<ReferenceVM> referenceList) throws IOException {
 
         /*Get de references id to delete */
-        ArrayList<Integer> referenceIdList = new ArrayList<>();
+        List<Integer> referenceIdList = new ArrayList<>();
         for (ReferenceVM reference : referenceList) {
             referenceIdList.add(reference.getId());
         }
-
-        /*Delete reference from model*/
-        manager.deleteReferences(referenceIdList);
 
         /*Delete reference from view-model*/
         for (Integer id : referenceIdList) {
@@ -120,35 +124,52 @@ public class ReferenceLibraryManagerVM {
         }
     }
 
-    public void updateReference(ReferenceVM referenceVM) throws IOException {
-
-        /*Update reference from model*/
-        manager.updateReference(referenceVM.toModel());
-
-        /* No es necesario actualizar la vista en este caso, porque se actualiza directamente
-         * cuando se modifica el valor en la interfaz*/
-    }
-
-    public void replaceReferenceType(ReferenceVM referenceVM) throws IOException {
-
-        referenceVM.setAuthorLibrary(manager.getAuthorLibrary());
-         Reference reference = manager.replaceReferenceType(referenceVM.toModel());
-
-        referenceVM.setTitle(reference.getTitle());
-        referenceVM.setAuthor(reference.getAuthorIdList());
-        referenceVM.setDate(reference.getLocalDate());
-        referenceVM.setNote(reference.getNote());
-        referenceVM.setAuthorLibrary(getAuthorLibrary());
+    public void replaceCurrentReferenceType(ReferenceType newReferenceType) {
 
         /*Update reference type from view-model*/
         for (ReferenceVM ref : referenceList) {
-            if (ref.getId() == referenceVM.getId()) {
+            if (ref.getId() == getCurrentReference().getId()) {
+                ReferenceVM referenceVM = getReferenceObject(newReferenceType);
+                referenceVM.setId(getCurrentReference().getId());
+                referenceVM.setTitle(getCurrentReference().getTitle());
+                referenceVM.setAuthor(getCurrentReference().getAuthor());
+                referenceVM.setDate(getCurrentReference().getDate());
+                referenceVM.setNote(getCurrentReference().getNote());
+
                 int referenceIndex = referenceList.indexOf(ref);
                 referenceList.set(referenceIndex, referenceVM);
+
+                referenceTypeReplaced.set(true);
                 break;
             }
         }
+    }
 
-        referenceTypeReplaced.set(true);
+    public void saveDataToModel() throws IOException {
+        manager.getReferenceTable().clear();
+
+        for (ReferenceVM reference : referenceList) {
+            reference.setAuthorLibrary(manager.getAuthorLibrary());
+            manager.getReferenceTable().put(reference.getId(),reference.toModel());
+        }
+        manager.saveTables();
+    }
+
+    public ReferenceVM getReferenceObject(ReferenceType referenceType) {
+        switch (referenceType) { // Aqui se podria hacer un factory que devuelva un objeto dado el tipo
+            case ARTICLE:
+                return new ArticleReferenceVM();
+            case BOOK:
+                return new BookReferenceVM();
+            case BOOKSECTION:
+                return new BookSectionReferenceVM();
+            case BOOKLET:
+                return new BookLetReferenceVM();
+            case CONFERENCEPROCEEDINGS:
+                return new ConferenceProceedingsReferenceVM();
+            case THESIS:
+                return new ThesisReferenceVM();
+        }
+        return new ReferenceVM();
     }
 }

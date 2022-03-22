@@ -126,22 +126,4 @@ public class ArticleReferenceVM extends ReferenceVM {
 
         return articleReference;
     }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ArticleReferenceVM)) return false;
-        if (!super.equals(o)) return false;
-        final ArticleReferenceVM that = (ArticleReferenceVM) o;
-        return getReferenceType().equals(that.getReferenceType()) &&
-                Objects.equals(getJournal(), that.getJournal()) &&
-                Objects.equals(getVolume(), that.getVolume()) &&
-                Objects.equals(getNumber(), that.getNumber()) &&
-                Objects.equals(getPages(), that.getPages());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getReferenceType(), getJournal(), getVolume(), getNumber(), getPages());
-    }
 }

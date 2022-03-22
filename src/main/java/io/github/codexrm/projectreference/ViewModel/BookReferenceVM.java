@@ -36,9 +36,6 @@ public class BookReferenceVM extends ReferenceVM {
         setSeries(series);
         setAddress(address);
         setEdition(edition);
-
-
-
     }
 
     public BookReferenceVM(BookReference bookReference, AuthorLibrary authorLibrary) {
@@ -144,24 +141,5 @@ public class BookReferenceVM extends ReferenceVM {
         bookReference.setEdition(this.getEdition());
 
         return bookReference;
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BookReferenceVM)) return false;
-        if (!super.equals(o)) return false;
-        final BookReferenceVM that = (BookReferenceVM) o;
-        return getReferenceType().equals(that.getReferenceType()) &&
-                Objects.equals(getPublisher(), that.getPublisher()) &&
-                Objects.equals(getVolume(), that.getVolume()) &&
-                Objects.equals(getSeries(), that.getSeries()) &&
-                Objects.equals(getAddress(), that.getAddress()) &&
-                Objects.equals(getEdition(), that.getEdition());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getReferenceType(), getPublisher(), getVolume(), getSeries(), getAddress(), getEdition());
     }
 }
