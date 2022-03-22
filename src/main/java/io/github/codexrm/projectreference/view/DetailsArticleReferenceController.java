@@ -47,7 +47,7 @@ public class DetailsArticleReferenceController implements Initializable {
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
         if (oldReference != null) {
-            if ((oldReference instanceof ArticleReferenceVM)) {
+            if ((oldReference.getClass() == ArticleReferenceVM.class)) {
                 author.textProperty().unbindBidirectional(oldReference.authorProperty());
                 title.textProperty().unbindBidirectional(oldReference.titleProperty());
                 date.valueProperty().unbindBidirectional(oldReference.dateProperty());
@@ -62,7 +62,7 @@ public class DetailsArticleReferenceController implements Initializable {
         }
 
         if (newReference != null) {
-            if ((newReference instanceof ArticleReferenceVM)) {
+            if ((newReference.getClass() == ArticleReferenceVM.class)) {
                 author.textProperty().bindBidirectional(newReference.authorProperty());
                 title.textProperty().bindBidirectional(newReference.titleProperty());
                 date.valueProperty().bindBidirectional(newReference.dateProperty());

@@ -42,7 +42,7 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
         if (oldReference != null) {
-            if ((oldReference instanceof ConferenceProceedingsReferenceVM)) {
+            if ((oldReference.getClass() == ConferenceProceedingsReferenceVM.class)) {
                 author.textProperty().unbindBidirectional(oldReference.authorProperty());
                 title.textProperty().unbindBidirectional(oldReference.titleProperty());
                 date.valueProperty().unbindBidirectional(oldReference.dateProperty());
@@ -56,7 +56,7 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
         }
 
         if (newReference != null) {
-            if ((newReference instanceof ConferenceProceedingsReferenceVM)) {
+            if ((newReference.getClass() == ConferenceProceedingsReferenceVM.class)) {
                 author.textProperty().bindBidirectional(newReference.authorProperty());
                 title.textProperty().bindBidirectional(newReference.titleProperty());
                 date.valueProperty().bindBidirectional(newReference.dateProperty());

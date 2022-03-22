@@ -56,7 +56,7 @@ public class DetailsBookSectionReferenceController implements Initializable {
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
         if (oldReference != null) {
-            if ((oldReference instanceof BookSectionReferenceVM)) {
+            if ((oldReference.getClass() == BookSectionReferenceVM.class)) {
                 author.textProperty().unbindBidirectional(oldReference.authorProperty());
                 title.textProperty().unbindBidirectional(oldReference.titleProperty());
                 date.valueProperty().unbindBidirectional(oldReference.dateProperty());
@@ -75,7 +75,7 @@ public class DetailsBookSectionReferenceController implements Initializable {
         }
 
         if (newReference != null) {
-            if ((newReference instanceof BookSectionReferenceVM)) {
+            if ((newReference.getClass() == BookSectionReferenceVM.class)) {
                 author.textProperty().bindBidirectional(newReference.authorProperty());
                 title.textProperty().bindBidirectional(newReference.titleProperty());
                 date.valueProperty().bindBidirectional(newReference.dateProperty());

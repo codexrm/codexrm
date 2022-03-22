@@ -39,7 +39,7 @@ public class DetailsBookLetReferenceController implements Initializable {
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
         if (oldReference != null) {
-            if ((oldReference instanceof BookLetReferenceVM)) {
+            if ((oldReference.getClass() == BookLetReferenceVM.class)) {
                 author.textProperty().unbindBidirectional(oldReference.authorProperty());
                 title.textProperty().unbindBidirectional(oldReference.titleProperty());
                 date.valueProperty().unbindBidirectional(oldReference.dateProperty());
@@ -52,7 +52,7 @@ public class DetailsBookLetReferenceController implements Initializable {
         }
 
         if (newReference != null) {
-            if ((newReference instanceof BookLetReferenceVM)) {
+            if ((newReference.getClass() == BookLetReferenceVM.class)) {
                 author.textProperty().bindBidirectional(newReference.authorProperty());
                 title.textProperty().bindBidirectional(newReference.titleProperty());
                 date.valueProperty().bindBidirectional(newReference.dateProperty());

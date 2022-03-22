@@ -80,17 +80,17 @@ public class ReferenceLibraryManagerVM {
         while (e.hasMoreElements()) {
             keyReference = e.nextElement();
             valorReference = manager.getReferenceTable().get(keyReference);
-            if (valorReference instanceof ArticleReference) {
+            if (valorReference.getClass() == ArticleReference.class) {
                 referenceList.add(new ArticleReferenceVM((ArticleReference) valorReference, manager.getAuthorLibrary()));
-            } else if (valorReference instanceof BookSectionReference) {
+            } else if (valorReference.getClass() == BookSectionReference.class) {
                 referenceList.add(new BookSectionReferenceVM((BookSectionReference) valorReference,manager.getAuthorLibrary()));
-            } else if (valorReference instanceof BookReference) {
+            } else if (valorReference.getClass() == BookReference.class) {
                 referenceList.add(new BookReferenceVM((BookReference) valorReference,manager.getAuthorLibrary()));
-            } else if (valorReference instanceof BookLetReference) {
+            } else if (valorReference.getClass() == BookLetReference.class) {
                 referenceList.add(new BookLetReferenceVM((BookLetReference) valorReference,manager.getAuthorLibrary()));
-            } else if (valorReference instanceof ConferenceProceedingsReference) {
+            } else if (valorReference.getClass() == ConferenceProceedingsReference.class) {
                 referenceList.add(new ConferenceProceedingsReferenceVM((ConferenceProceedingsReference) valorReference,manager.getAuthorLibrary()));
-            } else if (valorReference instanceof ThesisReference) {
+            } else if (valorReference.getClass() == ThesisReference.class) {
                 referenceList.add(new ThesisReferenceVM((ThesisReference) valorReference,manager.getAuthorLibrary()));
             }
         }

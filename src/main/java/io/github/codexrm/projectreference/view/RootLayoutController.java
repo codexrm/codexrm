@@ -1,8 +1,5 @@
 package io.github.codexrm.projectreference.view;
 
-
-import io.github.codexrm.projectreference.Model.Model.BookSectionReference;
-import io.github.codexrm.projectreference.Model.Model.ThesisReference;
 import io.github.codexrm.projectreference.ViewModel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
@@ -122,17 +119,17 @@ public class RootLayoutController implements Initializable {
         updateViewListener = (observable, oldValue, newValue) -> {
             if (newValue != null) {
                 selectedIndex = referenceTable.getSelectionModel().getSelectedIndex();
-                if (newValue instanceof BookSectionReferenceVM) {
+                if (newValue.getClass() == BookSectionReferenceVM.class) {
                     showReferenceDetails(bookSectionDetail);
-                } else if (newValue instanceof ArticleReferenceVM) {
+                } else if (newValue.getClass() == ArticleReferenceVM.class) {
                     showReferenceDetails(articleDetail);
-                } else if (newValue instanceof BookLetReferenceVM) {
+                } else if (newValue.getClass() == BookLetReferenceVM.class) {
                     showReferenceDetails(bookLetDetail);
-                } else if (newValue instanceof ConferenceProceedingsReferenceVM) {
+                } else if (newValue.getClass() == ConferenceProceedingsReferenceVM.class) {
                     showReferenceDetails(conferenceDetail);
-                } else if (newValue instanceof ThesisReferenceVM) {
+                } else if (newValue.getClass() == ThesisReferenceVM.class) {
                     showReferenceDetails(thesisDetail);
-                }    else if(newValue instanceof  BookReferenceVM){
+                }    else if(newValue.getClass() ==  BookReferenceVM.class){
                     showReferenceDetails(bookDetail);
                 }
             }
@@ -148,10 +145,6 @@ public class RootLayoutController implements Initializable {
                 } catch (IOException e) {
                     /* Mostrar algun dialogo de error al usuario */
                     e.printStackTrace();
-                }
-            } else {
-                if (KeyCodeCombination.keyCombination("Ctrl+S").match(keyEvent)) {
-                    save();
                 }
             }
         });
