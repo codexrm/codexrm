@@ -139,9 +139,8 @@ public class RootLayoutController implements Initializable {
 
         referenceTable.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.DELETE) {
-                ObservableList<ReferenceVM> selectedReferences = referenceTable.getSelectionModel().getSelectedItems();
                 try {
-                    deleteReference(selectedReferences);
+                    deleteReference();
                 } catch (IOException e) {
                     /* Mostrar algun dialogo de error al usuario */
                     e.printStackTrace();
@@ -150,7 +149,9 @@ public class RootLayoutController implements Initializable {
         });
     }
 
-    public void deleteReference(List<ReferenceVM> referenceList) throws IOException {
+    @FXML
+    public void deleteReference() throws IOException {
+        ObservableList<ReferenceVM> referenceList = referenceTable.getSelectionModel().getSelectedItems();
         if (referenceList != null) {
             referenceTable.getSelectionModel().selectedItemProperty().removeListener(updateViewListener);
 
@@ -190,7 +191,7 @@ public class RootLayoutController implements Initializable {
         }
         node.setVisible(true);
     }
-
+    @FXML
     public void addReference() throws IOException {
         referenceTable.getSelectionModel().selectedItemProperty().removeListener(updateViewListener);
 
