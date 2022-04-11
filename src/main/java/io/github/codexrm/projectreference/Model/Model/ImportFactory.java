@@ -14,7 +14,7 @@ public class ImportFactory {
             importRis.setAuthorLibrary(authorLibrary);
             return importRis;
         } else {
-            ImportBibTest importBibTex = new ImportBibTest();
+            ImportBibTex importBibTex = new ImportBibTex();
             importBibTex.setAuthorLibrary(authorLibrary);
             return importBibTex;
         }

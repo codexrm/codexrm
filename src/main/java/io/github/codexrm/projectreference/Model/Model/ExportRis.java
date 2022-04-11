@@ -33,20 +33,15 @@ public class ExportRis implements Export {
     }
 
     @Override
-    public void writeValue(Hashtable<Integer, Reference> referenceTable, String path)
+    public void writeValue(ArrayList<Reference> referenceList, String path)
             throws IOException {
 
         RisManager manager = new RisManager();
-        Enumeration<Integer> e = referenceTable.keys();
-        Integer keyReference;
-        Reference valorReference;
-
-        while (e.hasMoreElements()) {
-            keyReference = e.nextElement();
-            valorReference = referenceTable.get(keyReference);
-            BaseReference entry = identifyType(valorReference);
-            manager.addReference(entry);
-
+        for (Reference reference : referenceList) {
+            BaseReference entry = identifyType(reference);
+            if (entry != null) {
+                manager.addReference(entry);
+            }
         }
         manager.exportListReference(path);
     }
@@ -72,6 +67,8 @@ public class ExportRis implements Export {
                     } else {
                         if (reference instanceof ConferenceProceedingsReference) {
                             entry = createConference((ConferenceProceedingsReference) reference);
+                        }else{
+                            entry = null;
                         }
                     }
                 }

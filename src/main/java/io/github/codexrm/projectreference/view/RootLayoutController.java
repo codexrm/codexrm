@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference.view;
 
+import io.github.codexrm.projectreference.Model.Enum.Format;
 import io.github.codexrm.projectreference.ViewModel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
@@ -9,12 +10,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class RootLayoutController implements Initializable {
@@ -27,6 +29,7 @@ public class RootLayoutController implements Initializable {
     private final ScrollPane bookLetDetail;
     private final ScrollPane conferenceDetail;
     private final ScrollPane thesisDetail;
+    private Stage stage;
     @FXML
     private TableView<ReferenceVM> referenceTable;
     @FXML
@@ -44,6 +47,7 @@ public class RootLayoutController implements Initializable {
     public RootLayoutController() throws IOException {
 
         managerVM = new ReferenceLibraryManagerVM();
+        stage = new Stage();
 
         FXMLLoader bookDetailLoader = new FXMLLoader();
         FXMLLoader articleDetailLoader = new FXMLLoader();
@@ -88,6 +92,10 @@ public class RootLayoutController implements Initializable {
         thesisDetail = thesisDetailLoader.load();
         conferenceDetail = conferenceDetailLoader.load();
 
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     @Override
@@ -162,6 +170,24 @@ public class RootLayoutController implements Initializable {
             referenceTable.getSelectionModel().selectedItemProperty().addListener(updateViewListener);
 
             showReferenceDetails(noReferenceDetailInfo);
+        }
+    }
+    @FXML
+    public void exportRis() throws IOException {
+        export(Format.RIS);
+    }
+    @FXML
+    public void exportBibTex() throws IOException {
+       export(Format.BIBTEX);
+    }
+
+    private void export(Format format) throws IOException {
+        ObservableList<ReferenceVM> referenceList = referenceTable.getSelectionModel().getSelectedItems();
+        if (referenceList != null) {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Export");
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            managerVM.exportReferenceList(selectedFile,referenceList,format);
         }
     }
 

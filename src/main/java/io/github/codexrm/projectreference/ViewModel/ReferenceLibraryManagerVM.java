@@ -1,6 +1,7 @@
 package io.github.codexrm.projectreference.ViewModel;
 
 import io.github.codexrm.projectreference.Model.Controller.ReferenceLibraryManager;
+import io.github.codexrm.projectreference.Model.Enum.Format;
 import io.github.codexrm.projectreference.Model.Model.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -9,6 +10,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -122,6 +124,13 @@ public class ReferenceLibraryManagerVM {
         for (Integer id : referenceIdList) {
             this.referenceList.removeIf(reference -> reference.getId() == id);
         }
+    }
+    public void exportReferenceList(File file, List<ReferenceVM> referenceVMList, Format format) throws IOException {
+        ArrayList<Reference> referenceList = new ArrayList<>();
+        for (ReferenceVM referenceVM : referenceVMList) {
+            referenceList.add(referenceVM.toModel());
+        }
+        manager.exportReferenceList(file, referenceList,format);
     }
 
     public void replaceCurrentReferenceType(ReferenceType newReferenceType) {

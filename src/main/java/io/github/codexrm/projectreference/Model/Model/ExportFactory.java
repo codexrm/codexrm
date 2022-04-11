@@ -15,7 +15,7 @@ public class ExportFactory {
             exportRis.setAuthorLibrary(authorLibrary);
             return exportRis;
         } else {
-            ExportBibTest exportBibtex = new ExportBibTest();
+            ExportBibTex exportBibtex = new ExportBibTex();
             exportBibtex.setAuthorLibrary(authorLibrary);
             return exportBibtex;
         }

@@ -139,10 +139,10 @@ public class ReferenceLibraryManager {
         export.writeValue(reference, path);
     }
 
-    public void exportReferenceTable(String path, Format format) throws IOException {
+    public void exportReferenceList(File file, ArrayList<Reference> referenceList, Format format) throws IOException {
 
         Export export = exportFactory.getExport(format, authorLibrary);
-        export.writeValue(referenceLibrary.getReferenceTable(), path);
+        export.writeValue(referenceList,file.getPath());
     }
 
     public void importReferences(String path, Format format)

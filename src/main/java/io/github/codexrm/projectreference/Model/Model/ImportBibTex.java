@@ -8,10 +8,10 @@ import java.util.*;
 import io.github.codexrm.projectreference.Model.Enum.ThesisType;
 import org.jbibtex.*;
 
-public class ImportBibTest implements Import {
+public class ImportBibTex implements Import {
     private AuthorLibrary authorLibrary;
 
-    public ImportBibTest() {
+    public ImportBibTex() {
         super();
     }
 

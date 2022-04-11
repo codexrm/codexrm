@@ -5,11 +5,11 @@ import java.util.*;
 
 import io.github.codexrm.projectreference.Model.Enum.ThesisType;
 
-public class ExportBibTest implements Export {
+public class ExportBibTex implements Export {
 
     private AuthorLibrary authorLibrary;
 
-    public ExportBibTest() {
+    public ExportBibTex() {
         // Do nothing
     }
 
@@ -27,16 +27,10 @@ public class ExportBibTest implements Export {
     }
 
     @Override
-    public void writeValue(Hashtable<Integer, Reference> referenceTable, String path)
+    public void writeValue(ArrayList<Reference> referenceList, String path)
             throws IOException {
-        Enumeration<Integer> e = referenceTable.keys();
-        Integer keyReference;
-        Reference valorReference;
-
-        while (e.hasMoreElements()) {
-            keyReference = e.nextElement();
-            valorReference = referenceTable.get(keyReference);
-            identifyType(valorReference, path);
+        for (Reference reference : referenceList) {
+            identifyType(reference, path);
         }
     }
 
