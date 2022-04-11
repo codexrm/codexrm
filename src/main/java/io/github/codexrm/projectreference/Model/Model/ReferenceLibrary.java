@@ -33,6 +33,8 @@ public class ReferenceLibrary {
 
     public void addListReference(ArrayList<Reference> list) {
         for (Reference reference : list) {
+            int id = maxValueKeys() + 1;
+            reference.setId(id);
             referenceTable.put(reference.getId(), reference);
         }
     }

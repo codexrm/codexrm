@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.jbibtex.ParseException;
 
 import java.io.File;
 import java.io.IOException;
@@ -131,6 +132,10 @@ public class ReferenceLibraryManagerVM {
             referenceList.add(referenceVM.toModel());
         }
         manager.exportReferenceList(file, referenceList,format);
+    }
+    public void importReferences(File file, Format format) throws IOException, ParseException {
+        manager.importReferences(file.getPath(),format);
+        syncViewModel();
     }
 
     public void replaceCurrentReferenceType(ReferenceType newReferenceType) {

@@ -72,7 +72,7 @@ public class ImportRis implements Import {
         ArticleReference article = new ArticleReference();
 
         commonField(entry, article);
-        article.addAuthorId(authorLibrary.addAuthor(entry.getListAuthor()));
+        article.addAuthorId(authorLibrary.addAuthor(entry.getAuthorList()));
         article.setTitle(entry.getTitle());
         article.setLocalDate(entry.getDate());
         article.setJournal(entry.getJournal());
@@ -87,7 +87,7 @@ public class ImportRis implements Import {
         BookReference book = new BookReference();
 
         commonField(entry, book);
-        book.addAuthorId(authorLibrary.addAuthor(entry.getListAuthor()));
+        book.addAuthorId(authorLibrary.addAuthor(entry.getAuthorList()));
         book.setTitle(entry.getTitle());
         book.setLocalDate(entry.getDate());
         book.setAddress(entry.getAddress());
@@ -103,7 +103,7 @@ public class ImportRis implements Import {
         BookSectionReference section = new BookSectionReference();
 
         commonField(entry, section);
-        section.addAuthorId(authorLibrary.addAuthor(entry.getListAuthor()));
+        section.addAuthorId(authorLibrary.addAuthor(entry.getAuthorList()));
         section.setTitle(entry.getTitle());
         section.setLocalDate(entry.getDate());
         section.setAddress(entry.getAddress());
@@ -121,7 +121,7 @@ public class ImportRis implements Import {
         ThesisReference thesis = new ThesisReference();
 
         commonField(entry, thesis);
-        thesis.addAuthorId(authorLibrary.addAuthor(entry.getListAuthor()));
+        thesis.addAuthorId(authorLibrary.addAuthor(entry.getAuthorList()));
         thesis.setTitle(entry.getTitle());
         thesis.setLocalDate(entry.getDate());
         thesis.setAddress(entry.getAddress());
@@ -140,7 +140,7 @@ public class ImportRis implements Import {
         ConferenceProceedingsReference proceedings = new ConferenceProceedingsReference();
 
         commonField(entry, proceedings);
-        proceedings.addAuthorId(authorLibrary.addAuthor(entry.getListAuthor()));
+        proceedings.addAuthorId(authorLibrary.addAuthor(entry.getAuthorList()));
         proceedings.setTitle(entry.getTitle());
         proceedings.setLocalDate(entry.getDate());
         proceedings.setVolume(entry.getVolume());

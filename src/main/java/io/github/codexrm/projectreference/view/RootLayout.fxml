@@ -52,8 +52,8 @@
                   <SeparatorMenuItem mnemonicParsing="false" />
                         <Menu mnemonicParsing="false" text="Import">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="BibTex" />
-                                <MenuItem mnemonicParsing="false" text="Ris" />
+                                <MenuItem mnemonicParsing="false" onAction="#importBibTex" text="BibTex" />
+                                <MenuItem mnemonicParsing="false" onAction="#importRis" text="Ris" />
                             </items>
                         </Menu>
                   <Menu mnemonicParsing="false" text="Export">

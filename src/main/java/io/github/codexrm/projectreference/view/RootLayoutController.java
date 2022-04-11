@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.jbibtex.ParseException;
 
 import java.io.File;
 import java.io.IOException;
@@ -174,14 +175,14 @@ public class RootLayoutController implements Initializable {
     }
     @FXML
     public void exportRis() throws IOException {
-        export(Format.RIS);
+        exportTo(Format.RIS);
     }
     @FXML
     public void exportBibTex() throws IOException {
-       export(Format.BIBTEX);
+        exportTo(Format.BIBTEX);
     }
 
-    private void export(Format format) throws IOException {
+    private void exportTo(Format format) throws IOException {
         ObservableList<ReferenceVM> referenceList = referenceTable.getSelectionModel().getSelectedItems();
         if (referenceList != null) {
             FileChooser fileChooser = new FileChooser();
@@ -189,6 +190,24 @@ public class RootLayoutController implements Initializable {
             File selectedFile = fileChooser.showOpenDialog(stage);
             managerVM.exportReferenceList(selectedFile,referenceList,format);
         }
+    }
+    @FXML
+    public void importRis() throws IOException, ParseException {
+        importTo(Format.RIS);
+    }
+    @FXML
+    public void importBibTex() throws IOException, ParseException {
+        importTo(Format.BIBTEX);
+    }
+
+    private void importTo(Format format) throws IOException, ParseException {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Import");
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            managerVM.importReferences(selectedFile,format);
+            referenceTable.refresh();
+
+
     }
 
     private void loadReferenceDetail() {
