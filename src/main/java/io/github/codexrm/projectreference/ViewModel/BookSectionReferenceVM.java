@@ -1,7 +1,7 @@
-package io.github.codexrm.projectreference.ViewModel;
+package io.github.codexrm.projectreference.viewmodel;
 
-import io.github.codexrm.projectreference.Model.Model.AuthorLibrary;
-import io.github.codexrm.projectreference.Model.Model.BookSectionReference;
+import io.github.codexrm.projectreference.model.model.AuthorLibrary;
+import io.github.codexrm.projectreference.model.model.BookSectionReference;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

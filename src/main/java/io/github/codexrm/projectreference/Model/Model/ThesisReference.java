@@ -1,6 +1,6 @@
-package io.github.codexrm.projectreference.Model.Model;
+package io.github.codexrm.projectreference.model.model;
 
-import io.github.codexrm.projectreference.Model.Enum.ThesisType;
+import io.github.codexrm.projectreference.model.Enum.ThesisType;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

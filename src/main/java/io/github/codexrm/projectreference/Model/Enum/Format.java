@@ -1,4 +1,4 @@
-package io.github.codexrm.projectreference.Model.Enum;
+package io.github.codexrm.projectreference.model.Enum;
 
 public enum Format {
     RIS, BIBTEX

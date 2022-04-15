@@ -1,12 +1,12 @@
-package io.github.codexrm.projectreference.Model.Controller;
+package io.github.codexrm.projectreference.model.controller;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import io.github.codexrm.projectreference.Model.Enum.Format;
-import io.github.codexrm.projectreference.Model.Model.*;
+import io.github.codexrm.projectreference.model.Enum.Format;
+import io.github.codexrm.projectreference.model.model.*;
 import org.jbibtex.ParseException;
 import org.jbibtex.TokenMgrException;
 import org.jetbrains.annotations.NotNull;

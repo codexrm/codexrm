@@ -1,13 +1,11 @@
-package io.github.codexrm.projectreference.Model.Model;
+package io.github.codexrm.projectreference.model.model;
 
 public class Author {
 
     private String author;
     private Integer id;
 
-    public Author() {
-        super();
-    }
+    public Author() {super();}
 
     public Author(String author, Integer id) {
         this.author = author;

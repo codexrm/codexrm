@@ -1,7 +1,6 @@
-package io.github.codexrm.projectreference.Model.Model;
+package io.github.codexrm.projectreference.model.model;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -102,4 +101,4 @@ public class Reference {
             authorIdList.add(authorId);
         }
     }
-}
+   }

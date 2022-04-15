@@ -1,4 +1,4 @@
-package io.github.codexrm.projectreference.Model.Model;
+package io.github.codexrm.projectreference.model.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

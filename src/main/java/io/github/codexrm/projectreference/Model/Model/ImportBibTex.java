@@ -1,11 +1,11 @@
-package io.github.codexrm.projectreference.Model.Model;
+package io.github.codexrm.projectreference.model.model;
 
 import java.io.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import io.github.codexrm.projectreference.Model.Enum.ThesisType;
+import io.github.codexrm.projectreference.model.Enum.ThesisType;
 import org.jbibtex.*;
 
 public class ImportBibTex implements Import {

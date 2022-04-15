@@ -1,4 +1,4 @@
-package io.github.codexrm.projectreference.Model.Model;
+package io.github.codexrm.projectreference.model.model;
 
 import java.io.IOException;
 import java.util.ArrayList;

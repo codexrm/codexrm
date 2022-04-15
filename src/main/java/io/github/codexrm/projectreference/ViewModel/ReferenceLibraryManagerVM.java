@@ -1,8 +1,8 @@
-package io.github.codexrm.projectreference.ViewModel;
+package io.github.codexrm.projectreference.viewmodel;
 
-import io.github.codexrm.projectreference.Model.Controller.ReferenceLibraryManager;
-import io.github.codexrm.projectreference.Model.Enum.Format;
-import io.github.codexrm.projectreference.Model.Model.*;
+import io.github.codexrm.projectreference.model.Enum.Format;
+import io.github.codexrm.projectreference.model.controller.ReferenceLibraryManager;
+import io.github.codexrm.projectreference.model.model.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -133,8 +133,10 @@ public class ReferenceLibraryManagerVM {
         }
         manager.exportReferenceList(file, referenceList,format);
     }
-    public void importReferences(File file, Format format) throws IOException, ParseException {
-        manager.importReferences(file.getPath(),format);
+    public void importReferences(List<File> fileList, Format format) throws IOException, ParseException {
+        for (File file: fileList) {
+            manager.importReferences(file.getPath(), format);
+        }
         syncViewModel();
     }
 

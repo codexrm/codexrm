@@ -1,9 +1,14 @@
-package io.github.codexrm.projectreference.Model.Model;
+package io.github.codexrm.projectreference.model.model;
+
+import io.github.codexrm.jris.*;
+import io.github.codexrm.projectreference.model.Enum.ThesisType;
 
 import java.io.*;
+import java.time.Month;
 import java.util.*;
 
-import io.github.codexrm.projectreference.Model.Enum.ThesisType;
+import static java.time.Month.*;
+
 
 public class ExportBibTex implements Export {
 
@@ -85,6 +90,36 @@ public class ExportBibTex implements Export {
             bufferedWriter.newLine();
         }
     }
+    private String modificateformatDate(Month month) throws IOException {
+
+        switch (month) {
+            case JANUARY:
+              return "jan";
+            case FEBRUARY:
+                return "feb";
+            case MARCH:
+                return "mar";
+            case APRIL:
+                return "apr";
+            case MAY:
+                return "may";
+            case JUNE:
+                return "jun";
+            case JULY:
+                return "jul";
+            case AUGUST:
+                return "aug";
+            case SEPTEMBER:
+                return "sep";
+            case OCTOBER:
+                return "oct";
+            case NOVEMBER:
+                return "nov";
+            default:
+                return "dec";
+        }
+    }
+
 
     private void commonField(Reference reference, BufferedWriter bufferedWriter) throws IOException {
 
@@ -96,7 +131,7 @@ public class ExportBibTex implements Export {
             bufferedWriter.newLine();
         }
         if (reference.getLocalDate().getMonth() != null) {
-            bufferedWriter.write("  month = " + reference.getLocalDate().getMonth() + ",");
+            bufferedWriter.write("  month = " + modificateformatDate(reference.getLocalDate().getMonth()) + ",");
             bufferedWriter.newLine();
         }
         if (reference.getNote() != null) {

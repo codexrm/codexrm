@@ -1,4 +1,4 @@
-package io.github.codexrm.projectreference.Model.Model;
+package io.github.codexrm.projectreference.model.model;
 
 import java.util.ArrayList;
 import java.util.Enumeration;

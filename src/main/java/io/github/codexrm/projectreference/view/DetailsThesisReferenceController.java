@@ -1,12 +1,14 @@
 package io.github.codexrm.projectreference.view;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import io.github.codexrm.projectreference.Model.Enum.*;
-import io.github.codexrm.projectreference.ViewModel.*;
+import io.github.codexrm.projectreference.model.Enum.ThesisType;
+import io.github.codexrm.projectreference.viewmodel.ReferenceLibraryManagerVM;
+import io.github.codexrm.projectreference.viewmodel.ReferenceType;
+import io.github.codexrm.projectreference.viewmodel.ReferenceVM;
+import io.github.codexrm.projectreference.viewmodel.ThesisReferenceVM;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

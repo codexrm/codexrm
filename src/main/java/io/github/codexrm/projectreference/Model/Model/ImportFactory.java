@@ -1,6 +1,6 @@
-package io.github.codexrm.projectreference.Model.Model;
+package io.github.codexrm.projectreference.model.model;
 
-import io.github.codexrm.projectreference.Model.Enum.Format;
+import io.github.codexrm.projectreference.model.Enum.Format;
 
 public class ImportFactory {
 

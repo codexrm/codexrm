@@ -1,4 +1,4 @@
-package io.github.codexrm.projectreference.ViewModel;
+package io.github.codexrm.projectreference.viewmodel;
 
 public enum ReferenceType {
 

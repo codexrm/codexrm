@@ -1,7 +1,7 @@
 package io.github.codexrm.projectreference.view;
 
-import io.github.codexrm.projectreference.Model.Enum.Format;
-import io.github.codexrm.projectreference.ViewModel.*;
+import io.github.codexrm.projectreference.model.Enum.Format;
+import io.github.codexrm.projectreference.viewmodel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +18,8 @@ import org.jbibtex.ParseException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RootLayoutController implements Initializable {
@@ -187,7 +189,8 @@ public class RootLayoutController implements Initializable {
         if (referenceList != null) {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Export");
-            File selectedFile = fileChooser.showOpenDialog(stage);
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Files", "*.*"));
+            File selectedFile = fileChooser.showSaveDialog(stage);
             managerVM.exportReferenceList(selectedFile,referenceList,format);
         }
     }
@@ -203,10 +206,11 @@ public class RootLayoutController implements Initializable {
     private void importTo(Format format) throws IOException, ParseException {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Import");
-            File selectedFile = fileChooser.showOpenDialog(stage);
-            managerVM.importReferences(selectedFile,format);
-            referenceTable.refresh();
-
+           List<File> selectedFile = fileChooser.showOpenMultipleDialog(stage);
+           if (!selectedFile.isEmpty()) {
+               managerVM.importReferences(selectedFile, format);
+               referenceTable.refresh();
+           }
 
     }
 

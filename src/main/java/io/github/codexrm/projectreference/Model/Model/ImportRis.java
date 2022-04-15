@@ -1,17 +1,17 @@
-package io.github.codexrm.projectreference.Model.Model;
+package io.github.codexrm.projectreference.model.model;
+
+import io.github.codexrm.jris.*;
+import io.github.codexrm.projectreference.model.Enum.ThesisType;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 
-import io.github.codexrm.jris.*;
-import io.github.codexrm.projectreference.Model.Enum.ThesisType;
-
 public class ImportRis implements Import {
 
-    private AuthorLibrary authorLibrary;
     private final RisManager manager;
+    private AuthorLibrary authorLibrary;
 
     public ImportRis() {
         this.manager = new RisManager();

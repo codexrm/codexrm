@@ -1,7 +1,7 @@
-package io.github.codexrm.projectreference.ViewModel;
+package io.github.codexrm.projectreference.viewmodel;
 
-import io.github.codexrm.projectreference.Model.Model.AuthorLibrary;
-import io.github.codexrm.projectreference.Model.Model.Reference;
+import io.github.codexrm.projectreference.model.model.AuthorLibrary;
+import io.github.codexrm.projectreference.model.model.Reference;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ public class ReferenceVM {
     protected final StringProperty title;
     protected final ObjectProperty<LocalDate> date;
     protected final StringProperty note;
-    protected  AuthorLibrary authorLibrary;
+    protected AuthorLibrary authorLibrary;
 
     public ReferenceVM() {
         id = new SimpleIntegerProperty();

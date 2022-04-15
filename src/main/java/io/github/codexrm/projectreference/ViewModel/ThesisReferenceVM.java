@@ -1,16 +1,12 @@
-package io.github.codexrm.projectreference.ViewModel;
+package io.github.codexrm.projectreference.viewmodel;
 
-import io.github.codexrm.projectreference.Model.Enum.ThesisType;
-import io.github.codexrm.projectreference.Model.Model.AuthorLibrary;
-import io.github.codexrm.projectreference.Model.Model.ThesisReference;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import io.github.codexrm.projectreference.model.Enum.ThesisType;
+import io.github.codexrm.projectreference.model.model.AuthorLibrary;
+import io.github.codexrm.projectreference.model.model.ThesisReference;
+import javafx.beans.property.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ThesisReferenceVM extends ReferenceVM {
 
@@ -68,7 +64,7 @@ public class ThesisReferenceVM extends ReferenceVM {
         return type.get();
     }
 
-    public ObjectProperty<ThesisType> typeProperty() {
+    public Property<ThesisType> typeProperty() {
         return type;
     }
 

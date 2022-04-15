@@ -1,7 +1,7 @@
-package io.github.codexrm.projectreference.ViewModel;
+package io.github.codexrm.projectreference.viewmodel;
 
-import io.github.codexrm.projectreference.Model.Model.ArticleReference;
-import io.github.codexrm.projectreference.Model.Model.AuthorLibrary;
+import io.github.codexrm.projectreference.model.model.ArticleReference;
+import io.github.codexrm.projectreference.model.model.AuthorLibrary;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,7 +9,6 @@ import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ArticleReferenceVM extends ReferenceVM {
 
