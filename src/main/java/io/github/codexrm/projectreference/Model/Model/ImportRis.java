@@ -11,18 +11,9 @@ import java.util.ArrayList;
 public class ImportRis implements Import {
 
     private final RisManager manager;
-    private AuthorLibrary authorLibrary;
 
     public ImportRis() {
         this.manager = new RisManager();
-    }
-
-    public AuthorLibrary getAuthorLibrary() {
-        return authorLibrary;
-    }
-
-    public void setAuthorLibrary(AuthorLibrary authorLibrary) {
-        this.authorLibrary = authorLibrary;
     }
 
     @Override
@@ -68,11 +59,18 @@ public class ImportRis implements Import {
         reference.setNote(entry.getNotes());
     }
 
+    private void authorField(ArrayList<String> authorList, Reference reference) {
+        reference.setAuthor(authorList.get(0));
+        for (int i = 1; i < authorList.size(); i++) {
+            reference.setAuthor(reference.getAuthor() +";" + authorList.get(i));
+        }
+    }
+
     private Reference readArticleReference(JournalArticle entry) {
         ArticleReference article = new ArticleReference();
 
         commonField(entry, article);
-        article.addAuthorId(authorLibrary.addAuthor(entry.getAuthorList()));
+        authorField(entry.getAuthorList(), article);
         article.setTitle(entry.getTitle());
         article.setLocalDate(entry.getDate());
         article.setJournal(entry.getJournal());
@@ -87,7 +85,7 @@ public class ImportRis implements Import {
         BookReference book = new BookReference();
 
         commonField(entry, book);
-        book.addAuthorId(authorLibrary.addAuthor(entry.getAuthorList()));
+        authorField(entry.getAuthorList(), book);
         book.setTitle(entry.getTitle());
         book.setLocalDate(entry.getDate());
         book.setAddress(entry.getAddress());
@@ -103,7 +101,7 @@ public class ImportRis implements Import {
         BookSectionReference section = new BookSectionReference();
 
         commonField(entry, section);
-        section.addAuthorId(authorLibrary.addAuthor(entry.getAuthorList()));
+        authorField(entry.getAuthorList(), section);
         section.setTitle(entry.getTitle());
         section.setLocalDate(entry.getDate());
         section.setAddress(entry.getAddress());
@@ -121,7 +119,7 @@ public class ImportRis implements Import {
         ThesisReference thesis = new ThesisReference();
 
         commonField(entry, thesis);
-        thesis.addAuthorId(authorLibrary.addAuthor(entry.getAuthorList()));
+        authorField(entry.getAuthorList(), thesis);
         thesis.setTitle(entry.getTitle());
         thesis.setLocalDate(entry.getDate());
         thesis.setAddress(entry.getAddress());
@@ -140,7 +138,7 @@ public class ImportRis implements Import {
         ConferenceProceedingsReference proceedings = new ConferenceProceedingsReference();
 
         commonField(entry, proceedings);
-        proceedings.addAuthorId(authorLibrary.addAuthor(entry.getAuthorList()));
+        authorField(entry.getAuthorList(), proceedings);
         proceedings.setTitle(entry.getTitle());
         proceedings.setLocalDate(entry.getDate());
         proceedings.setVolume(entry.getVolume());

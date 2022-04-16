@@ -20,8 +20,8 @@ public class BookReference extends Reference {
         this.edition = "";
     }
 
-    public BookReference(Integer id, ArrayList<Integer> authorIdList, String title, LocalDate date, String note) {
-        super(id, authorIdList, title, date, note);
+    public BookReference(Integer id, String author, String title, LocalDate date, String note) {
+        super(id, author, title, date, note);
         this.publisher = "";
         this.volume = "";
         this.series = "";

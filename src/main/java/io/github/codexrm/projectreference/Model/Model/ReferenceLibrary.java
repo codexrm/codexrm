@@ -15,7 +15,7 @@ public class ReferenceLibrary {
         BookReference reference = new BookReference();
         reference.setId(id);
         reference.setTitle("No Title");
-        reference.setAuthorIdList(null);
+        reference.setAuthor("lastName1,Name1;lastNameN,nameN...");
         reference.setLocalDate(null);
         referenceTable.put(id, reference);
 

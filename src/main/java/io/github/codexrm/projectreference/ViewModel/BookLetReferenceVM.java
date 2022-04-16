@@ -1,7 +1,6 @@
 package io.github.codexrm.projectreference.viewmodel;
 
 
-import io.github.codexrm.projectreference.model.model.AuthorLibrary;
 import io.github.codexrm.projectreference.model.model.BookLetReference;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -23,9 +22,9 @@ public class BookLetReferenceVM extends ReferenceVM {
         createEmptyBookLetReferenceVM();
     }
 
-    public BookLetReferenceVM(final int id, final ArrayList<Integer> authorIdList, final String title, LocalDate date, String note,
-                              final String howpublished, final String address, final AuthorLibrary authorLibrary) {
-        super(id, authorIdList, title, date, note, authorLibrary);
+    public BookLetReferenceVM(final int id, final String author, final String title, LocalDate date, String note,
+                              final String howpublished, final String address) {
+        super(id, author, title, date, note);
 
         createEmptyBookLetReferenceVM();
         setHowpublished(howpublished);
@@ -35,8 +34,8 @@ public class BookLetReferenceVM extends ReferenceVM {
 
     }
 
-    public BookLetReferenceVM(BookLetReference bookLetReference, AuthorLibrary authorLibrary) {
-        super(bookLetReference.getId(), bookLetReference.getAuthorIdList(), bookLetReference.getTitle(), bookLetReference.getLocalDate(), bookLetReference.getNote(),authorLibrary);
+    public BookLetReferenceVM(BookLetReference bookLetReference) {
+        super(bookLetReference.getId(), bookLetReference.getAuthor(), bookLetReference.getTitle(), bookLetReference.getLocalDate(), bookLetReference.getNote());
 
         createEmptyBookLetReferenceVM();
 
@@ -89,7 +88,7 @@ public class BookLetReferenceVM extends ReferenceVM {
 
     @Override
     public BookLetReference toModel() {
-        BookLetReference bookLetReference = new BookLetReference(this.getId(), this.getAuthorIdList(), this.getTitle(), this.getDate(), this.getNote());
+        BookLetReference bookLetReference = new BookLetReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
         bookLetReference.setHowpublished(this.getHowpublished());
         bookLetReference.setAddress(this.getAddress());
 

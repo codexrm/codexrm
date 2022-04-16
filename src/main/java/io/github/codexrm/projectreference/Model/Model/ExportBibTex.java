@@ -7,23 +7,12 @@ import java.io.*;
 import java.time.Month;
 import java.util.*;
 
-import static java.time.Month.*;
-
-
 public class ExportBibTex implements Export {
 
-    private AuthorLibrary authorLibrary;
+
 
     public ExportBibTex() {
         // Do nothing
-    }
-
-    public AuthorLibrary getAuthorLibrary() {
-        return authorLibrary;
-    }
-
-    public void setAuthorLibrary(AuthorLibrary authorLibrary) {
-        this.authorLibrary = authorLibrary;
     }
 
     @Override
@@ -72,18 +61,19 @@ public class ExportBibTex implements Export {
         }
     }
 
-    private void writeAuthors(ArrayList<Integer> listId, BufferedWriter bufferedWriter)
+    private void writeAuthors(String author, BufferedWriter bufferedWriter)
             throws IOException {
 
-        if (!listId.isEmpty()) {
+        if (author != null) {
             bufferedWriter.write("  author = {");
-            for (int i = 0; i < listId.size(); i++) {
-                Author author = authorLibrary.readAuthor(listId.get(i));
+            String[] authors = author.split(";");
+            for (int i = 0; i < authors.length; i++) {
+
                 if (i == 0) {
-                    bufferedWriter.write(author.getAuthor());
+                    bufferedWriter.write(authors[i]);
                 } else {
                     bufferedWriter.write(" and ");
-                    bufferedWriter.write(author.getAuthor());
+                    bufferedWriter.write(authors[i]);
                 }
             }
             bufferedWriter.write("},");
@@ -124,7 +114,7 @@ public class ExportBibTex implements Export {
     private void commonField(Reference reference, BufferedWriter bufferedWriter) throws IOException {
 
         bufferedWriter.newLine();
-        writeAuthors(reference.getAuthorIdList(), bufferedWriter);
+        writeAuthors(reference.getAuthor(), bufferedWriter);
 
         if (reference.getTitle() != null) {
             bufferedWriter.write("  title = {" + reference.getTitle() + "},");

@@ -1,7 +1,6 @@
 package io.github.codexrm.projectreference.model.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -18,33 +17,30 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 public class Reference {
 
-    protected ArrayList<Integer> authorIdList;
+    protected String author;
     protected String title;
     protected LocalDate date;
     protected String note;
     protected Integer id;
 
     public Reference() {
-        authorIdList = new ArrayList<>();
+        this.author = "";
         this.title = "";
         this.date = null;
         this.note = "";
     }
 
-    public Reference(Integer id, ArrayList<Integer> authorIdList, String title, LocalDate date, String note) {
-        this.authorIdList = new ArrayList<>();
-        this.authorIdList = authorIdList;
+    public Reference(Integer id, String author, String title, LocalDate date, String note) {
+        this.author = author;
         this.title = title;
         this.date = date;
         this.note = note;
         this.id = id;
     }
 
-    public ArrayList<Integer> getAuthorIdList() {return authorIdList;}
+    public String getAuthor() {return author;}
 
-    public void setAuthorIdList(ArrayList<Integer> authorIdList) {
-        this.authorIdList = authorIdList;
-    }
+    public void setAuthor(String author) {this.author = author;}
 
     public String getTitle() {
         return title;
@@ -96,9 +92,4 @@ public class Reference {
         this.id = id;
     }
 
-    public void addAuthorId(ArrayList<Integer> idAuthorlist) {
-        for (Integer authorId : idAuthorlist) {
-            authorIdList.add(authorId);
-        }
-    }
    }

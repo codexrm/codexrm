@@ -9,15 +9,13 @@ public class ExportFactory {
         // Do nothing
     }
 
-    public Export getExport(Format type, AuthorLibrary authorLibrary) {
+    public Export getExport(Format type) {
 
         if (type.equals(Format.RIS)) {
             ExportRis exportRis = new ExportRis();
-            exportRis.setAuthorLibrary(authorLibrary);
             return exportRis;
         } else {
             ExportBibTex exportBibtex = new ExportBibTex();
-            exportBibtex.setAuthorLibrary(authorLibrary);
             return exportBibtex;
         }
     }

@@ -5,14 +5,12 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.viewmodel.*;
-import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.util.converter.NumberStringConverter;
 
 public class DetailsArticleReferenceController implements Initializable {
 

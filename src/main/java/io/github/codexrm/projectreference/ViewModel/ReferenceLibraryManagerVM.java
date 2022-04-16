@@ -41,10 +41,6 @@ public class ReferenceLibraryManagerVM {
         return referenceTypeReplaced.get();
     }
 
-    public AuthorLibrary getAuthorLibrary() {
-        return manager.getAuthorLibrary();
-    }
-
     public void setReferenceTypeReplaced(final boolean referenceTypeReplaced) {
         this.referenceTypeReplaced.set(referenceTypeReplaced);
     }
@@ -70,7 +66,7 @@ public class ReferenceLibraryManagerVM {
     }
 
     public void loadDataFromModel() throws IOException {
-        manager.loadTables();
+        manager.loadReferenceTable();
         syncViewModel();
     }
 
@@ -84,17 +80,17 @@ public class ReferenceLibraryManagerVM {
             keyReference = e.nextElement();
             valorReference = manager.getReferenceTable().get(keyReference);
             if (valorReference.getClass() == ArticleReference.class) {
-                referenceList.add(new ArticleReferenceVM((ArticleReference) valorReference, manager.getAuthorLibrary()));
+                referenceList.add(new ArticleReferenceVM((ArticleReference) valorReference));
             } else if (valorReference.getClass() == BookSectionReference.class) {
-                referenceList.add(new BookSectionReferenceVM((BookSectionReference) valorReference,manager.getAuthorLibrary()));
+                referenceList.add(new BookSectionReferenceVM((BookSectionReference) valorReference));
             } else if (valorReference.getClass() == BookReference.class) {
-                referenceList.add(new BookReferenceVM((BookReference) valorReference,manager.getAuthorLibrary()));
+                referenceList.add(new BookReferenceVM((BookReference) valorReference));
             } else if (valorReference.getClass() == BookLetReference.class) {
-                referenceList.add(new BookLetReferenceVM((BookLetReference) valorReference,manager.getAuthorLibrary()));
+                referenceList.add(new BookLetReferenceVM((BookLetReference) valorReference));
             } else if (valorReference.getClass() == ConferenceProceedingsReference.class) {
-                referenceList.add(new ConferenceProceedingsReferenceVM((ConferenceProceedingsReference) valorReference,manager.getAuthorLibrary()));
+                referenceList.add(new ConferenceProceedingsReferenceVM((ConferenceProceedingsReference) valorReference));
             } else if (valorReference.getClass() == ThesisReference.class) {
-                referenceList.add(new ThesisReferenceVM((ThesisReference) valorReference,manager.getAuthorLibrary()));
+                referenceList.add(new ThesisReferenceVM((ThesisReference) valorReference));
             }
         }
     }
@@ -165,10 +161,9 @@ public class ReferenceLibraryManagerVM {
         manager.getReferenceTable().clear();
 
         for (ReferenceVM reference : referenceList) {
-            reference.setAuthorLibrary(manager.getAuthorLibrary());
             manager.getReferenceTable().put(reference.getId(),reference.toModel());
         }
-        manager.saveTables();
+        manager.saveReferenceTable();
     }
 
     public ReferenceVM getReferenceObject(ReferenceType referenceType) {

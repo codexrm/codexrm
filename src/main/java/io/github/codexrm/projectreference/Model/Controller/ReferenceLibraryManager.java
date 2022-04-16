@@ -15,9 +15,7 @@ public class ReferenceLibraryManager {
 
     private static ReferenceLibraryManager manager;
     private ReferenceLibrary referenceLibrary;
-    private AuthorLibrary authorLibrary;
     private LibraryFiles libraryFiles;
-    private static String dbAuthorName = "testFile//authorL.txt";
     private static String dbReferenceName = "testFile//referenceL.txt";
     private final ExportFactory exportFactory;
     private final ImportFactory importFactory;
@@ -25,8 +23,7 @@ public class ReferenceLibraryManager {
 
     private ReferenceLibraryManager() {
         referenceLibrary = new ReferenceLibrary();
-        authorLibrary = new AuthorLibrary();
-        libraryFiles = new LibraryFiles(dbReferenceName, dbAuthorName);
+        libraryFiles = new LibraryFiles(dbReferenceName);
         exportFactory = new ExportFactory();
         importFactory = new ImportFactory();
     }
@@ -46,29 +43,12 @@ public class ReferenceLibraryManager {
         this.referenceLibrary = referenceLibrary;
     }
 
-    public AuthorLibrary getAuthorLibrary() {
-        return authorLibrary;
-    }
-
-    public void setAuthorLibrary(AuthorLibrary authorLibrary) {
-        this.authorLibrary = authorLibrary;
-    }
-
     public LibraryFiles getLibraryFiles() {
         return libraryFiles;
     }
 
     public void setLibraryFiles(LibraryFiles libraryFiles) {
         this.libraryFiles = libraryFiles;
-    }
-
-    public ArrayList<Integer> addAuthor(String lineAuthor) {
-        return authorLibrary.createAuthor(lineAuthor);
-    }
-
-
-    public Author readAuthor(Integer id) {
-        return authorLibrary.readAuthor(id);
     }
 
     public Reference addEmptyBookReference() {
@@ -83,22 +63,16 @@ public class ReferenceLibraryManager {
         return referenceLibrary.getReferenceTable();
     }
 
-    public void saveTables() throws IOException {
-        libraryFiles.saveTables(referenceLibrary, authorLibrary);
+    public void saveReferenceTable() throws IOException {
+        libraryFiles.saveReferenceTable(referenceLibrary);
     }
 
-    public void loadTables() throws IOException {
-        File fileDBA = new File(dbAuthorName);
-        if (fileDBA.exists() && fileDBA.isFile()) {
-            setAuthorLibrary(libraryFiles.loadAuthorTable(dbAuthorName));
-        } else {
-            saveTables();
-        }
+    public void loadReferenceTable() throws IOException {
         File fileDBR = new File(dbReferenceName);
         if (fileDBR.exists() && fileDBR.isFile()) {
             setReferenceLibrary(libraryFiles.loadReferenceTable(dbReferenceName));
         } else {
-            saveTables();
+            saveReferenceTable();
         }
 
     }
@@ -107,7 +81,7 @@ public class ReferenceLibraryManager {
         for (Integer id : referenceIdList) {
             referenceLibrary.getReferenceTable().remove(id);
         }
-        saveTables();
+        saveReferenceTable();
     }
 
     public void updateReference(Reference reference) throws IOException {
@@ -115,40 +89,40 @@ public class ReferenceLibraryManager {
 
             referenceLibrary.getReferenceTable().remove(reference.getId());
             referenceLibrary.getReferenceTable().put(reference.getId(), reference);
-            saveTables();
+            saveReferenceTable();
     }
 
     public Reference replaceReferenceType(@NotNull Reference newReference) throws IOException {
         if (referenceLibrary.getReference(newReference.getId()) != null) {
 
             Reference removedReference = referenceLibrary.getReferenceTable().remove(newReference.getId());
-            newReference.setAuthorIdList(removedReference.getAuthorIdList());
+            newReference.setAuthor(removedReference.getAuthor());
             newReference.setTitle(removedReference.getTitle());
             newReference.setLocalDate(removedReference.getLocalDate());
             newReference.setNote(removedReference.getNote());
             newReference.setId(removedReference.getId());
             referenceLibrary.getReferenceTable().put(newReference.getId(), newReference);
         }
-        saveTables();
+        saveReferenceTable();
         return newReference;
     }
 
     public void exportReference(String path, Reference reference, Format format) throws IOException {
 
-        Export export = exportFactory.getExport(format, authorLibrary);
+        Export export = exportFactory.getExport(format);
         export.writeValue(reference, path);
     }
 
     public void exportReferenceList(File file, ArrayList<Reference> referenceList, Format format) throws IOException {
 
-        Export export = exportFactory.getExport(format, authorLibrary);
+        Export export = exportFactory.getExport(format);
         export.writeValue(referenceList,file.getPath());
     }
 
     public void importReferences(String path, Format format)
             throws IOException, TokenMgrException, ParseException {
 
-        Import importer = importFactory.getImport(format, authorLibrary);
+        Import importer = importFactory.getImport(format);
         referenceLibrary.addListReference(importer.readFile(path));
 
     }

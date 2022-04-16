@@ -9,13 +9,11 @@ public class LibraryFiles {
 
     private ObjectMapper mapper;
     private File fileReference;
-    private File fileAuthor;
 
 
-    public LibraryFiles(String fileReferenceName, String fileAuthorName) {
+    public LibraryFiles(String fileReferenceName) {
         mapper = new ObjectMapper();
         fileReference = new File(fileReferenceName);
-        fileAuthor = new File(fileAuthorName);
     }
 
     public ObjectMapper getMapper() {
@@ -34,25 +32,12 @@ public class LibraryFiles {
         this.fileReference = fileReference;
     }
 
-    public File getFileAuthor() {
-        return fileAuthor;
-    }
-
-    public void setFileAuthor(File fileAuthor) {
-        this.fileAuthor = fileAuthor;
-    }
-
-    public void saveTables(ReferenceLibrary referenceLibrary, AuthorLibrary authorLibrary)
+    public void saveReferenceTable(ReferenceLibrary referenceLibrary)
             throws IOException {
         mapper.writeValue(fileReference, referenceLibrary);
-        mapper.writeValue(fileAuthor, authorLibrary);
     }
 
     public ReferenceLibrary loadReferenceTable(String pathName) throws IOException {
         return mapper.readValue(new File(pathName), ReferenceLibrary.class);
-    }
-
-    public AuthorLibrary loadAuthorTable(String pathName) throws IOException {
-        return mapper.readValue(new File(pathName), AuthorLibrary.class);
     }
 }

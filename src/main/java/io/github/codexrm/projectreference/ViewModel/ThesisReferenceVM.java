@@ -1,12 +1,10 @@
 package io.github.codexrm.projectreference.viewmodel;
 
 import io.github.codexrm.projectreference.model.Enum.ThesisType;
-import io.github.codexrm.projectreference.model.model.AuthorLibrary;
 import io.github.codexrm.projectreference.model.model.ThesisReference;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class ThesisReferenceVM extends ReferenceVM {
 
@@ -20,9 +18,9 @@ public class ThesisReferenceVM extends ReferenceVM {
         createEmptyThesisReferenceVM();
     }
 
-    public ThesisReferenceVM(final int id, final ArrayList<Integer> authorIdList, final String title, LocalDate date, String note,
-                             final String school, final ThesisType type, final String address, final AuthorLibrary authorLibrary) {
-        super(id, authorIdList, title, date, note,authorLibrary);
+    public ThesisReferenceVM(final int id, final String author, final String title, LocalDate date, String note,
+                             final String school, final ThesisType type, final String address) {
+        super(id, author, title, date, note);
 
         createEmptyThesisReferenceVM();
 
@@ -31,8 +29,8 @@ public class ThesisReferenceVM extends ReferenceVM {
         setAddress(address);
     }
 
-    public ThesisReferenceVM(ThesisReference thesisReference, AuthorLibrary authorLibrary) {
-        super(thesisReference.getId(), thesisReference.getAuthorIdList(), thesisReference.getTitle(), thesisReference.getLocalDate(), thesisReference.getNote(),authorLibrary);
+    public ThesisReferenceVM(ThesisReference thesisReference) {
+        super(thesisReference.getId(), thesisReference.getAuthor(), thesisReference.getTitle(), thesisReference.getLocalDate(), thesisReference.getNote());
 
         createEmptyThesisReferenceVM();
 
@@ -98,7 +96,7 @@ public class ThesisReferenceVM extends ReferenceVM {
 
     @Override
     public ThesisReference toModel() {
-        ThesisReference thesisReference = new ThesisReference(this.getId(), this.getAuthorIdList(), this.getTitle(), this.getDate(), this.getNote());
+        ThesisReference thesisReference = new ThesisReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
         thesisReference.setSchool(this.getSchool());
         thesisReference.setType(this.getType());
         thesisReference.setAddress(this.getAddress());

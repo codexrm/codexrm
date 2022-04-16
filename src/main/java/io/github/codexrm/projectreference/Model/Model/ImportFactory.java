@@ -8,14 +8,12 @@ public class ImportFactory {
         // Do nothing
     }
 
-    public Import getImport(Format type, AuthorLibrary authorLibrary) {
+    public Import getImport(Format type) {
         if (type.equals(Format.RIS)) {
             ImportRis importRis = new ImportRis();
-            importRis.setAuthorLibrary(authorLibrary);
             return importRis;
         } else {
             ImportBibTex importBibTex = new ImportBibTex();
-            importBibTex.setAuthorLibrary(authorLibrary);
             return importBibTex;
         }
     }

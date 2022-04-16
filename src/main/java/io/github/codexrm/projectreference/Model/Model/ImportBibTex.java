@@ -9,18 +9,9 @@ import io.github.codexrm.projectreference.model.Enum.ThesisType;
 import org.jbibtex.*;
 
 public class ImportBibTex implements Import {
-    private AuthorLibrary authorLibrary;
 
     public ImportBibTex() {
         super();
-    }
-
-    public AuthorLibrary getAuthorLibrary() {
-        return authorLibrary;
-    }
-
-    public void setAuthorLibrary(AuthorLibrary authorLibrary) {
-        this.authorLibrary = authorLibrary;
     }
 
     @Override
@@ -69,21 +60,21 @@ public class ImportBibTex implements Import {
         return listReference;
     }
 
-    private ArrayList<Integer> listIdAuthor(String content) {
+    private String createAuthorField(String content) {
 
-        ArrayList<Integer> listId = new ArrayList<>();
-        String[] listAuthors = content.split(" and ", 2);
+        String[] authors = content.split(" and ", 2);
+        String author = authors[0];
 
-        for (int i = 0; i < listAuthors.length; i++) {
-            listId.add(authorLibrary.addAuthor(listAuthors[i]));
+        for (int i = 1; i < authors.length; i++) {
+           author = author +";"+authors[i];
         }
-        return listId;
+        return author;
     }
 
     private void commonField(BibTeXEntry entry, Reference reference) {
         Value value = entry.getField(BibTeXEntry.KEY_AUTHOR);
         if (value != null) {
-            reference.setAuthorIdList(listIdAuthor(value.toUserString()));
+            reference.setAuthor(createAuthorField(value.toUserString()));
         }
         value = entry.getField(BibTeXEntry.KEY_TITLE);
         if (value != null) {

@@ -18,8 +18,8 @@ public class ThesisReference extends Reference {
         this.address = "";
     }
 
-    public ThesisReference(Integer id, ArrayList<Integer> authorIdList, String title, LocalDate date, String note) {
-        super(id, authorIdList, title, date, note);
+    public ThesisReference(Integer id, String author, String title, LocalDate date, String note) {
+        super(id, author, title, date, note);
         this.school = "";
         this.type = null;
         this.address = "";

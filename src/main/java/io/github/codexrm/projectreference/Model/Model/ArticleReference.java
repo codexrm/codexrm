@@ -18,8 +18,8 @@ public class ArticleReference extends Reference {
         this.pages = "";
     }
 
-    public ArticleReference(Integer id, ArrayList<Integer> authorIdList, String title, LocalDate date, String note) {
-        super(id, authorIdList, title, date, note);
+    public ArticleReference(Integer id, String author, String title, LocalDate date, String note) {
+        super(id, author, title, date, note);
         this.journal = "";
         this.volume = "";
         this.number = "";

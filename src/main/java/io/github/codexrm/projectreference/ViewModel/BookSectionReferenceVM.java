@@ -1,6 +1,5 @@
 package io.github.codexrm.projectreference.viewmodel;
 
-import io.github.codexrm.projectreference.model.model.AuthorLibrary;
 import io.github.codexrm.projectreference.model.model.BookSectionReference;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -9,7 +8,6 @@ import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class BookSectionReferenceVM extends BookReferenceVM {
 
@@ -22,10 +20,10 @@ public class BookSectionReferenceVM extends BookReferenceVM {
         createEmptyBookSectionReferenceVM();
     }
 
-    public BookSectionReferenceVM(final int id, final ArrayList<Integer> authorIdList, final String title, LocalDate date, String note, final String publisher,
+    public BookSectionReferenceVM(final int id, final String author, final String title, LocalDate date, String note, final String publisher,
                                   final String volume, final String series, final String address, final String edition,
-                                  final String chapter, final String pages, final AuthorLibrary authorLibrary) {
-        super(id, authorIdList, title, date, note, publisher, volume, series, address, edition, authorLibrary);
+                                  final String chapter, final String pages) {
+        super(id, author, title, date, note, publisher, volume, series, address, edition);
 
         createEmptyBookSectionReferenceVM();
 
@@ -35,8 +33,8 @@ public class BookSectionReferenceVM extends BookReferenceVM {
 
     }
 
-    public BookSectionReferenceVM(BookSectionReference bookSectionReference,AuthorLibrary authorLibrary) {
-        super(bookSectionReference.getId(), bookSectionReference.getAuthorIdList(), bookSectionReference.getTitle(), bookSectionReference.getLocalDate(), bookSectionReference.getNote(), bookSectionReference.getPublisher(), bookSectionReference.getVolume(), bookSectionReference.getSeries(), bookSectionReference.getAddress(), bookSectionReference.getEdition(),authorLibrary);
+    public BookSectionReferenceVM(BookSectionReference bookSectionReference) {
+        super(bookSectionReference.getId(), bookSectionReference.getAuthor(), bookSectionReference.getTitle(), bookSectionReference.getLocalDate(), bookSectionReference.getNote(), bookSectionReference.getPublisher(), bookSectionReference.getVolume(), bookSectionReference.getSeries(), bookSectionReference.getAddress(), bookSectionReference.getEdition());
 
         createEmptyBookSectionReferenceVM();
 
@@ -88,7 +86,7 @@ public class BookSectionReferenceVM extends BookReferenceVM {
 
     @Override
     public BookSectionReference toModel() {
-        BookSectionReference bookSectionReference = new BookSectionReference(this.getId(), this.getAuthorIdList(), this.getTitle(), this.getDate(), this.getNote());
+        BookSectionReference bookSectionReference = new BookSectionReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
 
         bookSectionReference.setPublisher(this.getPublisher());
         bookSectionReference.setVolume(this.getVolume());

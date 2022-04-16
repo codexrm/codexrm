@@ -25,10 +25,8 @@ PB  - Fructuoso Rodriguez
 M3  - Masters
 AD  - ave65
 ER  - 
-TY  - SECC
+TY  - CHAP
 AU  - Gomez,Mario
-A2  - Borges,Juan
-A3  - Nuñez,Rolandi
 TI  - plan x
 PY  - 2019
 N1  - mm
@@ -36,8 +34,8 @@ PB  - Education
 VL  - vol1
 T3  - 4
 AD  - no76
-ET  - Maria Elena B.
-EP  - II
+ET  - 9
+SE  - II
 SP  - 12
 ER  - 
 TY  - BOOK
@@ -56,8 +54,8 @@ AU  - Gomez,Mario
 TI  - Complexity
 DA  - 2020/04
 N1  - zz
-JO  - Science
+T2  - Science
 VL  - vol30
-IS  - 2
-SP  - 10
+C7  - 2
+M2  - 10
 ER  - 
