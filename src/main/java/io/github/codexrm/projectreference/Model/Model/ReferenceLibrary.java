@@ -5,10 +5,16 @@ import java.util.*;
 public class ReferenceLibrary {
 
     private final Hashtable<Integer, Reference> referenceTable;
+    private  User user;
 
     public ReferenceLibrary() {
         referenceTable = new Hashtable<>();
+        user = new User("marynes","123");
     }
+
+    public User getUser() {return user;}
+
+    public void setUser(User user) {this.user = user;}
 
     public Reference addEmptyReference() {
         int id = maxValueKeys() + 1;
@@ -17,6 +23,8 @@ public class ReferenceLibrary {
         reference.setTitle("No Title");
         reference.setAuthor("lastName1,Name1;lastNameN,nameN...");
         reference.setLocalDate(null);
+        reference.setFromServer(false);
+        reference.setActive(true);
         referenceTable.put(id, reference);
 
         return reference;
@@ -34,6 +42,14 @@ public class ReferenceLibrary {
         for (Reference reference : list) {
             int id = maxValueKeys() + 1;
             reference.setId(id);
+            reference.setFromServer(false);
+            reference.setActive(true);
+            referenceTable.put(reference.getId(), reference);
+        }
+    }
+    public void addListReferenceSync(ArrayList<Reference> list) {
+        referenceTable.clear();
+        for (Reference reference : list) {
             referenceTable.put(reference.getId(), reference);
         }
     }

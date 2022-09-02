@@ -64,7 +64,7 @@
                   </Menu>
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Synchronize Library" />
+                        <MenuItem mnemonicParsing="false" onAction="#sync" text="Synchronize Library" />
                         <MenuItem mnemonicParsing="false" text="Quit" />
                     </items>
                 </Menu>
@@ -93,8 +93,8 @@
             <items>
             <Button mnemonicParsing="false" onAction="#addReference" text="Add" />
             <Button mnemonicParsing="false" onAction="#deleteReference" text="Delete" />
-            <Button mnemonicParsing="false" text="Save" />
-                <Button mnemonicParsing="false" text="Sync" />
+            <Button mnemonicParsing="false" onAction="#save" text="Save" />
+                <Button mnemonicParsing="false" onAction="#sync" text="Sync" />
                 <Button mnemonicParsing="false" text="Help" />
             </items>
         </ToolBar>

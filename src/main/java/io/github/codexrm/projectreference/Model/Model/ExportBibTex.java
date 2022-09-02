@@ -1,6 +1,5 @@
 package io.github.codexrm.projectreference.model.model;
 
-import io.github.codexrm.jris.*;
 import io.github.codexrm.projectreference.model.Enum.ThesisType;
 
 import java.io.*;
@@ -225,8 +224,8 @@ public class ExportBibTex implements Export {
         bufferedWriter.write("@booklet{" + reference.getId() + ",");
         commonField(reference, bufferedWriter);
 
-        if (reference.getHowpublished() != null) {
-            bufferedWriter.write("  howpublished = {" + reference.getHowpublished() + "},");
+        if (reference.getHowpublisher() != null) {
+            bufferedWriter.write("  howpublished = {" + reference.getHowpublisher() + "},");
             bufferedWriter.newLine();
         }
         if (reference.getAddress() != null) {
@@ -269,8 +268,8 @@ public class ExportBibTex implements Export {
             bufferedWriter.write("  volume = {" + reference.getVolume() + "},");
             bufferedWriter.newLine();
         }
-        if (reference.getSerie() != null) {
-            bufferedWriter.write("  series = {" + reference.getSerie() + "},");
+        if (reference.getSeries() != null) {
+            bufferedWriter.write("  series = {" + reference.getSeries() + "},");
             bufferedWriter.newLine();
         }
         if (reference.getAddress() != null) {

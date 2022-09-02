@@ -24,7 +24,6 @@ import java.util.ResourceBundle;
 
 public class RootLayoutController implements Initializable {
 
-
     private final ReferenceLibraryManagerVM managerVM;
     private final ScrollPane bookDetail;
     private final ScrollPane articleDetail;
@@ -73,7 +72,6 @@ public class RootLayoutController implements Initializable {
         DetailsThesisReferenceController thesisDetailViewController = new DetailsThesisReferenceController();
         DetailsConferenceProceedingsReferenceController conferenceDetailViewController = new DetailsConferenceProceedingsReferenceController();
 
-
         bookDetailViewController.setDataModel(managerVM);
         articleDetailViewController.setDataModel(managerVM);
         bookSectionDetailViewController.setDataModel(managerVM);
@@ -94,7 +92,6 @@ public class RootLayoutController implements Initializable {
         bookLetDetail = bookLetDetailLoader.load();
         thesisDetail = thesisDetailLoader.load();
         conferenceDetail = conferenceDetailLoader.load();
-
     }
 
     public void setStage(Stage stage) {
@@ -257,6 +254,15 @@ public class RootLayoutController implements Initializable {
     private void save() {
         try {
             managerVM.saveDataToModel();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void sync() {
+        try {
+            managerVM.syncDB();
         } catch (IOException e) {
             e.printStackTrace();
         }

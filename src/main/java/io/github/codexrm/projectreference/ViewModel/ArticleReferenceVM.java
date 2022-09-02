@@ -22,20 +22,8 @@ public class ArticleReferenceVM extends ReferenceVM {
         createEmptyArticleReferenceVM();
     }
 
-    public ArticleReferenceVM(final Integer id, final String author, final String title, LocalDate date, String note,
-                              final String journal, final String volume, final String number, final String pages) {
-        super(id, author, title, date, note);
-
-        createEmptyArticleReferenceVM();
-
-        setJournal(journal);
-        setVolume(volume);
-        setNumber(number);
-        setPages(pages);
-    }
-
     public ArticleReferenceVM(ArticleReference articleReference) {
-        super(articleReference.getId(),articleReference.getAuthor(), articleReference.getTitle(), articleReference.getLocalDate(), articleReference.getNote());
+        super(articleReference.getId(),articleReference.getAuthor(), articleReference.getTitle(), articleReference.getLocalDate(), articleReference.getNote(), articleReference.isFromServer(), articleReference.isActive(), articleReference.isModified());
 
         createEmptyArticleReferenceVM();
 
@@ -116,11 +104,21 @@ public class ArticleReferenceVM extends ReferenceVM {
     @Override
     public ArticleReference toModel() {
 
-        ArticleReference articleReference = new ArticleReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
+        ArticleReference articleReference = new ArticleReference();
+        articleReference.setAuthor(this.getAuthor());
+        articleReference.setTitle(this.getTitle());
+        articleReference.setLocalDate(this.getDate());
+        articleReference.setId(this.getId());
+        articleReference.setNote(this.getNote());
+        articleReference.setFromServer(this.isIsFromServer());
+        articleReference.setModified(this.isIsModified());
+        articleReference.setActive(this.isIsActive());
+
         articleReference.setJournal(this.getJournal());
         articleReference.setNumber(this.getNumber());
         articleReference.setVolume(this.getVolume());
         articleReference.setPages(this.getPages());
+
 
         return articleReference;
     }

@@ -1,6 +1,7 @@
 package io.github.codexrm.projectreference.model.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -22,6 +23,9 @@ public class Reference {
     protected LocalDate date;
     protected String note;
     protected Integer id;
+    protected boolean isFromServer;
+    protected boolean isModified ;
+    protected boolean isActive ;
 
     public Reference() {
         this.author = "";
@@ -30,12 +34,15 @@ public class Reference {
         this.note = "";
     }
 
-    public Reference(Integer id, String author, String title, LocalDate date, String note) {
+    public Reference(String author, String title, LocalDate date, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive) {
         this.author = author;
         this.title = title;
         this.date = date;
         this.note = note;
         this.id = id;
+        this.isFromServer = isFromServer;
+        this.isModified = isModified;
+        this.isActive = isActive;
     }
 
     public String getAuthor() {return author;}
@@ -92,4 +99,23 @@ public class Reference {
         this.id = id;
     }
 
-   }
+    public boolean isFromServer() {return isFromServer;}
+
+    public void setFromServer(boolean fromServer) {isFromServer = fromServer;}
+
+    public boolean isModified() {return isModified;}
+
+    public void setModified(boolean modified) {isModified = modified;}
+
+    public boolean isActive() {return isActive;}
+
+    public void setActive(boolean active) {isActive = active;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Reference)) return false;
+        Reference reference = (Reference) o;
+        return getAuthor().equals(reference.getAuthor()) && getTitle().equals(reference.getTitle()) && getDate().equals(reference.getDate()) && getNote().equals(reference.getNote());
+    }
+}

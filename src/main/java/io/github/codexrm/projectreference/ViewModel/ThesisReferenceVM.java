@@ -18,19 +18,8 @@ public class ThesisReferenceVM extends ReferenceVM {
         createEmptyThesisReferenceVM();
     }
 
-    public ThesisReferenceVM(final int id, final String author, final String title, LocalDate date, String note,
-                             final String school, final ThesisType type, final String address) {
-        super(id, author, title, date, note);
-
-        createEmptyThesisReferenceVM();
-
-        setSchool(school);
-        setType(type);
-        setAddress(address);
-    }
-
     public ThesisReferenceVM(ThesisReference thesisReference) {
-        super(thesisReference.getId(), thesisReference.getAuthor(), thesisReference.getTitle(), thesisReference.getLocalDate(), thesisReference.getNote());
+        super(thesisReference.getId(), thesisReference.getAuthor(), thesisReference.getTitle(), thesisReference.getLocalDate(), thesisReference.getNote(), thesisReference.isFromServer(), thesisReference.isActive(), thesisReference.isModified());
 
         createEmptyThesisReferenceVM();
 
@@ -96,7 +85,17 @@ public class ThesisReferenceVM extends ReferenceVM {
 
     @Override
     public ThesisReference toModel() {
-        ThesisReference thesisReference = new ThesisReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
+        ThesisReference thesisReference = new ThesisReference();
+
+        thesisReference.setAuthor(this.getAuthor());
+        thesisReference.setTitle(this.getTitle());
+        thesisReference.setLocalDate(this.getDate());
+        thesisReference.setId(this.getId());
+        thesisReference.setNote(this.getNote());
+        thesisReference.setFromServer(this.isIsFromServer());
+        thesisReference.setModified(this.isIsModified());
+        thesisReference.setActive(this.isIsActive());
+
         thesisReference.setSchool(this.getSchool());
         thesisReference.setType(this.getType());
         thesisReference.setAddress(this.getAddress());

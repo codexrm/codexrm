@@ -1,13 +1,9 @@
 package io.github.codexrm.projectreference.viewmodel;
 
 import io.github.codexrm.projectreference.model.model.BookReference;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class BookReferenceVM extends ReferenceVM {
 
@@ -23,10 +19,8 @@ public class BookReferenceVM extends ReferenceVM {
         createEmptyBookReferenceVM();
     }
 
-    public BookReferenceVM(final int id, final String author, final String title, LocalDate date, String note,
-                           final String publisher, final String volume, final String series, final String address, final String edition) {
-        super(id, author, title, date, note);
-
+    public BookReferenceVM(int id, String author, String title, LocalDate date, String note, boolean isFromServer, boolean isActive, boolean isModified, String publisher, String volume, String series, String address, String edition) {
+        super(id, author, title, date, note, isFromServer, isActive, isModified);
         createEmptyBookReferenceVM();
 
         setPublisher(publisher);
@@ -37,7 +31,7 @@ public class BookReferenceVM extends ReferenceVM {
     }
 
     public BookReferenceVM(BookReference bookReference) {
-        super(bookReference.getId(), bookReference.getAuthor(), bookReference.getTitle(), bookReference.getLocalDate(), bookReference.getNote());
+        super(bookReference.getId(), bookReference.getAuthor(), bookReference.getTitle(), bookReference.getLocalDate(), bookReference.getNote(), bookReference.isFromServer(), bookReference.isActive(), bookReference.isModified());
 
         createEmptyBookReferenceVM();
 
@@ -131,7 +125,17 @@ public class BookReferenceVM extends ReferenceVM {
 
     @Override
     public BookReference toModel() {
-        BookReference bookReference = new BookReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
+        BookReference bookReference = new BookReference();
+
+        bookReference.setAuthor(this.getAuthor());
+        bookReference.setTitle(this.getTitle());
+        bookReference.setLocalDate(this.getDate());
+        bookReference.setId(this.getId());
+        bookReference.setNote(this.getNote());
+        bookReference.setFromServer(this.isIsFromServer());
+        bookReference.setModified(this.isIsModified());
+        bookReference.setActive(this.isIsActive());
+
         bookReference.setPublisher(this.getPublisher());
         bookReference.setVolume(this.getVolume());
         bookReference.setSeries(this.getSeries());

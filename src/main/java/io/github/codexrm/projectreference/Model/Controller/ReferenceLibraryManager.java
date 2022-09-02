@@ -19,6 +19,7 @@ public class ReferenceLibraryManager {
     private static String dbReferenceName = "testFile//referenceL.txt";
     private final ExportFactory exportFactory;
     private final ImportFactory importFactory;
+    private final Sync sync;
 
 
     private ReferenceLibraryManager() {
@@ -26,6 +27,7 @@ public class ReferenceLibraryManager {
         libraryFiles = new LibraryFiles(dbReferenceName);
         exportFactory = new ExportFactory();
         importFactory = new ImportFactory();
+        sync = new Sync();
     }
 
     public static ReferenceLibraryManager getReferenceLibraryManager() {
@@ -39,9 +41,7 @@ public class ReferenceLibraryManager {
         return referenceLibrary;
     }
 
-    public void setReferenceLibrary(ReferenceLibrary referenceLibrary) {
-        this.referenceLibrary = referenceLibrary;
-    }
+    public void setReferenceLibrary(ReferenceLibrary referenceLibrary) {this.referenceLibrary = referenceLibrary;}
 
     public LibraryFiles getLibraryFiles() {
         return libraryFiles;
@@ -63,8 +63,16 @@ public class ReferenceLibraryManager {
         return referenceLibrary.getReferenceTable();
     }
 
+    public Sync getSync() {return sync;}
+
     public void saveReferenceTable() throws IOException {
         libraryFiles.saveReferenceTable(referenceLibrary);
+    }
+
+    public void syncReferenceTable() throws IOException {
+        referenceLibrary.addListReferenceSync((ArrayList<Reference>) sync.syncReferences
+                (referenceLibrary.getReferenceTable(),referenceLibrary.getUser()));
+        saveReferenceTable();
     }
 
     public void loadReferenceTable() throws IOException {
@@ -74,7 +82,6 @@ public class ReferenceLibraryManager {
         } else {
             saveReferenceTable();
         }
-
     }
 
     public void deleteReferences(ArrayList<Integer> referenceIdList) throws IOException {
@@ -85,9 +92,10 @@ public class ReferenceLibraryManager {
     }
 
     public void updateReference(Reference reference) throws IOException {
-
-
             referenceLibrary.getReferenceTable().remove(reference.getId());
+            reference.setModified(true);
+            reference.setFromServer(true);
+            reference.setActive(true);
             referenceLibrary.getReferenceTable().put(reference.getId(), reference);
             saveReferenceTable();
     }
@@ -121,9 +129,7 @@ public class ReferenceLibraryManager {
 
     public void importReferences(String path, Format format)
             throws IOException, TokenMgrException, ParseException {
-
         Import importer = importFactory.getImport(format);
         referenceLibrary.addListReference(importer.readFile(path));
-
     }
 }

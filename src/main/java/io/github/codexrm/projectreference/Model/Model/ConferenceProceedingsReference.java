@@ -1,26 +1,26 @@
 package io.github.codexrm.projectreference.model.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Objects;
 
 public class ConferenceProceedingsReference extends Reference {
 
     private String volume;
-    private String serie;
+    private String series;
     private String address;
 
     public ConferenceProceedingsReference() {
         super();
         this.volume = "";
-        this.serie = "";
+        this.series = "";
         this.address = "";
     }
 
-    public ConferenceProceedingsReference(Integer id, String author, String title, LocalDate date, String note) {
-        super(id, author, title, date, note);
-        this.volume = "";
-        this.serie = "";
-        this.address = "";
+    public ConferenceProceedingsReference(String author, String title, LocalDate date, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String volume, String serie, String address) {
+        super(author, title, date, note, id, isFromServer, isModified, isActive);
+        this.volume = volume;
+        this.series = serie;
+        this.address = address;
     }
 
     public String getVolume() {
@@ -31,12 +31,12 @@ public class ConferenceProceedingsReference extends Reference {
         this.volume = volume;
     }
 
-    public String getSerie() {
-        return serie;
+    public String getSeries() {
+        return series;
     }
 
-    public void setSerie(String serie) {
-        this.serie = serie;
+    public void setSeries(String series) {
+        this.series = series;
     }
 
     public String getAddress() {
@@ -45,5 +45,14 @@ public class ConferenceProceedingsReference extends Reference {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ConferenceProceedingsReference)) return false;
+        if (!super.equals(o)) return false;
+        ConferenceProceedingsReference that = (ConferenceProceedingsReference) o;
+        return getVolume().equals(that.getVolume()) && getSeries().equals(that.getSeries()) && getAddress().equals(that.getAddress());
     }
 }

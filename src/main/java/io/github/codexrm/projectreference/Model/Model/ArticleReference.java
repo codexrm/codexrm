@@ -2,6 +2,7 @@ package io.github.codexrm.projectreference.model.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ArticleReference extends Reference {
 
@@ -18,12 +19,12 @@ public class ArticleReference extends Reference {
         this.pages = "";
     }
 
-    public ArticleReference(Integer id, String author, String title, LocalDate date, String note) {
-        super(id, author, title, date, note);
-        this.journal = "";
-        this.volume = "";
-        this.number = "";
-        this.pages = "";
+    public ArticleReference(String author, String title, LocalDate date, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String journal, String volume, String number, String pages) {
+        super(author, title, date, note, id, isFromServer, isModified, isActive);
+        this.journal = journal;
+        this.volume = volume;
+        this.number = number;
+        this.pages = pages;
     }
 
     public String getJournal() {
@@ -56,5 +57,14 @@ public class ArticleReference extends Reference {
 
     public void setPages(String pages) {
         this.pages = pages;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ArticleReference)) return false;
+        if (!super.equals(o)) return false;
+        ArticleReference that = (ArticleReference) o;
+        return getJournal().equals(that.getJournal()) && getVolume().equals(that.getVolume()) && getNumber().equals(that.getNumber()) && getPages().equals(that.getPages());
     }
 }

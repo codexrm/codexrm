@@ -154,7 +154,7 @@ public class ExportRis implements Export {
         proceedings.setTitle(reference.getTitle());
         proceedings.setDate(reference.getLocalDate());
         proceedings.setVolume(reference.getVolume());
-        proceedings.setSerie(reference.getSerie());
+        proceedings.setSerie(reference.getSeries());
         proceedings.setAddress(reference.getAddress());
         return proceedings;
     }

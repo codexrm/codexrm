@@ -129,7 +129,6 @@ public class ImportBibTex implements Import {
     }
 
     private void establishDate(BibTeXEntry entry, Reference reference) {
-
         String year = null;
         String month = null;
         String date = null;
@@ -155,7 +154,6 @@ public class ImportBibTex implements Import {
     }
 
     private Reference createArticleReference(BibTeXEntry entry) {
-
         ArticleReference article = new ArticleReference();
         commonField(entry, article);
         Value value = entry.getField(BibTeXEntry.KEY_JOURNAL);
@@ -178,7 +176,6 @@ public class ImportBibTex implements Import {
     }
 
     private Reference createBookReference(BibTeXEntry entry) {
-
         BookReference book = new BookReference();
         commonField(entry, book);
         createBook(entry, book);
@@ -210,7 +207,6 @@ public class ImportBibTex implements Import {
     }
 
     private Reference createBookSectionReference(BibTeXEntry entry) {
-
         BookSectionReference bookSection = new BookSectionReference();
         commonField(entry, bookSection);
         createBook(entry, bookSection);
@@ -226,7 +222,6 @@ public class ImportBibTex implements Import {
     }
 
     private Reference createBookLetReference(BibTeXEntry entry) {
-
         BookLetReference bookLet = new BookLetReference();
         commonField(entry, bookLet);
 
@@ -237,7 +232,7 @@ public class ImportBibTex implements Import {
 
         value = entry.getField(BibTeXEntry.KEY_HOWPUBLISHED);
         if (value != null) {
-            bookLet.setHowpublished(value.toUserString());
+            bookLet.setHowpublisher(value.toUserString());
         }
         return bookLet;
     }
@@ -276,7 +271,7 @@ public class ImportBibTex implements Import {
 
         value = entry.getField(BibTeXEntry.KEY_SERIES);
         if (value != null) {
-            proceedings.setSerie(value.toUserString());
+            proceedings.setSeries(value.toUserString());
         }
 
         value = entry.getField(BibTeXEntry.KEY_VOLUME);

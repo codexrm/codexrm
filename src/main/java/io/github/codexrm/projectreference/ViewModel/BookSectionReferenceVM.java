@@ -20,21 +20,8 @@ public class BookSectionReferenceVM extends BookReferenceVM {
         createEmptyBookSectionReferenceVM();
     }
 
-    public BookSectionReferenceVM(final int id, final String author, final String title, LocalDate date, String note, final String publisher,
-                                  final String volume, final String series, final String address, final String edition,
-                                  final String chapter, final String pages) {
-        super(id, author, title, date, note, publisher, volume, series, address, edition);
-
-        createEmptyBookSectionReferenceVM();
-
-        setChapter(chapter);
-        setPages(pages);
-
-
-    }
-
     public BookSectionReferenceVM(BookSectionReference bookSectionReference) {
-        super(bookSectionReference.getId(), bookSectionReference.getAuthor(), bookSectionReference.getTitle(), bookSectionReference.getLocalDate(), bookSectionReference.getNote(), bookSectionReference.getPublisher(), bookSectionReference.getVolume(), bookSectionReference.getSeries(), bookSectionReference.getAddress(), bookSectionReference.getEdition());
+        super(bookSectionReference.getId(), bookSectionReference.getAuthor(), bookSectionReference.getTitle(), bookSectionReference.getLocalDate(), bookSectionReference.getNote(), bookSectionReference.isFromServer(), bookSectionReference.isActive(), bookSectionReference.isModified(), bookSectionReference.getPublisher(), bookSectionReference.getVolume(), bookSectionReference.getSeries(), bookSectionReference.getAddress(), bookSectionReference.getEdition());
 
         createEmptyBookSectionReferenceVM();
 
@@ -86,7 +73,22 @@ public class BookSectionReferenceVM extends BookReferenceVM {
 
     @Override
     public BookSectionReference toModel() {
-        BookSectionReference bookSectionReference = new BookSectionReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
+        BookSectionReference bookSectionReference = new BookSectionReference();
+
+        bookSectionReference.setAuthor(this.getAuthor());
+        bookSectionReference.setTitle(this.getTitle());
+        bookSectionReference.setLocalDate(this.getDate());
+        bookSectionReference.setId(this.getId());
+        bookSectionReference.setNote(this.getNote());
+        bookSectionReference.setFromServer(this.isIsFromServer());
+        bookSectionReference.setModified(this.isIsModified());
+        bookSectionReference.setActive(this.isIsActive());
+
+        bookSectionReference.setPublisher(this.getPublisher());
+        bookSectionReference.setVolume(this.getVolume());
+        bookSectionReference.setSeries(this.getSeries());
+        bookSectionReference.setAddress(this.getAddress());
+        bookSectionReference.setEdition(this.getEdition());
 
         bookSectionReference.setPublisher(this.getPublisher());
         bookSectionReference.setVolume(this.getVolume());

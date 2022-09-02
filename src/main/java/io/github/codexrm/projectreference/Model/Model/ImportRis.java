@@ -142,7 +142,7 @@ public class ImportRis implements Import {
         proceedings.setTitle(entry.getTitle());
         proceedings.setLocalDate(entry.getDate());
         proceedings.setVolume(entry.getVolume());
-        proceedings.setSerie(entry.getSerie());
+        proceedings.setSeries(entry.getSerie());
         proceedings.setAddress(entry.getAddress());
 
         return proceedings;

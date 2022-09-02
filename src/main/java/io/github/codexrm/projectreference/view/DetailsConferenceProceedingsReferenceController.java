@@ -33,7 +33,7 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
     private TextField volume;
 
     @FXML
-    private TextField serie;
+    private TextField series;
 
     @FXML
     private TextField address;
@@ -51,7 +51,7 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
                 date.valueProperty().unbindBidirectional(oldReference.dateProperty());
                 note.textProperty().unbindBidirectional(oldReference.noteProperty());
                 volume.textProperty().unbindBidirectional(((ConferenceProceedingsReferenceVM) oldReference).volumeProperty());
-                serie.textProperty().unbindBidirectional(((ConferenceProceedingsReferenceVM) oldReference).serieProperty());
+                series.textProperty().unbindBidirectional(((ConferenceProceedingsReferenceVM) oldReference).seriesProperty());
                 address.textProperty().unbindBidirectional(((ConferenceProceedingsReferenceVM) oldReference).addressProperty());
 
                 referenceType.valueProperty().unbindBidirectional(((ConferenceProceedingsReferenceVM) oldReference).referenceTypeProperty());
@@ -65,7 +65,7 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
                 date.valueProperty().bindBidirectional(newReference.dateProperty());
                 note.textProperty().bindBidirectional(newReference.noteProperty());
                 volume.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).volumeProperty());
-                serie.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).serieProperty());
+                series.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).seriesProperty());
                 address.textProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).addressProperty());
 
                 referenceType.valueProperty().bindBidirectional(((ConferenceProceedingsReferenceVM) newReference).referenceTypeProperty());
@@ -76,7 +76,7 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
             date.setValue(LocalDate.now());
             note.clear();
             volume.clear();
-            serie.clear();
+            series.clear();
             address.clear();
         }
     };
@@ -113,12 +113,12 @@ public class DetailsConferenceProceedingsReferenceController implements Initiali
 
     public void setVolume(String volume) {this.volume.setText(volume);}
 
-    public String getSerie() {
-        return serie.getText();
+    public String getSeries() {
+        return series.getText();
     }
 
-    public void setSerie(String serie) {
-        this.serie.setText(serie);
+    public void setSeries(String series) {
+        this.series.setText(series);
     }
 
     public String getAddress() {

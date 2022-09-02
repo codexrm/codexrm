@@ -26,6 +26,7 @@ public class ReferenceLibraryManagerVM {
     private final ObjectProperty<ReferenceVM> currentReference;
     private final ReferenceLibraryManager manager;
     private final BooleanProperty referenceTypeReplaced;
+    private  ArrayList<ReferenceVM> referenceDeleteList;
 
     public ReferenceLibraryManagerVM() throws IOException {
         referenceList = FXCollections.observableArrayList();
@@ -33,6 +34,7 @@ public class ReferenceLibraryManagerVM {
         currentReference = new SimpleObjectProperty<>();
         manager = ReferenceLibraryManager.getReferenceLibraryManager();
         referenceTypeReplaced = new SimpleBooleanProperty(false);
+        referenceDeleteList = new ArrayList<>();
 
         loadDataFromModel();
     }
@@ -72,6 +74,7 @@ public class ReferenceLibraryManagerVM {
 
     private void syncViewModel() {
         referenceList.clear();
+
         Enumeration<Integer> e = manager.getReferenceTable().keys();
         Integer keyReference;
         Reference valorReference;
@@ -79,6 +82,7 @@ public class ReferenceLibraryManagerVM {
         while (e.hasMoreElements()) {
             keyReference = e.nextElement();
             valorReference = manager.getReferenceTable().get(keyReference);
+            if(valorReference.isActive()){
             if (valorReference.getClass() == ArticleReference.class) {
                 referenceList.add(new ArticleReferenceVM((ArticleReference) valorReference));
             } else if (valorReference.getClass() == BookSectionReference.class) {
@@ -91,6 +95,7 @@ public class ReferenceLibraryManagerVM {
                 referenceList.add(new ConferenceProceedingsReferenceVM((ConferenceProceedingsReference) valorReference));
             } else if (valorReference.getClass() == ThesisReference.class) {
                 referenceList.add(new ThesisReferenceVM((ThesisReference) valorReference));
+            }
             }
         }
     }
@@ -106,6 +111,8 @@ public class ReferenceLibraryManagerVM {
         reference.setId(id);
         reference.setTitle("No Title");
         reference.setAuthor("lastName1,Name1;lastNameN,nameN...");
+        reference.setIsActive(true);
+
         referenceList.add(reference);
     }
 
@@ -114,6 +121,11 @@ public class ReferenceLibraryManagerVM {
         /*Get de references id to delete */
         List<Integer> referenceIdList = new ArrayList<>();
         for (ReferenceVM reference : referenceList) {
+            if(reference.isIsFromServer()){
+                reference.setIsActive(false);
+                referenceDeleteList.add(reference);
+            }
+
             referenceIdList.add(reference.getId());
         }
 
@@ -135,6 +147,11 @@ public class ReferenceLibraryManagerVM {
         }
         syncViewModel();
     }
+    public void syncDB() throws IOException {
+        saveDataToModel();
+        manager.syncReferenceTable();
+        syncViewModel();
+    }
 
     public void replaceCurrentReferenceType(ReferenceType newReferenceType) {
 
@@ -147,6 +164,9 @@ public class ReferenceLibraryManagerVM {
                 referenceVM.setAuthor(getCurrentReference().getAuthor());
                 referenceVM.setDate(getCurrentReference().getDate());
                 referenceVM.setNote(getCurrentReference().getNote());
+                referenceVM.setIsFromServer(getCurrentReference().isIsFromServer());
+                referenceVM.setIsActive(getCurrentReference().isIsActive());
+                referenceVM.setIsModified(getCurrentReference().isIsModified());
 
                 int referenceIndex = referenceList.indexOf(ref);
                 referenceList.set(referenceIndex, referenceVM);
@@ -158,9 +178,22 @@ public class ReferenceLibraryManagerVM {
     }
 
     public void saveDataToModel() throws IOException {
+
+        for(ReferenceVM referenceVM: referenceList){
+            if (referenceVM.isIsFromServer() && referenceVM.isIsActive()) {
+                Reference reference = manager.getReference(referenceVM.getId());
+                if (!reference.equals(referenceVM.toModel())) {
+                    referenceVM.setIsModified(true);
+                }
+            }
+        }
+
         manager.getReferenceTable().clear();
 
         for (ReferenceVM reference : referenceList) {
+            manager.getReferenceTable().put(reference.getId(),reference.toModel());
+        }
+        for (ReferenceVM reference : referenceDeleteList) {
             manager.getReferenceTable().put(reference.getId(),reference.toModel());
         }
         manager.saveReferenceTable();

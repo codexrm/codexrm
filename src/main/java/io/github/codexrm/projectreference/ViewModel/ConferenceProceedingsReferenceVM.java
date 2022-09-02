@@ -6,14 +6,11 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.time.LocalDate;
-import java.util.Objects;
-
 public class ConferenceProceedingsReferenceVM extends ReferenceVM {
 
     ObjectProperty<ReferenceType> referenceType;
     private StringProperty volume;
-    private StringProperty serie;
+    private StringProperty series;
     private StringProperty address;
 
     public ConferenceProceedingsReferenceVM() {
@@ -21,30 +18,19 @@ public class ConferenceProceedingsReferenceVM extends ReferenceVM {
         createEmptyConferenceProceedingsReferenceVM();
     }
 
-    public ConferenceProceedingsReferenceVM(final int id, final String author, final String title, LocalDate date, String note,
-                                            final String volume, final String serie, final String address) {
-        super(id, author, title, date, note);
-
-        createEmptyConferenceProceedingsReferenceVM();
-
-        setVolume(volume);
-        setSerie(serie);
-        setAddress(address);
-    }
-
     public ConferenceProceedingsReferenceVM(ConferenceProceedingsReference conferenceProceedingsReference) {
-        super(conferenceProceedingsReference.getId(), conferenceProceedingsReference.getAuthor(), conferenceProceedingsReference.getTitle(), conferenceProceedingsReference.getLocalDate(), conferenceProceedingsReference.getNote());
+        super(conferenceProceedingsReference.getId(), conferenceProceedingsReference.getAuthor(), conferenceProceedingsReference.getTitle(), conferenceProceedingsReference.getLocalDate(), conferenceProceedingsReference.getNote(), conferenceProceedingsReference.isFromServer(), conferenceProceedingsReference.isActive(), conferenceProceedingsReference.isModified());
 
         createEmptyConferenceProceedingsReferenceVM();
 
         setVolume(conferenceProceedingsReference.getVolume());
-        setSerie(conferenceProceedingsReference.getSerie());
+        setSeries(conferenceProceedingsReference.getSeries());
         setAddress(conferenceProceedingsReference.getAddress());
     }
 
     private void createEmptyConferenceProceedingsReferenceVM() {
         this.volume = new SimpleStringProperty();
-        this.serie = new SimpleStringProperty();
+        this.series = new SimpleStringProperty();
         this.address = new SimpleStringProperty();
         this.referenceType = new SimpleObjectProperty<>(ReferenceType.CONFERENCEPROCEEDINGS);
     }
@@ -61,16 +47,16 @@ public class ConferenceProceedingsReferenceVM extends ReferenceVM {
         this.volume.set(volume);
     }
 
-    public String getSerie() {
-        return serie.get();
+    public String getSeries() {
+        return series.get();
     }
 
-    public StringProperty serieProperty() {
-        return serie;
+    public StringProperty seriesProperty() {
+        return series;
     }
 
-    public void setSerie(String serie) {
-        this.serie.set(serie);
+    public void setSeries(String series) {
+        this.series.set(series);
     }
 
     public String getAddress() {
@@ -99,9 +85,19 @@ public class ConferenceProceedingsReferenceVM extends ReferenceVM {
 
     @Override
     public ConferenceProceedingsReference toModel() {
-        ConferenceProceedingsReference conferenceProceedingsReference = new ConferenceProceedingsReference(this.getId(), this.getAuthor(), this.getTitle(), this.getDate(), this.getNote());
+        ConferenceProceedingsReference conferenceProceedingsReference = new ConferenceProceedingsReference();
+
+        conferenceProceedingsReference.setAuthor(this.getAuthor());
+        conferenceProceedingsReference.setTitle(this.getTitle());
+        conferenceProceedingsReference.setLocalDate(this.getDate());
+        conferenceProceedingsReference.setId(this.getId());
+        conferenceProceedingsReference.setNote(this.getNote());
+        conferenceProceedingsReference.setFromServer(this.isIsFromServer());
+        conferenceProceedingsReference.setModified(this.isIsModified());
+        conferenceProceedingsReference.setActive(this.isIsActive());
+
         conferenceProceedingsReference.setVolume(this.getVolume());
-        conferenceProceedingsReference.setSerie(this.getSerie());
+        conferenceProceedingsReference.setSeries(this.getSeries());
         conferenceProceedingsReference.setAddress(this.getAddress());
 
         return conferenceProceedingsReference;

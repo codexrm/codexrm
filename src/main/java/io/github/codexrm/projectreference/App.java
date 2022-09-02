@@ -11,6 +11,7 @@ import javafx.stage.*;
 import java.io.IOException;
 
 import io.github.codexrm.projectreference.view.RootLayoutController;
+import org.modelmapper.ModelMapper;
 
 public class App extends Application {
 
@@ -60,5 +61,9 @@ public class App extends Application {
 class AppLauncher {
     public static void main(String[] args) {
         App.main(args);
+    }
+   // @Bean
+    public ModelMapper modelMapper(){
+        return new ModelMapper();
     }
 }
