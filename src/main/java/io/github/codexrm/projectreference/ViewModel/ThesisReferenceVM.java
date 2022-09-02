@@ -1,10 +1,8 @@
 package io.github.codexrm.projectreference.viewmodel;
 
-import io.github.codexrm.projectreference.model.Enum.ThesisType;
+import io.github.codexrm.projectreference.model.enums.ThesisType;
 import io.github.codexrm.projectreference.model.model.ThesisReference;
 import javafx.beans.property.*;
-
-import java.time.LocalDate;
 
 public class ThesisReferenceVM extends ReferenceVM {
 

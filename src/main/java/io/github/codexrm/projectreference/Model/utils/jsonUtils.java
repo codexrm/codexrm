@@ -3,34 +3,36 @@ package io.github.codexrm.projectreference.model.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Collections;
 
 import java.util.List;
 
-public class JSONUtils {
+public class JsonUtils {
 
+    private JsonUtils() {}
 
     // covert JSON into List of Object
-    static public <T> List<T> convertFromJsonToList(String json, TypeReference<List<T>> var){
+    public static  <T> List<T> convertFromJsonToList(String json, TypeReference<List<T>> elem){
         if(json.equals("")){
-            return null;
+            return Collections.emptyList();
         }
         ObjectMapper mapper = new ObjectMapper();
         try {
-            return mapper.readValue(json,var);
+            return mapper.readValue(json,elem);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return null;
+        return Collections.emptyList();
     }
 
     //Generic Type Safe Method - convert JSON into Object
-    static public <T> T convertFromJsonToObject(String json, Class<T> var){
+    public static <T> T convertFromJsonToObject(String json, Class<T> elem){
           if(json.equals("")){
               return null;
           }
            ObjectMapper mapper = new ObjectMapper();
            try {
-               return mapper.readValue(json, var);//Convert Json into object of Specific Type
+               return mapper.readValue(json, elem);//Convert Json into object of Specific Type
            } catch (JsonProcessingException e) {
                e.printStackTrace();
            }

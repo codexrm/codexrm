@@ -62,8 +62,5 @@ class AppLauncher {
     public static void main(String[] args) {
         App.main(args);
     }
-   // @Bean
-    public ModelMapper modelMapper(){
-        return new ModelMapper();
-    }
+
 }

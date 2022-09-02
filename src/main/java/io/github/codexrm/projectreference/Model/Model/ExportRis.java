@@ -2,12 +2,12 @@ package io.github.codexrm.projectreference.model.model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import io.github.codexrm.jris.*;
-import io.github.codexrm.projectreference.model.Enum.ThesisType;
+import io.github.codexrm.projectreference.model.enums.ThesisType;
 
 public class ExportRis implements Export {
-
 
     public ExportRis() {
         // Do nothing
@@ -36,7 +36,7 @@ public class ExportRis implements Export {
     }
 
     private BaseReference identifyType(Reference reference) {
-        BaseReference entry = new BaseReference();
+        BaseReference entry;
 
         if (reference instanceof ArticleReference) {
             entry = createJour((ArticleReference) reference);
@@ -67,15 +67,11 @@ public class ExportRis implements Export {
     }
 
     private void addAuthors(String author, ArrayList<String> listAuthorReference) {
-
         String[] authors = author.split(";");
-        for (int i = 0; i < authors.length; i++) {
-            listAuthorReference.add(authors[i]);
-        }
+        Collections.addAll(listAuthorReference, authors);
     }
 
     private void commonField(Reference reference, BaseReference entry) {
-
         entry.setNotes(reference.getNote());
     }
 
@@ -137,7 +133,7 @@ public class ExportRis implements Export {
         thesis.setDate(reference.getLocalDate());
         thesis.setSchool(reference.getSchool());
         thesis.setAddress(reference.getAddress());
-        if (reference.getType().equals(ThesisType.Masters)) {
+        if (reference.getType().equals(ThesisType.MASTERS)) {
             thesis.setThesisType("Masters");
         } else {
             thesis.setThesisType("phd");

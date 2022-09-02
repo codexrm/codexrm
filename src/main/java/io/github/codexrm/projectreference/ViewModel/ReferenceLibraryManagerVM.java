@@ -1,6 +1,6 @@
 package io.github.codexrm.projectreference.viewmodel;
 
-import io.github.codexrm.projectreference.model.Enum.Format;
+import io.github.codexrm.projectreference.model.enums.Format;
 import io.github.codexrm.projectreference.model.controller.ReferenceLibraryManager;
 import io.github.codexrm.projectreference.model.model.*;
 import javafx.beans.property.BooleanProperty;
@@ -99,7 +99,7 @@ public class ReferenceLibraryManagerVM {
             }
         }
     }
-    public void addEmptyBookReference() throws IOException {
+    public void addEmptyBookReference() {
 
         int id = 0;
         Optional<ReferenceVM> maxReferenceId = referenceList.stream().max(comparing(ReferenceVM::getId));
@@ -116,7 +116,7 @@ public class ReferenceLibraryManagerVM {
         referenceList.add(reference);
     }
 
-    public void deleteReferences(List<ReferenceVM> referenceList) throws IOException {
+    public void deleteReferences(List<ReferenceVM> referenceList) {
 
         /*Get de references id to delete */
         List<Integer> referenceIdList = new ArrayList<>();
@@ -135,11 +135,11 @@ public class ReferenceLibraryManagerVM {
         }
     }
     public void exportReferenceList(File file, List<ReferenceVM> referenceVMList, Format format) throws IOException {
-        ArrayList<Reference> referenceList = new ArrayList<>();
+        ArrayList<Reference> list = new ArrayList<>();
         for (ReferenceVM referenceVM : referenceVMList) {
-            referenceList.add(referenceVM.toModel());
+            list.add(referenceVM.toModel());
         }
-        manager.exportReferenceList(file, referenceList,format);
+        manager.exportReferenceList(file, list,format);
     }
     public void importReferences(List<File> fileList, Format format) throws IOException, ParseException {
         for (File file: fileList) {

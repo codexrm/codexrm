@@ -5,46 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94da447b-1750-4e71-bb76-a8caf0b49cce" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/RestSync.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/Sync.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ArticleReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookLetReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookSectionReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ConferenceProceedingsReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ReferenceLibraryDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ThesisReferenceDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/UserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/utils/DTOConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/utils/jsonUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/enums/Format.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/enums/ThesisType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Controller/ReferenceLibraryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Controller/ReferenceLibraryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Enum/Format.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Enum/ThesisType.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ArticleReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ArticleReference.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/BookLetReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/BookLetReference.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/BookReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/BookReference.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/BookSectionReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/BookSectionReference.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ConferenceProceedingsReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ConferenceProceedingsReference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/Export.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/Export.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ExportBibTex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ExportBibTex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ExportFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ExportFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ExportRis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ExportRis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ImportBibTex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ImportBibTex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ImportFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ImportFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ImportRis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ImportRis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/Reference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/Reference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ReferenceLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ReferenceLibrary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ThesisReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ThesisReference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ArticleReferenceVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ArticleReferenceVM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookLetReferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookLetReferenceDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/BookLetReferenceVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/BookLetReferenceVM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/BookReferenceVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/BookReferenceVM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/BookSectionReferenceVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/BookSectionReferenceVM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ConferenceProceedingsReferenceVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ConferenceProceedingsReferenceVM.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ReferenceLibraryManagerVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ReferenceLibraryManagerVM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ReferenceVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ReferenceVM.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ThesisReferenceVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ThesisReferenceVM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsConferenceProceedingsReferenceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsConferenceProceedingsReferenceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsConferenceReference.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsConferenceReference.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayout.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsThesisReferenceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsThesisReferenceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayoutController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testFile/referenceL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testFile/referenceL.txt" afterDir="false" />
     </list>
@@ -207,29 +193,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ModelA/LibraryFiles.java</url>
           <line>54</line>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayoutController.java</url>
-          <line>264</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsBookReferenceController.java</url>
-          <line>101</line>
-          <properties class="io.github.codexrm.projectreference.view.DetailsBookReferenceController" method="setAuthor">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayoutController.java</url>
-          <line>253</line>
-          <properties class="io.github.codexrm.projectreference.view.RootLayoutController" method="save">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

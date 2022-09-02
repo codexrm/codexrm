@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import io.github.codexrm.projectreference.model.Enum.Format;
+import io.github.codexrm.projectreference.model.enums.Format;
 import io.github.codexrm.projectreference.model.model.*;
 import org.jbibtex.ParseException;
 import org.jbibtex.TokenMgrException;
@@ -15,7 +15,7 @@ public class ReferenceLibraryManager {
 
     private static ReferenceLibraryManager manager;
     private ReferenceLibrary referenceLibrary;
-    private LibraryFiles libraryFiles;
+    private final LibraryFiles libraryFiles;
     private static String dbReferenceName = "testFile//referenceL.txt";
     private final ExportFactory exportFactory;
     private final ImportFactory importFactory;
@@ -37,37 +37,15 @@ public class ReferenceLibraryManager {
         return manager;
     }
 
-    public ReferenceLibrary getReferenceLibrary() {
-        return referenceLibrary;
-    }
-
     public void setReferenceLibrary(ReferenceLibrary referenceLibrary) {this.referenceLibrary = referenceLibrary;}
-
-    public LibraryFiles getLibraryFiles() {
-        return libraryFiles;
-    }
-
-    public void setLibraryFiles(LibraryFiles libraryFiles) {
-        this.libraryFiles = libraryFiles;
-    }
-
-    public Reference addEmptyBookReference() {
-        return referenceLibrary.addEmptyReference();
-    }
 
     public Reference getReference(int id) {
         return referenceLibrary.getReference(id);
     }
 
-    public Hashtable<Integer, Reference> getReferenceTable() {
-        return referenceLibrary.getReferenceTable();
-    }
+    public Hashtable<Integer, Reference> getReferenceTable() {return referenceLibrary.getReferenceTable();}
 
-    public Sync getSync() {return sync;}
-
-    public void saveReferenceTable() throws IOException {
-        libraryFiles.saveReferenceTable(referenceLibrary);
-    }
+    public void saveReferenceTable() throws IOException {libraryFiles.saveReferenceTable(referenceLibrary);}
 
     public void syncReferenceTable() throws IOException {
         referenceLibrary.addListReferenceSync((ArrayList<Reference>) sync.syncReferences
@@ -102,7 +80,6 @@ public class ReferenceLibraryManager {
 
     public Reference replaceReferenceType(@NotNull Reference newReference) throws IOException {
         if (referenceLibrary.getReference(newReference.getId()) != null) {
-
             Reference removedReference = referenceLibrary.getReferenceTable().remove(newReference.getId());
             newReference.setAuthor(removedReference.getAuthor());
             newReference.setTitle(removedReference.getTitle());
@@ -116,13 +93,11 @@ public class ReferenceLibraryManager {
     }
 
     public void exportReference(String path, Reference reference, Format format) throws IOException {
-
         Export export = exportFactory.getExport(format);
         export.writeValue(reference, path);
     }
 
     public void exportReferenceList(File file, ArrayList<Reference> referenceList, Format format) throws IOException {
-
         Export export = exportFactory.getExport(format);
         export.writeValue(referenceList,file.getPath());
     }

@@ -1,7 +1,7 @@
 package io.github.codexrm.projectreference.model.model;
 
 
-import io.github.codexrm.projectreference.model.Enum.Format;
+import io.github.codexrm.projectreference.model.enums.Format;
 
 public class ExportFactory {
 
@@ -12,11 +12,9 @@ public class ExportFactory {
     public Export getExport(Format type) {
 
         if (type.equals(Format.RIS)) {
-            ExportRis exportRis = new ExportRis();
-            return exportRis;
+            return new ExportRis();
         } else {
-            ExportBibTex exportBibtex = new ExportBibTex();
-            return exportBibtex;
+            return new ExportBibTex();
         }
     }
 }

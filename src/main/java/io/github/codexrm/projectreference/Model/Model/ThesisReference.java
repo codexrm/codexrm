@@ -1,8 +1,9 @@
 package io.github.codexrm.projectreference.model.model;
 
-import io.github.codexrm.projectreference.model.Enum.ThesisType;
+import io.github.codexrm.projectreference.model.enums.ThesisType;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class ThesisReference extends Reference {
 
@@ -55,5 +56,10 @@ public class ThesisReference extends Reference {
         if (!super.equals(o)) return false;
         ThesisReference that = (ThesisReference) o;
         return getSchool().equals(that.getSchool()) && getType() == that.getType() && getAddress().equals(that.getAddress());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getSchool(), getType(), getAddress());
     }
 }

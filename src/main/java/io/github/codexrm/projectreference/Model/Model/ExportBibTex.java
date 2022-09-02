@@ -1,6 +1,6 @@
 package io.github.codexrm.projectreference.model.model;
 
-import io.github.codexrm.projectreference.model.Enum.ThesisType;
+import io.github.codexrm.projectreference.model.enums.ThesisType;
 
 import java.io.*;
 import java.time.Month;
@@ -8,7 +8,8 @@ import java.util.*;
 
 public class ExportBibTex implements Export {
 
-
+    private  String vl = "  volume = {";
+    private  String ad = "  address = {";
 
     public ExportBibTex() {
         // Do nothing
@@ -79,7 +80,7 @@ public class ExportBibTex implements Export {
             bufferedWriter.newLine();
         }
     }
-    private String modificateformatDate(Month month) throws IOException {
+    private String modifyFormatDate(Month month) {
 
         switch (month) {
             case JANUARY:
@@ -120,7 +121,7 @@ public class ExportBibTex implements Export {
             bufferedWriter.newLine();
         }
         if (reference.getLocalDate().getMonth() != null) {
-            bufferedWriter.write("  month = " + modificateformatDate(reference.getLocalDate().getMonth()) + ",");
+            bufferedWriter.write("  month = " + modifyFormatDate(reference.getLocalDate().getMonth()) + ",");
             bufferedWriter.newLine();
         }
         if (reference.getNote() != null) {
@@ -152,7 +153,7 @@ public class ExportBibTex implements Export {
             bufferedWriter.newLine();
         }
         if (reference.getVolume() != null) {
-            bufferedWriter.write("  volume = {" + reference.getVolume() + "},");
+            bufferedWriter.write(vl + reference.getVolume() + "},");
             bufferedWriter.newLine();
         }
         if (reference.getNumber() != null) {
@@ -176,7 +177,7 @@ public class ExportBibTex implements Export {
             bufferedWriter.newLine();
         }
         if (reference.getVolume() != null) {
-            bufferedWriter.write("  volume = {" + reference.getVolume() + "},");
+            bufferedWriter.write(vl + reference.getVolume() + "},");
             bufferedWriter.newLine();
         }
         if (reference.getSeries() != null) {
@@ -184,7 +185,7 @@ public class ExportBibTex implements Export {
             bufferedWriter.newLine();
         }
         if (reference.getAddress() != null) {
-            bufferedWriter.write("  address = {" + reference.getAddress() + "},");
+            bufferedWriter.write(ad + reference.getAddress() + "},");
             bufferedWriter.newLine();
         }
         if (reference.getEdition() != null) {
@@ -224,12 +225,12 @@ public class ExportBibTex implements Export {
         bufferedWriter.write("@booklet{" + reference.getId() + ",");
         commonField(reference, bufferedWriter);
 
-        if (reference.getHowpublisher() != null) {
-            bufferedWriter.write("  howpublished = {" + reference.getHowpublisher() + "},");
+        if (reference.getHowpublished() != null) {
+            bufferedWriter.write("  howpublished = {" + reference.getHowpublished() + "},");
             bufferedWriter.newLine();
         }
         if (reference.getAddress() != null) {
-            bufferedWriter.write("  address = {" + reference.getAddress() + "}");
+            bufferedWriter.write(ad + reference.getAddress() + "}");
         }
         closeReference(bufferedWriter);
     }
@@ -237,7 +238,7 @@ public class ExportBibTex implements Export {
     private void writeThesisReference(ThesisReference reference, BufferedWriter bufferedWriter)
             throws IOException {
 
-        if (reference.getType().equals(ThesisType.Masters)) {
+        if (reference.getType().equals(ThesisType.MASTERS)) {
             bufferedWriter.write("@mastersthesis{" + reference.getId() + ",");
         } else {
             bufferedWriter.write("@phdthesis{" + reference.getId() + ",");
@@ -253,7 +254,7 @@ public class ExportBibTex implements Export {
             bufferedWriter.newLine();
         }
         if (reference.getAddress() != null) {
-            bufferedWriter.write("  address = {" + reference.getAddress() + "}");
+            bufferedWriter.write(ad + reference.getAddress() + "}");
         }
         closeReference(bufferedWriter);
     }
@@ -265,7 +266,7 @@ public class ExportBibTex implements Export {
         commonField(reference, bufferedWriter);
 
         if (reference.getVolume() != null) {
-            bufferedWriter.write("  volume = {" + reference.getVolume() + "},");
+            bufferedWriter.write(vl + reference.getVolume() + "},");
             bufferedWriter.newLine();
         }
         if (reference.getSeries() != null) {
@@ -273,7 +274,7 @@ public class ExportBibTex implements Export {
             bufferedWriter.newLine();
         }
         if (reference.getAddress() != null) {
-            bufferedWriter.write("  address = {" + reference.getAddress() + "}");
+            bufferedWriter.write(ad + reference.getAddress() + "}");
         }
         closeReference(bufferedWriter);
     }

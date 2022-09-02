@@ -9,13 +9,13 @@ import java.util.List;
 
 public class DTOConverter {
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public DTOConverter() {this.modelMapper = new ModelMapper();}
 
     public ReferenceDTO toReferenceDTO(Reference reference, User user) {
 
-        ReferenceDTO referenceDTO = new ReferenceDTO();
+        ReferenceDTO referenceDTO;
 
         if(reference.getClass() == ArticleReference.class){
             referenceDTO =  modelMapper.map(reference, ArticleReferenceDTO.class);

@@ -25,7 +25,7 @@ public class BookLetReferenceVM extends ReferenceVM {
 
         createEmptyBookLetReferenceVM();
 
-        setHowpublished(bookLetReference.getHowpublisher());
+        setHowpublished(bookLetReference.getHowpublished());
         setAddress(bookLetReference.getAddress());
     }
 
@@ -84,7 +84,7 @@ public class BookLetReferenceVM extends ReferenceVM {
         bookLetReference.setModified(this.isIsModified());
         bookLetReference.setActive(this.isIsActive());
 
-        bookLetReference.setHowpublisher(this.getHowpublished());
+        bookLetReference.setHowpublished(this.getHowpublished());
         bookLetReference.setAddress(this.getAddress());
 
         return bookLetReference;

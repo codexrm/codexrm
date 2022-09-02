@@ -1,6 +1,6 @@
 package io.github.codexrm.projectreference.model.model;
 
-import io.github.codexrm.projectreference.model.Enum.Format;
+import io.github.codexrm.projectreference.model.enums.Format;
 
 public class ImportFactory {
 
@@ -9,12 +9,11 @@ public class ImportFactory {
     }
 
     public Import getImport(Format type) {
+
         if (type.equals(Format.RIS)) {
-            ImportRis importRis = new ImportRis();
-            return importRis;
+            return  new ImportRis();
         } else {
-            ImportBibTex importBibTex = new ImportBibTex();
-            return importBibTex;
+            return new ImportBibTex();
         }
     }
 }

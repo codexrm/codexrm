@@ -55,9 +55,7 @@ public class BookReferenceVM extends ReferenceVM {
         return referenceType.get();
     }
 
-    public void setReferenceType(final ReferenceType referenceType) {
-        this.referenceType.set(referenceType);
-    }
+    public void setReferenceType(final ReferenceType referenceType) {this.referenceType.set(referenceType);}
 
     public ObjectProperty<ReferenceType> referenceTypeProperty() {
         return referenceType;

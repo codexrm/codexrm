@@ -55,4 +55,9 @@ public class ConferenceProceedingsReference extends Reference {
         ConferenceProceedingsReference that = (ConferenceProceedingsReference) o;
         return getVolume().equals(that.getVolume()) && getSeries().equals(that.getSeries()) && getAddress().equals(that.getAddress());
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getVolume(), getSeries(), getAddress());
+    }
 }

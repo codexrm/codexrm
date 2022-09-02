@@ -5,7 +5,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-import io.github.codexrm.projectreference.model.Enum.ThesisType;
+import io.github.codexrm.projectreference.model.enums.ThesisType;
 import org.jbibtex.*;
 
 public class ImportBibTex implements Import {
@@ -63,12 +63,12 @@ public class ImportBibTex implements Import {
     private String createAuthorField(String content) {
 
         String[] authors = content.split(" and ", 2);
-        String author = authors[0];
+        StringBuilder author = new StringBuilder(authors[0]);
 
         for (int i = 1; i < authors.length; i++) {
-           author = author +";"+authors[i];
+           author.append(";").append(authors[i]);
         }
-        return author;
+        return author.toString();
     }
 
     private void commonField(BibTeXEntry entry, Reference reference) {
@@ -232,7 +232,7 @@ public class ImportBibTex implements Import {
 
         value = entry.getField(BibTeXEntry.KEY_HOWPUBLISHED);
         if (value != null) {
-            bookLet.setHowpublisher(value.toUserString());
+            bookLet.setHowpublished(value.toUserString());
         }
         return bookLet;
     }
@@ -252,9 +252,9 @@ public class ImportBibTex implements Import {
         }
 
         if (entry.getType().getValue().equals("mastersthesis")) {
-            thesis.setType(ThesisType.Masters);
+            thesis.setType(ThesisType.MASTERS);
         } else {
-            thesis.setType(ThesisType.phd);
+            thesis.setType(ThesisType.PHD);
         }
         return thesis;
     }

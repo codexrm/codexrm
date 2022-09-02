@@ -5,27 +5,27 @@ import java.util.Objects;
 
 public class BookLetReference extends Reference {
 
-    private String howpublisher;
+    private String howpublished;
     private String address;
 
     public BookLetReference() {
         super();
-        this.howpublisher = "";
+        this.howpublished = "";
         this.address = "";
     }
 
     public BookLetReference(String author, String title, LocalDate date, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String howpublished, String address) {
         super(author, title, date, note, id, isFromServer, isModified, isActive);
-        this.howpublisher = howpublished;
+        this.howpublished = howpublished;
         this.address = address;
     }
 
-    public String getHowpublisher() {
-        return howpublisher;
+    public String getHowpublished() {
+        return howpublished;
     }
 
-    public void setHowpublisher(String howpublisher) {
-        this.howpublisher = howpublisher;
+    public void setHowpublished(String howpublished) {
+        this.howpublished = howpublished;
     }
 
     public String getAddress() {
@@ -42,6 +42,11 @@ public class BookLetReference extends Reference {
         if (!(o instanceof BookLetReference)) return false;
         if (!super.equals(o)) return false;
         BookLetReference that = (BookLetReference) o;
-        return getHowpublisher().equals(that.getHowpublisher()) && getAddress().equals(that.getAddress());
+        return getHowpublished().equals(that.getHowpublished()) && getAddress().equals(that.getAddress());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getHowpublished(), getAddress());
     }
 }

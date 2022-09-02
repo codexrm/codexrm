@@ -11,9 +11,9 @@ import java.util.List;
 
 public class Sync {
 
-    private ReferenceLibraryDTO libraryDTO;
-    private DTOConverter dtoConverter;
-    private RestSync restSync;
+    private final ReferenceLibraryDTO libraryDTO;
+    private final DTOConverter dtoConverter;
+    private final RestSync restSync;
 
     public Sync() {
         this.libraryDTO = new ReferenceLibraryDTO();
@@ -22,9 +22,8 @@ public class Sync {
     }
 
     public List<Reference> syncReferences(Hashtable<Integer, Reference> referenceTable, User user){
-         List<ReferenceDTO> list = new ArrayList<>();
          addToLibraryDTO(referenceTable,user);
-         list = restSync.syncReferences(libraryDTO);
+        List<ReferenceDTO> list = restSync.syncReferences(libraryDTO);
 
         return dtoConverter.toReferenceList(list);
     }

@@ -6,9 +6,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 public class BookSectionReferenceVM extends BookReferenceVM {
 
     ObjectProperty<ReferenceType> referenceType;

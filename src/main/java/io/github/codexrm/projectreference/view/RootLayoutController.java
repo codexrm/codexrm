@@ -1,6 +1,6 @@
 package io.github.codexrm.projectreference.view;
 
-import io.github.codexrm.projectreference.model.Enum.Format;
+import io.github.codexrm.projectreference.model.enums.Format;
 import io.github.codexrm.projectreference.viewmodel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
@@ -18,7 +18,6 @@ import org.jbibtex.ParseException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,14 +31,19 @@ public class RootLayoutController implements Initializable {
     private final ScrollPane conferenceDetail;
     private final ScrollPane thesisDetail;
     private Stage stage;
+
     @FXML
     private TableView<ReferenceVM> referenceTable;
+
     @FXML
     private TableColumn<ReferenceVM, String> authorColumn;
+
     @FXML
     private TableColumn<ReferenceVM, String> titleColumn;
+
     @FXML
     private AnchorPane referenceDetail;
+
     @FXML
     private Label noReferenceDetailInfo;
 
@@ -176,6 +180,7 @@ public class RootLayoutController implements Initializable {
     public void exportRis() throws IOException {
         exportTo(Format.RIS);
     }
+
     @FXML
     public void exportBibTex() throws IOException {
         exportTo(Format.BIBTEX);
@@ -191,10 +196,12 @@ public class RootLayoutController implements Initializable {
             managerVM.exportReferenceList(selectedFile,referenceList,format);
         }
     }
+
     @FXML
     public void importRis() throws IOException, ParseException {
         importTo(Format.RIS);
     }
+
     @FXML
     public void importBibTex() throws IOException, ParseException {
         importTo(Format.BIBTEX);
@@ -237,6 +244,7 @@ public class RootLayoutController implements Initializable {
         }
         node.setVisible(true);
     }
+
     @FXML
     public void addReference() throws IOException {
         referenceTable.getSelectionModel().selectedItemProperty().removeListener(updateViewListener);

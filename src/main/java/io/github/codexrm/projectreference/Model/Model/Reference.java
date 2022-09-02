@@ -118,4 +118,9 @@ public class Reference {
         Reference reference = (Reference) o;
         return getAuthor().equals(reference.getAuthor()) && getTitle().equals(reference.getTitle()) && getDate().equals(reference.getDate()) && getNote().equals(reference.getNote());
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getAuthor(), getTitle(), getDate(), getNote());
+    }
 }

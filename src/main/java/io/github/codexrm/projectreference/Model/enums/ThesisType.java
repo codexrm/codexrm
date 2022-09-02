@@ -1,8 +1,10 @@
-package io.github.codexrm.projectreference.model.Enum;
+package io.github.codexrm.projectreference.model.enums;
 
 public enum ThesisType {
-    Masters("Masters"),
-    phd("phd");
+
+    MASTERS("Masters"),
+    PHD("phd");
+
     private final String description;
 
     ThesisType(String description) {

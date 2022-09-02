@@ -1,7 +1,7 @@
 package io.github.codexrm.projectreference.model.model;
 
 import io.github.codexrm.jris.*;
-import io.github.codexrm.projectreference.model.Enum.ThesisType;
+import io.github.codexrm.projectreference.model.enums.ThesisType;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -125,10 +125,10 @@ public class ImportRis implements Import {
         thesis.setAddress(entry.getAddress());
         thesis.setSchool(entry.getSchool());
         if (entry.getThesisType().equals("Masters")) {
-            thesis.setType(ThesisType.Masters);
+            thesis.setType(ThesisType.MASTERS);
         } else {
             if (entry.getThesisType().equals("Phd")) {
-                thesis.setType(ThesisType.phd);
+                thesis.setType(ThesisType.PHD);
             }
         }
         return thesis;

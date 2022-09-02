@@ -4,7 +4,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import io.github.codexrm.projectreference.model.Enum.ThesisType;
+import io.github.codexrm.projectreference.model.enums.ThesisType;
 import io.github.codexrm.projectreference.viewmodel.ReferenceLibraryManagerVM;
 import io.github.codexrm.projectreference.viewmodel.ReferenceType;
 import io.github.codexrm.projectreference.viewmodel.ReferenceVM;

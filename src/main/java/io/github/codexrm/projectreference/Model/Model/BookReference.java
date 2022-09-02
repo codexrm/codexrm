@@ -1,7 +1,6 @@
 package io.github.codexrm.projectreference.model.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class BookReference extends Reference {
@@ -77,5 +76,10 @@ public class BookReference extends Reference {
         if (!super.equals(o)) return false;
         BookReference that = (BookReference) o;
         return getPublisher().equals(that.getPublisher()) && getVolume().equals(that.getVolume()) && getSeries().equals(that.getSeries()) && getAddress().equals(that.getAddress()) && getEdition().equals(that.getEdition());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getPublisher(), getVolume(), getSeries(), getAddress(), getEdition());
     }
 }
