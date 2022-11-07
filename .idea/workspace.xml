@@ -5,34 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94da447b-1750-4e71-bb76-a8caf0b49cce" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/enums/Format.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/enums/ThesisType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Controller/ReferenceLibraryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Controller/ReferenceLibraryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Enum/Format.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Enum/ThesisType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ArticleReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ArticleReference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/BookLetReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/BookLetReference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/BookReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/BookReference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/BookSectionReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/BookSectionReference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ConferenceProceedingsReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ConferenceProceedingsReference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/Export.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/Export.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ExportBibTex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ExportBibTex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ExportFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ExportFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ExportRis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ExportRis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ImportBibTex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ImportBibTex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ImportFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ImportFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ImportRis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ImportRis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/Reference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/Reference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ThesisReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ThesisReference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookLetReferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookLetReferenceDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/BookLetReferenceVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/BookLetReferenceVM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ReferenceLibraryManagerVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ReferenceLibraryManagerVM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ThesisReferenceVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/ThesisReferenceVM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsThesisReferenceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsThesisReferenceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayoutController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testFile/referenceL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testFile/referenceL.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,13 +37,6 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -82,21 +51,23 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/model/utils" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.github.codexrm.projectreference.model.model" />
+      <recent name="io.github.codexrm.projectreference.Model.Controller" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Proyecto\CodexRM\src\main\java\io\github\codexrm\projectreference\model\utils" />
       <recent name="D:\Proyecto\CodexRM\src\main\java\io\github\codexrm\projectreference\model\dto" />
       <recent name="D:\Proyecto\CodexRM\src\main\java\io\github\codexrm\projectreference\Model\Model" />
       <recent name="D:\Proyecto\CodexRM\src\main\java\io\github\codexrm\projectreference\Model\Enum" />
       <recent name="D:\Proyecto\CodexRM\src\main\java\io\github\codexrm\projectreference\Model\" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="io.github.codexrm.projectreference.model.model" />
-      <recent name="io.github.codexrm.projectreference.Model.Controller" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -154,7 +125,10 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="94da447b-1750-4e71-bb76-a8caf0b49cce" name="Changes" comment="" />
@@ -162,8 +136,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642016263949</updated>
+      <workItem from="1665772392271" duration="2767000" />
+      <workItem from="1665959440240" duration="1296000" />
+      <workItem from="1666127389460" duration="1295000" />
+      <workItem from="1666133120788" duration="636000" />
+      <workItem from="1666644671142" duration="624000" />
+      <workItem from="1667518931368" duration="646000" />
+      <workItem from="1667851155095" duration="762000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -175,6 +159,13 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="414" y="231" width="537" height="273" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1665775166549">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="414" y="231" width="537" height="273" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1665775166549" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -198,8 +189,7 @@
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
-        <PinnedItemInfo parentTag="io.github.codexrm.projectreference.Model.Controller.ReferenceLibraryManager" memberName="referenceLibrary" />
-        <PinnedItemInfo parentTag="io.github.codexrm.projectreference.Model.Model.AuthorLibrary" memberName="authorTable" />
+        <PinnedItemInfo />
       </pinned-members>
     </pin-to-top-manager>
   </component>

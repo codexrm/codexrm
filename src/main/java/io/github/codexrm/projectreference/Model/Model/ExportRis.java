@@ -43,7 +43,7 @@ public class ExportRis implements Export {
 
         } else {
             if (reference instanceof BookSectionReference) {
-                entry = createSection((BookSectionReference) reference);
+                entry = createBookSection((BookSectionReference) reference);
 
             } else {
                 if (reference instanceof BookReference) {
@@ -55,7 +55,7 @@ public class ExportRis implements Export {
 
                     } else {
                         if (reference instanceof ConferenceProceedingsReference) {
-                            entry = createConference((ConferenceProceedingsReference) reference);
+                            entry = createConferenceProceedings((ConferenceProceedingsReference) reference);
                         }else{
                             entry = null;
                         }
@@ -106,7 +106,7 @@ public class ExportRis implements Export {
         return book;
     }
 
-    private BookSection createSection(BookSectionReference reference) {
+    private BookSection createBookSection(BookSectionReference reference) {
 
         BookSection section = new BookSection();
         commonField(reference, section);
@@ -142,7 +142,7 @@ public class ExportRis implements Export {
         return thesis;
     }
 
-    private ConferenceProceedings createConference(ConferenceProceedingsReference reference) {
+    private ConferenceProceedings createConferenceProceedings(ConferenceProceedingsReference reference) {
 
         ConferenceProceedings proceedings = new ConferenceProceedings();
         commonField(reference, proceedings);

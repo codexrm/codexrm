@@ -262,7 +262,7 @@ public class ExportBibTex implements Export {
     private void writeConferenceProceedingsReference(ConferenceProceedingsReference reference,
                                                      BufferedWriter bufferedWriter) throws IOException {
 
-        bufferedWriter.write("@inproceedings{" + reference.getId() + ",");
+        bufferedWriter.write("@proceedings{" + reference.getId() + ",");
         commonField(reference, bufferedWriter);
 
         if (reference.getVolume() != null) {
