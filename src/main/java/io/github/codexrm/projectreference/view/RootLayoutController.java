@@ -1,6 +1,7 @@
 package io.github.codexrm.projectreference.view;
 
 import io.github.codexrm.projectreference.model.enums.Format;
+import io.github.codexrm.projectreference.model.model.ConferencePaperReference;
 import io.github.codexrm.projectreference.viewmodel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
@@ -28,8 +29,10 @@ public class RootLayoutController implements Initializable {
     private final ScrollPane articleDetail;
     private final ScrollPane bookSectionDetail;
     private final ScrollPane bookLetDetail;
-    private final ScrollPane conferenceDetail;
+    private final ScrollPane conferenceProceedingsDetail;
     private final ScrollPane thesisDetail;
+    private final ScrollPane conferencePaperDetail;
+    private final ScrollPane webPageDetail;
     private Stage stage;
 
     @FXML
@@ -60,42 +63,54 @@ public class RootLayoutController implements Initializable {
         FXMLLoader bookSectionDetailLoader = new FXMLLoader();
         FXMLLoader bookLetDetailLoader = new FXMLLoader();
         FXMLLoader thesisDetailLoader = new FXMLLoader();
-        FXMLLoader conferenceDetailLoader = new FXMLLoader();
+        FXMLLoader conferenceProceedingsDetailLoader = new FXMLLoader();
+        FXMLLoader conferencePaperDetailLoader = new FXMLLoader();
+        FXMLLoader webPageDetailLoader = new FXMLLoader();
 
         bookDetailLoader.setLocation(getClass().getResource("DetailsBookReference.fxml"));
         articleDetailLoader.setLocation(getClass().getResource("DetailsArticleReference.fxml"));
         bookSectionDetailLoader.setLocation(getClass().getResource("DetailsBookSectionReference.fxml"));
         bookLetDetailLoader.setLocation(getClass().getResource("DetailsBookLetReference.fxml"));
-         thesisDetailLoader.setLocation(getClass().getResource("DetailsThesisReference.fxml"));
-        conferenceDetailLoader.setLocation(getClass().getResource("DetailsConferenceReference.fxml"));
+        thesisDetailLoader.setLocation(getClass().getResource("DetailsThesisReference.fxml"));
+        conferenceProceedingsDetailLoader.setLocation(getClass().getResource("DetailsConferenceProceedingsReference.fxml"));
+        conferencePaperDetailLoader.setLocation(getClass().getResource("DetailsConferencePaperReference.fxml"));
+        webPageDetailLoader.setLocation(getClass().getResource("DetailsWebPageReference.fxml"));
 
         DetailsBookReferenceController bookDetailViewController = new DetailsBookReferenceController();
         DetailsArticleReferenceController articleDetailViewController = new DetailsArticleReferenceController();
         DetailsBookSectionReferenceController bookSectionDetailViewController = new DetailsBookSectionReferenceController();
         DetailsBookLetReferenceController bookLetDetailViewController = new DetailsBookLetReferenceController();
         DetailsThesisReferenceController thesisDetailViewController = new DetailsThesisReferenceController();
-        DetailsConferenceProceedingsReferenceController conferenceDetailViewController = new DetailsConferenceProceedingsReferenceController();
+        DetailsConferenceProceedingsReferenceController conferenceProceedingsDetailViewController = new DetailsConferenceProceedingsReferenceController();
+        DetailsConferencePaperReferenceController conferencePaperDetailViewController = new DetailsConferencePaperReferenceController();
+        DetailsWebPageReferenceController webPageDetailViewController = new DetailsWebPageReferenceController();
 
         bookDetailViewController.setDataModel(managerVM);
         articleDetailViewController.setDataModel(managerVM);
         bookSectionDetailViewController.setDataModel(managerVM);
         bookLetDetailViewController.setDataModel(managerVM);
         thesisDetailViewController.setDataModel(managerVM);
-        conferenceDetailViewController.setDataModel(managerVM);
+        conferenceProceedingsDetailViewController.setDataModel(managerVM);
+        conferencePaperDetailViewController.setDataModel(managerVM);
+        webPageDetailViewController.setDataModel(managerVM);
 
         bookDetailLoader.setController(bookDetailViewController);
         articleDetailLoader.setController(articleDetailViewController);
         bookLetDetailLoader.setController(bookLetDetailViewController);
         bookSectionDetailLoader.setController(bookSectionDetailViewController);
         thesisDetailLoader.setController(thesisDetailViewController);
-        conferenceDetailLoader.setController(conferenceDetailViewController);
+        conferenceProceedingsDetailLoader.setController(conferenceProceedingsDetailViewController);
+        conferencePaperDetailLoader.setController(conferencePaperDetailViewController);
+        webPageDetailLoader.setController(webPageDetailViewController);
 
         bookDetail = bookDetailLoader.load();
         articleDetail = articleDetailLoader.load();
         bookSectionDetail = bookSectionDetailLoader.load();
         bookLetDetail = bookLetDetailLoader.load();
         thesisDetail = thesisDetailLoader.load();
-        conferenceDetail = conferenceDetailLoader.load();
+        conferenceProceedingsDetail = conferenceProceedingsDetailLoader.load();
+        conferencePaperDetail = conferencePaperDetailLoader.load();
+        webPageDetail = webPageDetailLoader.load();
     }
 
     public void setStage(Stage stage) {
@@ -138,11 +153,15 @@ public class RootLayoutController implements Initializable {
                 } else if (newValue.getClass() == BookLetReferenceVM.class) {
                     showReferenceDetails(bookLetDetail);
                 } else if (newValue.getClass() == ConferenceProceedingsReferenceVM.class) {
-                    showReferenceDetails(conferenceDetail);
+                    showReferenceDetails(conferenceProceedingsDetail);
                 } else if (newValue.getClass() == ThesisReferenceVM.class) {
                     showReferenceDetails(thesisDetail);
                 }    else if(newValue.getClass() ==  BookReferenceVM.class){
                     showReferenceDetails(bookDetail);
+                } else if(newValue.getClass() ==  ConferencePaperReferenceVM.class){
+                    showReferenceDetails(conferencePaperDetail);
+                } else if(newValue.getClass() ==  WebPageReferenceVM.class){
+                    showReferenceDetails(webPageDetail);
                 }
             }
         };
@@ -222,9 +241,11 @@ public class RootLayoutController implements Initializable {
         loadReferencePane(bookDetail);
         loadReferencePane(articleDetail);
         loadReferencePane(bookLetDetail);
-        loadReferencePane(conferenceDetail);
+        loadReferencePane(conferenceProceedingsDetail);
         loadReferencePane(thesisDetail);
         loadReferencePane(bookSectionDetail);
+        loadReferencePane(conferencePaperDetail);
+        loadReferencePane(webPageDetail);
     }
 
     private void loadReferencePane(Node node) {

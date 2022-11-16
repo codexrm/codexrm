@@ -44,8 +44,12 @@ public class ImportBibTex implements Import {
                                     || entry.getType().toString().equalsIgnoreCase("phdthesis")) {
                                 reference = createThesisReference(entry);
                             } else {
-                                if (entry.getType().toString().equalsIgnoreCase("inproceedings")) {
+                                if (entry.getType().toString().equalsIgnoreCase("proceedings")) {
                                     reference = createConferenceProceedingsReference(entry);
+                                }else{
+                                    if (entry.getType().toString().equalsIgnoreCase("conference")) {
+                                        reference = createConferencePaperReference(entry);
+                                    }
                                 }
                             }
                         }
@@ -118,9 +122,9 @@ public class ImportBibTex implements Import {
         }
     }
 
-    private boolean isNumero(final String numero) {
+    private boolean isNumber(final String number) {
         try {
-            Long.valueOf(numero);
+            Long.valueOf(number);
             return true;
 
         } catch (final NumberFormatException e) {
@@ -135,11 +139,11 @@ public class ImportBibTex implements Import {
         Value value = entry.getField(BibTeXEntry.KEY_AUTHOR);
 
         value = entry.getField(BibTeXEntry.KEY_MONTH);
-        if (value != null && isNumero(value.toUserString())) {
+        if (value != null && isNumber(value.toUserString())) {
             month = getMonth(value.toUserString());
         }
         value = entry.getField(BibTeXEntry.KEY_YEAR);
-        if (value != null && isNumero(value.toUserString())) {
+        if (value != null && isNumber(value.toUserString())) {
             year = value.toUserString();
         }
         if (year != null && month != null) {
@@ -279,5 +283,32 @@ public class ImportBibTex implements Import {
             proceedings.setVolume(value.toUserString());
         }
         return proceedings;
+    }
+
+    private Reference createConferencePaperReference(BibTeXEntry entry) {
+
+        ConferencePaperReference paper = new ConferencePaperReference();
+        commonField(entry, paper);
+
+        Value value = entry.getField(BibTeXEntry.KEY_VOLUME);
+        if (value != null) {
+            paper.setAddress(value.toUserString());
+        }
+
+        value = entry.getField(BibTeXEntry.KEY_PUBLISHER);
+        if (value != null) {
+            paper.setPublisher(value.toUserString());
+        }
+
+        value = entry.getField(BibTeXEntry.KEY_ADDRESS);
+        if (value != null) {
+            paper.setAddress(value.toUserString());
+        }
+
+        value = entry.getField(BibTeXEntry.KEY_PAGES);
+        if (value != null) {
+            paper.setPages(value.toUserString());
+        }
+        return paper;
     }
 }

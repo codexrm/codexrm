@@ -14,6 +14,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @Type(value = BookSectionReference.class, name = "bookSection"),
         @Type(value = ThesisReference.class, name = "thesis"),
         @Type(value = BookLetReference.class, name = "bookLet"),
+        @Type(value = ConferencePaperReference.class, name = "paper"),
+        @Type(value = WebPageReference.class, name = "webPage"),
         @Type(value = ConferenceProceedingsReference.class, name = "proceedings")})
 
 public class Reference {

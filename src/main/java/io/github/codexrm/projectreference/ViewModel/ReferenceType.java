@@ -7,7 +7,9 @@ public enum ReferenceType {
     BOOKSECTION("Book Section"),
     BOOKLET("Book Let"),
     CONFERENCEPROCEEDINGS("Conference Proceedings"),
-    THESIS("Thesis");
+    THESIS("Thesis"),
+    CONFERENCEPAPER("Conference Paper"),
+    WEBPAGE("Web Page");
 
     private final String description;
 

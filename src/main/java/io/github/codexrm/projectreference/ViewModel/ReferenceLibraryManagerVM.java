@@ -1,7 +1,7 @@
 package io.github.codexrm.projectreference.viewmodel;
 
-import io.github.codexrm.projectreference.model.enums.Format;
 import io.github.codexrm.projectreference.model.controller.ReferenceLibraryManager;
+import io.github.codexrm.projectreference.model.enums.Format;
 import io.github.codexrm.projectreference.model.model.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -95,6 +95,10 @@ public class ReferenceLibraryManagerVM {
                 referenceList.add(new ConferenceProceedingsReferenceVM((ConferenceProceedingsReference) valorReference));
             } else if (valorReference.getClass() == ThesisReference.class) {
                 referenceList.add(new ThesisReferenceVM((ThesisReference) valorReference));
+            } else if (valorReference.getClass() == ConferencePaperReference.class) {
+                referenceList.add(new ConferencePaperReferenceVM((ConferencePaperReference) valorReference));
+            } else if (valorReference.getClass() == WebPageReference.class) {
+                referenceList.add(new WebPageReferenceVM((WebPageReference) valorReference));
             }
             }
         }
@@ -213,6 +217,10 @@ public class ReferenceLibraryManagerVM {
                 return new ConferenceProceedingsReferenceVM();
             case THESIS:
                 return new ThesisReferenceVM();
+            case CONFERENCEPAPER:
+                return new ConferencePaperReferenceVM();
+            case WEBPAGE:
+                return new WebPageReferenceVM();
         }
         return new ReferenceVM();
     }

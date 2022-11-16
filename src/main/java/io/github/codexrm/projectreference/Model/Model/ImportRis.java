@@ -24,7 +24,7 @@ public class ImportRis implements Import {
         ArrayList<BaseReference> list = manager.importReferences(reader);
 
         for (BaseReference entry : list) {
-            listReference.add(createReference(entry));
+          listReference.add(createReference(entry));
         }
         return listReference;
     }
@@ -45,8 +45,16 @@ public class ImportRis implements Import {
                     } else {
                         if (entry instanceof ConferenceProceedings) {
                             reference = readConferenceProceedingsReference((ConferenceProceedings) entry);
-                        } else {
-                            reference = null;
+                        }else {
+                            if (entry instanceof ConferencePaper) {
+                                reference = readConferencePaperReference((ConferencePaper) entry);
+                            }else {
+                                if (entry instanceof WebPage) {
+                                    reference = readWebPageReference((WebPage) entry);
+                                } else {
+                                    reference = null;
+                                }
+                            }
                         }
                     }
                 }
@@ -91,7 +99,7 @@ public class ImportRis implements Import {
         book.setAddress(entry.getAddress());
         book.setPublisher(entry.getPublisher());
         book.setVolume(entry.getVolume());
-        book.setSeries(entry.getSerie());
+        book.setSeries(entry.getSeries());
         book.setEdition(entry.getEdition());
 
         return book;
@@ -107,7 +115,7 @@ public class ImportRis implements Import {
         section.setAddress(entry.getAddress());
         section.setPublisher(entry.getPublisher());
         section.setVolume(entry.getVolume());
-        section.setSeries(entry.getSerie());
+        section.setSeries(entry.getSeries());
         section.setEdition(entry.getEdition());
         section.setChapter(entry.getChapter());
         section.setPages(entry.getPages());
@@ -135,16 +143,43 @@ public class ImportRis implements Import {
     }
 
     private Reference readConferenceProceedingsReference(ConferenceProceedings entry) {
-        ConferenceProceedingsReference proceedings = new ConferenceProceedingsReference();
 
+        ConferenceProceedingsReference proceedings = new ConferenceProceedingsReference();
         commonField(entry, proceedings);
         authorField(entry.getAuthorList(), proceedings);
         proceedings.setTitle(entry.getTitle());
         proceedings.setLocalDate(entry.getDate());
         proceedings.setVolume(entry.getVolume());
-        proceedings.setSeries(entry.getSerie());
+        proceedings.setSeries(entry.getSeries());
         proceedings.setAddress(entry.getAddress());
 
         return proceedings;
+    }
+    private Reference readConferencePaperReference(ConferencePaper entry) {
+
+        ConferencePaperReference paper = new ConferencePaperReference();
+        commonField(entry, paper);
+        authorField(entry.getAuthorList(), paper);
+        paper.setTitle(entry.getTitle());
+        paper.setLocalDate(entry.getDate());
+        paper.setVolume(entry.getVolume());
+        paper.setPublisher(entry.getPublisher());
+        paper.setAddress(entry.getAddress());
+        paper.setPages(entry.getPages());
+
+        return paper;
+    }
+
+    private Reference readWebPageReference(WebPage entry) {
+
+        WebPageReference webPage = new WebPageReference();
+        commonField(entry, webPage);
+        authorField(entry.getAuthorList(), webPage);
+        webPage.setTitle(entry.getTitle());
+        webPage.setLocalDate(entry.getDate());
+        webPage.setUrl(entry.getUrl());
+        webPage.setAccessDateLocal(entry.getAccessDate());
+
+        return webPage;
     }
 }

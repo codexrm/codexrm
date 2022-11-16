@@ -1,13 +1,8 @@
 package io.github.codexrm.projectreference.viewmodel;
 
 import io.github.codexrm.projectreference.model.model.ArticleReference;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class ArticleReferenceVM extends ReferenceVM {
 
@@ -41,65 +36,35 @@ public class ArticleReferenceVM extends ReferenceVM {
         this.referenceType = new SimpleObjectProperty<>(ReferenceType.ARTICLE);
     }
 
-    public String getJournal() {
-        return journal.get();
-    }
+    public String getJournal() { return journal.get(); }
 
-    public StringProperty journalProperty() {
-        return journal;
-    }
+    public StringProperty journalProperty() { return journal; }
 
-    public void setJournal(String journal) {
-        this.journal.set(journal);
-    }
+    public void setJournal(String journal) { this.journal.set(journal); }
 
-    public String getVolume() {
-        return volume.get();
-    }
+    public String getVolume() { return volume.get(); }
 
-    public StringProperty volumeProperty() {
-        return volume;
-    }
+    public StringProperty volumeProperty() { return volume; }
 
-    public void setVolume(String volume) {
-        this.volume.set(volume);
-    }
+    public void setVolume(String volume) { this.volume.set(volume); }
 
-    public String getNumber() {
-        return number.get();
-    }
+    public String getNumber() { return number.get(); }
 
-    public StringProperty numberProperty() {
-        return number;
-    }
+    public StringProperty numberProperty() { return number; }
 
-    public void setNumber(String number) {
-        this.number.set(number);
-    }
+    public void setNumber(String number) { this.number.set(number); }
 
-    public String getPages() {
-        return pages.get();
-    }
+    public String getPages() { return pages.get(); }
 
-    public StringProperty pagesProperty() {
-        return pages;
-    }
+    public StringProperty pagesProperty() { return pages; }
 
-    public void setPages(String pages) {
-        this.pages.set(pages);
-    }
+    public void setPages(String pages) { this.pages.set(pages); }
 
-    public ReferenceType getReferenceType() {
-        return referenceType.get();
-    }
+    public ReferenceType getReferenceType() { return referenceType.get(); }
 
-    public void setReferenceType(final ReferenceType referenceType) {
-        this.referenceType.set(referenceType);
-    }
+    public void setReferenceType(final ReferenceType referenceType) { this.referenceType.set(referenceType); }
 
-    public ObjectProperty<ReferenceType> referenceTypeProperty() {
-        return referenceType;
-    }
+    public ObjectProperty<ReferenceType> referenceTypeProperty() { return referenceType; }
 
     @Override
     public ArticleReference toModel() {

@@ -1,11 +1,11 @@
 package io.github.codexrm.projectreference.model.model;
 
+import io.github.codexrm.jris.*;
+import io.github.codexrm.projectreference.model.enums.ThesisType;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import io.github.codexrm.jris.*;
-import io.github.codexrm.projectreference.model.enums.ThesisType;
 
 public class ExportRis implements Export {
 
@@ -27,7 +27,7 @@ public class ExportRis implements Export {
 
         RisManager manager = new RisManager();
         for (Reference reference : referenceList) {
-            BaseReference entry = identifyType(reference);
+          BaseReference entry = identifyType(reference);
             if (entry != null) {
                 manager.addReference(entry);
             }
@@ -36,10 +36,10 @@ public class ExportRis implements Export {
     }
 
     private BaseReference identifyType(Reference reference) {
-        BaseReference entry;
+        BaseReference entry = null;
 
         if (reference instanceof ArticleReference) {
-            entry = createJour((ArticleReference) reference);
+            entry = createJournal((ArticleReference) reference);
 
         } else {
             if (reference instanceof BookSectionReference) {
@@ -56,13 +56,25 @@ public class ExportRis implements Export {
                     } else {
                         if (reference instanceof ConferenceProceedingsReference) {
                             entry = createConferenceProceedings((ConferenceProceedingsReference) reference);
-                        }else{
-                            entry = null;
+
+                        } else {
+                            if (reference instanceof ConferencePaperReference) {
+                                entry = createConferencePaper((ConferencePaperReference) reference);
+
+                            } else {
+                                if (reference instanceof WebPageReference) {
+                                    entry = createWebPage((WebPageReference) reference);
+
+                                } else {
+                                    entry = null;
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+
         return entry;
     }
 
@@ -75,19 +87,19 @@ public class ExportRis implements Export {
         entry.setNotes(reference.getNote());
     }
 
-    private JournalArticle createJour(ArticleReference reference) {
-        JournalArticle jour = new JournalArticle();
+    private JournalArticle createJournal(ArticleReference reference) {
 
-        commonField(reference, jour);
-        addAuthors(reference.getAuthor(), jour.getAuthorList());
-        jour.setTitle(reference.getTitle());
-        jour.setDate(reference.getLocalDate());
-        jour.setJournal(reference.getJournal());
-        jour.setVolume(reference.getVolume());
-        jour.setNumber(reference.getNumber());
-        jour.setPages(reference.getPages());
+        JournalArticle journalArticle = new JournalArticle();
+        commonField(reference, journalArticle);
+        addAuthors(reference.getAuthor(), journalArticle.getAuthorList());
+        journalArticle.setTitle(reference.getTitle());
+        journalArticle.setDate(reference.getLocalDate());
+        journalArticle.setJournal(reference.getJournal());
+        journalArticle.setVolume(reference.getVolume());
+        journalArticle.setNumber(reference.getNumber());
+        journalArticle.setPages(reference.getPages());
 
-        return jour;
+        return journalArticle;
     }
 
     private Book createBook(BookReference reference) {
@@ -99,7 +111,7 @@ public class ExportRis implements Export {
         book.setDate(reference.getLocalDate());
         book.setPublisher(reference.getPublisher());
         book.setVolume(reference.getVolume());
-        book.setSerie(reference.getSeries());
+        book.setSeries(reference.getSeries());
         book.setAddress(reference.getAddress());
         book.setEdition(reference.getEdition());
 
@@ -115,7 +127,7 @@ public class ExportRis implements Export {
         section.setDate(reference.getLocalDate());
         section.setPublisher(reference.getPublisher());
         section.setVolume(reference.getVolume());
-        section.setSerie(reference.getSeries());
+        section.setSeries(reference.getSeries());
         section.setAddress(reference.getAddress());
         section.setEdition(reference.getEdition());
         section.setChapter(reference.getChapter());
@@ -150,8 +162,34 @@ public class ExportRis implements Export {
         proceedings.setTitle(reference.getTitle());
         proceedings.setDate(reference.getLocalDate());
         proceedings.setVolume(reference.getVolume());
-        proceedings.setSerie(reference.getSeries());
+        proceedings.setSeries(reference.getSeries());
         proceedings.setAddress(reference.getAddress());
         return proceedings;
+    }
+
+   private ConferencePaper createConferencePaper(ConferencePaperReference reference) {
+
+        ConferencePaper paper = new ConferencePaper();
+        commonField(reference, paper);
+        addAuthors(reference.getAuthor(), paper.getAuthorList());
+        paper.setTitle(reference.getTitle());
+        paper.setDate(reference.getLocalDate());
+        paper.setVolume(reference.getVolume());
+        paper.setPublisher(reference.getPublisher());
+        paper.setAddress(reference.getAddress());
+        paper.setPages(reference.getPages());
+        return paper;
+    }
+
+    private WebPage createWebPage(WebPageReference reference) {
+
+        WebPage webPage = new WebPage();
+        commonField(reference, webPage);
+        addAuthors(reference.getAuthor(), webPage.getAuthorList());
+        webPage.setTitle(reference.getTitle());
+        webPage.setDate(reference.getLocalDate());
+        webPage.setUrl(reference.getUrl());
+        webPage.setAccessDate(reference.getAccessDateLocal());
+        return webPage;
     }
 }

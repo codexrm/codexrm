@@ -8,8 +8,8 @@ import java.util.*;
 
 public class ExportBibTex implements Export {
 
-    private  String vl = "  volume = {";
-    private  String ad = "  address = {";
+    private final String vl = "  volume = {";
+    private final String ad = "  address = {";
 
     public ExportBibTex() {
         // Do nothing
@@ -52,8 +52,19 @@ public class ExportBibTex implements Export {
                             writeBookLetReference((BookLetReference) reference, bufferedWriter);
 
                         } else {
-                            writeConferenceProceedingsReference((ConferenceProceedingsReference) reference,
-                                    bufferedWriter);
+                            if (reference instanceof ConferenceProceedingsReference) {
+                                writeConferenceProceedingsReference((ConferenceProceedingsReference) reference,
+                                        bufferedWriter);
+                            } else {
+                                if (reference instanceof ConferencePaperReference) {
+                                    writeConferencePaperReference((ConferencePaperReference) reference,
+                                            bufferedWriter);
+                                } else {
+                                    if (reference instanceof WebPageReference) {
+                                        writeWebPageReference((WebPageReference) reference, bufferedWriter);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -80,11 +91,12 @@ public class ExportBibTex implements Export {
             bufferedWriter.newLine();
         }
     }
+
     private String modifyFormatDate(Month month) {
 
         switch (month) {
             case JANUARY:
-              return "jan";
+                return "jan";
             case FEBRUARY:
                 return "feb";
             case MARCH:
@@ -275,6 +287,42 @@ public class ExportBibTex implements Export {
         }
         if (reference.getAddress() != null) {
             bufferedWriter.write(ad + reference.getAddress() + "}");
+        }
+        closeReference(bufferedWriter);
+    }
+
+    private void writeConferencePaperReference(ConferencePaperReference reference,
+                                               BufferedWriter bufferedWriter) throws IOException {
+
+        bufferedWriter.write("@conference{" + reference.getId() + ",");
+        commonField(reference, bufferedWriter);
+
+        if (reference.getVolume() != null) {
+            bufferedWriter.write(vl + reference.getVolume() + "},");
+            bufferedWriter.newLine();
+        }
+        if (reference.getPublisher() != null) {
+            bufferedWriter.write("  publisher = {" + reference.getPublisher() + "},");
+            bufferedWriter.newLine();
+        }
+        if (reference.getAddress() != null) {
+            bufferedWriter.write(ad + reference.getAddress() + "},");
+            bufferedWriter.newLine();
+        }
+        if (reference.getPages() != null) {
+            bufferedWriter.write("  pages = {" + reference.getPages() + "}");
+        }
+        closeReference(bufferedWriter);
+    }
+
+    private void writeWebPageReference(WebPageReference reference,
+                                       BufferedWriter bufferedWriter) throws IOException {
+
+        bufferedWriter.write("@misc{" + reference.getId() + ",");
+        commonField(reference, bufferedWriter);
+
+        if (reference.getUrl() != null) {
+            bufferedWriter.write("  url = {" + reference.getUrl() + "}");
         }
         closeReference(bufferedWriter);
     }
