@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference.viewmodel;
 
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.model.model.ConferencePaperReference;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -31,6 +32,7 @@ public class ConferencePaperReferenceVM extends ReferenceVM {
     }
 
     private void createEmptyConferencePaperReferenceVM() {
+
         this.volume = new SimpleStringProperty();
         this.publisher = new SimpleStringProperty();
         this.address = new SimpleStringProperty();
@@ -72,6 +74,7 @@ public class ConferencePaperReferenceVM extends ReferenceVM {
     public ConferencePaperReference toModel() {
 
         ConferencePaperReference conferencePaperReference = new ConferencePaperReference();
+
         conferencePaperReference.setAuthor(this.getAuthor());
         conferencePaperReference.setTitle(this.getTitle());
         conferencePaperReference.setLocalDate(this.getDate());

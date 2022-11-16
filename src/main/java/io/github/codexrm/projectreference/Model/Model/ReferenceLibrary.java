@@ -39,6 +39,7 @@ public class ReferenceLibrary {
     }
 
     public void addListReference(ArrayList<Reference> list) {
+
         for (Reference reference : list) {
             int id = maxValueKeys() + 1;
             reference.setId(id);
@@ -47,7 +48,9 @@ public class ReferenceLibrary {
             referenceTable.put(reference.getId(), reference);
         }
     }
+
     public void addListReferenceSync(ArrayList<Reference> list) {
+
         referenceTable.clear();
         for (Reference reference : list) {
             referenceTable.put(reference.getId(), reference);
@@ -55,6 +58,7 @@ public class ReferenceLibrary {
     }
 
     private Integer maxValueKeys() {
+
         Enumeration<Integer> e = referenceTable.keys();
         ArrayList<Integer> listKeys = new ArrayList<>();
         while (e.hasMoreElements()) {

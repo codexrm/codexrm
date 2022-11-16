@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference.viewmodel;
 
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.model.enums.ThesisType;
 import io.github.codexrm.projectreference.model.model.ThesisReference;
 import javafx.beans.property.*;
@@ -27,6 +28,7 @@ public class ThesisReferenceVM extends ReferenceVM {
     }
 
     private void createEmptyThesisReferenceVM() {
+
         this.school = new SimpleStringProperty();
         this.type = new SimpleObjectProperty<>();
         this.address = new SimpleStringProperty();
@@ -83,6 +85,7 @@ public class ThesisReferenceVM extends ReferenceVM {
 
     @Override
     public ThesisReference toModel() {
+
         ThesisReference thesisReference = new ThesisReference();
 
         thesisReference.setAuthor(this.getAuthor());

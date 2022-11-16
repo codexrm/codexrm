@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference.view;
 
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.viewmodel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
@@ -43,6 +44,7 @@ public class DetailsConferencePaperReferenceController implements Initializable 
     private ReferenceLibraryManagerVM managerVM;
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
+
         if (oldReference != null) {
             if ((oldReference.getClass() == ConferencePaperReferenceVM.class)) {
                 author.textProperty().unbindBidirectional(oldReference.authorProperty());
@@ -131,15 +133,16 @@ public class DetailsConferencePaperReferenceController implements Initializable 
     }
 
     public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
+
         if (this.managerVM != null) {
             this.managerVM.currentReferenceProperty().removeListener(referenceVMListener);
         }
-
         this.managerVM = dataViewModel;
         this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
     }
 
     private void loadReferenceType() {
+
         referenceType.getItems().addAll(ReferenceType.values());
 
         ChangeListener<ReferenceType> referenceTypeListener = (options, oldReferenceType, newReferenceType) -> {
@@ -147,7 +150,6 @@ public class DetailsConferencePaperReferenceController implements Initializable 
                 managerVM.replaceCurrentReferenceType(newReferenceType);
             }
         };
-
         referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
     }
 }

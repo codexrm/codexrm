@@ -1,7 +1,6 @@
 package io.github.codexrm.projectreference.view;
 
 import io.github.codexrm.projectreference.model.enums.Format;
-import io.github.codexrm.projectreference.model.model.ConferencePaperReference;
 import io.github.codexrm.projectreference.viewmodel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
@@ -119,6 +118,7 @@ public class RootLayoutController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         authorColumn.setCellValueFactory(cellData -> cellData.getValue().authorProperty());
         titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
 
@@ -139,6 +139,7 @@ public class RootLayoutController implements Initializable {
     }
 
     private void loadReferenceTable() {
+
         referenceTable.getSelectionModel().setSelectionMode(
                 SelectionMode.MULTIPLE
         );
@@ -182,6 +183,7 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     public void deleteReference() throws IOException {
+
         ObservableList<ReferenceVM> referenceList = referenceTable.getSelectionModel().getSelectedItems();
         if (referenceList != null) {
             referenceTable.getSelectionModel().selectedItemProperty().removeListener(updateViewListener);
@@ -196,16 +198,13 @@ public class RootLayoutController implements Initializable {
         }
     }
     @FXML
-    public void exportRis() throws IOException {
-        exportTo(Format.RIS);
-    }
+    public void exportRis() throws IOException { exportTo(Format.RIS); }
 
     @FXML
-    public void exportBibTex() throws IOException {
-        exportTo(Format.BIBTEX);
-    }
+    public void exportBibTex() throws IOException { exportTo(Format.BIBTEX); }
 
     private void exportTo(Format format) throws IOException {
+
         ObservableList<ReferenceVM> referenceList = referenceTable.getSelectionModel().getSelectedItems();
         if (referenceList != null) {
             FileChooser fileChooser = new FileChooser();
@@ -217,16 +216,13 @@ public class RootLayoutController implements Initializable {
     }
 
     @FXML
-    public void importRis() throws IOException, ParseException {
-        importTo(Format.RIS);
-    }
+    public void importRis() throws IOException, ParseException { importTo(Format.RIS); }
 
     @FXML
-    public void importBibTex() throws IOException, ParseException {
-        importTo(Format.BIBTEX);
-    }
+    public void importBibTex() throws IOException, ParseException { importTo(Format.BIBTEX); }
 
     private void importTo(Format format) throws IOException, ParseException {
+
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Import");
            List<File> selectedFile = fileChooser.showOpenMultipleDialog(stage);
@@ -234,10 +230,10 @@ public class RootLayoutController implements Initializable {
                managerVM.importReferences(selectedFile, format);
                referenceTable.refresh();
            }
-
     }
 
     private void loadReferenceDetail() {
+
         loadReferencePane(bookDetail);
         loadReferencePane(articleDetail);
         loadReferencePane(bookLetDetail);
@@ -249,8 +245,8 @@ public class RootLayoutController implements Initializable {
     }
 
     private void loadReferencePane(Node node) {
-        node.setVisible(false);
 
+        node.setVisible(false);
         AnchorPane.setTopAnchor(node, 0.0);
         AnchorPane.setLeftAnchor(node, 0.0);
         AnchorPane.setRightAnchor(node, 0.0);
@@ -260,6 +256,7 @@ public class RootLayoutController implements Initializable {
     }
 
     private void showReferenceDetails(Node node) {
+
         for (Node currentNode : referenceDetail.getChildren()) {
             currentNode.setVisible(false);
         }
@@ -268,6 +265,7 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     public void addReference() throws IOException {
+
         referenceTable.getSelectionModel().selectedItemProperty().removeListener(updateViewListener);
 
         managerVM.addEmptyBookReference();
@@ -281,6 +279,7 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     private void save() {
+
         try {
             managerVM.saveDataToModel();
         } catch (IOException e) {
@@ -290,6 +289,7 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     private void sync() {
+
         try {
             managerVM.syncDB();
         } catch (IOException e) {

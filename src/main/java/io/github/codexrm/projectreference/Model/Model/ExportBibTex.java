@@ -29,6 +29,7 @@ public class ExportBibTex implements Export {
     }
 
     private void identifyType(Reference reference, String path) throws IOException {
+
         FileWriter writer = new FileWriter(path, true);
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
 
@@ -122,7 +123,6 @@ public class ExportBibTex implements Export {
         }
     }
 
-
     private void commonField(Reference reference, BufferedWriter bufferedWriter) throws IOException {
 
         bufferedWriter.newLine();
@@ -179,8 +179,7 @@ public class ExportBibTex implements Export {
         closeReference(bufferedWriter);
     }
 
-    private void writeBooks(BookReference reference, BufferedWriter bufferedWriter)
-            throws IOException {
+    private void writeBooks(BookReference reference, BufferedWriter bufferedWriter) throws IOException {
 
         commonField(reference, bufferedWriter);
 
@@ -205,8 +204,7 @@ public class ExportBibTex implements Export {
         }
     }
 
-    private void writeBookReference(BookReference reference, BufferedWriter bufferedWriter)
-            throws IOException {
+    private void writeBookReference(BookReference reference, BufferedWriter bufferedWriter) throws IOException {
 
         bufferedWriter.write("@book{" + reference.getId() + ",");
         writeBooks(reference, bufferedWriter);
@@ -231,8 +229,7 @@ public class ExportBibTex implements Export {
         closeReference(bufferedWriter);
     }
 
-    private void writeBookLetReference(BookLetReference reference, BufferedWriter bufferedWriter)
-            throws IOException {
+    private void writeBookLetReference(BookLetReference reference, BufferedWriter bufferedWriter) throws IOException {
 
         bufferedWriter.write("@booklet{" + reference.getId() + ",");
         commonField(reference, bufferedWriter);
@@ -247,8 +244,7 @@ public class ExportBibTex implements Export {
         closeReference(bufferedWriter);
     }
 
-    private void writeThesisReference(ThesisReference reference, BufferedWriter bufferedWriter)
-            throws IOException {
+    private void writeThesisReference(ThesisReference reference, BufferedWriter bufferedWriter) throws IOException {
 
         if (reference.getType().equals(ThesisType.MASTERS)) {
             bufferedWriter.write("@mastersthesis{" + reference.getId() + ",");

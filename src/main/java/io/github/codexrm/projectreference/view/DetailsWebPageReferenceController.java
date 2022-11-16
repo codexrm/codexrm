@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference.view;
 
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.viewmodel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
@@ -37,6 +38,7 @@ public class DetailsWebPageReferenceController implements Initializable {
     private ReferenceLibraryManagerVM managerVM;
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
+
         if (oldReference != null) {
             if ((oldReference.getClass() == WebPageReferenceVM.class)) {
                 author.textProperty().unbindBidirectional(oldReference.authorProperty());
@@ -111,6 +113,7 @@ public class DetailsWebPageReferenceController implements Initializable {
     }
 
     public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
+
         if (this.managerVM != null) {
             this.managerVM.currentReferenceProperty().removeListener(referenceVMListener);
         }
@@ -120,6 +123,7 @@ public class DetailsWebPageReferenceController implements Initializable {
     }
 
     private void loadReferenceType() {
+
         referenceType.getItems().addAll(ReferenceType.values());
 
         ChangeListener<ReferenceType> referenceTypeListener = (options, oldReferenceType, newReferenceType) -> {
@@ -127,7 +131,6 @@ public class DetailsWebPageReferenceController implements Initializable {
                 managerVM.replaceCurrentReferenceType(newReferenceType);
             }
         };
-
         referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
     }
 }

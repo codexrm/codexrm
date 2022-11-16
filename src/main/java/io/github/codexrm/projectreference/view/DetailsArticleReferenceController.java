@@ -4,6 +4,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.viewmodel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
@@ -44,6 +45,7 @@ public class DetailsArticleReferenceController implements Initializable {
     private ReferenceLibraryManagerVM managerVM;
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
+
         if (oldReference != null) {
             if ((oldReference.getClass() == ArticleReferenceVM.class)) {
                 author.textProperty().unbindBidirectional(oldReference.authorProperty());
@@ -130,9 +132,7 @@ public class DetailsArticleReferenceController implements Initializable {
 
     public void setPages(String pages) {this.pages.setText(pages);}
 
-    public void setReferenceType(ReferenceType referenceType) {
-        this.referenceType.getSelectionModel().select(referenceType);
-    }
+    public void setReferenceType(ReferenceType referenceType) { this.referenceType.getSelectionModel().select(referenceType); }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -140,15 +140,16 @@ public class DetailsArticleReferenceController implements Initializable {
     }
 
     public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
+
         if (this.managerVM != null) {
             this.managerVM.currentReferenceProperty().removeListener(referenceVMListener);
         }
-
         this.managerVM = dataViewModel;
         this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
     }
 
     private void loadReferenceType() {
+
         referenceType.getItems().addAll(ReferenceType.values());
 
         ChangeListener<ReferenceType> referenceTypeListener = (options, oldReferenceType, newReferenceType) -> {
@@ -156,8 +157,7 @@ public class DetailsArticleReferenceController implements Initializable {
                 managerVM.replaceCurrentReferenceType(newReferenceType);
             }
         };
-
         referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
     }
-    }
+}
 

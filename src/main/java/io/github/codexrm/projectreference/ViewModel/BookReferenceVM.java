@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference.viewmodel;
 
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.model.model.BookReference;
 import javafx.beans.property.*;
 
@@ -21,6 +22,7 @@ public class BookReferenceVM extends ReferenceVM {
 
     public BookReferenceVM(int id, String author, String title, LocalDate date, String note, boolean isFromServer, boolean isActive, boolean isModified, String publisher, String volume, String series, String address, String edition) {
         super(id, author, title, date, note, isFromServer, isActive, isModified);
+
         createEmptyBookReferenceVM();
 
         setPublisher(publisher);
@@ -43,6 +45,7 @@ public class BookReferenceVM extends ReferenceVM {
     }
 
     private void createEmptyBookReferenceVM() {
+
         this.publisher = new SimpleStringProperty();
         this.volume = new SimpleStringProperty();
         this.series = new SimpleStringProperty();
@@ -123,6 +126,7 @@ public class BookReferenceVM extends ReferenceVM {
 
     @Override
     public BookReference toModel() {
+
         BookReference bookReference = new BookReference();
 
         bookReference.setAuthor(this.getAuthor());

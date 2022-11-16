@@ -13,6 +13,7 @@ public class JsonUtils {
 
     // covert JSON into List of Object
     public static  <T> List<T> convertFromJsonToList(String json, TypeReference<List<T>> elem){
+
         if(json.equals("")){
             return Collections.emptyList();
         }
@@ -27,6 +28,7 @@ public class JsonUtils {
 
     //Generic Type Safe Method - convert JSON into Object
     public static <T> T convertFromJsonToObject(String json, Class<T> elem){
+
           if(json.equals("")){
               return null;
           }
@@ -41,6 +43,7 @@ public class JsonUtils {
 
     //convert Object into JSON
     public static String convertFromObjectToJson(Object obj){
+
         ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.writeValueAsString(obj);

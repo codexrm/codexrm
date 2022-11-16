@@ -30,6 +30,7 @@ public class ImportRis implements Import {
     }
 
     private Reference createReference(BaseReference entry) {
+
         Reference reference;
         if (entry instanceof JournalArticle) {
             reference = readArticleReference((JournalArticle) entry);
@@ -68,6 +69,7 @@ public class ImportRis implements Import {
     }
 
     private void authorField(ArrayList<String> authorList, Reference reference) {
+
         reference.setAuthor(authorList.get(0));
         for (int i = 1; i < authorList.size(); i++) {
             reference.setAuthor(reference.getAuthor() +";" + authorList.get(i));
@@ -75,6 +77,7 @@ public class ImportRis implements Import {
     }
 
     private Reference readArticleReference(JournalArticle entry) {
+
         ArticleReference article = new ArticleReference();
 
         commonField(entry, article);
@@ -90,6 +93,7 @@ public class ImportRis implements Import {
     }
 
     private Reference readBookReference(Book entry) {
+
         BookReference book = new BookReference();
 
         commonField(entry, book);
@@ -106,6 +110,7 @@ public class ImportRis implements Import {
     }
 
     private Reference readBookSectionReference(BookSection entry) {
+
         BookSectionReference section = new BookSectionReference();
 
         commonField(entry, section);
@@ -124,6 +129,7 @@ public class ImportRis implements Import {
     }
 
     private Reference readThesisReference(Thesis entry) {
+
         ThesisReference thesis = new ThesisReference();
 
         commonField(entry, thesis);

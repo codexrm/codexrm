@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference.viewmodel;
 
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.model.model.ConferenceProceedingsReference;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -29,6 +30,7 @@ public class ConferenceProceedingsReferenceVM extends ReferenceVM {
     }
 
     private void createEmptyConferenceProceedingsReferenceVM() {
+
         this.volume = new SimpleStringProperty();
         this.series = new SimpleStringProperty();
         this.address = new SimpleStringProperty();
@@ -85,6 +87,7 @@ public class ConferenceProceedingsReferenceVM extends ReferenceVM {
 
     @Override
     public ConferenceProceedingsReference toModel() {
+
         ConferenceProceedingsReference conferenceProceedingsReference = new ConferenceProceedingsReference();
 
         conferenceProceedingsReference.setAuthor(this.getAuthor());

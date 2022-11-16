@@ -7,6 +7,5 @@ public interface Export {
 
     void writeValue(Reference reference, String path) throws IOException;
 
-    void writeValue(ArrayList<Reference> referenceList, String path)
-            throws IOException;
+    void writeValue(ArrayList<Reference> referenceList, String path) throws IOException;
 }

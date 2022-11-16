@@ -36,6 +36,7 @@ public class ExportRis implements Export {
     }
 
     private BaseReference identifyType(Reference reference) {
+
         BaseReference entry = null;
 
         if (reference instanceof ArticleReference) {
@@ -74,11 +75,11 @@ public class ExportRis implements Export {
                 }
             }
         }
-
         return entry;
     }
 
     private void addAuthors(String author, ArrayList<String> listAuthorReference) {
+
         String[] authors = author.split(";");
         Collections.addAll(listAuthorReference, authors);
     }
@@ -150,7 +151,6 @@ public class ExportRis implements Export {
         } else {
             thesis.setThesisType("phd");
         }
-
         return thesis;
     }
 
@@ -164,6 +164,7 @@ public class ExportRis implements Export {
         proceedings.setVolume(reference.getVolume());
         proceedings.setSeries(reference.getSeries());
         proceedings.setAddress(reference.getAddress());
+
         return proceedings;
     }
 
@@ -178,6 +179,7 @@ public class ExportRis implements Export {
         paper.setPublisher(reference.getPublisher());
         paper.setAddress(reference.getAddress());
         paper.setPages(reference.getPages());
+
         return paper;
     }
 
@@ -190,6 +192,7 @@ public class ExportRis implements Export {
         webPage.setDate(reference.getLocalDate());
         webPage.setUrl(reference.getUrl());
         webPage.setAccessDate(reference.getAccessDateLocal());
+
         return webPage;
     }
 }

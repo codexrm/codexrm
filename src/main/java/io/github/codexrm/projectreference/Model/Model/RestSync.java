@@ -18,8 +18,8 @@ public class RestSync {
     private static final HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
     private static final String URL = "http://localhost:8080/Sync/";
 
-
     public List<ReferenceDTO> syncReferences(ReferenceLibraryDTO libraryDTO) {
+
         String  inputJson = JsonUtils.convertFromObjectToJson(libraryDTO);
 
         HttpRequest req = HttpRequest.newBuilder(URI.create(URL + "syncTable"))

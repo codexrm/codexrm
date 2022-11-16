@@ -29,6 +29,7 @@ public class WebPageReference extends Reference {
     public void setAccessDateLocal(LocalDate accessDate) { this.accessDate = accessDate; }
 
     public String getAccessDate() {
+
         if (accessDate == null){
             return "0000-00-00";
         } else{
@@ -37,6 +38,7 @@ public class WebPageReference extends Reference {
     }
 
     public void setAccessDate(String date) {
+
         if (date.equals("0000-00-00")) {
             this.accessDate = null;
         }else{

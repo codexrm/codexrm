@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.model.enums.ThesisType;
 import io.github.codexrm.projectreference.viewmodel.ReferenceLibraryManagerVM;
-import io.github.codexrm.projectreference.viewmodel.ReferenceType;
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.viewmodel.ReferenceVM;
 import io.github.codexrm.projectreference.viewmodel.ThesisReferenceVM;
 import javafx.beans.value.ChangeListener;
@@ -45,6 +45,7 @@ public class DetailsThesisReferenceController implements Initializable {
     private ReferenceLibraryManagerVM managerVM;
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
+
         if (oldReference != null) {
             if ((oldReference.getClass() == ThesisReferenceVM.class)) {
                 author.textProperty().unbindBidirectional(oldReference.authorProperty());
@@ -80,7 +81,6 @@ public class DetailsThesisReferenceController implements Initializable {
             address.clear();
         }
     };
-
 
     public String getAuthor() {
         return author.getText();
@@ -128,17 +128,17 @@ public class DetailsThesisReferenceController implements Initializable {
 
     public void setAddress(String address) {this.address.setText(address);}
 
-    public void setReferenceType(ReferenceType referenceType) {
-        this.referenceType.getSelectionModel().select(referenceType);
-    }
+    public void setReferenceType(ReferenceType referenceType) { this.referenceType.getSelectionModel().select(referenceType); }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         loadReferenceType();
         loadThesisType();
     }
 
     public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
+
         if (this.managerVM != null) {
             this.managerVM.currentReferenceProperty().removeListener(referenceVMListener);
         }
@@ -152,6 +152,7 @@ public class DetailsThesisReferenceController implements Initializable {
     }
 
     private void loadReferenceType() {
+
         referenceType.getItems().addAll(ReferenceType.values());
 
         ChangeListener<ReferenceType> referenceTypeListener = (options, oldReferenceType, newReferenceType) -> {
@@ -159,7 +160,6 @@ public class DetailsThesisReferenceController implements Initializable {
                 managerVM.replaceCurrentReferenceType(newReferenceType);
             }
         };
-
         referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
     }
 }

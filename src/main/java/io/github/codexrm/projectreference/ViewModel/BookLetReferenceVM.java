@@ -1,6 +1,6 @@
 package io.github.codexrm.projectreference.viewmodel;
 
-
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.model.model.BookLetReference;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -74,7 +74,9 @@ public class BookLetReferenceVM extends ReferenceVM {
 
     @Override
     public BookLetReference toModel() {
+
         BookLetReference bookLetReference = new BookLetReference();
+
         bookLetReference.setAuthor(this.getAuthor());
         bookLetReference.setTitle(this.getTitle());
         bookLetReference.setLocalDate(this.getDate());
@@ -88,21 +90,5 @@ public class BookLetReferenceVM extends ReferenceVM {
         bookLetReference.setAddress(this.getAddress());
 
         return bookLetReference;
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BookLetReferenceVM)) return false;
-        if (!super.equals(o)) return false;
-        final BookLetReferenceVM that = (BookLetReferenceVM) o;
-        return getReferenceType().equals(that.getReferenceType()) &&
-                Objects.equals(getHowpublished(), that.getHowpublished()) &&
-                Objects.equals(getAddress(), that.getAddress());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getReferenceType(), getHowpublished(), getAddress());
     }
 }

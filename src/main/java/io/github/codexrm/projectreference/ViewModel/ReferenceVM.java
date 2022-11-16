@@ -98,7 +98,5 @@ public class ReferenceVM {
 
     public Reference toModel() {
         return new Reference(this.getAuthor(), this.getTitle(), this.getDate(), this.getNote(),this.getId(),this.isIsFromServer(),this.isIsModified(),this.isIsActive());
-
     }
-
 }

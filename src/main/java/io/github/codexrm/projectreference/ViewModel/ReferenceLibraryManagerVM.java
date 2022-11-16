@@ -2,6 +2,7 @@ package io.github.codexrm.projectreference.viewmodel;
 
 import io.github.codexrm.projectreference.model.controller.ReferenceLibraryManager;
 import io.github.codexrm.projectreference.model.enums.Format;
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.model.model.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -68,11 +69,13 @@ public class ReferenceLibraryManagerVM {
     }
 
     public void loadDataFromModel() throws IOException {
+
         manager.loadReferenceTable();
         syncViewModel();
     }
 
     private void syncViewModel() {
+
         referenceList.clear();
 
         Enumeration<Integer> e = manager.getReferenceTable().keys();
@@ -103,6 +106,7 @@ public class ReferenceLibraryManagerVM {
             }
         }
     }
+
     public void addEmptyBookReference() {
 
         int id = 0;
@@ -110,7 +114,6 @@ public class ReferenceLibraryManagerVM {
         if (maxReferenceId.isPresent()) {
             id = maxReferenceId.get().getId() + 1;
         }
-
         BookReferenceVM reference = new BookReferenceVM();
         reference.setId(id);
         reference.setTitle("No Title");
@@ -129,7 +132,6 @@ public class ReferenceLibraryManagerVM {
                 reference.setIsActive(false);
                 referenceDeleteList.add(reference);
             }
-
             referenceIdList.add(reference.getId());
         }
 
@@ -138,20 +140,26 @@ public class ReferenceLibraryManagerVM {
             this.referenceList.removeIf(reference -> reference.getId() == id);
         }
     }
+
     public void exportReferenceList(File file, List<ReferenceVM> referenceVMList, Format format) throws IOException {
-        ArrayList<Reference> list = new ArrayList<>();
+
+       ArrayList<Reference> list = new ArrayList<>();
         for (ReferenceVM referenceVM : referenceVMList) {
             list.add(referenceVM.toModel());
         }
         manager.exportReferenceList(file, list,format);
     }
+
     public void importReferences(List<File> fileList, Format format) throws IOException, ParseException {
+
         for (File file: fileList) {
             manager.importReferences(file.getPath(), format);
         }
         syncViewModel();
     }
+
     public void syncDB() throws IOException {
+
         saveDataToModel();
         manager.syncReferenceTable();
         syncViewModel();

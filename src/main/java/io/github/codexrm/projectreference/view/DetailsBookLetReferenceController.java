@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.viewmodel.BookLetReferenceVM;
 import io.github.codexrm.projectreference.viewmodel.ReferenceLibraryManagerVM;
-import io.github.codexrm.projectreference.viewmodel.ReferenceType;
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.viewmodel.ReferenceVM;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
@@ -40,6 +40,7 @@ public class DetailsBookLetReferenceController implements Initializable {
     private ReferenceLibraryManagerVM managerVM;
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
+
         if (oldReference != null) {
             if ((oldReference.getClass() == BookLetReferenceVM.class)) {
                 author.textProperty().unbindBidirectional(oldReference.authorProperty());
@@ -110,9 +111,7 @@ public class DetailsBookLetReferenceController implements Initializable {
 
     public void setAddress(String address) {this.address.setText(address);}
 
-    public void setReferenceType(ReferenceType referenceType) {
-        this.referenceType.getSelectionModel().select(referenceType);
-    }
+    public void setReferenceType(ReferenceType referenceType) { this.referenceType.getSelectionModel().select(referenceType); }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -120,15 +119,16 @@ public class DetailsBookLetReferenceController implements Initializable {
     }
 
     public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
+
         if (this.managerVM != null) {
             this.managerVM.currentReferenceProperty().removeListener(referenceVMListener);
         }
-
         this.managerVM = dataViewModel;
         this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
     }
 
     private void loadReferenceType() {
+
         referenceType.getItems().addAll(ReferenceType.values());
 
         ChangeListener<ReferenceType> referenceTypeListener = (options, oldReferenceType, newReferenceType) -> {
@@ -136,7 +136,6 @@ public class DetailsBookLetReferenceController implements Initializable {
                 managerVM.replaceCurrentReferenceType(newReferenceType);
             }
         };
-
         referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
     }
-    }
+}

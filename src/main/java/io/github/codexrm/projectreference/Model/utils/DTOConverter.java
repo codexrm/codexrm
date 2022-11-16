@@ -78,10 +78,10 @@ public class DTOConverter {
         }else{
             return modelMapper.map(referenceDTO,WebPageReference.class);
         }
-
     }
 
     public List<ReferenceDTO> toReferenceDTOList(List<Reference> referenceList,User user) {
+
         List<ReferenceDTO> referenceDTOList = new ArrayList<>();
         referenceList.forEach(reference ->
                 referenceDTOList.add(toReferenceDTO(reference, user))
@@ -90,6 +90,7 @@ public class DTOConverter {
     }
 
     public List<Reference> toReferenceList(List<ReferenceDTO> referenceDTOList) {
+
         List<Reference> referenceList = new ArrayList<>();
         for (ReferenceDTO referenceDTO: referenceDTOList){
             Reference ref = toReference(referenceDTO);
@@ -101,11 +102,7 @@ public class DTOConverter {
         return referenceList;
     }
 
-    private UserDTO toUserDTO(User user) {
-        return modelMapper.map(user, UserDTO.class);
-    }
+    private UserDTO toUserDTO(User user) { return modelMapper.map(user, UserDTO.class); }
 
-    public User toUser(UserDTO userDTO) {
-        return modelMapper.map(userDTO, User.class);
-    }
+    public User toUser(UserDTO userDTO) { return modelMapper.map(userDTO, User.class); }
 }

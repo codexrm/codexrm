@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference.viewmodel;
 
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.model.model.BookSectionReference;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -27,6 +28,7 @@ public class BookSectionReferenceVM extends BookReferenceVM {
     }
 
     private void createEmptyBookSectionReferenceVM() {
+
         this.chapter = new SimpleStringProperty();
         this.pages = new SimpleStringProperty();
         this.referenceType = new SimpleObjectProperty<>(ReferenceType.BOOKSECTION);
@@ -70,6 +72,7 @@ public class BookSectionReferenceVM extends BookReferenceVM {
 
     @Override
     public BookSectionReference toModel() {
+
         BookSectionReference bookSectionReference = new BookSectionReference();
 
         bookSectionReference.setAuthor(this.getAuthor());
@@ -87,13 +90,9 @@ public class BookSectionReferenceVM extends BookReferenceVM {
         bookSectionReference.setAddress(this.getAddress());
         bookSectionReference.setEdition(this.getEdition());
 
-        bookSectionReference.setPublisher(this.getPublisher());
-        bookSectionReference.setVolume(this.getVolume());
-        bookSectionReference.setSeries(this.getSeries());
-        bookSectionReference.setAddress(this.getAddress());
-        bookSectionReference.setEdition(this.getEdition());
         bookSectionReference.setChapter(this.getChapter());
         bookSectionReference.setPages(this.getPages());
+
         return bookSectionReference;
     }
 }

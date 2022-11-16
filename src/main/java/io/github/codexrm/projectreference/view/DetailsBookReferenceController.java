@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.viewmodel.BookReferenceVM;
 import io.github.codexrm.projectreference.viewmodel.ReferenceLibraryManagerVM;
-import io.github.codexrm.projectreference.viewmodel.ReferenceType;
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.viewmodel.ReferenceVM;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
@@ -51,6 +51,7 @@ public class DetailsBookReferenceController implements Initializable {
     private ReferenceLibraryManagerVM maganerVM;
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
+
         if (oldReference != null) {
             if ((oldReference.getClass() == BookReferenceVM.class)) {
                 author.textProperty().unbindBidirectional(oldReference.authorProperty());
@@ -169,15 +170,16 @@ public class DetailsBookReferenceController implements Initializable {
     }
 
     public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
+
         if (this.maganerVM != null) {
             this.maganerVM.currentReferenceProperty().removeListener(referenceVMListener);
         }
-
         this.maganerVM = dataViewModel;
         this.maganerVM.currentReferenceProperty().addListener(referenceVMListener);
     }
 
     private void loadReferenceType() {
+
         referenceType.getItems().addAll(ReferenceType.values());
 
         ChangeListener<ReferenceType> referenceTypeListener = (options, oldReferenceType, newReferenceType) -> {
@@ -185,7 +187,6 @@ public class DetailsBookReferenceController implements Initializable {
                 maganerVM.replaceCurrentReferenceType(newReferenceType);
             }
         };
-
         referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
     }
 }

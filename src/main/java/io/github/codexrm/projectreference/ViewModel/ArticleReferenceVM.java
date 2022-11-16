@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference.viewmodel;
 
+import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.model.model.ArticleReference;
 import javafx.beans.property.*;
 
@@ -83,7 +84,6 @@ public class ArticleReferenceVM extends ReferenceVM {
         articleReference.setNumber(this.getNumber());
         articleReference.setVolume(this.getVolume());
         articleReference.setPages(this.getPages());
-
 
         return articleReference;
     }
