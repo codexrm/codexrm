@@ -43,7 +43,7 @@ public class DTOConverter {
             referenceDTO =  modelMapper.map(reference,WebPageReferenceDTO.class);
         }
 
-        referenceDTO.setUserId( toUserDTO(user));
+        referenceDTO.setUser(user);
         return referenceDTO;
     }
 

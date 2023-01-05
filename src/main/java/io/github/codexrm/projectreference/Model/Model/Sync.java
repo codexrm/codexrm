@@ -51,6 +51,6 @@ public class Sync {
                 }
             }
         }
-        libraryDTO.setUserId(user.getId());
+        libraryDTO.setUsername(user.getUsername());
     }
 }

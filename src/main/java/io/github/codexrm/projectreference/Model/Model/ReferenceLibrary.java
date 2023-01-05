@@ -9,7 +9,7 @@ public class ReferenceLibrary {
 
     public ReferenceLibrary() {
         referenceTable = new Hashtable<>();
-        user = new User("marynes","123");
+        user = new User("mary","mary");
     }
 
     public User getUser() {return user;}

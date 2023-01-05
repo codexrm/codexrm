@@ -1,30 +1,33 @@
 package io.github.codexrm.projectreference.model.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
-    private Integer id;
-    private String userCodex;
+    private String username;
     private String password;
+    private List<Reference> referenceList;
 
-    public User() {}
+    public User() { }
 
-    public User(String userCodex, String password) {
-        this.userCodex = userCodex;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
-        id = 1;
+        this.referenceList = new ArrayList<>();
     }
 
-    public Integer getId() {return id;}
+    public String getUsername() { return username; }
 
-    public void setId(Integer id) {this.id = id;}
+    public void setUsername(String username) { this.username = username; }
 
-    public String getUserCodex() {return userCodex;}
+    public String getPassword() { return password; }
 
-    public void setUserCodex(String userCodex) {this.userCodex = userCodex;}
+    public void setPassword(String password) { this.password = password; }
 
-    public String getPassword() {return password;}
+    public List<Reference> getReferenceList() { return referenceList; }
 
-    public void setPassword(String password) {this.password = password;}
+    public void setReferenceList(List<Reference> referenceList) { this.referenceList = referenceList; }
 }
 
 

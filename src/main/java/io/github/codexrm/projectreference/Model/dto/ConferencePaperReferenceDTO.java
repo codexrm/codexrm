@@ -1,31 +1,41 @@
 package io.github.codexrm.projectreference.model.dto;
 
+import io.github.codexrm.projectreference.model.model.User;
+
 import java.time.LocalDate;
 
 public class ConferencePaperReferenceDTO extends ReferenceDTO{
 
-    private String volume;
     private String publisher;
+    private String volume;
     private String address;
     private String pages;
 
-    public ConferencePaperReferenceDTO() { }
+    public ConferencePaperReferenceDTO() {}
 
-    public ConferencePaperReferenceDTO(String author, String title, LocalDate date, String note, Integer id, UserDTO userId, String volume, String publisher, String address, String pages) {
-        super(author, title, date, note, id, userId);
-        this.volume = volume;
+    public ConferencePaperReferenceDTO(String author, String title, LocalDate date, String note, Integer id, User user, String publisher, String volume, String address, String pages) {
+        super(author, title, date, note, id, user);
         this.publisher = publisher;
+        this.volume = volume;
         this.address = address;
         this.pages = pages;
     }
 
-    public String getVolume() { return volume; }
-
-    public void setVolume(String volume) { this.volume = volume; }
+    public ConferencePaperReferenceDTO(String author, String title, LocalDate date, String note, User user, String publisher, String volume, String address, String pages) {
+        super(author, title, date, note, user);
+        this.publisher = publisher;
+        this.volume = volume;
+        this.address = address;
+        this.pages = pages;
+    }
 
     public String getPublisher() { return publisher; }
 
     public void setPublisher(String publisher) { this.publisher = publisher; }
+
+    public String getVolume() { return volume; }
+
+    public void setVolume(String volume) { this.volume = volume; }
 
     public String getAddress() { return address; }
 

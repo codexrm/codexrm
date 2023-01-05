@@ -1,5 +1,7 @@
 package io.github.codexrm.projectreference.model.dto;
 
+import io.github.codexrm.projectreference.model.model.User;
+
 import java.time.LocalDate;
 
 public class BookSectionReferenceDTO extends  BookReferenceDTO{
@@ -9,8 +11,14 @@ public class BookSectionReferenceDTO extends  BookReferenceDTO{
 
     public BookSectionReferenceDTO() {}
 
-    public BookSectionReferenceDTO(String author, String title, LocalDate date, String note, Integer id, UserDTO userId, String publisher, String volume, String series, String address, String edition, String chapter, String pages) {
-        super(author, title, date, note, id, userId, publisher, volume, series, address, edition);
+    public BookSectionReferenceDTO(String author, String title, LocalDate date, String note, Integer id, User user, String publisher, String volume, String series, String address, String edition, String chapter, String pages) {
+        super(author, title, date, note, id, user, publisher, volume, series, address, edition);
+        this.chapter = chapter;
+        this.pages = pages;
+    }
+
+    public BookSectionReferenceDTO(String author, String title, LocalDate date, String note, User user, String publisher, String volume, String series, String address, String edition, String chapter, String pages) {
+        super(author, title, date, note, user, publisher, volume, series, address, edition);
         this.chapter = chapter;
         this.pages = pages;
     }

@@ -1,5 +1,7 @@
 package io.github.codexrm.projectreference.model.dto;
 
+import io.github.codexrm.projectreference.model.model.User;
+
 import java.time.LocalDate;
 
 public class ConferenceProceedingsReferenceDTO extends ReferenceDTO{
@@ -10,8 +12,15 @@ public class ConferenceProceedingsReferenceDTO extends ReferenceDTO{
 
     public ConferenceProceedingsReferenceDTO() {}
 
-    public ConferenceProceedingsReferenceDTO(String author, String title, LocalDate date, String note, Integer id, UserDTO userId, String volume, String series, String address) {
-        super(author, title, date, note, id, userId);
+    public ConferenceProceedingsReferenceDTO(String author, String title, LocalDate date, String note, Integer id, User user, String volume, String series, String address) {
+        super(author, title, date, note, id, user);
+        this.volume = volume;
+        this.series = series;
+        this.address = address;
+    }
+
+    public ConferenceProceedingsReferenceDTO(String author, String title, LocalDate date, String note, User user, String volume, String series, String address) {
+        super(author, title, date, note, user);
         this.volume = volume;
         this.series = series;
         this.address = address;

@@ -3,6 +3,7 @@ package io.github.codexrm.projectreference.model.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import io.github.codexrm.projectreference.model.model.User;
 
 import java.time.LocalDate;
 
@@ -22,19 +23,25 @@ public class ReferenceDTO {
     protected LocalDate date;
     protected String note;
     protected Integer id;
-    protected UserDTO userId;
+    protected User user;
 
-    public ReferenceDTO() {
-        userId = null;
-    }
+    public ReferenceDTO() {}
 
-    public ReferenceDTO(String author, String title, LocalDate date, String note, Integer id, UserDTO userId) {
+    public ReferenceDTO(String author, String title, LocalDate date, String note, Integer id, User user) {
         this.author = author;
         this.title = title;
         this.date = date;
         this.note = note;
         this.id = id;
-        this.userId = userId;
+        this.user = user;
+    }
+
+    public ReferenceDTO(String author, String title, LocalDate date, String note, User user) {
+        this.author = author;
+        this.title = title;
+        this.date = date;
+        this.note = note;
+        this.user = user;
     }
 
     public String getAuthor() {
@@ -58,7 +65,7 @@ public class ReferenceDTO {
         return date;
     }
 
-    @JsonIgnore
+
     public void setLocalDate(LocalDate date) {
         this.date = date;
     }
@@ -96,7 +103,7 @@ public class ReferenceDTO {
         this.id = id;
     }
 
-    public UserDTO getUserId() {return userId;}
+    public User getUser() {return user;}
 
-    public void setUserId(UserDTO userId) {this.userId = userId;}
+    public void setUser(User user) {this.user = user;}
 }
