@@ -79,7 +79,7 @@ public class ReferenceDTO {
     }
 
     public void setDate(String date) {
-        if (date.equals("0000-00-00")) {
+        if (date == null || date.equals("0000-00-00")) {
             this.date = null;
         }else{
             String[] partDate = date.split("-", 3);

@@ -43,7 +43,7 @@ public class WebPageReferenceDTO extends ReferenceDTO {
     }
 
     public void setAccessDate(String date) {
-        if (date.equals("0000-00-00")) {
+        if (date == null || date.equals("0000-00-00")) {
             this.accessDate = null;
         }else{
             String[] partDate = date.split("-", 3);

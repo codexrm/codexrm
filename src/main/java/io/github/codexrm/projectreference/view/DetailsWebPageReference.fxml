@@ -29,20 +29,20 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label prefHeight="34.0" prefWidth="170.0" text="Author:" GridPane.rowIndex="1" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Title:" GridPane.rowIndex="2" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Date:" GridPane.rowIndex="3" />
+                        <Label prefHeight="34.0" prefWidth="170.0" text="Autor:" GridPane.rowIndex="1" />
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Título:" GridPane.rowIndex="2" />
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Fecha:" GridPane.rowIndex="3" />
                         <Label prefHeight="66.0" prefWidth="118.0" text="URL:" GridPane.rowIndex="6" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Access Date:" GridPane.rowIndex="5" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Note:" GridPane.rowIndex="4" />
+                        <Label prefHeight="118.0" prefWidth="204.0" text="F. de Acceso:" GridPane.rowIndex="5" />
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Nota:" GridPane.rowIndex="4" />
                         <TextField fx:id="author" prefHeight="52.0" prefWidth="231.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="title" prefHeight="45.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="url" prefHeight="41.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <TextField fx:id="note" prefHeight="39.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <ComboBox fx:id="referenceType" prefHeight="63.0" prefWidth="237.0" GridPane.columnIndex="1" />
-                        <Label prefHeight="50.0" prefWidth="107.0" text="Type:" />
+                        <Label prefHeight="50.0" prefWidth="107.0" text="Tipo:" />
                   <DatePicker fx:id="date" prefHeight="59.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <DatePicker fx:id="accessDate" prefHeight="47.0" prefWidth="241.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <DatePicker fx:id="accessDate" prefHeight="41.0" prefWidth="223.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                     </children>
                 </GridPane>
             </children>

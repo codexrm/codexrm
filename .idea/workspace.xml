@@ -24,23 +24,18 @@
   <component name="ChangeListManager">
     <list default="true" id="94da447b-1750-4e71-bb76-a8caf0b49cce" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ReferenceLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ReferenceLibrary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/RestSync.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/RestSync.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/Sync.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/Sync.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ArticleReferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ArticleReferenceDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookLetReferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookLetReferenceDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookReferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookReferenceDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookSectionReferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/BookSectionReferenceDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ConferencePaperReferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ConferencePaperReferenceDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ConferenceProceedingsReferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ConferenceProceedingsReferenceDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ReferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ReferenceDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ReferenceLibraryDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ReferenceLibraryDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ThesisReferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/ThesisReferenceDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/UserDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/WebPageReferenceDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/dto/WebPageReferenceDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/utils/DTOConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/utils/DTOConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/utils/jsonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/utils/jsonUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/enums/ReferenceType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/enums/ReferenceType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsArticleReference.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsArticleReference.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsBookLetReference.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsBookLetReference.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsBookReference.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsBookReference.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsBookSectionReference.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsBookSectionReference.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsConferencePaperReference.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsConferencePaperReference.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsConferenceProceedingsReference.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsConferenceProceedingsReference.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsThesisReference.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsThesisReference.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsWebPageReference.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/DetailsWebPageReference.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayout.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testFile/referenceL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testFile/referenceL.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -191,6 +186,10 @@
       <workItem from="1672798642815" duration="94000" />
       <workItem from="1672884237114" duration="4465000" />
       <workItem from="1672889785863" duration="23000" />
+      <workItem from="1673292332424" duration="5668000" />
+      <workItem from="1673320491108" duration="407000" />
+      <workItem from="1674367902852" duration="3262000" />
+      <workItem from="1674407981985" duration="692000" />
     </task>
     <servers />
   </component>
@@ -210,10 +209,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="380" y="0" width="619" height="728" key="#AppLauncher" timestamp="1672889718464">
+    <state x="380" y="0" width="619" height="728" key="#AppLauncher" timestamp="1674373683099">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="380" y="0" width="619" height="728" key="#AppLauncher/0.0.1366.728@0.0.1366.728" timestamp="1672889718464" />
+    <state x="380" y="0" width="619" height="728" key="#AppLauncher/0.0.1366.728@0.0.1366.728" timestamp="1674373683099" />
     <state x="488" y="78" key="#com.intellij.ide.util.MemberChooser" timestamp="1672889661946">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -238,22 +237,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="117" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1668382212175" />
-    <state width="1322" height="171" key="GridCell.Tab.0.bottom" timestamp="1672889750049">
+    <state width="1322" height="147" key="GridCell.Tab.0.bottom" timestamp="1674382062956">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="171" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1672889750049" />
-    <state width="1322" height="171" key="GridCell.Tab.0.center" timestamp="1672889750048">
+    <state width="1322" height="147" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1674382062956" />
+    <state width="1322" height="147" key="GridCell.Tab.0.center" timestamp="1674382062956">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="171" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1672889750048" />
-    <state width="1322" height="171" key="GridCell.Tab.0.left" timestamp="1672889750048">
+    <state width="1322" height="147" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1674382062956" />
+    <state width="1322" height="147" key="GridCell.Tab.0.left" timestamp="1674382062956">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="171" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1672889750048" />
-    <state width="1322" height="171" key="GridCell.Tab.0.right" timestamp="1672889750048">
+    <state width="1322" height="147" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1674382062956" />
+    <state width="1322" height="147" key="GridCell.Tab.0.right" timestamp="1674382062956">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1322" height="171" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1672889750048" />
+    <state width="1322" height="147" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1674382062956" />
     <state width="1322" height="171" key="GridCell.Tab.1.bottom" timestamp="1672889750049">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

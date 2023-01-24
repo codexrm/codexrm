@@ -46,56 +46,42 @@
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="Fichero">
                     <items>
-                  <MenuItem mnemonicParsing="false" onAction="#addReference" text="Add" />
+                  <MenuItem mnemonicParsing="false" onAction="#addReference" text="Adicionar" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                        <Menu mnemonicParsing="false" text="Import">
+                        <Menu mnemonicParsing="false" text="Importar">
                             <items>
-                                <MenuItem mnemonicParsing="false" onAction="#importBibTex" text="BibTex" />
+                                <MenuItem mnemonicParsing="false" onAction="#importBibTex" text="BibTeX" />
                                 <MenuItem mnemonicParsing="false" onAction="#importRis" text="Ris" />
                             </items>
                         </Menu>
-                  <Menu mnemonicParsing="false" text="Export">
+                  <Menu mnemonicParsing="false" text="Exportar">
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#exportBibTex" text="Bib Tex" />
+                      <MenuItem mnemonicParsing="false" onAction="#exportBibTex" text="Bib TeX" />
                         <MenuItem mnemonicParsing="false" onAction="#exportRis" text="Ris" />
                     </items>
                   </Menu>
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
-                        <MenuItem mnemonicParsing="false" onAction="#sync" text="Synchronize Library" />
-                        <MenuItem mnemonicParsing="false" text="Quit" />
+                        <MenuItem mnemonicParsing="false" onAction="#save" text="Salvar" />
+                        <MenuItem mnemonicParsing="false" onAction="#sync" text="Sincronizar Librería" />
+                        <MenuItem mnemonicParsing="false" text="Salir" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu mnemonicParsing="false" text="Ayuda">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Undo" />
-                        <MenuItem mnemonicParsing="false" text="Redo" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Cut" />
-                        <MenuItem mnemonicParsing="false" text="Copy" />
-                        <MenuItem mnemonicParsing="false" text="Paste" />
-                        <MenuItem mnemonicParsing="false" onAction="#deleteReference" text="Delete" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Select All" />
-                        <MenuItem mnemonicParsing="false" text="Unselect All" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="About Codex" />
+                        <MenuItem mnemonicParsing="false" text="Sobre Codex RM" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
         <ToolBar prefHeight="40.0" prefWidth="200.0">
             <items>
-            <Button mnemonicParsing="false" onAction="#addReference" text="Add" />
-            <Button mnemonicParsing="false" onAction="#deleteReference" text="Delete" />
-            <Button mnemonicParsing="false" onAction="#save" text="Save" />
-                <Button mnemonicParsing="false" onAction="#sync" text="Sync" />
-                <Button mnemonicParsing="false" text="Help" />
+            <Button mnemonicParsing="false" onAction="#addReference" text="Adicionar" />
+            <Button mnemonicParsing="false" onAction="#deleteReference" text="Eliminar" />
+            <Button mnemonicParsing="false" onAction="#save" text="Salvar" />
+                <Button mnemonicParsing="false" onAction="#sync" text="Sincronizar" />
+                <Button mnemonicParsing="false" text="Ayuda" />
             </items>
         </ToolBar>
         <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
@@ -107,12 +93,12 @@
                             <children>
                                 <TableView fx:id="referenceTable" layoutX="109.0" layoutY="147.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="430.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <columns>
-                                        <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Author">
+                                        <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Autor">
                                             <cellValueFactory>
                                                 <PropertyValueFactory property="author" />
                                             </cellValueFactory>
                                         </TableColumn>
-                                        <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Title">
+                                        <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Título">
                                             <cellValueFactory>
                                                 <PropertyValueFactory property="title" />
                                             </cellValueFactory>

@@ -31,13 +31,13 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label prefHeight="34.0" prefWidth="170.0" text="Author:" GridPane.rowIndex="1" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Title:" GridPane.rowIndex="2" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Date:" GridPane.rowIndex="3" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Publisher:" GridPane.rowIndex="6" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Volume:" GridPane.rowIndex="5" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Note:" GridPane.rowIndex="4" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Address:" GridPane.rowIndex="7" />
+                        <Label prefHeight="34.0" prefWidth="170.0" text="Autor:" GridPane.rowIndex="1" />
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Título:" GridPane.rowIndex="2" />
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Fecha:" GridPane.rowIndex="3" />
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Editorial:" GridPane.rowIndex="6" />
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Volumen:" GridPane.rowIndex="5" />
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Nota:" GridPane.rowIndex="4" />
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Dirección:" GridPane.rowIndex="7" />
                         <TextField fx:id="author" prefHeight="52.0" prefWidth="231.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="title" prefHeight="45.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="publisher" prefHeight="41.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
@@ -45,9 +45,9 @@
                         <TextField fx:id="note" prefHeight="39.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <TextField fx:id="address" prefHeight="42.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                         <ComboBox fx:id="referenceType" prefHeight="63.0" prefWidth="237.0" GridPane.columnIndex="1" />
-                        <Label prefHeight="50.0" prefWidth="107.0" text="Type:" />
+                        <Label prefHeight="50.0" prefWidth="107.0" text="Tipo:" />
                   <DatePicker fx:id="date" prefHeight="59.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label prefHeight="54.0" prefWidth="99.0" text="Pages:" GridPane.rowIndex="8" />
+                  <Label prefHeight="54.0" prefWidth="99.0" text="Páginas:" GridPane.rowIndex="8" />
                   <TextField fx:id="pages" prefHeight="42.0" prefWidth="238.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                     </children>
                 </GridPane>

@@ -2,14 +2,14 @@ package io.github.codexrm.projectreference.model.enums;
 
 public enum ReferenceType {
 
-    ARTICLE("Article"),
-    BOOK("Book"),
-    BOOKSECTION("Book Section"),
-    BOOKLET("Book Let"),
-    CONFERENCEPROCEEDINGS("Conference Proceedings"),
-    THESIS("Thesis"),
-    CONFERENCEPAPER("Conference Paper"),
-    WEBPAGE("Web Page");
+    ARTICLE("Referencia de Artículo"),
+    BOOK("Referencia de Libro"),
+    BOOKSECTION("Referencia de Sección de Libro"),
+    BOOKLET("Referencia de Folleto"),
+    CONFERENCEPROCEEDINGS("Referencia de Acta de Congreso"),
+    THESIS("Referencia de Tesis"),
+    CONFERENCEPAPER("Referencia de Doc. de Sesión"),
+    WEBPAGE("Referencia de Página Web");
 
     private final String description;
 
