@@ -1,16 +1,15 @@
 package io.github.codexrm.projectreference.view;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import io.github.codexrm.projectreference.model.enums.Months;
 import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.viewmodel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 public class DetailsArticleReferenceController implements Initializable {
@@ -22,13 +21,10 @@ public class DetailsArticleReferenceController implements Initializable {
     private TextField title;
 
     @FXML
-    private DatePicker date;
-
-    @FXML
-    private TextField note;
-
-    @FXML
     private TextField journal;
+
+    @FXML
+    private TextField year;
 
     @FXML
     private TextField volume;
@@ -40,6 +36,15 @@ public class DetailsArticleReferenceController implements Initializable {
     private TextField pages;
 
     @FXML
+    private ComboBox<Months> month;
+
+    @FXML
+    private TextField issn;
+
+    @FXML
+    private TextField note;
+
+    @FXML
     private ComboBox<ReferenceType> referenceType;
 
     private ReferenceLibraryManagerVM managerVM;
@@ -48,14 +53,18 @@ public class DetailsArticleReferenceController implements Initializable {
 
         if (oldReference != null) {
             if ((oldReference.getClass() == ArticleReferenceVM.class)) {
-                author.textProperty().unbindBidirectional(oldReference.authorProperty());
+
+                year.textProperty().unbindBidirectional(oldReference.yearProperty());
                 title.textProperty().unbindBidirectional(oldReference.titleProperty());
-                date.valueProperty().unbindBidirectional(oldReference.dateProperty());
+                month.valueProperty().unbindBidirectional(oldReference.monthProperty());
                 note.textProperty().unbindBidirectional(oldReference.noteProperty());
+
+                author.textProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).authorProperty());
                 journal.textProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).journalProperty());
                 volume.textProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).volumeProperty());
                 number.textProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).numberProperty());
                 pages.textProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).pagesProperty());
+                issn.textProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).issnProperty());
 
                 referenceType.valueProperty().unbindBidirectional(((ArticleReferenceVM) oldReference).referenceTypeProperty());
             }
@@ -63,80 +72,82 @@ public class DetailsArticleReferenceController implements Initializable {
 
         if (newReference != null) {
             if ((newReference.getClass() == ArticleReferenceVM.class)) {
-                author.textProperty().bindBidirectional(newReference.authorProperty());
+
                 title.textProperty().bindBidirectional(newReference.titleProperty());
-                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                year.textProperty().bindBidirectional(newReference.yearProperty());
+                month.valueProperty().bindBidirectional(newReference.monthProperty());
                 note.textProperty().bindBidirectional(newReference.noteProperty());
+
+                author.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).authorProperty());
                 journal.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).journalProperty());
                 volume.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).volumeProperty());
                 number.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).numberProperty());
                 pages.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).pagesProperty());
+                issn.textProperty().bindBidirectional(((ArticleReferenceVM) newReference).issnProperty());
 
                 referenceType.valueProperty().bindBidirectional(((ArticleReferenceVM) newReference).referenceTypeProperty());
             }
         } else {
-            author.clear();
             title.clear();
-            date.setValue(LocalDate.now());
+            year.clear();
             note.clear();
+            author.clear();
             journal.clear();
             volume.clear();
             number.clear();
             pages.clear();
+            issn.clear();
         }
     };
 
-    public String getAuthor() {return author.getText();}
+    public TextField getAuthor() { return author; }
 
-    public void setAuthor(String author) {this.author.setText(author);}
+    public void setAuthor(TextField author) { this.author = author; }
 
-    public String getTitle() {
-        return title.getText();
-    }
+    public TextField getTitle() { return title; }
 
-    public void setTitle(String title) {this.title.setText(title);}
+    public void setTitle(TextField title) { this.title = title; }
 
-    public LocalDate getDate() {
-        return date.getValue();
-    }
+    public TextField getJournal() { return journal; }
 
-    public void setDate(LocalDate date) {this.date.setValue(date);}
+    public void setJournal(TextField journal) { this.journal = journal; }
 
-    public String getNote() {
-        return note.getText();
-    }
+    public TextField getYear() { return year; }
 
-    public void setNote(String note) {this.note.setText(note);}
+    public void setYear(TextField year) { this.year = year; }
 
-    public String getJournal() {
-        return journal.getText();
-    }
+    public TextField getVolume() { return volume; }
 
-    public void setJournal(String journal) {this.journal.setText(journal);}
+    public void setVolume(TextField volume) { this.volume = volume; }
 
-    public String getVolume() {
-        return volume.getText();
-    }
+    public TextField getNumber() { return number; }
 
-    public void setVolume(String volume) {this.volume.setText(volume);}
+    public void setNumber(TextField number) { this.number = number; }
 
-    public String getNumber() {
-        return number.getText();
-    }
+    public TextField getPages() { return pages; }
 
-    public void setNumber(String number) {this.number.setText(number);}
+    public void setPages(TextField pages) { this.pages = pages; }
 
-    public String getPages() {
-        return pages.getText();
-    }
+    public ComboBox<Months> getMonth() { return month; }
 
-    public void setPages(String pages) {this.pages.setText(pages);}
+    public void setMonth(ComboBox<Months> month) { this.month = month; }
 
-    public void setReferenceType(ReferenceType referenceType) { this.referenceType.getSelectionModel().select(referenceType); }
+    public TextField getIssn() { return issn; }
+
+    public void setIssn(TextField issn) { this.issn = issn; }
+
+    public TextField getNote() { return note; }
+
+    public void setNote(TextField note) { this.note = note; }
+
+    public ComboBox<ReferenceType> getReferenceType() { return referenceType; }
+
+    public void setReferenceType(ComboBox<ReferenceType> referenceType) { this.referenceType = referenceType; }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadReferenceType();
+        loadMonths();
     }
 
     public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
@@ -146,6 +157,10 @@ public class DetailsArticleReferenceController implements Initializable {
         }
         this.managerVM = dataViewModel;
         this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
+    }
+
+    private void loadMonths(){
+        month.getItems().addAll(Months.values());
     }
 
     private void loadReferenceType() {

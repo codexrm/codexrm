@@ -7,11 +7,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.util.Objects;
-
 public class BookLetReferenceVM extends ReferenceVM {
 
     ObjectProperty<ReferenceType> referenceType;
+    private StringProperty author;
     private StringProperty howpublished;
     private StringProperty address;
 
@@ -21,32 +20,28 @@ public class BookLetReferenceVM extends ReferenceVM {
     }
 
     public BookLetReferenceVM(BookLetReference bookLetReference) {
-        super(bookLetReference.getId(), bookLetReference.getAuthor(), bookLetReference.getTitle(), bookLetReference.getLocalDate(), bookLetReference.getNote(), bookLetReference.isFromServer(), bookLetReference.isActive(), bookLetReference.isModified());
+        super(bookLetReference.getId(), bookLetReference.getTitle(), bookLetReference.getYear(), bookLetReference.getMonth(), bookLetReference.getNote(), bookLetReference.isFromServer(), bookLetReference.isActive(), bookLetReference.isModified());
 
         createEmptyBookLetReferenceVM();
 
+        setAuthor(bookLetReference.getAuthor());
         setHowpublished(bookLetReference.getHowpublished());
         setAddress(bookLetReference.getAddress());
     }
 
     private void createEmptyBookLetReferenceVM() {
 
+        this.author = new SimpleStringProperty();
         this.howpublished = new SimpleStringProperty();
         this.address = new SimpleStringProperty();
         this.referenceType = new SimpleObjectProperty<>(ReferenceType.BOOKLET);
     }
 
-    public ReferenceType getReferenceType() {
-        return referenceType.get();
-    }
+    public String getAuthor() { return author.get(); }
 
-    public void setReferenceType(final ReferenceType referenceType) {
-        this.referenceType.set(referenceType);
-    }
+    public StringProperty authorProperty() { return author; }
 
-    public ObjectProperty<ReferenceType> referenceTypeProperty() {
-        return referenceType;
-    }
+    public void setAuthor(String author) { this.author.set(author); }
 
     public String getHowpublished() {
         return howpublished.get();
@@ -72,20 +67,33 @@ public class BookLetReferenceVM extends ReferenceVM {
         this.address.set(address);
     }
 
+    public ReferenceType getReferenceType() {
+        return referenceType.get();
+    }
+
+    public void setReferenceType(final ReferenceType referenceType) {
+        this.referenceType.set(referenceType);
+    }
+
+    public ObjectProperty<ReferenceType> referenceTypeProperty() {
+        return referenceType;
+    }
+
     @Override
     public BookLetReference toModel() {
 
         BookLetReference bookLetReference = new BookLetReference();
 
-        bookLetReference.setAuthor(this.getAuthor());
         bookLetReference.setTitle(this.getTitle());
-        bookLetReference.setLocalDate(this.getDate());
+        bookLetReference.setYear(this.getYear());
+        bookLetReference.setMonth(this.getMonth());
         bookLetReference.setId(this.getId());
         bookLetReference.setNote(this.getNote());
         bookLetReference.setFromServer(this.isIsFromServer());
         bookLetReference.setModified(this.isIsModified());
         bookLetReference.setActive(this.isIsActive());
 
+        bookLetReference.setAuthor(this.getAuthor());
         bookLetReference.setHowpublished(this.getHowpublished());
         bookLetReference.setAddress(this.getAddress());
 

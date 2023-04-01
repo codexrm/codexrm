@@ -1,33 +1,54 @@
 package io.github.codexrm.projectreference.model.model;
 
-import java.time.LocalDate;
+import io.github.codexrm.projectreference.model.enums.Months;
+
 import java.util.Objects;
 
 public class BookReference extends Reference {
 
+    protected String author;
+    protected String editor;
     protected String publisher;
     protected String volume;
+    protected String number;
     protected String series;
     protected String address;
     protected String edition;
+    protected String isbn;
 
     public BookReference() {
         super();
+        this.author = "";
+        this.editor = "";
         this.publisher = "";
         this.volume = "";
+        this.number = "";
         this.series = "";
         this.address = "";
         this.edition = "";
+        this.isbn = "";
     }
 
-    public BookReference(String author, String title, LocalDate date, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String publisher, String volume, String series, String address, String edition) {
-        super(author, title, date, note, id, isFromServer, isModified, isActive);
+    public BookReference(String title, String year, Months month, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String author, String editor, String publisher, String volume, String number, String series, String address, String edition, String isbn) {
+        super(title, year, month, note, id, isFromServer, isModified, isActive);
+        this.author = author;
+        this.editor = editor;
         this.publisher = publisher;
         this.volume = volume;
+        this.number = number;
         this.series = series;
         this.address = address;
         this.edition = edition;
+        this.isbn = isbn;
     }
+
+    public String getAuthor() { return author; }
+
+    public void setAuthor(String author) { this.author = author; }
+
+    public String getEditor() { return editor; }
+
+    public void setEditor(String editor) { this.editor = editor; }
 
     public String getPublisher() {
         return publisher;
@@ -44,6 +65,10 @@ public class BookReference extends Reference {
     public void setVolume(String volume) {
         this.volume = volume;
     }
+
+    public String getNumber() { return number; }
+
+    public void setNumber(String number) { this.number = number; }
 
     public String getSeries() {
         return series;
@@ -69,17 +94,29 @@ public class BookReference extends Reference {
         this.edition = edition;
     }
 
+    public String getIsbn() { return isbn; }
+
+    public void setIsbn(String isbn) { this.isbn = isbn; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof BookReference)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         BookReference that = (BookReference) o;
-        return getPublisher().equals(that.getPublisher()) && getVolume().equals(that.getVolume()) && getSeries().equals(that.getSeries()) && getAddress().equals(that.getAddress()) && getEdition().equals(that.getEdition());
+        return Objects.equals(author, that.author) &&
+                Objects.equals(editor, that.editor) &&
+                Objects.equals(publisher, that.publisher) &&
+                Objects.equals(volume, that.volume) &&
+                Objects.equals(number, that.number) &&
+                Objects.equals(series, that.series) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(edition, that.edition) &&
+                Objects.equals(isbn, that.isbn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getPublisher(), getVolume(), getSeries(), getAddress(), getEdition());
+        return Objects.hash(super.hashCode(), author, editor, publisher, volume, number, series, address, edition, isbn);
     }
 }

@@ -46,9 +46,9 @@ public class ReferenceLibraryManager {
 
     public void syncReferenceTable() throws IOException {
 
-        referenceLibrary.addListReferenceSync((ArrayList<Reference>) sync.syncReferences
+        /*referenceLibrary.addListReferenceSync((ArrayList<Reference>) sync.syncReferences
                 (referenceLibrary.getReferenceTable(), referenceLibrary.getUser()));
-        saveReferenceTable();
+        saveReferenceTable();*/
     }
 
     public void loadReferenceTable() throws IOException {
@@ -83,9 +83,9 @@ public class ReferenceLibraryManager {
 
         if (referenceLibrary.getReference(newReference.getId()) != null) {
             Reference removedReference = referenceLibrary.getReferenceTable().remove(newReference.getId());
-            newReference.setAuthor(removedReference.getAuthor());
+            newReference.setYear(removedReference.getYear());
             newReference.setTitle(removedReference.getTitle());
-            newReference.setLocalDate(removedReference.getLocalDate());
+            newReference.setMonth(removedReference.getMonth());
             newReference.setNote(removedReference.getNote());
             newReference.setId(removedReference.getId());
             referenceLibrary.getReferenceTable().put(newReference.getId(), newReference);

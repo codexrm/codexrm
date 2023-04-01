@@ -2,31 +2,35 @@ package io.github.codexrm.projectreference.model.dto;
 
 import io.github.codexrm.projectreference.model.model.User;
 
-import java.time.LocalDate;
-
 public class ArticleReferenceDTO extends ReferenceDTO {
 
+    private String author;
     private String journal;
     private String volume;
     private String number;
     private String pages;
+    private String issn;
 
     public ArticleReferenceDTO() {}
 
-    public ArticleReferenceDTO(String author, String title, LocalDate date, String note, Integer id, User user, String journal, String volume, String number, String pages) {
-        super(author, title, date, note, id, user);
+    public ArticleReferenceDTO(String title, String year, String month, String note, Integer id, User user, String author, String journal, String volume, String number, String pages, String issn) {
+        super(title, year, month, note, id, user);
+        this.author = author;
         this.journal = journal;
         this.volume = volume;
         this.number = number;
         this.pages = pages;
+        this.issn = issn;
     }
 
-    public ArticleReferenceDTO(String author, String title, LocalDate date, String note, User user, String journal, String volume, String number, String pages) {
-        super(author, title, date, note, user);
+    public ArticleReferenceDTO(String title, String year, String month, String note, User user, String author, String journal, String volume, String number, String pages, String issn) {
+        super(title, year, month, note, user);
+        this.author = author;
         this.journal = journal;
         this.volume = volume;
         this.number = number;
         this.pages = pages;
+        this.issn = issn;
     }
 
     public String getJournal() {
@@ -60,4 +64,13 @@ public class ArticleReferenceDTO extends ReferenceDTO {
     public void setPages(String pages) {
         this.pages = pages;
     }
+
+    public String getAuthor() { return author; }
+
+    public void setAuthor(String author) { this.author = author; }
+
+    public String getIssn() { return issn; }
+
+    public void setIssn(String issn) { this.issn = issn; }
 }
+

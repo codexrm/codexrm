@@ -31,8 +31,8 @@ public class ImportRis implements Import {
 
     private Reference createReference(BaseReference entry) {
 
-        Reference reference;
-        if (entry instanceof JournalArticle) {
+        Reference reference = null;
+       /*if (entry instanceof JournalArticle) {
             reference = readArticleReference((JournalArticle) entry);
         } else {
             if (entry instanceof Book) {
@@ -60,11 +60,11 @@ public class ImportRis implements Import {
                     }
                 }
             }
-        }
+        }*/
         return reference;
     }
 
-    private void commonField(BaseReference entry, Reference reference) {
+  /*  private void commonField(BaseReference entry, Reference reference) {
         reference.setNote(entry.getNotes());
     }
 
@@ -187,5 +187,5 @@ public class ImportRis implements Import {
         webPage.setAccessDateLocal(entry.getAccessDate());
 
         return webPage;
-    }
+    }*/
 }

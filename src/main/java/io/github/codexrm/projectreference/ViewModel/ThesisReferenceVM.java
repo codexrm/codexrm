@@ -1,13 +1,13 @@
 package io.github.codexrm.projectreference.viewmodel;
 
-import io.github.codexrm.projectreference.model.enums.ReferenceType;
-import io.github.codexrm.projectreference.model.enums.ThesisType;
+import io.github.codexrm.projectreference.model.enums.*;
 import io.github.codexrm.projectreference.model.model.ThesisReference;
 import javafx.beans.property.*;
 
 public class ThesisReferenceVM extends ReferenceVM {
 
     ObjectProperty<ReferenceType> referenceType;
+    private StringProperty author;
     private StringProperty school;
     private ObjectProperty<ThesisType> type;
     private StringProperty address;
@@ -18,10 +18,11 @@ public class ThesisReferenceVM extends ReferenceVM {
     }
 
     public ThesisReferenceVM(ThesisReference thesisReference) {
-        super(thesisReference.getId(), thesisReference.getAuthor(), thesisReference.getTitle(), thesisReference.getLocalDate(), thesisReference.getNote(), thesisReference.isFromServer(), thesisReference.isActive(), thesisReference.isModified());
+        super(thesisReference.getId(), thesisReference.getTitle(), thesisReference.getYear(), thesisReference.getMonth(), thesisReference.getNote(), thesisReference.isFromServer(), thesisReference.isActive(), thesisReference.isModified());
 
         createEmptyThesisReferenceVM();
 
+        setAuthor(thesisReference.getAuthor());
         setSchool(thesisReference.getSchool());
         setType(thesisReference.getType());
         setAddress(thesisReference.getAddress());
@@ -29,11 +30,18 @@ public class ThesisReferenceVM extends ReferenceVM {
 
     private void createEmptyThesisReferenceVM() {
 
+        this.author = new SimpleStringProperty();
         this.school = new SimpleStringProperty();
         this.type = new SimpleObjectProperty<>();
         this.address = new SimpleStringProperty();
         this.referenceType = new SimpleObjectProperty<>(ReferenceType.THESIS);
     }
+
+    public String getAuthor() { return author.get(); }
+
+    public StringProperty authorProperty() { return author; }
+
+    public void setAuthor(String author) { this.author.set(author); }
 
     public String getSchool() {
         return school.get();
@@ -88,15 +96,16 @@ public class ThesisReferenceVM extends ReferenceVM {
 
         ThesisReference thesisReference = new ThesisReference();
 
-        thesisReference.setAuthor(this.getAuthor());
         thesisReference.setTitle(this.getTitle());
-        thesisReference.setLocalDate(this.getDate());
+        thesisReference.setYear(this.getYear());
+        thesisReference.setMonth(this.getMonth());
         thesisReference.setId(this.getId());
         thesisReference.setNote(this.getNote());
         thesisReference.setFromServer(this.isIsFromServer());
         thesisReference.setModified(this.isIsModified());
         thesisReference.setActive(this.isIsActive());
 
+        thesisReference.setAuthor(this.getAuthor());
         thesisReference.setSchool(this.getSchool());
         thesisReference.setType(this.getType());
         thesisReference.setAddress(this.getAddress());

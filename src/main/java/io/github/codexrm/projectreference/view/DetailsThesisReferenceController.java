@@ -1,19 +1,16 @@
 package io.github.codexrm.projectreference.view;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import io.github.codexrm.projectreference.model.enums.ThesisType;
+import io.github.codexrm.projectreference.model.enums.*;
 import io.github.codexrm.projectreference.viewmodel.ReferenceLibraryManagerVM;
-import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.viewmodel.ReferenceVM;
 import io.github.codexrm.projectreference.viewmodel.ThesisReferenceVM;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 public class DetailsThesisReferenceController implements Initializable {
@@ -25,20 +22,22 @@ public class DetailsThesisReferenceController implements Initializable {
     private TextField title;
 
     @FXML
-    private DatePicker date;
-
-    @FXML
-    private TextField note;
-
-    @FXML
     private TextField school;
+
+    @FXML
+    private TextField year;
 
     @FXML
     private ComboBox<ThesisType> type;
 
-
     @FXML
     private TextField address;
+
+    @FXML
+    private ComboBox<Months> month;
+
+    @FXML
+    private TextField note;
 
     @FXML
     private ComboBox<ReferenceType> referenceType;
@@ -48,10 +47,13 @@ public class DetailsThesisReferenceController implements Initializable {
 
         if (oldReference != null) {
             if ((oldReference.getClass() == ThesisReferenceVM.class)) {
-                author.textProperty().unbindBidirectional(oldReference.authorProperty());
+
                 title.textProperty().unbindBidirectional(oldReference.titleProperty());
-                date.valueProperty().unbindBidirectional(oldReference.dateProperty());
+                year.textProperty().unbindBidirectional(oldReference.yearProperty());
+                month.valueProperty().unbindBidirectional(oldReference.monthProperty());
                 note.textProperty().unbindBidirectional(oldReference.noteProperty());
+
+                author.textProperty().unbindBidirectional(((ThesisReferenceVM) oldReference).authorProperty());
                 school.textProperty().unbindBidirectional(((ThesisReferenceVM) oldReference).schoolProperty());
                 type.valueProperty().unbindBidirectional(((ThesisReferenceVM) oldReference).typeProperty());
                 address.textProperty().unbindBidirectional(((ThesisReferenceVM) oldReference).addressProperty());
@@ -62,10 +64,13 @@ public class DetailsThesisReferenceController implements Initializable {
 
         if (newReference != null) {
             if ((newReference.getClass() == ThesisReferenceVM.class)) {
-                author.textProperty().bindBidirectional(newReference.authorProperty());
+
                 title.textProperty().bindBidirectional(newReference.titleProperty());
-                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                year.textProperty().bindBidirectional(newReference.yearProperty());
+                month.valueProperty().bindBidirectional(newReference.monthProperty());
                 note.textProperty().bindBidirectional(newReference.noteProperty());
+
+                author.textProperty().bindBidirectional(((ThesisReferenceVM) newReference).authorProperty());
                 school.textProperty().bindBidirectional(((ThesisReferenceVM) newReference).schoolProperty());
                 type.valueProperty().bindBidirectional(((ThesisReferenceVM) newReference).typeProperty());
                 address.textProperty().bindBidirectional(((ThesisReferenceVM) newReference).addressProperty());
@@ -75,66 +80,54 @@ public class DetailsThesisReferenceController implements Initializable {
         } else {
             author.clear();
             title.clear();
-            date.setValue(LocalDate.now());
-            note.clear();
             school.clear();
+            year.clear();
             address.clear();
+            note.clear();
         }
     };
 
-    public String getAuthor() {
-        return author.getText();
-    }
+    public TextField getAuthor() { return author; }
 
-    public void setAuthor(String author) {this.author.setText(author);}
+    public void setAuthor(TextField author) { this.author = author; }
 
-    public String getTitle() {
-        return title.getText();
-    }
+    public TextField getTitle() { return title; }
 
-    public void setTitle(String title) {this.title.setText(title);}
+    public void setTitle(TextField title) { this.title = title; }
 
-    public LocalDate getDate() {
-        return date.getValue();
-    }
+    public TextField getSchool() { return school; }
 
-    public void setDate(LocalDate date) {this.date.setValue(date);}
+    public void setSchool(TextField school) { this.school = school; }
 
-    public String getNote() {
-        return note.getText();
-    }
+    public TextField getYear() { return year; }
 
-    public void setNote(String note) {
-        this.note.setText(note);
-    }
+    public void setYear(TextField year) { this.year = year; }
 
-    public String getSchool() {
-        return school.getText();
-    }
+    public ComboBox<ThesisType> getType() { return type; }
 
-    public void setSchool(String school) {this.school.setText(school);}
+    public void setType(ComboBox<ThesisType> type) { this.type = type; }
 
-    public ThesisType getType() {
-        return type.getValue();
-    }
+    public TextField getAddress() { return address; }
 
-    public void setType(ThesisType type) {
-        this.type.getSelectionModel().select(type);
-    }
+    public void setAddress(TextField address) { this.address = address; }
 
-    public String getAddress() {
-        return address.getText();
-    }
+    public ComboBox<Months> getMonth() { return month; }
 
-    public void setAddress(String address) {this.address.setText(address);}
+    public void setMonth(ComboBox<Months> month) { this.month = month; }
 
-    public void setReferenceType(ReferenceType referenceType) { this.referenceType.getSelectionModel().select(referenceType); }
+    public TextField getNote() { return note; }
+
+    public void setNote(TextField note) { this.note = note; }
+
+    public ComboBox<ReferenceType> getReferenceType() { return referenceType; }
+
+    public void setReferenceType(ComboBox<ReferenceType> referenceType) { this.referenceType = referenceType; }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         loadReferenceType();
         loadThesisType();
+        loadMonths();
     }
 
     public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
@@ -147,8 +140,10 @@ public class DetailsThesisReferenceController implements Initializable {
         this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
     }
 
-    private void loadThesisType(){
-        type.getItems().addAll(ThesisType.values());
+    private void loadThesisType(){ type.getItems().addAll(ThesisType.values()); }
+
+    private void loadMonths(){
+        month.getItems().addAll(Months.values());
     }
 
     private void loadReferenceType() {

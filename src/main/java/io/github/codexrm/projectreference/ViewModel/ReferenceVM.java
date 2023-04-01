@@ -1,16 +1,15 @@
 package io.github.codexrm.projectreference.viewmodel;
 
+import io.github.codexrm.projectreference.model.enums.Months;
 import io.github.codexrm.projectreference.model.model.Reference;
 import javafx.beans.property.*;
-
-import java.time.LocalDate;
 
 public class ReferenceVM {
 
     protected final IntegerProperty id;
-    protected final StringProperty author;
     protected final StringProperty title;
-    protected final ObjectProperty<LocalDate> date;
+    protected final StringProperty year;
+    protected final ObjectProperty<Months> month;
     protected final StringProperty note;
     protected BooleanProperty isFromServer;
     protected BooleanProperty isModified ;
@@ -18,30 +17,30 @@ public class ReferenceVM {
 
     public ReferenceVM() {
         id = new SimpleIntegerProperty();
-        author = new SimpleStringProperty();
         title = new SimpleStringProperty();
-        date = new SimpleObjectProperty<>();
+        year = new SimpleStringProperty();
+        month = new SimpleObjectProperty();
         note = new SimpleStringProperty();
         isFromServer = new SimpleBooleanProperty();
         isActive = new SimpleBooleanProperty();
         isModified = new SimpleBooleanProperty();
     }
 
-    public ReferenceVM(final int id, final String author , final String title, LocalDate date, String note, boolean isFromServer, boolean isActive, boolean isModified) {
+    public ReferenceVM(final int id, final String title, final String year , Months month, String note, boolean isFromServer, boolean isActive, boolean isModified) {
 
         this.id = new SimpleIntegerProperty();
-        this.author = new SimpleStringProperty();
         this.title = new SimpleStringProperty();
-        this.date = new SimpleObjectProperty<>();
+        this.year = new SimpleStringProperty();
+        this.month = new SimpleObjectProperty();
         this.note = new SimpleStringProperty();
         this.isFromServer = new SimpleBooleanProperty();
         this.isActive = new SimpleBooleanProperty();
         this.isModified = new SimpleBooleanProperty();
 
         setId(id);
-        setAuthor(author);
         setTitle(title);
-        setDate(date);
+        setYear(year);
+        setMonth(month);
         setNote(note);
         setIsFromServer(isFromServer);
         setIsActive(isActive);
@@ -54,23 +53,23 @@ public class ReferenceVM {
 
     public void setId(int id) {this.id.set(id);}
 
-    public String getAuthor() {return author.get();}
-
-    public StringProperty authorProperty() {return author;}
-
-    public void setAuthor(String author) {this.author.set(author);}
-
     public String getTitle() {return title.get();}
 
     public StringProperty titleProperty() {return title;}
 
     public void setTitle(String title) {this.title.set(title);}
 
-    public LocalDate getDate() {return date.get();}
+    public String getYear() { return year.get(); }
 
-    public ObjectProperty<LocalDate> dateProperty() {return date;}
+    public StringProperty yearProperty() { return year; }
 
-    public void setDate(LocalDate date) {this.date.set(date);}
+    public void setYear(String year) { this.year.set(year); }
+
+    public Months getMonth() { return month.get(); }
+
+    public ObjectProperty<Months> monthProperty() { return month; }
+
+    public void setMonth(Months month) { this.month.set(month); }
 
     public String getNote() {return note.get();}
 
@@ -97,6 +96,5 @@ public class ReferenceVM {
     public void setIsActive(boolean isActive) {this.isActive.set(isActive);}
 
     public Reference toModel() {
-        return new Reference(this.getAuthor(), this.getTitle(), this.getDate(), this.getNote(),this.getId(),this.isIsFromServer(),this.isIsModified(),this.isIsActive());
-    }
+        return new Reference(this.getTitle(), this.getYear(), this.getMonth(), this.getNote(), this.getId(), this.isIsFromServer(), this.isIsModified(), this.isIsActive()); }
 }

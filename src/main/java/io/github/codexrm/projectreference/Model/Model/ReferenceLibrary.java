@@ -9,7 +9,7 @@ public class ReferenceLibrary {
 
     public ReferenceLibrary() {
         referenceTable = new Hashtable<>();
-        user = new User("mary","mary");
+        user = new User( 1, "marynes", "123", "Marynes", "Diaz", "marynes@gmail.com",  true);
     }
 
     public User getUser() {return user;}
@@ -21,8 +21,6 @@ public class ReferenceLibrary {
         BookReference reference = new BookReference();
         reference.setId(id);
         reference.setTitle("No Title");
-        reference.setAuthor("lastName1,Name1;lastNameN,nameN...");
-        reference.setLocalDate(null);
         reference.setFromServer(false);
         reference.setActive(true);
         referenceTable.put(id, reference);

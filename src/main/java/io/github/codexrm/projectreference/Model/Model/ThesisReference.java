@@ -1,29 +1,36 @@
 package io.github.codexrm.projectreference.model.model;
 
+import io.github.codexrm.projectreference.model.enums.Months;
 import io.github.codexrm.projectreference.model.enums.ThesisType;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 public class ThesisReference extends Reference {
 
+    private String author;
     private String school;
     private ThesisType type;
     private String address;
 
     public ThesisReference() {
         super();
+        this.author = "";
         this.school = "";
         this.type = null;
         this.address = "";
     }
 
-    public ThesisReference(String author, String title, LocalDate date, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String school, ThesisType type, String address) {
-        super(author, title, date, note, id, isFromServer, isModified, isActive);
+    public ThesisReference(String title, String year, Months month, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String author, String school, ThesisType type, String address) {
+        super(title, year, month, note, id, isFromServer, isModified, isActive);
+        this.author = author;
         this.school = school;
         this.type = type;
         this.address = address;
     }
+
+    public String getAuthor() { return author; }
+
+    public void setAuthor(String author) { this.author = author; }
 
     public String getSchool() {
         return school;
@@ -52,14 +59,17 @@ public class ThesisReference extends Reference {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ThesisReference)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         ThesisReference that = (ThesisReference) o;
-        return getSchool().equals(that.getSchool()) && getType() == that.getType() && getAddress().equals(that.getAddress());
+        return Objects.equals(author, that.author) &&
+                Objects.equals(school, that.school) &&
+                type == that.type &&
+                Objects.equals(address, that.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getSchool(), getType(), getAddress());
+        return Objects.hash(super.hashCode(), author, school, type, address);
     }
 }

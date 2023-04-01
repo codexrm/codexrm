@@ -1,19 +1,19 @@
 package io.github.codexrm.projectreference.view;
 
+import io.github.codexrm.projectreference.model.enums.Months;
 import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.viewmodel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class DetailsWebPageReferenceController implements Initializable {
+
     @FXML
     private TextField author;
 
@@ -21,16 +21,16 @@ public class DetailsWebPageReferenceController implements Initializable {
     private TextField title;
 
     @FXML
-    private DatePicker date;
+    private ComboBox<Months> month;
 
     @FXML
-    private TextField note;
-
-    @FXML
-    private DatePicker accessDate ;
+    private TextField year;
 
     @FXML
     private TextField url;
+
+    @FXML
+    private TextField note;
 
     @FXML
     private ComboBox<ReferenceType> referenceType;
@@ -41,11 +41,13 @@ public class DetailsWebPageReferenceController implements Initializable {
 
         if (oldReference != null) {
             if ((oldReference.getClass() == WebPageReferenceVM.class)) {
-                author.textProperty().unbindBidirectional(oldReference.authorProperty());
+
                 title.textProperty().unbindBidirectional(oldReference.titleProperty());
-                date.valueProperty().unbindBidirectional(oldReference.dateProperty());
+                year.textProperty().unbindBidirectional(oldReference.yearProperty());
+                month.valueProperty().unbindBidirectional(oldReference.monthProperty());
                 note.textProperty().unbindBidirectional(oldReference.noteProperty());
-                accessDate.valueProperty().unbindBidirectional(((WebPageReferenceVM) oldReference).accessDateProperty());
+
+                author.textProperty().unbindBidirectional(((WebPageReferenceVM) oldReference).authorProperty() );
                 url.textProperty().unbindBidirectional(((WebPageReferenceVM) oldReference).urlProperty());
 
                 referenceType.valueProperty().unbindBidirectional(((WebPageReferenceVM) oldReference).referenceTypeProperty());
@@ -54,11 +56,13 @@ public class DetailsWebPageReferenceController implements Initializable {
 
         if (newReference != null) {
             if ((newReference.getClass() == WebPageReferenceVM.class)) {
-                author.textProperty().bindBidirectional(newReference.authorProperty());
+
                 title.textProperty().bindBidirectional(newReference.titleProperty());
-                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                year.textProperty().bindBidirectional(newReference.yearProperty());
+                month.valueProperty().bindBidirectional(newReference.monthProperty());
                 note.textProperty().bindBidirectional(newReference.noteProperty());
-                accessDate.valueProperty().bindBidirectional(((WebPageReferenceVM) newReference).accessDateProperty());
+
+                author.textProperty().bindBidirectional(((WebPageReferenceVM) newReference).authorProperty());
                 url.textProperty().bindBidirectional(((WebPageReferenceVM) newReference).urlProperty());
 
                 referenceType.valueProperty().bindBidirectional(((WebPageReferenceVM) newReference).referenceTypeProperty());
@@ -66,10 +70,9 @@ public class DetailsWebPageReferenceController implements Initializable {
         } else {
             author.clear();
             title.clear();
-            date.setValue(LocalDate.now());
-            note.clear();
-            accessDate.setValue(LocalDate.now());
+            year.clear();
             url.clear();
+            note.clear();
         }
     };
 
@@ -81,35 +84,30 @@ public class DetailsWebPageReferenceController implements Initializable {
 
     public void setTitle(TextField title) { this.title = title; }
 
-    public DatePicker getDate() { return date; }
+    public ComboBox<Months> getMonth() { return month; }
 
-    public void setDate(DatePicker date) { this.date = date; }
+    public void setMonth(ComboBox<Months> month) { this.month = month; }
 
-    public TextField getNote() { return note; }
+    public TextField getYear() { return year; }
 
-    public void setNote(TextField note) { this.note = note; }
-
-    public DatePicker getAccessDate() { return accessDate; }
-
-    public void setAccessDate(DatePicker accessDate) { this.accessDate = accessDate; }
+    public void setYear(TextField year) { this.year = year; }
 
     public TextField getUrl() { return url; }
 
     public void setUrl(TextField url) { this.url = url; }
 
+    public TextField getNote() { return note; }
+
+    public void setNote(TextField note) { this.note = note; }
+
     public ComboBox<ReferenceType> getReferenceType() { return referenceType; }
 
     public void setReferenceType(ComboBox<ReferenceType> referenceType) { this.referenceType = referenceType; }
 
-    public ReferenceLibraryManagerVM getManagerVM() { return managerVM; }
-
-    public void setManagerVM(ReferenceLibraryManagerVM managerVM) { this.managerVM = managerVM; }
-
-    public ChangeListener<ReferenceVM> getReferenceVMListener() { return referenceVMListener; }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadReferenceType();
+        loadMonths();
     }
 
     public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
@@ -120,6 +118,10 @@ public class DetailsWebPageReferenceController implements Initializable {
 
         this.managerVM = dataViewModel;
         this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
+    }
+
+    private void loadMonths(){
+        month.getItems().addAll(Months.values());
     }
 
     private void loadReferenceType() {

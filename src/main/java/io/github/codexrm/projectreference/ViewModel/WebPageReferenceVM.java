@@ -4,12 +4,11 @@ import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.model.model.WebPageReference;
 import javafx.beans.property.*;
 
-import java.time.LocalDate;
 
 public class WebPageReferenceVM extends ReferenceVM {
 
     ObjectProperty<ReferenceType> referenceType;
-    private ObjectProperty<LocalDate> accessDate;
+    private StringProperty author;
     private StringProperty url;
 
     public WebPageReferenceVM() {
@@ -18,32 +17,27 @@ public class WebPageReferenceVM extends ReferenceVM {
     }
 
     public WebPageReferenceVM(WebPageReference webPageReference) {
-        super(webPageReference.getId(),webPageReference.getAuthor(), webPageReference.getTitle(), webPageReference.getLocalDate(), webPageReference.getNote(), webPageReference.isFromServer(), webPageReference.isActive(), webPageReference.isModified());
+        super(webPageReference.getId(), webPageReference.getTitle(), webPageReference.getYear(), webPageReference.getMonth(), webPageReference.getNote(), webPageReference.isFromServer(), webPageReference.isActive(), webPageReference.isModified());
 
         createEmptyWebPageReferenceVM();
 
-        setAccessDate(webPageReference.getAccessDateLocal());
+        setAuthor(webPageReference.getAuthor());
         setUrl(webPageReference.getUrl());
     }
 
     private void createEmptyWebPageReferenceVM() {
 
-        this.accessDate = new SimpleObjectProperty();
+        this.author = new SimpleStringProperty();
         this.url = new SimpleStringProperty();
         this.referenceType = new SimpleObjectProperty<>(ReferenceType.WEBPAGE);
     }
 
-    public ReferenceType getReferenceType() { return referenceType.get(); }
 
-    public ObjectProperty<ReferenceType> referenceTypeProperty() { return referenceType; }
+    public String getAuthor() { return author.get(); }
 
-    public void setReferenceType(ReferenceType referenceType) { this.referenceType.set(referenceType); }
+    public StringProperty authorProperty() { return author; }
 
-    public LocalDate getAccessDate() { return accessDate.get(); }
-
-    public ObjectProperty<LocalDate> accessDateProperty() { return accessDate; }
-
-    public void setAccessDate(LocalDate accessDate) { this.accessDate.set(accessDate); }
+    public void setAuthor(String author) { this.author.set(author); }
 
     public String getUrl() { return url.get(); }
 
@@ -51,20 +45,27 @@ public class WebPageReferenceVM extends ReferenceVM {
 
     public void setUrl(String url) { this.url.set(url); }
 
+    public ReferenceType getReferenceType() { return referenceType.get(); }
+
+    public ObjectProperty<ReferenceType> referenceTypeProperty() { return referenceType; }
+
+    public void setReferenceType(ReferenceType referenceType) { this.referenceType.set(referenceType); }
+
     @Override
     public WebPageReference toModel() {
 
         WebPageReference webPageReference = new WebPageReference();
-        webPageReference.setAuthor(this.getAuthor());
+
         webPageReference.setTitle(this.getTitle());
-        webPageReference.setLocalDate(this.getDate());
+        webPageReference.setYear(this.getYear());
+        webPageReference.setMonth(this.getMonth());
         webPageReference.setId(this.getId());
         webPageReference.setNote(this.getNote());
         webPageReference.setFromServer(this.isIsFromServer());
         webPageReference.setModified(this.isIsModified());
         webPageReference.setActive(this.isIsActive());
 
-        webPageReference.setAccessDateLocal(this.getAccessDate());
+        webPageReference.setAuthor(this.getAuthor());
         webPageReference.setUrl(this.getUrl());
 
         return webPageReference;

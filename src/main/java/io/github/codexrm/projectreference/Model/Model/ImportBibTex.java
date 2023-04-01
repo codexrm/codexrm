@@ -18,14 +18,14 @@ public class ImportBibTex implements Import {
     public ArrayList<Reference> readFile(String path)
             throws FileNotFoundException, TokenMgrException, ParseException {
 
-        Reader reader = new FileReader(path);
+       Reader reader = new FileReader(path);
         BibTeXParser bibtexParser = new BibTeXParser();
         BibTeXDatabase database = bibtexParser.parseFully(reader);
         Map<Key, BibTeXEntry> entryMap = database.getEntries();
         Collection<BibTeXEntry> entries = entryMap.values();
         ArrayList<Reference> listReference = new ArrayList<>();
 
-        Reference reference = new Reference();
+      /*  Reference reference = new Reference();
         for (BibTeXEntry entry : entries) {
 
             if (entry.getType().toString().equalsIgnoreCase("article")) {
@@ -60,11 +60,11 @@ public class ImportBibTex implements Import {
                 listReference.add(reference);
             }
             reference = null;
-        }
+        }*/
         return listReference;
     }
 
-    private String createAuthorField(String content) {
+/*    private String createAuthorField(String content) {
 
         String[] authors = content.split(" and ", 2);
         StringBuilder author = new StringBuilder(authors[0]);
@@ -310,5 +310,5 @@ public class ImportBibTex implements Import {
             paper.setPages(value.toUserString());
         }
         return paper;
-    }
+    }*/
 }

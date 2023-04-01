@@ -1,46 +1,90 @@
 package io.github.codexrm.projectreference.model.model;
 
-import java.time.LocalDate;
+import io.github.codexrm.projectreference.model.enums.Months;
+
 import java.util.Objects;
 
 public class ConferencePaperReference extends Reference {
 
+    private String author;
+    private String bookTitle;
+    private String editor;
     private String volume;
-    private String publisher;
-    private String address;
+    private String number;
+    private String series;
     private String pages;
+    private String address;
+    private String organization;
+    private String publisher;
 
     public ConferencePaperReference() {
         super();
+        this.author = "";
+        this.bookTitle = "";
+        this.editor = "";
         this.volume = "";
-        this.publisher = "";
-        this.address = "";
+        this.number = "";
+        this.series = "";
         this.pages = "";
+        this.address = "";
+        this.organization = "";
+        this.publisher = "";
     }
 
-    public ConferencePaperReference(String author, String title, LocalDate date, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String volume, String publisher, String address, String pages) {
-        super(author, title, date, note, id, isFromServer, isModified, isActive);
+    public ConferencePaperReference(String title, String year, Months month, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String author, String bookTitle, String editor, String volume, String number, String series, String pages, String address, String organization, String publisher) {
+        super(title, year, month, note, id, isFromServer, isModified, isActive);
+        this.author = author;
+        this.bookTitle = bookTitle;
+        this.editor = editor;
         this.volume = volume;
-        this.publisher = publisher;
-        this.address = address;
+        this.number = number;
+        this.series = series;
         this.pages = pages;
+        this.address = address;
+        this.organization = organization;
+        this.publisher = publisher;
     }
+
+    public String getAuthor() { return author; }
+
+    public void setAuthor(String author) { this.author = author; }
+
+    public String getBookTitle() { return bookTitle; }
+
+    public void setBookTitle(String bookTitle) { this.bookTitle = bookTitle; }
+
+    public String getEditor() { return editor; }
+
+    public void setEditor(String editor) { this.editor = editor; }
 
     public String getVolume() { return volume; }
 
     public void setVolume(String volume) { this.volume = volume; }
 
-    public String getPublisher() { return publisher; }
+    public String getNumber() { return number; }
 
-    public void setPublisher(String publisher) { this.publisher = publisher; }
+    public void setNumber(String number) { this.number = number; }
+
+    public String getSeries() { return series; }
+
+    public void setSeries(String series) { this.series = series; }
+
+    public String getPages() { return pages; }
+
+    public void setPages(String pages) { this.pages = pages; }
 
     public String getAddress() { return address; }
 
     public void setAddress(String address) { this.address = address; }
 
-    public String getPages() { return pages; }
+    public String getOrganization() { return organization; }
 
-    public void setPages(String pages) { this.pages = pages; }
+    public void setOrganization(String organization) { this.organization = organization; }
+
+    public String getPublisher() { return publisher; }
+
+    public void setPublisher(String publisher) { this.publisher = publisher; }
+
 
     @Override
     public boolean equals(Object o) {
@@ -48,14 +92,20 @@ public class ConferencePaperReference extends Reference {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         ConferencePaperReference that = (ConferencePaperReference) o;
-        return volume.equals(that.volume) &&
-                publisher.equals(that.publisher) &&
-                address.equals(that.address) &&
-                pages.equals(that.pages);
+        return Objects.equals(author, that.author) &&
+                Objects.equals(bookTitle, that.bookTitle) &&
+                Objects.equals(editor, that.editor) &&
+                Objects.equals(volume, that.volume) &&
+                Objects.equals(number, that.number) &&
+                Objects.equals(series, that.series) &&
+                Objects.equals(pages, that.pages) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(organization, that.organization) &&
+                Objects.equals(publisher, that.publisher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), volume, publisher, address, pages);
+        return Objects.hash(super.hashCode(), author, bookTitle, editor, volume, number, series, pages, address, organization, publisher);
     }
 }

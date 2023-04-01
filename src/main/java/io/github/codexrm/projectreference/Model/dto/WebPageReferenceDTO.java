@@ -1,53 +1,31 @@
 package io.github.codexrm.projectreference.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.github.codexrm.projectreference.model.model.User;
-
-import java.time.LocalDate;
 
 public class WebPageReferenceDTO extends ReferenceDTO {
 
-    private String url;
-    private LocalDate accessDate;
+    private String author;
+    private String howpublished;
 
     public WebPageReferenceDTO() {}
 
-    public WebPageReferenceDTO(String author, String title, LocalDate date, String note, Integer id, User user, String url, LocalDate accessDate) {
-        super(author, title, date, note, id, user);
-        this.url = url;
-        this.accessDate = accessDate;
+    public WebPageReferenceDTO(String title, String year, String month, String note, Integer id, User user, String author, String howpublished) {
+        super(title, year, month, note, id, user);
+        this.author = author;
+        this.howpublished = howpublished;
     }
 
-    public WebPageReferenceDTO(String author, String title, LocalDate date, String note, User user, String url, LocalDate accessDate) {
-        super(author, title, date, note, user);
-        this.url = url;
-        this.accessDate = accessDate;
+    public WebPageReferenceDTO(String title, String year, String month, String note, User user, String author, String howpublished) {
+        super(title, year, month, note, user);
+        this.author = author;
+        this.howpublished = howpublished;
     }
 
-    public String getUrl() { return url; }
+    public String getAuthor() { return author; }
 
-    public void setUrl(String url) { this.url = url; }
+    public void setAuthor(String author) { this.author = author; }
 
-    @JsonIgnore
-    public LocalDate getAccessDateLocal() { return accessDate; }
+    public String getHowpublished() { return howpublished; }
 
-    @JsonIgnore
-    public void setAccessDateLocal(LocalDate accessDate) { this.accessDate = accessDate; }
-
-    public String getAccessDate() {
-        if (accessDate == null){
-            return "0000-00-00";
-        } else{
-            return accessDate.toString();
-        }
-    }
-
-    public void setAccessDate(String date) {
-        if (date == null || date.equals("0000-00-00")) {
-            this.accessDate = null;
-        }else{
-            String[] partDate = date.split("-", 3);
-            this.accessDate = LocalDate.of(Integer.parseInt(partDate[0]),Integer.parseInt(partDate[1]),Integer.parseInt(partDate[2]));
-        }
-    }
+    public void setHowpublished(String howpublished) { this.howpublished = howpublished; }
 }

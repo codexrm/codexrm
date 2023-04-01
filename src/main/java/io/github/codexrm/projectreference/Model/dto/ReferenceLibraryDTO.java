@@ -8,7 +8,7 @@ public class ReferenceLibraryDTO {
     private List<ReferenceDTO> newReferencesList;
     private List<ReferenceDTO> updatedReferencesList;
     private List<Integer> deletedReferencesList;
-    private String username;
+    private Integer userId;
 
     public ReferenceLibraryDTO() {
         this.newReferencesList = new ArrayList<>();
@@ -16,38 +16,27 @@ public class ReferenceLibraryDTO {
         this.deletedReferencesList = new ArrayList<>();
     }
 
-    public ReferenceLibraryDTO(List<ReferenceDTO> newReferencesList, List<ReferenceDTO> updatedReferencesList, List<Integer> deletedReferencesList, String username) {
+    public ReferenceLibraryDTO(List<ReferenceDTO> newReferencesList, List<ReferenceDTO> updatedReferencesList, List<Integer> deletedReferencesList, Integer userId) {
         this.newReferencesList = newReferencesList;
         this.updatedReferencesList = updatedReferencesList;
         this.deletedReferencesList = deletedReferencesList;
-        this.username = username;
+        this.userId = userId;
+
     }
 
-    public List<ReferenceDTO> getNewReferencesList() {
-        return newReferencesList;
-    }
+    public List<ReferenceDTO> getNewReferencesList() { return newReferencesList; }
 
-    public void setNewReference(ReferenceDTO newReference) {
-        this.newReferencesList.add(newReference);
-    }
+    public void setNewReferencesList(List<ReferenceDTO> newReferencesList) { this.newReferencesList = newReferencesList; }
 
-    public List<ReferenceDTO> getUpdatedReferencesList() {
-        return updatedReferencesList;
-    }
+    public List<ReferenceDTO> getUpdatedReferencesList() { return updatedReferencesList; }
 
-    public void setUpdatedReference(ReferenceDTO updatedReference) {
-        this.updatedReferencesList.add(updatedReference);
-    }
+    public void setUpdatedReferencesList(List<ReferenceDTO> updatedReferencesList) { this.updatedReferencesList = updatedReferencesList; }
 
-    public List<Integer> getDeletedReferencesList() {
-        return deletedReferencesList;
-    }
+    public List<Integer> getDeletedReferencesList() { return deletedReferencesList; }
 
-    public void setDeletedReference(Integer deletedReference) {
-        this.deletedReferencesList.add(deletedReference);
-    }
+    public void setDeletedReferencesList(List<Integer> deletedReferencesList) { this.deletedReferencesList = deletedReferencesList; }
 
-    public String getUsername() { return username; }
+    public Integer getUserId() { return userId; }
 
-    public void setUsername(String username) { this.username = username; }
+    public void setUserId(Integer userId) { this.userId = userId; }
 }

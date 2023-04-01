@@ -1,9 +1,9 @@
 package io.github.codexrm.projectreference.view;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import io.github.codexrm.projectreference.model.enums.Months;
 import io.github.codexrm.projectreference.viewmodel.BookLetReferenceVM;
 import io.github.codexrm.projectreference.viewmodel.ReferenceLibraryManagerVM;
 import io.github.codexrm.projectreference.model.enums.ReferenceType;
@@ -12,28 +12,31 @@ import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 public class DetailsBookLetReferenceController implements Initializable {
 
     @FXML
-    private TextField author;
-
-    @FXML
     private TextField title;
 
     @FXML
-    private DatePicker date;
-
-    @FXML
-    private TextField note;
+    private TextField author;
 
     @FXML
     private TextField howpublished;
 
     @FXML
     private TextField address;
+
+    @FXML
+    private ComboBox<Months> month;
+
+    @FXML
+    private TextField year;
+
+    @FXML
+    private TextField note;
+
     @FXML
     private ComboBox<ReferenceType> referenceType;
 
@@ -43,10 +46,13 @@ public class DetailsBookLetReferenceController implements Initializable {
 
         if (oldReference != null) {
             if ((oldReference.getClass() == BookLetReferenceVM.class)) {
-                author.textProperty().unbindBidirectional(oldReference.authorProperty());
+
                 title.textProperty().unbindBidirectional(oldReference.titleProperty());
-                date.valueProperty().unbindBidirectional(oldReference.dateProperty());
+                year.textProperty().unbindBidirectional(oldReference.yearProperty());
+                month.valueProperty().unbindBidirectional(oldReference.monthProperty());
                 note.textProperty().unbindBidirectional(oldReference.noteProperty());
+
+                author.textProperty().unbindBidirectional(((BookLetReferenceVM) oldReference).authorProperty());
                 howpublished.textProperty().unbindBidirectional(((BookLetReferenceVM) oldReference).howpublishedProperty());
                 address.textProperty().unbindBidirectional(((BookLetReferenceVM) oldReference).addressProperty());
 
@@ -56,66 +62,64 @@ public class DetailsBookLetReferenceController implements Initializable {
 
         if (newReference != null) {
             if ((newReference.getClass() == BookLetReferenceVM.class)) {
-                author.textProperty().bindBidirectional(newReference.authorProperty());
+
                 title.textProperty().bindBidirectional(newReference.titleProperty());
-                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                year.textProperty().bindBidirectional(newReference.yearProperty());
+                month.valueProperty().bindBidirectional(newReference.monthProperty());
                 note.textProperty().bindBidirectional(newReference.noteProperty());
+
+                author.textProperty().bindBidirectional(((BookLetReferenceVM) newReference).authorProperty());
                 howpublished.textProperty().bindBidirectional(((BookLetReferenceVM) newReference).howpublishedProperty());
                 address.textProperty().bindBidirectional(((BookLetReferenceVM) newReference).addressProperty());
 
                 referenceType.valueProperty().bindBidirectional(((BookLetReferenceVM) newReference).referenceTypeProperty());
             }
         } else {
-            author.clear();
             title.clear();
-            date.setValue(LocalDate.now());
-            note.clear();
+            author.clear();
             howpublished.clear();
             address.clear();
+            year.clear();
+            note.clear();
         }
     };
 
-    public String getAuthor() {
-        return author.getText();
-    }
+    public TextField getTitle() { return title; }
 
-    public void setAuthor(String author) {this.author.setText(author);}
+    public void setTitle(TextField title) { this.title = title; }
 
-    public String getTitle() {
-        return title.getText();
-    }
+    public TextField getAuthor() { return author; }
 
-    public void setTitle(String title) {this.title.setText(title);}
+    public void setAuthor(TextField author) { this.author = author; }
 
-    public LocalDate getDate() {
-        return date.getValue();
-    }
+    public TextField getHowpublished() { return howpublished; }
 
-    public void setDate(LocalDate date) {this.date.setValue(date);}
+    public void setHowpublished(TextField howpublished) { this.howpublished = howpublished; }
 
-    public String getNote() {
-        return note.getText();
-    }
+    public TextField getAddress() { return address; }
 
-    public void setNote(String note) {this.note.setText(note);}
+    public void setAddress(TextField address) { this.address = address; }
 
-    public String getHowpublished() {
-        return howpublished.getText();
-    }
+    public ComboBox<Months> getMonth() { return month; }
 
-    public void setHowpublished(String howpublished) {this.howpublished.setText(howpublished);}
+    public void setMonth(ComboBox<Months> month) { this.month = month; }
 
-    public String getAddress() {
-        return address.getText();
-    }
+    public TextField getYear() { return year; }
 
-    public void setAddress(String address) {this.address.setText(address);}
+    public void setYear(TextField year) { this.year = year; }
 
-    public void setReferenceType(ReferenceType referenceType) { this.referenceType.getSelectionModel().select(referenceType); }
+    public TextField getNote() { return note; }
+
+    public void setNote(TextField note) { this.note = note; }
+
+    public ComboBox<ReferenceType> getReferenceType() { return referenceType; }
+
+    public void setReferenceType(ComboBox<ReferenceType> referenceType) { this.referenceType = referenceType; }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadReferenceType();
+        loadMonths();
     }
 
     public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
@@ -125,6 +129,10 @@ public class DetailsBookLetReferenceController implements Initializable {
         }
         this.managerVM = dataViewModel;
         this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
+    }
+
+    private void loadMonths(){
+        month.getItems().addAll(Months.values());
     }
 
     private void loadReferenceType() {

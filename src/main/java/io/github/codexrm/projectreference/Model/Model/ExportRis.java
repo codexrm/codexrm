@@ -17,7 +17,7 @@ public class ExportRis implements Export {
     public void writeValue(Reference reference, String path) throws IOException {
 
         RisManager manager = new RisManager();
-        manager.addReference(identifyType(reference));
+      //  manager.addReference(identifyType(reference));
         manager.exportListReference(path);
     }
 
@@ -26,16 +26,16 @@ public class ExportRis implements Export {
             throws IOException {
 
         RisManager manager = new RisManager();
-        for (Reference reference : referenceList) {
+        /*for (Reference reference : referenceList) {
           BaseReference entry = identifyType(reference);
             if (entry != null) {
                 manager.addReference(entry);
             }
-        }
+        }*/
         manager.exportListReference(path);
     }
 
-    private BaseReference identifyType(Reference reference) {
+   /* private BaseReference identifyType(Reference reference) {
 
         BaseReference entry = null;
 
@@ -194,5 +194,5 @@ public class ExportRis implements Export {
         webPage.setAccessDate(reference.getAccessDateLocal());
 
         return webPage;
-    }
+    }*/
 }

@@ -21,15 +21,15 @@ public class Sync {
         this.restSync = new RestSync();
     }
 
-    public List<Reference> syncReferences(Hashtable<Integer, Reference> referenceTable, User user){
+   /* public List<Reference> syncReferences(Hashtable<Integer, Reference> referenceTable, User user){
 
         addToLibraryDTO(referenceTable,user);
         List<ReferenceDTO> list = restSync.syncReferences(libraryDTO);
 
         return dtoConverter.toReferenceList(list);
-    }
+    }*/
 
-    private void addToLibraryDTO(Hashtable<Integer, Reference> referenceTable, User user){
+   /* private void addToLibraryDTO(Hashtable<Integer, Reference> referenceTable, User user){
 
         Enumeration<Reference> e = referenceTable.elements();
         ArrayList<Reference> referenceList = new ArrayList<>();
@@ -52,5 +52,5 @@ public class Sync {
             }
         }
         libraryDTO.setUsername(user.getUsername());
-    }
+    }*/
 }

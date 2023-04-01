@@ -17,18 +17,18 @@ public class ExportBibTex implements Export {
 
     @Override
     public void writeValue(Reference reference, String path) throws IOException {
-        identifyType(reference, path);
+     //   identifyType(reference, path);
     }
 
     @Override
     public void writeValue(ArrayList<Reference> referenceList, String path)
             throws IOException {
         for (Reference reference : referenceList) {
-            identifyType(reference, path);
+          //  identifyType(reference, path);
         }
     }
 
-    private void identifyType(Reference reference, String path) throws IOException {
+   /* private void identifyType(Reference reference, String path) throws IOException {
 
         FileWriter writer = new FileWriter(path, true);
         BufferedWriter bufferedWriter = new BufferedWriter(writer);
@@ -321,5 +321,5 @@ public class ExportBibTex implements Export {
             bufferedWriter.write("  url = {" + reference.getUrl() + "}");
         }
         closeReference(bufferedWriter);
-    }
+    }*/
 }

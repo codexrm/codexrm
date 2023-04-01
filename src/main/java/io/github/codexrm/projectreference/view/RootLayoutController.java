@@ -38,7 +38,7 @@ public class RootLayoutController implements Initializable {
     private TableView<ReferenceVM> referenceTable;
 
     @FXML
-    private TableColumn<ReferenceVM, String> authorColumn;
+    private TableColumn<ReferenceVM, String> yearColumn;
 
     @FXML
     private TableColumn<ReferenceVM, String> titleColumn;
@@ -119,8 +119,8 @@ public class RootLayoutController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        authorColumn.setCellValueFactory(cellData -> cellData.getValue().authorProperty());
         titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
+        yearColumn.setCellValueFactory(cellData -> cellData.getValue().yearProperty());
 
         managerVM.currentReferenceProperty().bind(referenceTable.getSelectionModel().selectedItemProperty());
         referenceTable.setItems(managerVM.getReferenceList());

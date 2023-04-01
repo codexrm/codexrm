@@ -1,12 +1,11 @@
 package io.github.codexrm.projectreference.model.model;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import io.github.codexrm.projectreference.model.enums.Months;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({@Type(value = ArticleReference.class, name = "article"),
@@ -20,9 +19,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 public class Reference {
 
-    protected String author;
     protected String title;
-    protected LocalDate date;
+    protected String year;
+    protected Months month;
     protected String note;
     protected Integer id;
     protected boolean isFromServer;
@@ -30,16 +29,16 @@ public class Reference {
     protected boolean isActive ;
 
     public Reference() {
-        this.author = "";
         this.title = "";
-        this.date = null;
+        this.year = "";
+        this.month = null;
         this.note = "";
     }
 
-    public Reference(String author, String title, LocalDate date, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive) {
-        this.author = author;
+    public Reference(String title, String year, Months month, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive) {
         this.title = title;
-        this.date = date;
+        this.year = year;
+        this.month = month;
         this.note = note;
         this.id = id;
         this.isFromServer = isFromServer;
@@ -47,44 +46,18 @@ public class Reference {
         this.isActive = isActive;
     }
 
-    public String getAuthor() {return author;}
+    public String getTitle() { return title; }
 
-    public void setAuthor(String author) {this.author = author;}
+    public void setTitle(String title) { this.title = title; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getYear() { return year; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public void setYear(String year) { this.year = year; }
 
-    @JsonIgnore
-    public LocalDate getLocalDate() {
-        return date;
-    }
+    public Months getMonth() { return month; }
 
-    @JsonIgnore
-    public void setLocalDate(LocalDate date) {
-        this.date = date;
-    }
+    public void setMonth(Months month) { this.month = month; }
 
-    public String getDate() {
-        if (date == null){
-        return "0000-00-00";
-        } else{
-            return date.toString();
-        }
-    }
-
-    public void setDate(String date) {
-        if (date.equals("0000-00-00")) {
-           this.date = null;
-        }else{
-            String[] partDate = date.split("-", 3);
-            this.date = LocalDate.of(Integer.parseInt(partDate[0]),Integer.parseInt(partDate[1]),Integer.parseInt(partDate[2]));
-        }
-    }
     public String getNote() {
         return note;
     }
@@ -116,13 +89,20 @@ public class Reference {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Reference)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Reference reference = (Reference) o;
-        return getAuthor().equals(reference.getAuthor()) && getTitle().equals(reference.getTitle()) && getDate().equals(reference.getDate()) && getNote().equals(reference.getNote());
+        return isFromServer == reference.isFromServer &&
+                isModified == reference.isModified &&
+                isActive == reference.isActive &&
+                Objects.equals(title, reference.title) &&
+                Objects.equals(year, reference.year) &&
+                Objects.equals(month, reference.month) &&
+                Objects.equals(note, reference.note) &&
+                Objects.equals(id, reference.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getAuthor(), getTitle(), getDate(), getNote());
+        return Objects.hash(title, year, month, note, id, isFromServer, isModified, isActive);
     }
 }

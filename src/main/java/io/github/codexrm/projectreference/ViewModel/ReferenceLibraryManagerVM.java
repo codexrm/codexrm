@@ -1,23 +1,16 @@
 package io.github.codexrm.projectreference.viewmodel;
 
 import io.github.codexrm.projectreference.model.controller.ReferenceLibraryManager;
-import io.github.codexrm.projectreference.model.enums.Format;
-import io.github.codexrm.projectreference.model.enums.ReferenceType;
+import io.github.codexrm.projectreference.model.enums.*;
 import io.github.codexrm.projectreference.model.model.*;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.jbibtex.ParseException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static java.util.Comparator.comparing;
 
@@ -44,9 +37,7 @@ public class ReferenceLibraryManagerVM {
         return referenceTypeReplaced.get();
     }
 
-    public void setReferenceTypeReplaced(final boolean referenceTypeReplaced) {
-        this.referenceTypeReplaced.set(referenceTypeReplaced);
-    }
+    public void setReferenceTypeReplaced(final boolean referenceTypeReplaced) { this.referenceTypeReplaced.set(referenceTypeReplaced); }
 
     public BooleanProperty referenceTypeReplacedProperty() {
         return referenceTypeReplaced;
@@ -117,7 +108,7 @@ public class ReferenceLibraryManagerVM {
         BookReferenceVM reference = new BookReferenceVM();
         reference.setId(id);
         reference.setTitle("No Title");
-        reference.setAuthor("lastName1,Name1;lastNameN,nameN...");
+        reference.setYear("No Year");
         reference.setIsActive(true);
 
         referenceList.add(reference);
@@ -173,8 +164,8 @@ public class ReferenceLibraryManagerVM {
                 ReferenceVM referenceVM = getReferenceObject(newReferenceType);
                 referenceVM.setId(getCurrentReference().getId());
                 referenceVM.setTitle(getCurrentReference().getTitle());
-                referenceVM.setAuthor(getCurrentReference().getAuthor());
-                referenceVM.setDate(getCurrentReference().getDate());
+                referenceVM.setYear(getCurrentReference().getYear());
+                referenceVM.setMonth(getCurrentReference().getMonth());
                 referenceVM.setNote(getCurrentReference().getNote());
                 referenceVM.setIsFromServer(getCurrentReference().isIsFromServer());
                 referenceVM.setIsActive(getCurrentReference().isIsActive());

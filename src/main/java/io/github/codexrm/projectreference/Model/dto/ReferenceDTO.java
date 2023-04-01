@@ -1,11 +1,8 @@
 package io.github.codexrm.projectreference.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.github.codexrm.projectreference.model.model.User;
-
-import java.time.LocalDate;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({@JsonSubTypes.Type(value = ArticleReferenceDTO.class, name = "articleDTO"),
@@ -18,92 +15,53 @@ import java.time.LocalDate;
         @JsonSubTypes.Type(value = ConferenceProceedingsReferenceDTO.class, name = "proceedingsDTO")})
 public class ReferenceDTO {
 
-    protected String author;
     protected String title;
-    protected LocalDate date;
+    protected String year;
+    protected String month;
     protected String note;
     protected Integer id;
     protected User user;
 
     public ReferenceDTO() {}
 
-    public ReferenceDTO(String author, String title, LocalDate date, String note, Integer id, User user) {
-        this.author = author;
+    public ReferenceDTO(String title, String year, String month, String note, Integer id, User user) {
         this.title = title;
-        this.date = date;
+        this.year = year;
+        this.month = month;
         this.note = note;
         this.id = id;
         this.user = user;
     }
 
-    public ReferenceDTO(String author, String title, LocalDate date, String note, User user) {
-        this.author = author;
+    public ReferenceDTO(String title, String year, String month, String note, User user) {
         this.title = title;
-        this.date = date;
+        this.year = year;
+        this.month = month;
         this.note = note;
         this.user = user;
     }
 
-    public String getAuthor() {
-        return author;
-    }
+    public String getTitle() { return title; }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
+    public void setTitle(String title) { this.title = title; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getYear() { return year; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public void setYear(String year) { this.year = year; }
 
-    @JsonIgnore
-    public LocalDate getLocalDate() {
-        return date;
-    }
+    public String getMonth() { return month; }
 
+    public void setMonth(String month) { this.month = month; }
 
-    public void setLocalDate(LocalDate date) {
-        this.date = date;
-    }
+    public String getNote() { return note; }
 
-    public String getDate() {
-        if (date == null){
-            return "0000-00-00";
-        } else{
-            return date.toString();
-        }
-    }
+    public void setNote(String note) { this.note = note; }
 
-    public void setDate(String date) {
-        if (date == null || date.equals("0000-00-00")) {
-            this.date = null;
-        }else{
-            String[] partDate = date.split("-", 3);
-            this.date = LocalDate.of(Integer.parseInt(partDate[0]),Integer.parseInt(partDate[1]),Integer.parseInt(partDate[2]));
-        }
-    }
+    public Integer getId() { return id; }
 
-    public String getNote() {
-        return note;
-    }
+    public void setId(Integer id) { this.id = id; }
 
-    public void setNote(String note) {
-        this.note = note;
-    }
+    public User getUser() { return user; }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public User getUser() {return user;}
-
-    public void setUser(User user) {this.user = user;}
+    public void setUser(User user) { this.user = user; }
 }

@@ -91,9 +91,9 @@
                     <content>
                         <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0">
                             <children>
-                                <TableView fx:id="referenceTable" layoutX="109.0" layoutY="147.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="430.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <TableView fx:id="referenceTable" layoutX="109.0" layoutY="147.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="430.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <columns>
-                                        <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Autor">
+                                        <TableColumn fx:id="yearColumn" prefWidth="75.0" text="Año">
                                             <cellValueFactory>
                                                 <PropertyValueFactory property="author" />
                                             </cellValueFactory>

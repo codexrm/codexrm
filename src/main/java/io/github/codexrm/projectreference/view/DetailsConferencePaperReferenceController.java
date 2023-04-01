@@ -1,19 +1,19 @@
 package io.github.codexrm.projectreference.view;
 
+import io.github.codexrm.projectreference.model.enums.Months;
 import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.viewmodel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class DetailsConferencePaperReferenceController implements Initializable {
+
     @FXML
     private TextField author;
 
@@ -21,40 +21,66 @@ public class DetailsConferencePaperReferenceController implements Initializable 
     private TextField title;
 
     @FXML
-    private DatePicker date;
+    private TextField bookTitle;
 
     @FXML
-    private TextField note;
+    private TextField year;
+
+    @FXML
+    private TextField editor;
 
     @FXML
     private TextField volume;
 
     @FXML
-    private TextField publisher;
+    private TextField number;
 
     @FXML
-    private TextField address;
+    private TextField series;
 
     @FXML
     private TextField pages;
 
     @FXML
-    private ComboBox<ReferenceType> referenceType;
+    private TextField address;
 
+    @FXML
+    private ComboBox<Months> month;
+
+    @FXML
+    private TextField organization;
+
+    @FXML
+    private TextField publisher;
+
+    @FXML
+    private TextField note;
+
+    @FXML
+    private ComboBox<ReferenceType> referenceType;
     private ReferenceLibraryManagerVM managerVM;
+
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 
         if (oldReference != null) {
             if ((oldReference.getClass() == ConferencePaperReferenceVM.class)) {
-                author.textProperty().unbindBidirectional(oldReference.authorProperty());
+
                 title.textProperty().unbindBidirectional(oldReference.titleProperty());
-                date.valueProperty().unbindBidirectional(oldReference.dateProperty());
+                year.textProperty().unbindBidirectional(oldReference.yearProperty());
+                month.valueProperty().unbindBidirectional(oldReference.monthProperty());
                 note.textProperty().unbindBidirectional(oldReference.noteProperty());
-                publisher.textProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).publisherProperty());
+
+                author.textProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).authorProperty());
+                bookTitle.textProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).bookTitleProperty());
+                editor.textProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).editorProperty());
                 volume.textProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).volumeProperty());
-                address.textProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).addressProperty());
+                number.textProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).numberProperty());
+                series.textProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).seriesProperty());
                 pages.textProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).pagesProperty());
+                address.textProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).addressProperty());
+                organization.textProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).organizationProperty());
+                publisher.textProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).publisherProperty());
 
                 referenceType.valueProperty().unbindBidirectional(((ConferencePaperReferenceVM) oldReference).referenceTypeProperty());
             }
@@ -62,26 +88,39 @@ public class DetailsConferencePaperReferenceController implements Initializable 
 
         if (newReference != null) {
             if ((newReference.getClass() == ConferencePaperReferenceVM.class)) {
-                author.textProperty().bindBidirectional(newReference.authorProperty());
+
                 title.textProperty().bindBidirectional(newReference.titleProperty());
-                date.valueProperty().bindBidirectional(newReference.dateProperty());
+                year.textProperty().bindBidirectional(newReference.yearProperty());
+                month.valueProperty().bindBidirectional(newReference.monthProperty());
                 note.textProperty().bindBidirectional(newReference.noteProperty());
-                publisher.textProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).publisherProperty());
+
+                author.textProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).authorProperty());
+                bookTitle.textProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).bookTitleProperty());
+                editor.textProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).editorProperty());
                 volume.textProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).volumeProperty());
-                address.textProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).addressProperty());
+                number.textProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).numberProperty());
+                series.textProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).seriesProperty());
                 pages.textProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).pagesProperty());
+                address.textProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).addressProperty());
+                organization.textProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).organizationProperty());
+                publisher.textProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).publisherProperty());
 
                 referenceType.valueProperty().bindBidirectional(((ConferencePaperReferenceVM) newReference).referenceTypeProperty());
             }
         } else {
             author.clear();
             title.clear();
-            date.setValue(LocalDate.now());
-            note.clear();
-            publisher.clear();
+            bookTitle.clear();
+            year.clear();
+            editor.clear();
             volume.clear();
-            address.clear();
+            number.clear();
+            series.clear();
             pages.clear();
+            address.clear();
+            organization.clear();
+            publisher.clear();
+            note.clear();
         }
     };
 
@@ -93,43 +132,62 @@ public class DetailsConferencePaperReferenceController implements Initializable 
 
     public void setTitle(TextField title) { this.title = title; }
 
-    public DatePicker getDate() { return date; }
+    public TextField getBookTitle() { return bookTitle; }
 
-    public void setDate(DatePicker date) { this.date = date; }
+    public void setBookTitle(TextField bookTitle) { this.bookTitle = bookTitle; }
 
-    public TextField getNote() { return note; }
+    public TextField getYear() { return year; }
 
-    public void setNote(TextField note) { this.note = note; }
+    public void setYear(TextField year) { this.year = year; }
+
+    public TextField getEditor() { return editor; }
+
+    public void setEditor(TextField editor) { this.editor = editor; }
 
     public TextField getVolume() { return volume; }
 
     public void setVolume(TextField volume) { this.volume = volume; }
 
-    public TextField getPublisher() { return publisher; }
+    public TextField getNumber() { return number; }
 
-    public void setPublisher(TextField publisher) { this.publisher = publisher; }
+    public void setNumber(TextField number) { this.number = number; }
 
-    public TextField getAddress() { return address; }
+    public TextField getSeries() { return series; }
 
-    public void setAddress(TextField address) { this.address = address; }
+    public void setSeries(TextField series) { this.series = series; }
 
     public TextField getPages() { return pages; }
 
     public void setPages(TextField pages) { this.pages = pages; }
 
+    public TextField getAddress() { return address; }
+
+    public void setAddress(TextField address) { this.address = address; }
+
+    public ComboBox<Months> getMonth() { return month; }
+
+    public void setMonth(ComboBox<Months> month) { this.month = month; }
+
+    public TextField getOrganization() { return organization; }
+
+    public void setOrganization(TextField organization) { this.organization = organization; }
+
+    public TextField getPublisher() { return publisher; }
+
+    public void setPublisher(TextField publisher) { this.publisher = publisher; }
+
+    public TextField getNote() { return note; }
+
+    public void setNote(TextField note) { this.note = note; }
+
     public ComboBox<ReferenceType> getReferenceType() { return referenceType; }
 
     public void setReferenceType(ComboBox<ReferenceType> referenceType) { this.referenceType = referenceType; }
 
-    public ReferenceLibraryManagerVM getManagerVM() { return managerVM; }
-
-    public void setManagerVM(ReferenceLibraryManagerVM managerVM) { this.managerVM = managerVM; }
-
-    public ChangeListener<ReferenceVM> getReferenceVMListener() { return referenceVMListener; }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadReferenceType();
+        loadMonths();
     }
 
     public void setDataModel(ReferenceLibraryManagerVM dataViewModel) {
@@ -139,6 +197,10 @@ public class DetailsConferencePaperReferenceController implements Initializable 
         }
         this.managerVM = dataViewModel;
         this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
+    }
+
+    private void loadMonths(){
+        month.getItems().addAll(Months.values());
     }
 
     private void loadReferenceType() {
