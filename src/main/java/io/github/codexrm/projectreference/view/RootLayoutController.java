@@ -207,11 +207,7 @@ public class RootLayoutController implements Initializable {
 
         ObservableList<ReferenceVM> referenceList = referenceTable.getSelectionModel().getSelectedItems();
         if (referenceList != null) {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Export");
-            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("All Files", "*.*"));
-            File selectedFile = fileChooser.showSaveDialog(stage);
-            managerVM.exportReferenceList(selectedFile,referenceList,format);
+            managerVM.exportReferenceList(referenceList,format);
         }
     }
 

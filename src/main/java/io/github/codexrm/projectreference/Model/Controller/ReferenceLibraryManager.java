@@ -17,16 +17,16 @@ public class ReferenceLibraryManager {
     private ReferenceLibrary referenceLibrary;
     private final LibraryFiles libraryFiles;
     private static final String dbReferenceName = "testFile//referenceL.txt";
-    private final ExportFactory exportFactory;
-    private final ImportFactory importFactory;
     private final Sync sync;
+    private final ExportR exportR;
+    private final ImportR importR;
 
     private ReferenceLibraryManager() {
         referenceLibrary = new ReferenceLibrary();
         libraryFiles = new LibraryFiles(dbReferenceName);
-        exportFactory = new ExportFactory();
-        importFactory = new ImportFactory();
         sync = new Sync();
+        exportR = new ExportR();
+        importR = new ImportR();
     }
 
     public static ReferenceLibraryManager getReferenceLibraryManager() {
@@ -94,21 +94,13 @@ public class ReferenceLibraryManager {
         return newReference;
     }
 
-    public void exportReference(String path, Reference reference, Format format) throws IOException {
+    public void exportReferenceList(ArrayList<Reference> referenceList, Format format) throws IOException {
 
-        Export export = exportFactory.getExport(format);
-        export.writeValue(reference, path);
-    }
-
-    public void exportReferenceList(File file, ArrayList<Reference> referenceList, Format format) throws IOException {
-
-        Export export = exportFactory.getExport(format);
-        export.writeValue(referenceList, file.getPath());
+        exportR.exportReferenceList(new File( System.getProperty("user.home") + File. separator +"Desktop" + File. separator + "exported References.txt"), referenceList, format);
     }
 
     public void importReferences(String path, Format format) throws IOException, TokenMgrException, ParseException {
 
-        Import importer = importFactory.getImport(format);
-        referenceLibrary.addListReference(importer.readFile(path));
+        referenceLibrary.addListReference(importR.importReferences(path,format));
     }
 }

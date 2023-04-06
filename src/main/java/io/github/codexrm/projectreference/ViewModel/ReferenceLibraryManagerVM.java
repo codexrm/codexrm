@@ -132,13 +132,13 @@ public class ReferenceLibraryManagerVM {
         }
     }
 
-    public void exportReferenceList(File file, List<ReferenceVM> referenceVMList, Format format) throws IOException {
+    public void exportReferenceList(List<ReferenceVM> referenceVMList, Format format) throws IOException {
 
        ArrayList<Reference> list = new ArrayList<>();
         for (ReferenceVM referenceVM : referenceVMList) {
             list.add(referenceVM.toModel());
         }
-        manager.exportReferenceList(file, list,format);
+        manager.exportReferenceList(list, format);
     }
 
     public void importReferences(List<File> fileList, Format format) throws IOException, ParseException {
