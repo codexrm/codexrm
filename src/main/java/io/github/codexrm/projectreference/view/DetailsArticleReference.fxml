@@ -39,9 +39,9 @@
                         <Label prefHeight="66.0" prefWidth="118.0" text="Volumen:" GridPane.rowIndex="5" />
                         <Label prefHeight="66.0" prefWidth="118.0" text="Año:" GridPane.rowIndex="4" />
                         <Label prefHeight="66.0" prefWidth="118.0" text="Páginas:" GridPane.rowIndex="7" />
-                        <TextField fx:id="author" prefHeight="47.0" prefWidth="238.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="author" prefHeight="47.0" prefWidth="238.0" promptText="Apellido,Nombre;Aplellido2,Nombre2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="title" prefHeight="54.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="number" prefHeight="51.0" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <TextField fx:id="number" prefHeight="51.0" prefWidth="236.0" promptText="No. del Artículo" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <TextField fx:id="volume" prefHeight="55.0" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <TextField fx:id="year" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <TextField fx:id="pages" prefHeight="47.0" prefWidth="233.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
@@ -51,9 +51,9 @@
                   <Label prefHeight="48.0" prefWidth="103.0" text="Mes:" GridPane.rowIndex="8" />
                   <Label prefHeight="56.0" prefWidth="122.0" text="ISSN:" GridPane.rowIndex="9" />
                   <Label prefHeight="57.0" prefWidth="139.0" text="Nota:" GridPane.rowIndex="10" />
-                  <TextField fx:id="issn" prefHeight="56.0" prefWidth="214.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <TextField fx:id="issn" prefHeight="56.0" prefWidth="214.0" promptText="0000-0000" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                   <ComboBox fx:id="month" prefHeight="25.0" prefWidth="215.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                  <TextField fx:id="note" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <TextField fx:id="note" prefHeight="60.0" prefWidth="251.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                   <TextField fx:id="year" prefHeight="65.0" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     </children>
                 </GridPane>

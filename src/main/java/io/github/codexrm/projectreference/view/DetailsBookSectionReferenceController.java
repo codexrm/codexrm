@@ -12,6 +12,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import org.controlsfx.validation.Severity;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 public class DetailsBookSectionReferenceController implements Initializable {
 
@@ -63,11 +66,13 @@ public class DetailsBookSectionReferenceController implements Initializable {
     @FXML
     private TextField note;
 
-
     @FXML
     private ComboBox<ReferenceType> referenceType;
 
     private ReferenceLibraryManagerVM managerVM;
+
+    private ValidationSupport validationSupport = new ValidationSupport();
+    private Validations v = new Validations();
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 
@@ -207,6 +212,23 @@ public class DetailsBookSectionReferenceController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        validationSupport.registerValidator(chapter,true, Validator.createRegexValidator("Solo se puede introduccir números", "[\\d]*", Severity.ERROR));
+        validationSupport.registerValidator(pages,true,  Validator.createRegexValidator("Solo se puede introducir número(incluido romano) y los caracteres '-', ','", "[IVXMLCD0-9-,]+", Severity.ERROR));
+        validationSupport.registerValidator(author, true, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*", Severity.ERROR));
+        validationSupport.registerValidator(editor, true, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*", Severity.ERROR));
+        validationSupport.registerValidator(title,true, Validator.createEmptyValidator("Campo requerido"));
+        validationSupport.registerValidator(publisher,true, Validator.createRegexValidator("Solo se puede introducir letras y el caracter '.'", "[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s\\.]+", Severity.ERROR));
+        validationSupport.registerValidator(year,true,  Validator.createRegexValidator("Solo se pueden introducir un año o un rango de años", "\\d{4}|\\d{4}-\\d{4}|\\d{4}--\\d{4}", Severity.ERROR));
+
+        validationSupport.registerValidator(volume, false, Validator.createRegexValidator("Solo se puede introduccir números", "^$|[\\d]*", Severity.ERROR));
+        validationSupport.registerValidator(series, false, Validator.createRegexValidator("Solo se puede introduccir letras", "^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s]+", Severity.ERROR));
+        validationSupport.registerValidator(address, false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s]+[,\\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*", Severity.ERROR));
+        validationSupport.registerValidator(number, false, Validator.createRegexValidator("Solo se puede introducir números, letras y el caracter '-'", "^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0-9\\s-]+", Severity.ERROR));
+        validationSupport.registerValidator(edition, false, Validator.createRegexValidator("Solo se puede introducir números, letras y el caracter '.'", "^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0-9\\s\\.]+", Severity.ERROR));
+        validationSupport.registerValidator(isbn, false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|\\d{4}-\\d{4}", Severity.ERROR));
+
+
         loadReferenceType();
         loadBookSectionType();
         loadMonths();
@@ -223,10 +245,12 @@ public class DetailsBookSectionReferenceController implements Initializable {
     }
 
     private void loadMonths(){
+        month.getItems().add(null);
         month.getItems().addAll(Months.values());
     }
 
     private void loadBookSectionType(){
+        type.getItems().add(null);
         type.getItems().addAll(BookSectionType.values());
     }
 

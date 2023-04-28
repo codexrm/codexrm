@@ -13,6 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import org.controlsfx.validation.Severity;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 public class DetailsBookLetReferenceController implements Initializable {
 
@@ -41,6 +44,9 @@ public class DetailsBookLetReferenceController implements Initializable {
     private ComboBox<ReferenceType> referenceType;
 
     private ReferenceLibraryManagerVM managerVM;
+
+    private ValidationSupport validationSupport = new ValidationSupport();
+    private Validations v = new Validations();
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 
@@ -118,6 +124,13 @@ public class DetailsBookLetReferenceController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        validationSupport.registerValidator(title,true, Validator.createEmptyValidator("Campo requerido"));
+
+        validationSupport.registerValidator(author, false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*", Severity.ERROR));
+        validationSupport.registerValidator(address,false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s]+[,\\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*", Severity.ERROR));
+        validationSupport.registerValidator(year,false, Validator.createRegexValidator("Solo se pueden introducir un año o un rango de años", "^$|\\d{4}|\\d{4}-\\d{4}|\\d{4}--\\d{4}", Severity.ERROR));
+
         loadReferenceType();
         loadMonths();
     }
@@ -132,6 +145,7 @@ public class DetailsBookLetReferenceController implements Initializable {
     }
 
     private void loadMonths(){
+        month.getItems().add(null);
         month.getItems().addAll(Months.values());
     }
 
