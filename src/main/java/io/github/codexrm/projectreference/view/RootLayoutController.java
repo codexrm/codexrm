@@ -8,10 +8,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.jbibtex.ParseException;
 
@@ -32,6 +34,8 @@ public class RootLayoutController implements Initializable {
     private final ScrollPane thesisDetail;
     private final ScrollPane conferencePaperDetail;
     private final ScrollPane webPageDetail;
+    private final AnchorPane login;
+    private final LoginDialogController loginDialogController;
     private Stage stage;
 
     @FXML
@@ -65,6 +69,7 @@ public class RootLayoutController implements Initializable {
         FXMLLoader conferenceProceedingsDetailLoader = new FXMLLoader();
         FXMLLoader conferencePaperDetailLoader = new FXMLLoader();
         FXMLLoader webPageDetailLoader = new FXMLLoader();
+        FXMLLoader loginLoader = new FXMLLoader();
 
         bookDetailLoader.setLocation(getClass().getResource("DetailsBookReference.fxml"));
         articleDetailLoader.setLocation(getClass().getResource("DetailsArticleReference.fxml"));
@@ -74,6 +79,7 @@ public class RootLayoutController implements Initializable {
         conferenceProceedingsDetailLoader.setLocation(getClass().getResource("DetailsConferenceProceedingsReference.fxml"));
         conferencePaperDetailLoader.setLocation(getClass().getResource("DetailsConferencePaperReference.fxml"));
         webPageDetailLoader.setLocation(getClass().getResource("DetailsWebPageReference.fxml"));
+        loginLoader.setLocation(getClass().getResource("LoginDialog.fxml"));
 
         DetailsBookReferenceController bookDetailViewController = new DetailsBookReferenceController();
         DetailsArticleReferenceController articleDetailViewController = new DetailsArticleReferenceController();
@@ -83,6 +89,7 @@ public class RootLayoutController implements Initializable {
         DetailsConferenceProceedingsReferenceController conferenceProceedingsDetailViewController = new DetailsConferenceProceedingsReferenceController();
         DetailsConferencePaperReferenceController conferencePaperDetailViewController = new DetailsConferencePaperReferenceController();
         DetailsWebPageReferenceController webPageDetailViewController = new DetailsWebPageReferenceController();
+        loginDialogController = new LoginDialogController();
 
         bookDetailViewController.setDataModel(managerVM);
         articleDetailViewController.setDataModel(managerVM);
@@ -101,6 +108,7 @@ public class RootLayoutController implements Initializable {
         conferenceProceedingsDetailLoader.setController(conferenceProceedingsDetailViewController);
         conferencePaperDetailLoader.setController(conferencePaperDetailViewController);
         webPageDetailLoader.setController(webPageDetailViewController);
+        loginLoader.setController(loginDialogController);
 
         bookDetail = bookDetailLoader.load();
         articleDetail = articleDetailLoader.load();
@@ -110,6 +118,7 @@ public class RootLayoutController implements Initializable {
         conferenceProceedingsDetail = conferenceProceedingsDetailLoader.load();
         conferencePaperDetail = conferencePaperDetailLoader.load();
         webPageDetail = webPageDetailLoader.load();
+        login = loginLoader.load();
     }
 
     public void setStage(Stage stage) {
@@ -287,9 +296,29 @@ public class RootLayoutController implements Initializable {
     private void sync() {
 
         try {
+            if(showPersonEditDialog()){
+                managerVM.userLogin(loginDialogController.getUser());
+            }
             managerVM.syncDB();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean showPersonEditDialog() {
+        // Create the dialog Stage.
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Login");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(stage);
+        Scene scene = new Scene(login);
+        dialogStage.setScene(scene);
+
+        loginDialogController.setDialogStage(dialogStage);
+
+
+        // Show the dialog and wait until the user closes it
+        dialogStage.showAndWait();
+        return loginDialogController.isOkClicked();
     }
 }

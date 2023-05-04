@@ -13,12 +13,12 @@ public class Sync {
 
     private final ReferenceLibraryDTO libraryDTO;
     private final DTOConverter dtoConverter;
-    private final RestSync restSync;
+    private final RestService restService;
 
     public Sync() {
         this.libraryDTO = new ReferenceLibraryDTO();
         this.dtoConverter = new DTOConverter();
-        this.restSync = new RestSync();
+        this.restService = new RestService();
     }
 
    /* public List<Reference> syncReferences(Hashtable<Integer, Reference> referenceTable, User user){

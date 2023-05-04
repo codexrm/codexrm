@@ -46,7 +46,6 @@ public class DetailsBookLetReferenceController implements Initializable {
     private ReferenceLibraryManagerVM managerVM;
 
     private ValidationSupport validationSupport = new ValidationSupport();
-    private Validations v = new Validations();
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 

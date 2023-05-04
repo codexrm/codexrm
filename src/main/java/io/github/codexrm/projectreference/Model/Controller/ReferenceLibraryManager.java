@@ -2,6 +2,7 @@ package io.github.codexrm.projectreference.model.controller;
 
 import io.github.codexrm.projectreference.model.enums.Format;
 import io.github.codexrm.projectreference.model.model.*;
+import io.github.codexrm.projectreference.viewmodel.UserLoginVM;
 import org.jbibtex.ParseException;
 import org.jbibtex.TokenMgrException;
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +19,7 @@ public class ReferenceLibraryManager {
     private final LibraryFiles libraryFiles;
     private static final String dbReferenceName = "testFile//referenceL.txt";
     private final Sync sync;
+    private RestService restService;
     private final ExportR exportR;
     private final ImportR importR;
 
@@ -27,6 +29,7 @@ public class ReferenceLibraryManager {
         sync = new Sync();
         exportR = new ExportR();
         importR = new ImportR();
+        restService = new RestService();
     }
 
     public static ReferenceLibraryManager getReferenceLibraryManager() {
@@ -102,5 +105,10 @@ public class ReferenceLibraryManager {
     public void importReferences(String path, Format format) throws IOException, TokenMgrException, ParseException {
 
         referenceLibrary.addListReference(importR.importReferences(path,format));
+    }
+
+    public void userLogin(UserLogin userLogin) {
+
+        User user = restService.userLogin(userLogin);
     }
 }

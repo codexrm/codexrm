@@ -7,16 +7,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Control;
 import javafx.scene.control.TextField;
 import org.controlsfx.validation.Severity;
-import org.controlsfx.validation.ValidationResult;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
 
 public class DetailsWebPageReferenceController implements Initializable {
 
@@ -44,7 +41,6 @@ public class DetailsWebPageReferenceController implements Initializable {
     private ReferenceLibraryManagerVM managerVM;
 
     private ValidationSupport validationSupport = new ValidationSupport();
-    private Validations v = new Validations();
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 

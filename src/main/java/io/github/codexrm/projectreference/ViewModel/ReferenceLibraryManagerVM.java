@@ -21,6 +21,7 @@ public class ReferenceLibraryManagerVM {
     private final ReferenceLibraryManager manager;
     private final BooleanProperty referenceTypeReplaced;
     private  ArrayList<ReferenceVM> referenceDeleteList;
+    private UserLoginVM userLoginVM;
 
     public ReferenceLibraryManagerVM() throws IOException {
         referenceList = FXCollections.observableArrayList();
@@ -29,6 +30,7 @@ public class ReferenceLibraryManagerVM {
         manager = ReferenceLibraryManager.getReferenceLibraryManager();
         referenceTypeReplaced = new SimpleBooleanProperty(false);
         referenceDeleteList = new ArrayList<>();
+        userLoginVM = new UserLoginVM();
 
         loadDataFromModel();
     }
@@ -155,6 +157,8 @@ public class ReferenceLibraryManagerVM {
         manager.syncReferenceTable();
         syncViewModel();
     }
+
+    public void userLogin(UserLoginVM user) { manager.userLogin(user.toModel()); }
 
     public void replaceCurrentReferenceType(ReferenceType newReferenceType) {
 
