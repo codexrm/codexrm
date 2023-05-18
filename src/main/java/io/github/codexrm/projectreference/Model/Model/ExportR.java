@@ -55,7 +55,7 @@ public class ExportR {
                 } else {
                     if (reference instanceof ThesisReference) {
                         ThesisReference thesis = (ThesisReference) reference;
-                        entry = new ThesisR(thesis.getTitle(), thesis.getYear(), enumsConverter.getMonthLibrary(thesis.getMonth()), thesis.getNote(), thesis.getId(), thesis.getAuthor(), thesis.getSchool(), enumsConverter.getThesisTypelibrary(thesis.getType()), thesis.getAddress());
+                        entry = new ThesisR(thesis.getTitle(), thesis.getYear(), enumsConverter.getMonthLibrary(thesis.getMonth()), thesis.getNote(), thesis.getId(), thesis.getAuthor(), thesis.getSchool(), enumsConverter.getThesisTypeLibrary(thesis.getType()), thesis.getAddress());
 
                     } else {
                         if (reference instanceof ConferenceProceedingsReference) {

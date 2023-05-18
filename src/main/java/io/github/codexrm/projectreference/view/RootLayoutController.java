@@ -296,11 +296,14 @@ public class RootLayoutController implements Initializable {
     private void sync() {
 
         try {
-            if(showPersonEditDialog()){
-                managerVM.userLogin(loginDialogController.getUser());
+            if(!managerVM.verificateAutentication()){
+                if(showPersonEditDialog()){
+                    managerVM.userLogin(loginDialogController.getUser());
+                }
             }
+
             managerVM.syncDB();
-        } catch (IOException e) {
+        } catch (IOException | java.text.ParseException e) {
             e.printStackTrace();
         }
     }

@@ -2,14 +2,16 @@ package io.github.codexrm.projectreference.model.controller;
 
 import io.github.codexrm.projectreference.model.enums.Format;
 import io.github.codexrm.projectreference.model.model.*;
-import io.github.codexrm.projectreference.viewmodel.UserLoginVM;
 import org.jbibtex.ParseException;
 import org.jbibtex.TokenMgrException;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 
 public class ReferenceLibraryManager {
@@ -18,18 +20,16 @@ public class ReferenceLibraryManager {
     private ReferenceLibrary referenceLibrary;
     private final LibraryFiles libraryFiles;
     private static final String dbReferenceName = "testFile//referenceL.txt";
-    private final Sync sync;
-    private RestService restService;
+    private final Service service;
     private final ExportR exportR;
     private final ImportR importR;
 
     private ReferenceLibraryManager() {
         referenceLibrary = new ReferenceLibrary();
         libraryFiles = new LibraryFiles(dbReferenceName);
-        sync = new Sync();
+        service = new Service();
         exportR = new ExportR();
         importR = new ImportR();
-        restService = new RestService();
     }
 
     public static ReferenceLibraryManager getReferenceLibraryManager() {
@@ -49,9 +49,8 @@ public class ReferenceLibraryManager {
 
     public void syncReferenceTable() throws IOException {
 
-        /*referenceLibrary.addListReferenceSync((ArrayList<Reference>) sync.syncReferences
-                (referenceLibrary.getReferenceTable(), referenceLibrary.getUser()));
-        saveReferenceTable();*/
+       referenceLibrary = service.syncReferences (referenceLibrary.getReferenceTable(), referenceLibrary.getAuthenticationData(), referenceLibrary.getUser());
+        saveReferenceTable();
     }
 
     public void loadReferenceTable() throws IOException {
@@ -108,7 +107,22 @@ public class ReferenceLibraryManager {
     }
 
     public void userLogin(UserLogin userLogin) {
+        referenceLibrary.setAuthenticationData(service.login(userLogin));
+    }
 
-        User user = restService.userLogin(userLogin);
+    public boolean verificateAutentication() throws java.text.ParseException {
+        if(referenceLibrary.getAuthenticationData().getUsername().equals("guest")){
+            return false;
+        }else{
+            DateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZ");
+            Date date = format.parse(referenceLibrary.getAuthenticationData().getExpiredTime());
+           Date now = new Date();
+
+            if(date.compareTo(now) != -1){
+                return false;
+            }else{
+                return true;
+            }
+        }
     }
 }

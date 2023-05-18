@@ -5,16 +5,28 @@ import java.util.*;
 public class ReferenceLibrary {
 
     private final Hashtable<Integer, Reference> referenceTable;
-    private  User user;
+    private AuthenticationData authenticationData;
+    private User user;
 
     public ReferenceLibrary() {
         referenceTable = new Hashtable<>();
-        user = new User( 0, "guest", "guest", "guest", "guest", false,  null);
+        authenticationData = new AuthenticationData( 0, "guest", "guest", "guest", "guest", false,  null, null);
+        user = new User();
     }
 
-    public User getUser() {return user;}
+    public ReferenceLibrary(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData, User user) {
+        this.referenceTable = referenceTable;
+        this.authenticationData = authenticationData;
+        this.user = user;
+    }
 
-    public void setUser(User user) {this.user = user;}
+    public AuthenticationData getAuthenticationData() { return authenticationData; }
+
+    public void setAuthenticationData(AuthenticationData authenticationData) { this.authenticationData = authenticationData; }
+
+    public User getUser() { return user; }
+
+    public void setUser(User user) { this.user = user; }
 
     public Reference addEmptyReference() {
         int id = maxValueKeys() + 1;

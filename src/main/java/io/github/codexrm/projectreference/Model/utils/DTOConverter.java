@@ -1,6 +1,7 @@
 package io.github.codexrm.projectreference.model.utils;
 
 import io.github.codexrm.projectreference.model.dto.*;
+import io.github.codexrm.projectreference.model.enums.BookSectionType;
 import io.github.codexrm.projectreference.model.enums.ThesisType;
 import io.github.codexrm.projectreference.model.model.*;
 import org.modelmapper.ModelMapper;
@@ -11,8 +12,12 @@ import java.util.List;
 public class DTOConverter {
 
     private final ModelMapper modelMapper;
+    private EnumsConverter enumsConverter;
 
-    public DTOConverter() {this.modelMapper = new ModelMapper();}
+    public DTOConverter() {
+        this.modelMapper = new ModelMapper();
+        this.enumsConverter = new EnumsConverter();
+    }
 
     public ReferenceDTO toReferenceDTO(Reference reference, User user) {
 
@@ -20,27 +25,39 @@ public class DTOConverter {
 
         if(reference.getClass() == ArticleReference.class){
             referenceDTO =  modelMapper.map(reference, ArticleReferenceDTO.class);
+            referenceDTO.setMonth(enumsConverter.getMonthString((reference).getMonth()));
         }
         else if(reference.getClass() == BookSectionReference.class){
-            referenceDTO =  modelMapper.map(reference, BookSectionReferenceDTO.class);
+            BookSectionReferenceDTO sectionDTO =  modelMapper.map(reference, BookSectionReferenceDTO.class);
+            sectionDTO.setMonth(enumsConverter.getMonthString((reference).getMonth()));
+            sectionDTO.setType(enumsConverter.getBookSectionTypeString(((BookSectionReference) reference).getType()));
+            referenceDTO = sectionDTO;
         }
         else if(reference.getClass() == BookReference.class){
             referenceDTO =  modelMapper.map(reference, BookReferenceDTO.class);
+            referenceDTO.setMonth(enumsConverter.getMonthString((reference).getMonth()));
         }
         else if(reference.getClass() == BookLetReference.class){
             referenceDTO =  modelMapper.map(reference, BookLetReferenceDTO.class);
+            referenceDTO.setMonth(enumsConverter.getMonthString((reference).getMonth()));
         }
         else if(reference.getClass() == ConferenceProceedingsReference.class){
             referenceDTO =  modelMapper.map(reference,ConferenceProceedingsReferenceDTO.class);
+            referenceDTO.setMonth(enumsConverter.getMonthString((reference).getMonth()));
         }
         else if(reference.getClass() == ThesisReference.class){
-                referenceDTO =  modelMapper.map(reference,ThesisReferenceDTO.class);
+            ThesisReferenceDTO thesisDTO =  modelMapper.map(reference, ThesisReferenceDTO.class);
+            thesisDTO.setMonth(enumsConverter.getMonthString((reference).getMonth()));
+            thesisDTO.setType(enumsConverter.getThesisTypeString(((ThesisReference) reference).getType()));
+            referenceDTO = thesisDTO;
         }
         else if(reference.getClass() == ConferencePaperReference.class){
                 referenceDTO =  modelMapper.map(reference,ConferencePaperReferenceDTO.class);
+            referenceDTO.setMonth(enumsConverter.getMonthString((reference).getMonth()));
         }
         else{
             referenceDTO =  modelMapper.map(reference,WebPageReferenceDTO.class);
+            referenceDTO.setMonth(enumsConverter.getMonthString((reference).getMonth()));
         }
 
         referenceDTO.setUser(user);
@@ -49,38 +66,48 @@ public class DTOConverter {
 
     public Reference toReference(ReferenceDTO referenceDTO) {
 
+        Reference reference;
+
         if(referenceDTO.getClass() == ArticleReferenceDTO.class){
-            return modelMapper.map(referenceDTO,ArticleReference.class);
+            reference = modelMapper.map(referenceDTO,ArticleReference.class);
+            reference.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
         }
         else if(referenceDTO.getClass() == BookSectionReferenceDTO.class){
-            return modelMapper.map(referenceDTO,BookSectionReference.class);
+            BookSectionReference section = modelMapper.map(referenceDTO,BookSectionReference.class);
+            section.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
+            section.setType(enumsConverter.getBookSectionType(((BookSectionReferenceDTO) referenceDTO).getType()));
+            reference = section;
+
         }
         else if(referenceDTO.getClass() == BookReferenceDTO.class){
-            return  modelMapper.map(referenceDTO,BookReference.class);
+            reference =  modelMapper.map(referenceDTO,BookReference.class);
+            reference.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
         }
         else if(referenceDTO.getClass() == BookLetReferenceDTO.class){
-            return  modelMapper.map(referenceDTO,BookLetReference.class);
+            reference =  modelMapper.map(referenceDTO,BookLetReference.class);
+            reference.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
         }
         else if(referenceDTO.getClass() == ConferenceProceedingsReferenceDTO.class){
-            return  modelMapper.map(referenceDTO,ConferenceProceedingsReference.class);
+            reference =  modelMapper.map(referenceDTO,ConferenceProceedingsReference.class);
+            reference.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
         }
         else if(referenceDTO.getClass() == ThesisReferenceDTO.class){
              ThesisReference thesis = modelMapper.map(referenceDTO,ThesisReference.class);
-            if (((ThesisReferenceDTO) referenceDTO).getType().equalsIgnoreCase("Masters")){
-                 thesis.setType(ThesisType.MASTERS);
-            }else{
-                thesis.setType(ThesisType.PHD);
-            }
-            return thesis;
+             thesis.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
+             thesis.setType(enumsConverter.getThesisType(((ThesisReferenceDTO) referenceDTO).getType()));
+            reference = thesis;
         }
         else if(referenceDTO.getClass() == ConferencePaperReferenceDTO.class){
-            return modelMapper.map(referenceDTO,ConferencePaperReference.class);
+            reference = modelMapper.map(referenceDTO,ConferencePaperReference.class);
+            reference.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
         }else{
-            return modelMapper.map(referenceDTO,WebPageReference.class);
+            reference = modelMapper.map(referenceDTO,WebPageReference.class);
         }
+
+        return reference;
     }
 
-    public List<ReferenceDTO> toReferenceDTOList(List<Reference> referenceList,User user) {
+    public List<ReferenceDTO> toReferenceDTOList(List<Reference> referenceList, User user) {
 
         List<ReferenceDTO> referenceDTOList = new ArrayList<>();
         referenceList.forEach(reference ->

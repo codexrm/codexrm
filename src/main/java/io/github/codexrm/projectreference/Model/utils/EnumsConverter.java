@@ -86,6 +86,78 @@ public class EnumsConverter {
         }
     }
 
+    public Months getMonth(String months) {
+
+        if (months != null) {
+            switch (months) {
+                case "jan":
+                    return Months.jan;
+                case "feb":
+                    return Months.feb;
+                case "mar":
+                    return Months.mar;
+                case "apr":
+                    return Months.apr;
+                case "may":
+                    return Months.may;
+                case "jun":
+                    return Months.jun;
+                case "jul":
+                    return Months.jul;
+                case "aug":
+                    return Months.aug;
+                case "sep":
+                    return Months.sep;
+                case "oct":
+                    return Months.oct;
+                case "nov":
+                    return Months.nov;
+                case "dec":
+                    return Months.dec;
+                default:
+                    return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public String getMonthString(Months months) {
+
+        if (months != null) {
+            switch (months) {
+                case jan:
+                    return "jan";
+                case feb:
+                    return "feb";
+                case mar:
+                    return "mar";
+                case apr:
+                    return "apr";
+                case may:
+                    return "may";
+                case jun:
+                    return "jun";
+                case jul:
+                    return "jul";
+                case aug:
+                    return "aug";
+                case sep:
+                    return "sep";
+                case oct:
+                    return "oct";
+                case nov:
+                    return "nov";
+                case dec:
+                    return "dec";
+                default:
+                    return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
     public FormatLibrary getFormat(Format format) {
 
         if (format != null) {
@@ -158,7 +230,63 @@ public class EnumsConverter {
         }
     }
 
-    public ThesisTypeLibrary getThesisTypelibrary(ThesisType type) {
+    public BookSectionType getBookSectionType(String type) {
+
+        if (type != null) {
+            switch (type) {
+                case "Audio CD":
+                    return BookSectionType.AUDIOCD;
+                case "Candidate thesis":
+                    return BookSectionType.CANDTHESIS;
+                case "Data CD":
+                    return BookSectionType.DataCD;
+                case "Master´s thesis":
+                    return BookSectionType.MATHESIS;
+                case "PhD thesis":
+                    return BookSectionType.PHDTHESIS;
+                case "Research report":
+                    return BookSectionType.RESREPORT;
+                case "Software":
+                    return BookSectionType.SOFTWARE;
+                case "Technical report":
+                    return BookSectionType.TECHREPORT;
+                default:
+                    return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public String getBookSectionTypeString(BookSectionType type) {
+
+        if (type != null) {
+            switch (type) {
+                case AUDIOCD:
+                    return "Audio CD";
+                case CANDTHESIS:
+                    return "Candidate thesis";
+                case DataCD:
+                    return "Data CD";
+                case MATHESIS:
+                    return "Master´s thesis" ;
+                case PHDTHESIS:
+                    return "PhD thesis";
+                case RESREPORT:
+                    return "Research report";
+                case SOFTWARE:
+                    return "Software";
+                case TECHREPORT:
+                    return "Technical report";
+                default:
+                    return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public ThesisTypeLibrary getThesisTypeLibrary(ThesisType type) {
 
         if (type != null) {
             switch (type) {
@@ -182,6 +310,38 @@ public class EnumsConverter {
                     return ThesisType.MASTERS;
                 case PHD:
                     return ThesisType.PHD;
+                default:
+                    return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public ThesisType getThesisType(String type) {
+
+        if (type != null) {
+            switch (type) {
+                case "Masters":
+                    return ThesisType.MASTERS;
+                case "phd":
+                    return ThesisType.PHD;
+                default:
+                    return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    public String getThesisTypeString(ThesisType type) {
+
+        if (type != null) {
+            switch (type) {
+                case MASTERS:
+                    return "Masters";
+                case PHD:
+                    return "phd";
                 default:
                     return null;
             }

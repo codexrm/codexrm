@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference.model.dto;
 
+import io.github.codexrm.projectreference.model.model.AuthenticationData;
 import io.github.codexrm.projectreference.model.model.User;
 
 public class ThesisReferenceDTO extends ReferenceDTO{

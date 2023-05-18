@@ -160,6 +160,8 @@ public class ReferenceLibraryManagerVM {
 
     public void userLogin(UserLoginVM user) { manager.userLogin(user.toModel()); }
 
+    public boolean verificateAutentication() throws java.text.ParseException { return manager.verificateAutentication(); }
+
     public void replaceCurrentReferenceType(ReferenceType newReferenceType) {
 
         /*Update reference type from view-model*/

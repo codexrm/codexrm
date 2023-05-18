@@ -24,7 +24,7 @@ public class JsonUtils {
     }
 
     //Generic Type Safe Method - convert JSON into Object
-    static public <T> T convertFromJsonToObject(String json, TypeReference<UserDTO> var){
+    static public <T> T convertFromJsonToObject(String json, TypeReference<T> var){
         if(json.equals("")){
             return null;
         }
