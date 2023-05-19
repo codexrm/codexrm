@@ -49,7 +49,7 @@ public class ReferenceLibraryManager {
 
     public void syncReferenceTable() throws IOException {
 
-       referenceLibrary = service.syncReferences (referenceLibrary.getReferenceTable(), referenceLibrary.getAuthenticationData(), referenceLibrary.getUser());
+       referenceLibrary = service.syncReferences (referenceLibrary.getReferenceTable(), referenceLibrary.getAuthenticationData());
         saveReferenceTable();
     }
 

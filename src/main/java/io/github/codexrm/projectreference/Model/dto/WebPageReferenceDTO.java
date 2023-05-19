@@ -1,7 +1,5 @@
 package io.github.codexrm.projectreference.model.dto;
 
-import io.github.codexrm.projectreference.model.model.User;
-
 public class WebPageReferenceDTO extends ReferenceDTO {
 
     private String author;
@@ -9,14 +7,14 @@ public class WebPageReferenceDTO extends ReferenceDTO {
 
     public WebPageReferenceDTO() {}
 
-    public WebPageReferenceDTO(String title, String year, String month, String note, Integer id, User user, String author, String url) {
-        super(title, year, month, note, id, user);
+    public WebPageReferenceDTO(String title, String year, String month, String note, Integer id, String author, String url) {
+        super(title, year, month, note, id);
         this.author = author;
         this.url = url;
     }
 
-    public WebPageReferenceDTO(String title, String year, String month, String note, User user, String author, String url) {
-        super(title, year, month, note, user);
+    public WebPageReferenceDTO(String title, String year, String month, String note, String author, String url) {
+        super(title, year, month, note);
         this.author = author;
         this.url = url;
     }

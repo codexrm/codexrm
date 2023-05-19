@@ -1,8 +1,5 @@
 package io.github.codexrm.projectreference.model.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AuthenticationData {
 
     private Integer id;

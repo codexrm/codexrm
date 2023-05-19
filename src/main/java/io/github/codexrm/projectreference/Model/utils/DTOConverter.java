@@ -1,8 +1,6 @@
 package io.github.codexrm.projectreference.model.utils;
 
 import io.github.codexrm.projectreference.model.dto.*;
-import io.github.codexrm.projectreference.model.enums.BookSectionType;
-import io.github.codexrm.projectreference.model.enums.ThesisType;
 import io.github.codexrm.projectreference.model.model.*;
 import org.modelmapper.ModelMapper;
 
@@ -19,7 +17,7 @@ public class DTOConverter {
         this.enumsConverter = new EnumsConverter();
     }
 
-    public ReferenceDTO toReferenceDTO(Reference reference, User user) {
+    public ReferenceDTO toReferenceDTO(Reference reference) {
 
         ReferenceDTO referenceDTO;
 
@@ -59,8 +57,6 @@ public class DTOConverter {
             referenceDTO =  modelMapper.map(reference,WebPageReferenceDTO.class);
             referenceDTO.setMonth(enumsConverter.getMonthString((reference).getMonth()));
         }
-
-        referenceDTO.setUser(user);
         return referenceDTO;
     }
 
@@ -107,11 +103,11 @@ public class DTOConverter {
         return reference;
     }
 
-    public List<ReferenceDTO> toReferenceDTOList(List<Reference> referenceList, User user) {
+    public List<ReferenceDTO> toReferenceDTOList(List<Reference> referenceList) {
 
         List<ReferenceDTO> referenceDTOList = new ArrayList<>();
         referenceList.forEach(reference ->
-                referenceDTOList.add(toReferenceDTO(reference, user))
+                referenceDTOList.add(toReferenceDTO(reference))
         );
         return referenceDTOList;
     }
@@ -128,8 +124,4 @@ public class DTOConverter {
         }
         return referenceList;
     }
-
-    private UserDTO toUserDTO(User user) { return modelMapper.map(user, UserDTO.class); }
-
-    public User toUser(UserDTO userDTO) { return modelMapper.map(userDTO, User.class); }
 }

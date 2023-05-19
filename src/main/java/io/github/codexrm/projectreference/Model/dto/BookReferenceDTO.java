@@ -1,7 +1,5 @@
 package io.github.codexrm.projectreference.model.dto;
 
-import io.github.codexrm.projectreference.model.model.User;
-
 public class BookReferenceDTO extends ReferenceDTO{
 
     protected String author;
@@ -20,8 +18,8 @@ public class BookReferenceDTO extends ReferenceDTO{
 
     public void setAuthor(String author) { this.author = author; }
 
-    public BookReferenceDTO(String title, String year, String month, String note, Integer id, User user, String author, String editor, String publisher, String volume, String series, String number, String address, String edition, String isbn) {
-        super(title, year, month, note, id, user);
+    public BookReferenceDTO(String title, String year, String month, String note, Integer id, String author, String editor, String publisher, String volume, String series, String number, String address, String edition, String isbn) {
+        super(title, year, month, note, id);
         this.author = author;
         this.editor = editor;
         this.publisher = publisher;
@@ -33,8 +31,8 @@ public class BookReferenceDTO extends ReferenceDTO{
         this.isbn = isbn;
     }
 
-    public BookReferenceDTO(String title, String year, String month, String note, User user, String author, String editor, String publisher, String volume, String series, String number, String address, String edition, String isbn) {
-        super(title, year, month, note, user);
+    public BookReferenceDTO(String title, String year, String month, String note, String author, String editor, String publisher, String volume, String series, String number, String address, String edition, String isbn) {
+        super(title, year, month, note);
         this.author = author;
         this.editor = editor;
         this.publisher = publisher;

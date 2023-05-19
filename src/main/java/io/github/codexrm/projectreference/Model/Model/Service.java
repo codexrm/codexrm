@@ -9,7 +9,6 @@ import io.github.codexrm.projectreference.model.utils.DTOConverter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.List;
 
 public class Service {
 
@@ -23,13 +22,13 @@ public class Service {
         this.restService = new RestService();
     }
 
-   public ReferenceLibrary syncReferences(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData, User user){
+   public ReferenceLibrary syncReferences(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData){
 
         ArrayList<Reference> referenceList = new ArrayList<>();
         ReferencePageDTO referencePageDTO = new ReferencePageDTO();
        Hashtable<Integer, Reference> referenceTableSync = new Hashtable<>();
 
-       addToLibraryDTO(referenceTable,user, authenticationData);
+       addToLibraryDTO(referenceTable, authenticationData);
 
        do {
            referencePageDTO = restService.syncReferences(libraryDTO,referencePageDTO.getPageDTO().getCurrentPage(), authenticationData.getToken());
@@ -39,7 +38,7 @@ public class Service {
       for(Reference reference: referenceList){
           referenceTableSync.put(reference.getId(), reference);
       }
-        return new ReferenceLibrary(referenceTableSync,authenticationData, referencePageDTO.getReferenceDTOList().get(0).getUser());
+        return new ReferenceLibrary(referenceTableSync,authenticationData);
     }
 
     public AuthenticationData login(UserLogin userLogin){
@@ -47,7 +46,7 @@ public class Service {
         return restService.userLogin(userLogin);
     }
 
-    private void addToLibraryDTO(Hashtable<Integer, Reference> referenceTable, User user, AuthenticationData authenticationData){
+    private void addToLibraryDTO(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData){
 
         Enumeration<Reference> e = referenceTable.elements();
         ArrayList<Reference> referenceList = new ArrayList<>();
@@ -56,12 +55,12 @@ public class Service {
         }
         for (Reference reference : referenceList){
             if (!reference.isFromServer && reference.isActive()){
-                ReferenceDTO referenceDTO = dtoConverter.toReferenceDTO(reference,user);
+                ReferenceDTO referenceDTO = dtoConverter.toReferenceDTO(reference);
                 referenceDTO.setId(0);
                 libraryDTO.setNewReferencesList(referenceDTO);
             }else{
                 if (reference.isModified && reference.isFromServer && reference.isActive()){
-                    libraryDTO.setUpdatedReferencesList(dtoConverter.toReferenceDTO(reference,user));
+                    libraryDTO.setUpdatedReferencesList(dtoConverter.toReferenceDTO(reference));
                 }else{
                     if (reference.isFromServer && !reference.isActive()){
                         libraryDTO.setDeletedReferencesList(reference.getId());

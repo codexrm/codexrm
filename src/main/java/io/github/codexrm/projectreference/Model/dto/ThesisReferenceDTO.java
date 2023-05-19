@@ -1,8 +1,5 @@
 package io.github.codexrm.projectreference.model.dto;
 
-import io.github.codexrm.projectreference.model.model.AuthenticationData;
-import io.github.codexrm.projectreference.model.model.User;
-
 public class ThesisReferenceDTO extends ReferenceDTO{
 
     private String author;
@@ -12,16 +9,16 @@ public class ThesisReferenceDTO extends ReferenceDTO{
 
     public ThesisReferenceDTO() {}
 
-    public ThesisReferenceDTO(String title, String year, String month, String note, Integer id, User user, String author, String school, String type, String address) {
-        super(title, year, month, note, id, user);
+    public ThesisReferenceDTO(String title, String year, String month, String note, Integer id, String author, String school, String type, String address) {
+        super(title, year, month, note, id);
         this.author = author;
         this.school = school;
         this.type = type;
         this.address = address;
     }
 
-    public ThesisReferenceDTO(String title, String year, String month, String note, User user, String author, String school, String type, String address) {
-        super(title, year, month, note, user);
+    public ThesisReferenceDTO(String title, String year, String month, String note, String author, String school, String type, String address) {
+        super(title, year, month, note);
         this.author = author;
         this.school = school;
         this.type = type;

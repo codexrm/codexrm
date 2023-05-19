@@ -6,27 +6,20 @@ public class ReferenceLibrary {
 
     private final Hashtable<Integer, Reference> referenceTable;
     private AuthenticationData authenticationData;
-    private User user;
 
     public ReferenceLibrary() {
         referenceTable = new Hashtable<>();
         authenticationData = new AuthenticationData( 0, "guest", "guest", "guest", "guest", false,  null, null);
-        user = new User();
     }
 
-    public ReferenceLibrary(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData, User user) {
+    public ReferenceLibrary(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData) {
         this.referenceTable = referenceTable;
         this.authenticationData = authenticationData;
-        this.user = user;
     }
 
     public AuthenticationData getAuthenticationData() { return authenticationData; }
 
     public void setAuthenticationData(AuthenticationData authenticationData) { this.authenticationData = authenticationData; }
-
-    public User getUser() { return user; }
-
-    public void setUser(User user) { this.user = user; }
 
     public Reference addEmptyReference() {
         int id = maxValueKeys() + 1;
