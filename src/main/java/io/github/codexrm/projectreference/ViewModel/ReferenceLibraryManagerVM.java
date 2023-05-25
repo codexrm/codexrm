@@ -11,6 +11,7 @@ import org.jbibtex.ParseException;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 import static java.util.Comparator.comparing;
 
@@ -159,6 +160,8 @@ public class ReferenceLibraryManagerVM {
     }
 
     public void userLogin(UserLoginVM user) { manager.userLogin(user.toModel()); }
+
+    public void userLogout() throws ExecutionException, InterruptedException, IOException { manager.userLogout(); }
 
     public boolean verificateAutentication() throws java.text.ParseException { return manager.verificateAutentication(); }
 

@@ -1,4 +1,6 @@
-package io.github.codexrm.projectreference.model.model;
+package io.github.codexrm.projectreference.model.Rest;
+
+import java.util.Date;
 
 public class AuthenticationData {
 
@@ -9,12 +11,14 @@ public class AuthenticationData {
     private String email;
     private boolean enabled;
     private String token;
-    private String expiredTime;
+    private String refreshToken;
+    private Date tokenExpirationDate;
+    private Date refreshTokenExpirationDate;
 
 
     public AuthenticationData() { }
 
-    public AuthenticationData(Integer id, String username, String name, String lastName, String email, boolean enabled, String token, String expiredTime) {
+    public AuthenticationData(Integer id, String username, String name, String lastName, String email, boolean enabled, String token, String refreshToken, Date tokenExpirationDate, Date refreshTokenExpirationDate) {
         this.id = id;
         this.username = username;
         this.name = name;
@@ -22,7 +26,9 @@ public class AuthenticationData {
         this.email = email;
         this.enabled = enabled;
         this.token = token;
-        this.expiredTime = expiredTime;
+        this.refreshToken = refreshToken;
+        this.tokenExpirationDate = tokenExpirationDate;
+        this.refreshTokenExpirationDate = refreshTokenExpirationDate;
     }
 
     public Integer getId() { return id; }
@@ -53,9 +59,18 @@ public class AuthenticationData {
 
     public void setToken(String token) { this.token = token; }
 
-    public String getExpiredTime() { return expiredTime; }
+    public String getRefreshToken() { return refreshToken; }
 
-    public void setExpiredTime(String expiredTime) { this.expiredTime = expiredTime; }
+    public void setRefreshToken(String refreshToken) { this.refreshToken = refreshToken; }
+
+    public Date getTokenExpirationDate() { return tokenExpirationDate; }
+
+    public void setTokenExpirationDate(Date tokenExpirationDate) { this.tokenExpirationDate = tokenExpirationDate; }
+
+    public Date getRefreshTokenExpirationDate() { return refreshTokenExpirationDate; }
+
+    public void setRefreshTokenExpirationDate(Date refreshTokenExpirationDate) { this.refreshTokenExpirationDate = refreshTokenExpirationDate; }
+
 }
 
 

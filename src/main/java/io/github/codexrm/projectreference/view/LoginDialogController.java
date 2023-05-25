@@ -53,6 +53,12 @@ public class LoginDialogController implements Initializable {
         validationSupport.registerValidator(password,true, Validator.createRegexValidator("La contraseña debe contener al menos una letra minúscula, una letra mayúsculas, números (0-9) y un carácter especial como ! @ # & ( ). Longirtud entre 6 y 40 caracteres", "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,40}$", Severity.ERROR));
     }
 
+    public void clearField() {
+    username.clear();
+    password.clear();
+    }
+
+
     @FXML
     private void handleOk() {
         if (!validationSupport.isInvalid()) {

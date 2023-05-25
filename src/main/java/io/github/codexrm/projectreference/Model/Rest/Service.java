@@ -1,14 +1,17 @@
-package io.github.codexrm.projectreference.model.model;
+package io.github.codexrm.projectreference.model.Rest;
 
 import io.github.codexrm.projectreference.model.dto.ReferenceDTO;
 import io.github.codexrm.projectreference.model.dto.ReferenceLibraryDTO;
 import io.github.codexrm.projectreference.model.dto.ReferencePageDTO;
 import io.github.codexrm.projectreference.model.enums.SortReference;
+import io.github.codexrm.projectreference.model.model.Reference;
+import io.github.codexrm.projectreference.model.model.ReferenceLibrary;
 import io.github.codexrm.projectreference.model.utils.DTOConverter;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.concurrent.ExecutionException;
 
 public class Service {
 
@@ -41,10 +44,12 @@ public class Service {
         return new ReferenceLibrary(referenceTableSync,authenticationData);
     }
 
-    public AuthenticationData login(UserLogin userLogin){
+    public AuthenticationData login(UserLogin userLogin){ return restService.userLogin(userLogin); }
 
-        return restService.userLogin(userLogin);
-    }
+    public boolean logout(String token) throws ExecutionException, InterruptedException { return restService.userLogout(token); }
+
+    public TokenRefreshResponse refreshToken(TokenRefreshRequest refreshToken) { return restService.refreshToken(refreshToken); }
+
 
     private void addToLibraryDTO(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData){
 
@@ -54,15 +59,15 @@ public class Service {
             referenceList.add(e.nextElement());
         }
         for (Reference reference : referenceList){
-            if (!reference.isFromServer && reference.isActive()){
+            if (!reference.isFromServer() && reference.isActive()){
                 ReferenceDTO referenceDTO = dtoConverter.toReferenceDTO(reference);
                 referenceDTO.setId(0);
                 libraryDTO.setNewReferencesList(referenceDTO);
             }else{
-                if (reference.isModified && reference.isFromServer && reference.isActive()){
+                if (reference.isModified() && reference.isFromServer() && reference.isActive()){
                     libraryDTO.setUpdatedReferencesList(dtoConverter.toReferenceDTO(reference));
                 }else{
-                    if (reference.isFromServer && !reference.isActive()){
+                    if (reference.isFromServer() && !reference.isActive()){
                         libraryDTO.setDeletedReferencesList(reference.getId());
                     }
                 }

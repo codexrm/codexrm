@@ -1,6 +1,6 @@
 package io.github.codexrm.projectreference.viewmodel;
 
-import io.github.codexrm.projectreference.model.model.UserLogin;
+import io.github.codexrm.projectreference.model.Rest.UserLogin;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

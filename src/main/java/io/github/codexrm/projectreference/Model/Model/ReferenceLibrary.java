@@ -1,5 +1,7 @@
 package io.github.codexrm.projectreference.model.model;
 
+import io.github.codexrm.projectreference.model.Rest.AuthenticationData;
+
 import java.util.*;
 
 public class ReferenceLibrary {
@@ -9,7 +11,7 @@ public class ReferenceLibrary {
 
     public ReferenceLibrary() {
         referenceTable = new Hashtable<>();
-        authenticationData = new AuthenticationData( 0, "guest", "guest", "guest", "guest", false,  null, null);
+        authenticationData = new AuthenticationData( 0, "guest", "guest", "guest", "guest", false,  null, null, null, new Date());
     }
 
     public ReferenceLibrary(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData) {

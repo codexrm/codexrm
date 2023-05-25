@@ -1,5 +1,9 @@
 package io.github.codexrm.projectreference.model.controller;
 
+import io.github.codexrm.projectreference.model.Rest.Service;
+import io.github.codexrm.projectreference.model.Rest.TokenRefreshRequest;
+import io.github.codexrm.projectreference.model.Rest.TokenRefreshResponse;
+import io.github.codexrm.projectreference.model.Rest.UserLogin;
 import io.github.codexrm.projectreference.model.enums.Format;
 import io.github.codexrm.projectreference.model.model.*;
 import org.jbibtex.ParseException;
@@ -8,11 +12,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
+import java.util.concurrent.ExecutionException;
 
 public class ReferenceLibraryManager {
 
@@ -49,7 +52,8 @@ public class ReferenceLibraryManager {
 
     public void syncReferenceTable() throws IOException {
 
-       referenceLibrary = service.syncReferences (referenceLibrary.getReferenceTable(), referenceLibrary.getAuthenticationData());
+        verificateExpiationDate();
+        referenceLibrary = service.syncReferences (referenceLibrary.getReferenceTable(), referenceLibrary.getAuthenticationData());
         saveReferenceTable();
     }
 
@@ -110,19 +114,46 @@ public class ReferenceLibraryManager {
         referenceLibrary.setAuthenticationData(service.login(userLogin));
     }
 
-    public boolean verificateAutentication() throws java.text.ParseException {
-        if(referenceLibrary.getAuthenticationData().getUsername().equals("guest")){
-            return false;
-        }else{
-            DateFormat format = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZ");
-            Date date = format.parse(referenceLibrary.getAuthenticationData().getExpiredTime());
-           Date now = new Date();
+    public void userLogout() throws ExecutionException, InterruptedException, IOException {
 
-            if(date.compareTo(now) != -1){
-                return false;
-            }else{
-                return true;
+        if(referenceLibrary.getAuthenticationData().getRefreshToken() != null)
+            verificateExpiationDate();
+        if (service.logout(referenceLibrary.getAuthenticationData().getToken())){
+            referenceLibrary.getAuthenticationData().setToken(null);
+            referenceLibrary.getAuthenticationData().setRefreshToken(null);
+            referenceLibrary.getAuthenticationData().setTokenExpirationDate(null);
+            referenceLibrary.getAuthenticationData().setRefreshTokenExpirationDate(new Date());
+        }
+        saveReferenceTable();
+    }
+
+    public boolean verificateAutentication() {
+
+        boolean isAuthentication = true;
+
+        if(referenceLibrary.getAuthenticationData().getUsername().equals("guest")){
+            isAuthentication = false;
+        }
+        else{
+            if(referenceLibrary.getAuthenticationData().getRefreshTokenExpirationDate().before(new Date())){
+                isAuthentication = false;
             }
         }
+
+        return isAuthentication;
+    }
+
+    private void verificateExpiationDate() throws IOException {
+        if(referenceLibrary.getAuthenticationData().getTokenExpirationDate().before(new Date())){
+            refreshToken();
+        }
+    }
+
+    private void refreshToken() throws IOException {
+        TokenRefreshResponse response = service.refreshToken(new TokenRefreshRequest(referenceLibrary.getAuthenticationData().getRefreshToken()));
+        referenceLibrary.getAuthenticationData().setToken(response.getTokenType()  + " " + response.getAccessToken());
+        referenceLibrary.getAuthenticationData().setRefreshToken(response.getRefreshToken());
+        referenceLibrary.getAuthenticationData().setTokenExpirationDate(response.getTokenExpirationDate());
+        saveReferenceTable();
     }
 }

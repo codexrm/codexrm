@@ -65,7 +65,7 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#save" text="Salvar" />
                         <MenuItem mnemonicParsing="false" onAction="#sync" text="Sincronizar Librería" />
-                        <MenuItem mnemonicParsing="false" text="Salir" />
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="Salir" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Ayuda">

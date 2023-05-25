@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
 
 public class RootLayoutController implements Initializable {
 
@@ -308,7 +309,19 @@ public class RootLayoutController implements Initializable {
         }
     }
 
+    @FXML
+    public void logout(){
+        try {
+            managerVM.userLogout();
+        } catch (ExecutionException | InterruptedException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean showPersonEditDialog() {
+
+        loginDialogController.clearField();
+
         // Create the dialog Stage.
         Stage dialogStage = new Stage();
         dialogStage.setTitle("Login");

@@ -1,4 +1,4 @@
-package io.github.codexrm.projectreference.model.model;
+package io.github.codexrm.projectreference.model.Rest;
 
 public class UserLogin {
 
