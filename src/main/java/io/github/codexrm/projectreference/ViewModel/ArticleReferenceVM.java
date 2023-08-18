@@ -20,7 +20,8 @@ public class ArticleReferenceVM extends ReferenceVM {
     }
 
     public ArticleReferenceVM(ArticleReference articleReference) {
-        super(articleReference.getId(), articleReference.getTitle(), articleReference.getYear(), articleReference.getMonth(),  articleReference.getNote(), articleReference.isFromServer(), articleReference.isActive(), articleReference.isModified());
+        super(articleReference.getId(), articleReference.getTitle(), articleReference.getYear(), articleReference.getMonth(),  articleReference.getNote(), articleReference.isFromServer(),
+                articleReference.isActive(), articleReference.isModified());
 
         createEmptyArticleReferenceVM();
 

@@ -1,5 +1,6 @@
 package io.github.codexrm.projectreference;
 
+import io.github.codexrm.projectreference.model.utils.AlertMessage;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -23,17 +24,19 @@ public class App extends Application {
 
     private RootLayoutController rootLayoutController;
     private VBox rootLayout;
+    private AlertMessage alert;
 
     public App() {
         FXMLLoader rootLayoutLoader = new FXMLLoader();
         rootLayoutLoader.setLocation(getClass().getResource("view/RootLayout.fxml"));
+        alert = new AlertMessage();
 
         try {
             rootLayoutController = new RootLayoutController();
             rootLayoutLoader.setController(rootLayoutController);
             rootLayout = rootLayoutLoader.load();
         } catch (IOException e) {
-            /* Mostrar algun dialogo de error al usuario */
+            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar cargar aplicacion. Los sentimos" );
             e.printStackTrace();
         }
     }
@@ -49,12 +52,7 @@ public class App extends Application {
 
         stage.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
             if (KeyCodeCombination.keyCombination("Ctrl+N").match(keyEvent)) {
-                try {
-                    rootLayoutController.addReference();
-                } catch (IOException e) {
-                    /* Mostrar algun dialogo de error al usuario */
-                    e.printStackTrace();
-                }
+                rootLayoutController.addReference();
             }
         });
 
@@ -63,17 +61,18 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Atención ");
-        alert.setContentText("Desea salir de la aplicaión ?");
 
         // cierra la aplicaión y el programa previa confirmacion de alert
         stage.setOnCloseRequest(e -> {
-            alert.showAndWait();
-            if (alert.getResult().equals(ButtonType.OK)) {
-                rootLayoutController.logout();
-                stage.close();
-                Platform.exit();
+           Alert altClosed = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "Desea salir de la aplicaión ?" );
+            if (alert.getResult(altClosed).equals(ButtonType.OK)) {
+                if(rootLayoutController.closeApp()){
+                    stage.close();
+                    Platform.exit();
+                }else{
+                    alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar cerrar de la aplicacion ?" );
+                }
+
             }
 
         });

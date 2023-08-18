@@ -25,8 +25,8 @@ public class ReferenceLibraryManagerVM {
     private UserLoginVM userLoginVM;
 
     public ReferenceLibraryManagerVM() throws IOException {
-        referenceList = FXCollections.observableArrayList();
 
+        referenceList = FXCollections.observableArrayList();
         currentReference = new SimpleObjectProperty<>();
         manager = ReferenceLibraryManager.getReferenceLibraryManager();
         referenceTypeReplaced = new SimpleBooleanProperty(false);
@@ -63,7 +63,6 @@ public class ReferenceLibraryManagerVM {
     }
 
     public void loadDataFromModel() throws IOException {
-
         manager.loadReferenceTable();
         syncViewModel();
     }
@@ -71,7 +70,6 @@ public class ReferenceLibraryManagerVM {
     private void syncViewModel() {
 
         referenceList.clear();
-
         Enumeration<Integer> e = manager.getReferenceTable().keys();
         Integer keyReference;
         Reference valorReference;
@@ -136,7 +134,6 @@ public class ReferenceLibraryManagerVM {
     }
 
     public void exportReferenceList(List<ReferenceVM> referenceVMList, Format format) throws IOException {
-
        ArrayList<Reference> list = new ArrayList<>();
         for (ReferenceVM referenceVM : referenceVMList) {
             list.add(referenceVM.toModel());
@@ -145,25 +142,26 @@ public class ReferenceLibraryManagerVM {
     }
 
     public void importReferences(List<File> fileList, Format format) throws IOException, ParseException {
-
         for (File file: fileList) {
             manager.importReferences(file.getPath(), format);
         }
         syncViewModel();
     }
 
-    public void syncDB() throws IOException {
-
+    public boolean syncDB() throws IOException {
         saveDataToModel();
-        manager.syncReferenceTable();
-        syncViewModel();
+        if(manager.syncReferenceTable()){
+            syncViewModel();
+            return true;
+        }
+        else{return false;}
     }
 
-    public void userLogin(UserLoginVM user) { manager.userLogin(user.toModel()); }
+    public boolean userLogin(UserLoginVM user) { return manager.userLogin(user.toModel()); }
 
-    public void userLogout() throws ExecutionException, InterruptedException, IOException { manager.userLogout(); }
+    public boolean userLogout() throws ExecutionException, InterruptedException, IOException { return manager.userLogout(); }
 
-    public boolean verificateAutentication() throws java.text.ParseException { return manager.verificateAutentication(); }
+    public boolean verificateAutentication(){ return manager.verificateAutentication(); }
 
     public void replaceCurrentReferenceType(ReferenceType newReferenceType) {
 
@@ -212,7 +210,7 @@ public class ReferenceLibraryManagerVM {
     }
 
     public ReferenceVM getReferenceObject(ReferenceType referenceType) {
-        switch (referenceType) { // Aqui se podria hacer un factory que devuelva un objeto dado el tipo
+        switch (referenceType) {
             case ARTICLE:
                 return new ArticleReferenceVM();
             case BOOK:

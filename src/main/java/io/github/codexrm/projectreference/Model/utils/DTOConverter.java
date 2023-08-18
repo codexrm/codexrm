@@ -103,15 +103,6 @@ public class DTOConverter {
         return reference;
     }
 
-    public List<ReferenceDTO> toReferenceDTOList(List<Reference> referenceList) {
-
-        List<ReferenceDTO> referenceDTOList = new ArrayList<>();
-        referenceList.forEach(reference ->
-                referenceDTOList.add(toReferenceDTO(reference))
-        );
-        return referenceDTOList;
-    }
-
     public List<Reference> toReferenceList(List<ReferenceDTO> referenceDTOList) {
 
         List<Reference> referenceList = new ArrayList<>();
@@ -120,7 +111,6 @@ public class DTOConverter {
             ref.setFromServer(true);
             ref.setActive(true);
             referenceList.add(ref);
-
         }
         return referenceList;
     }

@@ -23,7 +23,8 @@ public class BookReferenceVM extends ReferenceVM {
         createEmptyBookReferenceVM();
     }
 
-    public BookReferenceVM(int id, String title, String year, Months month, String note, boolean isFromServer, boolean isActive, boolean isModified, String author, String editor, String publisher, String volume, String number, String series, String address, String edition, String isbn) {
+    public BookReferenceVM(int id, String title, String year, Months month, String note, boolean isFromServer, boolean isActive, boolean isModified, String author,
+                           String editor, String publisher, String volume, String number, String series, String address, String edition, String isbn) {
         super(id, title, year, month, note, isFromServer, isActive, isModified);
 
         createEmptyBookReferenceVM();
@@ -40,7 +41,8 @@ public class BookReferenceVM extends ReferenceVM {
     }
 
     public BookReferenceVM(BookReference bookReference) {
-        super(bookReference.getId(), bookReference.getTitle(), bookReference.getYear(), bookReference.getMonth(), bookReference.getNote(), bookReference.isFromServer(), bookReference.isActive(), bookReference.isModified());
+        super(bookReference.getId(), bookReference.getTitle(), bookReference.getYear(), bookReference.getMonth(), bookReference.getNote(), bookReference.isFromServer(),
+                bookReference.isActive(), bookReference.isModified());
 
         createEmptyBookReferenceVM();
 
@@ -176,7 +178,6 @@ public class BookReferenceVM extends ReferenceVM {
         bookReference.setFromServer(this.isIsFromServer());
         bookReference.setModified(this.isIsModified());
         bookReference.setActive(this.isIsActive());
-
 
         bookReference.setAuthor(this.getAuthor());
         bookReference.setEditor(this.getEditor());

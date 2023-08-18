@@ -58,7 +58,7 @@
                         <Label prefHeight="36.0" prefWidth="85.0" text="Tipo:" GridPane.rowIndex="11" />
                         <TextField fx:id="number" prefHeight="55.0" prefWidth="234.0" promptText="No. de volúmenes" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                         <TextField fx:id="series" prefHeight="49.0" prefWidth="224.0" promptText="Nombre de la serie" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                        <TextField fx:id="address" prefHeight="50.0" prefWidth="225.0" promptText="Ciudad,País (Dirección del autor)" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                        <TextField fx:id="address" prefHeight="50.0" prefWidth="225.0" promptText="Ciudad, País (Dirección del autor)" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                         <ComboBox fx:id="referenceType" prefHeight="31.0" prefWidth="223.0" GridPane.columnIndex="1" />
                         <Label prefHeight="45.0" prefWidth="119.0" text="Tipo:" />
                   <Label prefHeight="65.0" prefWidth="125.0" text="Dirección:" GridPane.rowIndex="12" />
@@ -69,7 +69,7 @@
                   <ComboBox fx:id="type" prefHeight="41.0" prefWidth="244.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                   <ComboBox fx:id="month" prefHeight="57.0" prefWidth="340.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
                   <TextField fx:id="author" promptText="Apellido,Nombre;Aplellido2,Nombre2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="isbn" prefHeight="50.0" prefWidth="236.0" promptText="0000-0000" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                  <TextField fx:id="isbn" prefHeight="50.0" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
                   <TextField fx:id="note" prefHeight="49.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="16" />
                   <TextField fx:id="edition" prefHeight="53.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                     </children>

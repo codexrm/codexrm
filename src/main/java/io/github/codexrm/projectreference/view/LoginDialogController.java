@@ -49,15 +49,14 @@ public class LoginDialogController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        validationSupport.registerValidator(username, true, Validator.createRegexValidator("El nombre de usuario puede contener letras (a-z), números (0-9) y puntos (.). Longirtud entre 6 y 40 caracteres", "^[a-z0-9]([.](?![.])|[a-z0-9]){1,18}[a-z0-9]$", Severity.ERROR));
-        validationSupport.registerValidator(password,true, Validator.createRegexValidator("La contraseña debe contener al menos una letra minúscula, una letra mayúsculas, números (0-9) y un carácter especial como ! @ # & ( ). Longirtud entre 6 y 40 caracteres", "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,40}$", Severity.ERROR));
+        validationSupport.registerValidator(username, true, Validator.createEmptyValidator("Campo requerido"));
+        validationSupport.registerValidator(password,true, Validator.createEmptyValidator("Campo requerido"));
     }
 
     public void clearField() {
     username.clear();
     password.clear();
     }
-
 
     @FXML
     private void handleOk() {
@@ -69,10 +68,4 @@ public class LoginDialogController implements Initializable {
             dialogStage.close();
         }
     }
-
-    @FXML
-    private void handleCancel() {
-        dialogStage.close();
-    }
-
 }

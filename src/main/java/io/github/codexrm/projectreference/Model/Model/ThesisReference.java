@@ -2,6 +2,7 @@ package io.github.codexrm.projectreference.model.model;
 
 import io.github.codexrm.projectreference.model.enums.Months;
 import io.github.codexrm.projectreference.model.enums.ThesisType;
+import io.github.codexrm.projectreference.model.utils.FieldValidations;
 
 import java.util.Objects;
 
@@ -11,6 +12,8 @@ public class ThesisReference extends Reference {
     private String school;
     private ThesisType type;
     private String address;
+
+    private final FieldValidations validations = new FieldValidations();
 
     public ThesisReference() {
         super();
@@ -22,15 +25,22 @@ public class ThesisReference extends Reference {
 
     public ThesisReference(String title, String year, Months month, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String author, String school, ThesisType type, String address) {
         super(title, year, month, note, id, isFromServer, isModified, isActive);
-        this.author = author;
         this.school = school;
         this.type = type;
-        this.address = address;
+
+        if(validations.validateAuthorOrEditor(author))
+            this.author = author;
+
+        if(validations.validateAddress(address))
+            this.address = address;
     }
 
     public String getAuthor() { return author; }
 
-    public void setAuthor(String author) { this.author = author; }
+    public void setAuthor(String author) {
+        if(validations.validateAuthorOrEditor(author))
+        this.author = author;
+    }
 
     public String getSchool() {
         return school;
@@ -53,6 +63,7 @@ public class ThesisReference extends Reference {
     }
 
     public void setAddress(String address) {
+        if(validations.validateAddress(address))
         this.address = address;
     }
 

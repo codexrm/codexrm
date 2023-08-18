@@ -6,9 +6,7 @@ public class PageDTO {
     private Long totalElement;
     private Integer totalPages;
 
-    public PageDTO() {
-        currentPage = 0;
-    }
+    public PageDTO() { currentPage = 0; }
 
     public PageDTO(Integer currentPage, Long totalElement, Integer totalPages) {
         this.currentPage = currentPage;

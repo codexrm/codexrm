@@ -65,12 +65,7 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#save" text="Salvar" />
                         <MenuItem mnemonicParsing="false" onAction="#sync" text="Sincronizar Librería" />
-                        <MenuItem mnemonicParsing="false" onAction="#logout" text="Salir" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Ayuda">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Sobre Codex RM" />
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="Cerrar Sesion" />
                     </items>
                 </Menu>
             </menus>
@@ -81,7 +76,6 @@
             <Button mnemonicParsing="false" onAction="#deleteReference" text="Eliminar" />
             <Button mnemonicParsing="false" onAction="#save" text="Salvar" />
                 <Button mnemonicParsing="false" onAction="#sync" text="Sincronizar" />
-                <Button mnemonicParsing="false" text="Ayuda" />
             </items>
         </ToolBar>
         <SplitPane dividerPositions="0.2505567928730512, 0.7505567928730512" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">

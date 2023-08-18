@@ -18,7 +18,8 @@ public class BookReferenceDTO extends ReferenceDTO{
 
     public void setAuthor(String author) { this.author = author; }
 
-    public BookReferenceDTO(String title, String year, String month, String note, Integer id, String author, String editor, String publisher, String volume, String series, String number, String address, String edition, String isbn) {
+    public BookReferenceDTO(String title, String year, String month, String note, Integer id, String author, String editor, String publisher, String volume, String series, String number,
+                            String address, String edition, String isbn) {
         super(title, year, month, note, id);
         this.author = author;
         this.editor = editor;
@@ -31,7 +32,8 @@ public class BookReferenceDTO extends ReferenceDTO{
         this.isbn = isbn;
     }
 
-    public BookReferenceDTO(String title, String year, String month, String note, String author, String editor, String publisher, String volume, String series, String number, String address, String edition, String isbn) {
+    public BookReferenceDTO(String title, String year, String month, String note, String author, String editor, String publisher, String volume, String series, String number, String address,
+                            String edition, String isbn) {
         super(title, year, month, note);
         this.author = author;
         this.editor = editor;

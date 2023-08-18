@@ -14,7 +14,6 @@ public class UserLoginVM {
     }
 
     public UserLoginVM(UserLogin userLogin) {
-
         createEmptyUserLoginVM();
 
         setUsername(userLogin.getUsername());

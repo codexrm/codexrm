@@ -27,7 +27,6 @@ public class ReferenceVM {
     }
 
     public ReferenceVM(final int id, final String title, final String year , Months month, String note, boolean isFromServer, boolean isActive, boolean isModified) {
-
         this.id = new SimpleIntegerProperty();
         this.title = new SimpleStringProperty();
         this.year = new SimpleStringProperty();

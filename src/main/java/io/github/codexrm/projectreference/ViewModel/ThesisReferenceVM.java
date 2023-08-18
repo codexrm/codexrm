@@ -18,7 +18,8 @@ public class ThesisReferenceVM extends ReferenceVM {
     }
 
     public ThesisReferenceVM(ThesisReference thesisReference) {
-        super(thesisReference.getId(), thesisReference.getTitle(), thesisReference.getYear(), thesisReference.getMonth(), thesisReference.getNote(), thesisReference.isFromServer(), thesisReference.isActive(), thesisReference.isModified());
+        super(thesisReference.getId(), thesisReference.getTitle(), thesisReference.getYear(), thesisReference.getMonth(), thesisReference.getNote(), thesisReference.isFromServer(),
+                thesisReference.isActive(), thesisReference.isModified());
 
         createEmptyThesisReferenceVM();
 

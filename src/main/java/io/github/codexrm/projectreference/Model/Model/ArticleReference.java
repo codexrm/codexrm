@@ -1,6 +1,7 @@
 package io.github.codexrm.projectreference.model.model;
 
 import io.github.codexrm.projectreference.model.enums.Months;
+import io.github.codexrm.projectreference.model.utils.FieldValidations;
 
 import java.util.Objects;
 
@@ -13,6 +14,8 @@ public class ArticleReference extends Reference {
     private String pages;
     private String issn;
 
+    private final FieldValidations validations = new FieldValidations();
+
     public ArticleReference() {
         super();
         this.author = "";
@@ -23,19 +26,33 @@ public class ArticleReference extends Reference {
         this.issn = "";
     }
 
-    public ArticleReference(String title, String year, Months month, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String author, String journal, String volume, String number, String pages, String issn) {
+    public ArticleReference(String title, String year, Months month, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String author, String journal,
+                            String volume, String number, String pages, String issn) {
         super(title, year, month, note, id, isFromServer, isModified, isActive);
-        this.author = author;
         this.journal = journal;
-        this.volume = volume;
-        this.number = number;
-        this.pages = pages;
-        this.issn = issn;
+
+        if(validations.validateAuthorOrEditor(author))
+            this.author = author;
+
+        if(validations.isNumber(volume))
+            this.volume = volume;
+
+        if(validations.validateNumber(number))
+            this.number = number;
+
+        if(validations.validatePages(pages))
+            this.pages = pages;
+
+        if(validations.validateIssn(issn))
+            this.issn = issn;
     }
 
     public String getAuthor() { return author; }
 
-    public void setAuthor(String author) { this.author = author; }
+    public void setAuthor(String author) {
+        if(validations.validateAuthorOrEditor(author))
+        this.author = author;
+    }
 
     public String getJournal() {
         return journal;
@@ -50,6 +67,7 @@ public class ArticleReference extends Reference {
     }
 
     public void setVolume(String volume) {
+        if(validations.isNumber(volume))
         this.volume = volume;
     }
 
@@ -58,6 +76,7 @@ public class ArticleReference extends Reference {
     }
 
     public void setNumber(String number) {
+        if(validations.validateNumber(number))
         this.number = number;
     }
 
@@ -66,12 +85,16 @@ public class ArticleReference extends Reference {
     }
 
     public void setPages(String pages) {
+        if(validations.validatePages(pages))
         this.pages = pages;
     }
 
     public String getIssn() { return issn; }
 
-    public void setIssn(String issn) { this.issn = issn; }
+    public void setIssn(String issn) {
+        if(validations.validateIssn(issn))
+        this.issn = issn;
+    }
 
     @Override
     public boolean equals(Object o) {

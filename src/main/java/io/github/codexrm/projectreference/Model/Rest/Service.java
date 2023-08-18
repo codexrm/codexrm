@@ -15,9 +15,9 @@ import java.util.concurrent.ExecutionException;
 
 public class Service {
 
-    private ReferenceLibraryDTO libraryDTO;
     private final DTOConverter dtoConverter;
     private final RestService restService;
+    private final ReferenceLibraryDTO libraryDTO;
 
     public Service() {
         this.libraryDTO = new ReferenceLibraryDTO();
@@ -25,49 +25,58 @@ public class Service {
         this.restService = new RestService();
     }
 
-   public ReferenceLibrary syncReferences(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData){
-
-        ArrayList<Reference> referenceList = new ArrayList<>();
-        ReferencePageDTO referencePageDTO = new ReferencePageDTO();
-       Hashtable<Integer, Reference> referenceTableSync = new Hashtable<>();
-
-       addToLibraryDTO(referenceTable, authenticationData);
-
-       do {
-           referencePageDTO = restService.syncReferences(libraryDTO,referencePageDTO.getPageDTO().getCurrentPage(), authenticationData.getToken());
-           referenceList = (ArrayList<Reference>) dtoConverter.toReferenceList(referencePageDTO.getReferenceDTOList());
-       } while (referencePageDTO.getPageDTO().getCurrentPage() + 1 != referencePageDTO.getPageDTO().getTotalPages());;
-
-      for(Reference reference: referenceList){
-          referenceTableSync.put(reference.getId(), reference);
-      }
-        return new ReferenceLibrary(referenceTableSync,authenticationData);
-    }
-
-    public AuthenticationData login(UserLogin userLogin){ return restService.userLogin(userLogin); }
+    //User
+    public AuthenticationData login(UserLogin userLogin) { return restService.userLogin(userLogin); }
 
     public boolean logout(String token) throws ExecutionException, InterruptedException { return restService.userLogout(token); }
 
     public TokenRefreshResponse refreshToken(TokenRefreshRequest refreshToken) { return restService.refreshToken(refreshToken); }
 
+    //Reference
+    public ReferenceLibrary syncReferences(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData) {
 
-    private void addToLibraryDTO(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData){
+        ArrayList<Reference> temporalList;
+        ArrayList<Reference> referenceList = new ArrayList<>();
+        ReferencePageDTO referencePageDTO = new ReferencePageDTO();
+        Hashtable<Integer, Reference> referenceTableSync = new Hashtable<>();
+
+        addToLibraryDTO(referenceTable, authenticationData);
+
+        do {
+            referencePageDTO = restService.syncReferences(libraryDTO, referencePageDTO.getPageDTO().getCurrentPage(), authenticationData.getToken());
+            if (referencePageDTO == null) {
+                break;
+            }
+            temporalList = (ArrayList<Reference>) dtoConverter.toReferenceList(referencePageDTO.getReferenceDTOList());
+            for (Reference reference : temporalList) {
+                referenceList.add(reference);
+            }
+            referencePageDTO.getPageDTO().setCurrentPage(referencePageDTO.getPageDTO().getCurrentPage() + 1);
+        } while (referenceList.size() != referencePageDTO.getPageDTO().getTotalElement());
+        for (Reference reference : referenceList) {
+            referenceTableSync.put(reference.getId(), reference);
+        }
+        return new ReferenceLibrary(referenceTableSync, authenticationData);
+    }
+
+
+    private void addToLibraryDTO(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData) {
 
         Enumeration<Reference> e = referenceTable.elements();
         ArrayList<Reference> referenceList = new ArrayList<>();
         while (e.hasMoreElements()) {
             referenceList.add(e.nextElement());
         }
-        for (Reference reference : referenceList){
-            if (!reference.isFromServer() && reference.isActive()){
+        for (Reference reference : referenceList) {
+            if (!reference.isFromServer() && reference.isActive()) {
                 ReferenceDTO referenceDTO = dtoConverter.toReferenceDTO(reference);
                 referenceDTO.setId(0);
                 libraryDTO.setNewReferencesList(referenceDTO);
-            }else{
-                if (reference.isModified() && reference.isFromServer() && reference.isActive()){
+            } else {
+                if (reference.isModified() && reference.isFromServer() && reference.isActive()) {
                     libraryDTO.setUpdatedReferencesList(dtoConverter.toReferenceDTO(reference));
-                }else{
-                    if (reference.isFromServer() && !reference.isActive()){
+                } else {
+                    if (reference.isFromServer() && !reference.isActive()) {
                         libraryDTO.setDeletedReferencesList(reference.getId());
                     }
                 }

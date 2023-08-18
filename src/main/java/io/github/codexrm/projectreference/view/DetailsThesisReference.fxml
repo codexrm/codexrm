@@ -47,7 +47,7 @@
                         <Label prefHeight="63.0" prefWidth="118.0" text="Tipo:" />
                   <Label prefHeight="62.0" prefWidth="138.0" text="Nota:" GridPane.rowIndex="8" />
                   <ComboBox fx:id="type" prefHeight="74.0" prefWidth="289.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="address" prefHeight="84.0" prefWidth="237.0" promptText="Ciudad,País (Dirección del autor)" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="address" prefHeight="84.0" prefWidth="237.0" promptText="Ciudad, País (Dirección del autor)" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <TextField fx:id="note" prefHeight="69.0" prefWidth="216.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                     </children>
                 </GridPane>

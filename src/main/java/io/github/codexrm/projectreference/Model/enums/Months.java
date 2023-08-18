@@ -3,7 +3,7 @@ package io.github.codexrm.projectreference.model.enums;
 public enum Months {
 
     jan("Enero"),
-    feb("Febereo"),
+    feb("Febrero"),
     mar("Marzo"),
     apr("Abril"),
     may("Mayo"),

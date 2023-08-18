@@ -1,6 +1,7 @@
 package io.github.codexrm.projectreference.model.model;
 
 import io.github.codexrm.projectreference.model.enums.Months;
+import io.github.codexrm.projectreference.model.utils.FieldValidations;
 
 import java.util.Objects;
 
@@ -17,6 +18,8 @@ public class ConferencePaperReference extends Reference {
     private String organization;
     private String publisher;
 
+    private final FieldValidations validations = new FieldValidations();
+
     public ConferencePaperReference() {
         super();
         this.author = "";
@@ -31,23 +34,42 @@ public class ConferencePaperReference extends Reference {
         this.publisher = "";
     }
 
-    public ConferencePaperReference(String title, String year, Months month, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String author, String bookTitle, String editor, String volume, String number, String series, String pages, String address, String organization, String publisher) {
+    public ConferencePaperReference(String title, String year, Months month, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String author, String bookTitle, String editor,
+                                    String volume, String number, String series, String pages, String address, String organization, String publisher) {
         super(title, year, month, note, id, isFromServer, isModified, isActive);
-        this.author = author;
         this.bookTitle = bookTitle;
-        this.editor = editor;
-        this.volume = volume;
-        this.number = number;
-        this.series = series;
-        this.pages = pages;
-        this.address = address;
         this.organization = organization;
         this.publisher = publisher;
+
+        if(validations.validateAuthorOrEditor(author))
+            this.author = author;
+
+        if(validations.validateAuthorOrEditor(editor))
+            this.editor = editor;
+
+        if(validations.validateNumber(number))
+            this.number = number;
+
+        if(validations.validateSeries(series))
+            this.series = series;
+
+        if(validations.isNumber(volume))
+            this.volume = volume;
+
+        if(validations.validateAddress(address))
+            this.address = address;
+
+        if(validations.validatePages(pages))
+            this.pages = pages;
+
     }
 
     public String getAuthor() { return author; }
 
-    public void setAuthor(String author) { this.author = author; }
+    public void setAuthor(String author) {
+        if(validations.validateAuthorOrEditor(author))
+        this.author = author;
+    }
 
     public String getBookTitle() { return bookTitle; }
 
@@ -55,27 +77,45 @@ public class ConferencePaperReference extends Reference {
 
     public String getEditor() { return editor; }
 
-    public void setEditor(String editor) { this.editor = editor; }
+    public void setEditor(String editor) {
+        if(validations.validateAuthorOrEditor(editor))
+        this.editor = editor;
+    }
 
     public String getVolume() { return volume; }
 
-    public void setVolume(String volume) { this.volume = volume; }
+    public void setVolume(String volume) {
+        if(validations.isNumber(volume))
+        this.volume = volume;
+    }
 
     public String getNumber() { return number; }
 
-    public void setNumber(String number) { this.number = number; }
+    public void setNumber(String number) {
+        if(validations.validateNumber(number))
+        this.number = number;
+    }
 
     public String getSeries() { return series; }
 
-    public void setSeries(String series) { this.series = series; }
+    public void setSeries(String series) {
+        if(validations.validateSeries(series))
+        this.series = series;
+    }
 
     public String getPages() { return pages; }
 
-    public void setPages(String pages) { this.pages = pages; }
+    public void setPages(String pages) {
+        if(validations.validatePages(pages))
+        this.pages = pages;
+    }
 
     public String getAddress() { return address; }
 
-    public void setAddress(String address) { this.address = address; }
+    public void setAddress(String address) {
+        if(validations.validateAddress(address))
+        this.address = address;
+    }
 
     public String getOrganization() { return organization; }
 

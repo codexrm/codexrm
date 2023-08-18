@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.github.codexrm.projectreference.model.enums.Months;
+import io.github.codexrm.projectreference.model.utils.FieldValidations;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({@Type(value = ArticleReference.class, name = "article"),
@@ -28,6 +29,8 @@ public class Reference {
     protected boolean isModified ;
     protected boolean isActive ;
 
+    private final FieldValidations validations = new FieldValidations();
+
     public Reference() {
         this.title = "";
         this.year = "";
@@ -37,13 +40,15 @@ public class Reference {
 
     public Reference(String title, String year, Months month, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive) {
         this.title = title;
-        this.year = year;
         this.month = month;
         this.note = note;
         this.id = id;
         this.isFromServer = isFromServer;
         this.isModified = isModified;
         this.isActive = isActive;
+
+        if(validations.validateYear(year))
+        this.year = year;
     }
 
     public String getTitle() { return title; }
@@ -52,7 +57,10 @@ public class Reference {
 
     public String getYear() { return year; }
 
-    public void setYear(String year) { this.year = year; }
+    public void setYear(String year) {
+        if(validations.validateYear(year))
+        this.year = year;
+    }
 
     public Months getMonth() { return month; }
 

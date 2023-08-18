@@ -1,9 +1,13 @@
 package io.github.codexrm.projectreference.view;
 
 import io.github.codexrm.projectreference.model.enums.Format;
+import io.github.codexrm.projectreference.model.utils.AlertMessage;
 import io.github.codexrm.projectreference.viewmodel.*;
+import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,11 +19,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.jbibtex.ParseException;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
@@ -36,8 +42,21 @@ public class RootLayoutController implements Initializable {
     private final ScrollPane conferencePaperDetail;
     private final ScrollPane webPageDetail;
     private final AnchorPane login;
+
     private final LoginDialogController loginDialogController;
+    private final DetailsBookReferenceController bookDetailViewController;
+    private final DetailsArticleReferenceController articleDetailViewController;
+    private final DetailsBookSectionReferenceController bookSectionDetailViewController;
+    private final DetailsBookLetReferenceController bookLetDetailViewController;
+    private final DetailsThesisReferenceController thesisDetailViewController;
+    private final DetailsConferenceProceedingsReferenceController conferenceProceedingsDetailViewController;
+    private final DetailsConferencePaperReferenceController conferencePaperDetailViewController;
+    private final DetailsWebPageReferenceController webPageDetailViewController;
+
     private Stage stage;
+    private Stage loginStage;
+    private AlertMessage alert;
+    private static boolean isStartedLoginScene = false;
 
     @FXML
     private TableView<ReferenceVM> referenceTable;
@@ -61,6 +80,8 @@ public class RootLayoutController implements Initializable {
 
         managerVM = new ReferenceLibraryManagerVM();
         stage = new Stage();
+        loginStage = new Stage();
+        alert = new AlertMessage();
 
         FXMLLoader bookDetailLoader = new FXMLLoader();
         FXMLLoader articleDetailLoader = new FXMLLoader();
@@ -82,14 +103,14 @@ public class RootLayoutController implements Initializable {
         webPageDetailLoader.setLocation(getClass().getResource("DetailsWebPageReference.fxml"));
         loginLoader.setLocation(getClass().getResource("LoginDialog.fxml"));
 
-        DetailsBookReferenceController bookDetailViewController = new DetailsBookReferenceController();
-        DetailsArticleReferenceController articleDetailViewController = new DetailsArticleReferenceController();
-        DetailsBookSectionReferenceController bookSectionDetailViewController = new DetailsBookSectionReferenceController();
-        DetailsBookLetReferenceController bookLetDetailViewController = new DetailsBookLetReferenceController();
-        DetailsThesisReferenceController thesisDetailViewController = new DetailsThesisReferenceController();
-        DetailsConferenceProceedingsReferenceController conferenceProceedingsDetailViewController = new DetailsConferenceProceedingsReferenceController();
-        DetailsConferencePaperReferenceController conferencePaperDetailViewController = new DetailsConferencePaperReferenceController();
-        DetailsWebPageReferenceController webPageDetailViewController = new DetailsWebPageReferenceController();
+        bookDetailViewController = new DetailsBookReferenceController();
+        articleDetailViewController = new DetailsArticleReferenceController();
+        bookSectionDetailViewController = new DetailsBookSectionReferenceController();
+        bookLetDetailViewController = new DetailsBookLetReferenceController();
+        thesisDetailViewController = new DetailsThesisReferenceController();
+        conferenceProceedingsDetailViewController = new DetailsConferenceProceedingsReferenceController();
+        conferencePaperDetailViewController = new DetailsConferencePaperReferenceController();
+        webPageDetailViewController = new DetailsWebPageReferenceController();
         loginDialogController = new LoginDialogController();
 
         bookDetailViewController.setDataModel(managerVM);
@@ -148,8 +169,141 @@ public class RootLayoutController implements Initializable {
         loadReferenceDetail();
     }
 
-    private void loadReferenceTable() {
+    //Reference
+    @FXML
+    public void addReference(){
 
+        referenceTable.getSelectionModel().selectedItemProperty().removeListener(updateViewListener);
+
+        managerVM.addEmptyBookReference();
+
+        referenceTable.refresh();
+        referenceTable.getSelectionModel().clearSelection();
+        referenceTable.getSelectionModel().selectedItemProperty().addListener(updateViewListener);
+
+        showReferenceDetails(noReferenceDetailInfo);
+    }
+
+    @FXML
+    public void deleteReference(){
+        Alert altDelete = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "Desea eliminar las referencias que han sido seleccionadas ?" );
+        if (alert.getResult(altDelete).equals(ButtonType.OK)) {
+            ObservableList<ReferenceVM> referenceList = referenceTable.getSelectionModel().getSelectedItems();
+            if (referenceList != null) {
+                referenceTable.getSelectionModel().selectedItemProperty().removeListener(updateViewListener);
+
+                managerVM.deleteReferences(referenceList);
+
+                referenceTable.refresh();
+                referenceTable.getSelectionModel().clearSelection();
+                referenceTable.getSelectionModel().selectedItemProperty().addListener(updateViewListener);
+
+                showReferenceDetails(noReferenceDetailInfo);
+            }
+        }
+    }
+
+    @FXML
+    private void save() {
+        Alert altSave = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "Desea salvar la lista de referencias ?" );
+        if (alert.getResult(altSave).equals(ButtonType.OK)) {
+            if(!verificateValidations()){
+                alert.getAlert(Alert.AlertType.ERROR, "Error de Validacion", "Referencias invalidas", "Verifique los campos de las referencias. Es posible que alguna no sea valida");
+            }else{
+                try {
+                    managerVM.saveDataToModel();
+
+                } catch (IOException e) {
+                    alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar salvar las referencias" );
+                }
+            }
+        }
+    }
+
+    @FXML
+    public void sync() {
+
+        try {
+            if(!managerVM.verificateAutentication()){
+                if(login()){
+                    if(!managerVM.userLogin(loginDialogController.getUser())){
+                        alert.getAlert(Alert.AlertType.ERROR, "Error de Acceso al usuario", "Usuario no autorizado", "Verifique nombre de usuario y contraseña nuevamente. Es posible que el usuario se encuentre deshabilitado o no exista");
+                    }else{
+                        if(!managerVM.syncDB())
+                            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar sincronizar las referencias con el servidor");
+                    }
+                }
+            }
+
+        } catch (IOException e) {
+            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar sincronizar las referencias con el servidor");
+
+        }
+    }
+
+    @FXML
+    public void exportRis(){
+        try {
+            exportTo(Format.RIS);
+        } catch (IOException e) {
+            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar exportar las referencias" );
+        }
+    }
+
+    @FXML
+    public void exportBibTex(){
+        try {
+            exportTo(Format.BIBTEX);
+        } catch (IOException e) {
+            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar exportar las referencias" );
+        }
+    }
+
+    @FXML
+    public void importRis() {
+        try {
+            importTo(Format.RIS);
+        } catch (IOException | ParseException e) {
+            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar importar las referencias" );
+        }
+    }
+
+    @FXML
+    public void importBibTex() {
+        try {
+            importTo(Format.BIBTEX);
+        } catch (IOException | ParseException e) {
+            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar importar las referencias" );
+        }
+    }
+
+    //User
+    @FXML
+    public void logout(){
+        Alert altSave = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "Desea cerrar la sesion ?" );
+        if (alert.getResult(altSave).equals(ButtonType.OK)) {
+            try {
+                if(!managerVM.userLogout())
+                    alert.getAlert(Alert.AlertType.ERROR, "Error","", "No fue posible cerrar la sesion" );
+
+            } catch (ExecutionException | InterruptedException | IOException e) {
+                e.printStackTrace();
+                alert.getAlert(Alert.AlertType.ERROR, "Error","", "No fue posible cerrar la sesion" );
+            }
+
+        }
+    }
+
+    public boolean closeApp(){
+        try {
+            return managerVM.userLogout();
+        } catch (ExecutionException | InterruptedException | IOException e) {
+            return false;
+        }
+    }
+
+    //App
+    private void loadReferenceTable() {
         referenceTable.getSelectionModel().setSelectionMode(
                 SelectionMode.MULTIPLE
         );
@@ -181,61 +335,9 @@ public class RootLayoutController implements Initializable {
 
         referenceTable.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.DELETE) {
-                try {
-                    deleteReference();
-                } catch (IOException e) {
-                    /* Mostrar algun dialogo de error al usuario */
-                    e.printStackTrace();
-                }
+                deleteReference();
             }
         });
-    }
-
-    @FXML
-    public void deleteReference() throws IOException {
-
-        ObservableList<ReferenceVM> referenceList = referenceTable.getSelectionModel().getSelectedItems();
-        if (referenceList != null) {
-            referenceTable.getSelectionModel().selectedItemProperty().removeListener(updateViewListener);
-
-            managerVM.deleteReferences(referenceList);
-
-            referenceTable.refresh();
-            referenceTable.getSelectionModel().clearSelection();
-            referenceTable.getSelectionModel().selectedItemProperty().addListener(updateViewListener);
-
-            showReferenceDetails(noReferenceDetailInfo);
-        }
-    }
-    @FXML
-    public void exportRis() throws IOException { exportTo(Format.RIS); }
-
-    @FXML
-    public void exportBibTex() throws IOException { exportTo(Format.BIBTEX); }
-
-    private void exportTo(Format format) throws IOException {
-
-        ObservableList<ReferenceVM> referenceList = referenceTable.getSelectionModel().getSelectedItems();
-        if (referenceList != null) {
-            managerVM.exportReferenceList(referenceList,format);
-        }
-    }
-
-    @FXML
-    public void importRis() throws IOException, ParseException { importTo(Format.RIS); }
-
-    @FXML
-    public void importBibTex() throws IOException, ParseException { importTo(Format.BIBTEX); }
-
-    private void importTo(Format format) throws IOException, ParseException {
-
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Import");
-           List<File> selectedFile = fileChooser.showOpenMultipleDialog(stage);
-           if (!selectedFile.isEmpty()) {
-               managerVM.importReferences(selectedFile, format);
-               referenceTable.refresh();
-           }
     }
 
     private void loadReferenceDetail() {
@@ -269,72 +371,97 @@ public class RootLayoutController implements Initializable {
         node.setVisible(true);
     }
 
-    @FXML
-    public void addReference() throws IOException {
+    //Reference
 
-        referenceTable.getSelectionModel().selectedItemProperty().removeListener(updateViewListener);
+    private void exportTo(Format format) throws IOException {
 
-        managerVM.addEmptyBookReference();
-
-        referenceTable.refresh();
-        referenceTable.getSelectionModel().clearSelection();
-        referenceTable.getSelectionModel().selectedItemProperty().addListener(updateViewListener);
-
-        showReferenceDetails(noReferenceDetailInfo);
-    }
-
-    @FXML
-    private void save() {
-
-        try {
-            managerVM.saveDataToModel();
-        } catch (IOException e) {
-            e.printStackTrace();
+        ObservableList<ReferenceVM> referenceList = referenceTable.getSelectionModel().getSelectedItems();
+        if (referenceList != null) {
+            managerVM.exportReferenceList(referenceList,format);
         }
     }
 
-    @FXML
-    private void sync() {
+    private void importTo(Format format) throws IOException, ParseException {
 
-        try {
-            if(!managerVM.verificateAutentication()){
-                if(showPersonEditDialog()){
-                    managerVM.userLogin(loginDialogController.getUser());
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Import");
+           List<File> selectedFile = fileChooser.showOpenMultipleDialog(stage);
+           if (!selectedFile.isEmpty()) {
+               managerVM.importReferences(selectedFile, format);
+               referenceTable.refresh();
+           }
+    }
+
+    private boolean verificateValidations() {
+        boolean validation = true;
+        ObservableList<ReferenceVM> referenceList = referenceTable.getItems();
+        for(ReferenceVM reference: referenceList){
+            if(reference instanceof BookSectionReferenceVM && bookSectionDetailViewController.getValidationSupport().isInvalid()){
+                validation = false;
+            }else{
+                if(reference instanceof ArticleReferenceVM && articleDetailViewController.getValidationSupport().isInvalid()){
+                    validation = false;
+                }else{
+                    if(reference instanceof BookReferenceVM && bookDetailViewController.getValidationSupport().isInvalid()){
+                        validation = false;
+                    } else{
+                        if(reference instanceof BookLetReferenceVM && bookLetDetailViewController.getValidationSupport().isInvalid()){
+                            validation = false;
+                        } else{
+                            if(reference instanceof ThesisReferenceVM && thesisDetailViewController.getValidationSupport().isInvalid()){
+                                validation = false;
+                            } else{
+                                if(reference instanceof ConferencePaperReferenceVM && conferencePaperDetailViewController.getValidationSupport().isInvalid()){
+                                    validation = false;
+                                } else{
+                                    if(reference instanceof ConferenceProceedingsReferenceVM && conferenceProceedingsDetailViewController.getValidationSupport().isInvalid()){
+                                        validation = false;
+                                    } else{
+                                        if(reference instanceof WebPageReferenceVM && webPageDetailViewController.getValidationSupport().isInvalid()){
+                                            validation = false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
-
-            managerVM.syncDB();
-        } catch (IOException | java.text.ParseException e) {
-            e.printStackTrace();
         }
+        return validation;
     }
 
-    @FXML
-    public void logout(){
-        try {
-            managerVM.userLogout();
-        } catch (ExecutionException | InterruptedException | IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean showPersonEditDialog() {
+    //User
+    private boolean login() {
 
         loginDialogController.clearField();
-
-        // Create the dialog Stage.
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle("Login");
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(stage);
-        Scene scene = new Scene(login);
-        dialogStage.setScene(scene);
-
-        loginDialogController.setDialogStage(dialogStage);
-
+        if(!isStartedLoginScene)
+            createScene();
 
         // Show the dialog and wait until the user closes it
-        dialogStage.showAndWait();
+        loginStage.showAndWait();
+
+        loginStage.setOnCloseRequest(e -> {
+            Alert altClosed = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "No se desea autenticar ?" );
+            if (alert.getResult(altClosed).equals(ButtonType.OK)) {
+                loginStage.setScene(null);
+                loginStage.close();
+            }
+        });
+
         return loginDialogController.isOkClicked();
+    }
+
+    private void createScene(){
+        // Create the dialog Stage.
+
+        loginStage.setTitle("Login");
+        loginStage.initModality(Modality.WINDOW_MODAL);
+        loginStage.initOwner(stage);
+        Scene scene = new Scene(login);
+        loginStage.setScene(scene);
+
+        loginDialogController.setDialogStage(loginStage);
+        isStartedLoginScene = true;
     }
 }

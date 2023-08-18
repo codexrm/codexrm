@@ -64,7 +64,7 @@
                   <TextField fx:id="publisher" prefHeight="83.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                   <TextField fx:id="organization" prefHeight="82.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
                   <TextField fx:id="pages" prefHeight="79.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                  <TextField fx:id="address" prefHeight="61.0" prefWidth="218.0" promptText="Ciudad,País (Dirección del autor)" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <TextField fx:id="address" prefHeight="61.0" prefWidth="218.0" promptText="Ciudad, País (Dirección del autor)" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                   <ComboBox fx:id="month" prefHeight="69.0" prefWidth="456.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                     </children>
                 </GridPane>

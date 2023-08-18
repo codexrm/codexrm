@@ -4,7 +4,6 @@ import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.model.model.WebPageReference;
 import javafx.beans.property.*;
 
-
 public class WebPageReferenceVM extends ReferenceVM {
 
     ObjectProperty<ReferenceType> referenceType;
@@ -17,7 +16,8 @@ public class WebPageReferenceVM extends ReferenceVM {
     }
 
     public WebPageReferenceVM(WebPageReference webPageReference) {
-        super(webPageReference.getId(), webPageReference.getTitle(), webPageReference.getYear(), webPageReference.getMonth(), webPageReference.getNote(), webPageReference.isFromServer(), webPageReference.isActive(), webPageReference.isModified());
+        super(webPageReference.getId(), webPageReference.getTitle(), webPageReference.getYear(), webPageReference.getMonth(), webPageReference.getNote(), webPageReference.isFromServer(),
+                webPageReference.isActive(), webPageReference.isModified());
 
         createEmptyWebPageReferenceVM();
 
@@ -31,7 +31,6 @@ public class WebPageReferenceVM extends ReferenceVM {
         this.url = new SimpleStringProperty();
         this.referenceType = new SimpleObjectProperty<>(ReferenceType.WEBPAGE);
     }
-
 
     public String getAuthor() { return author.get(); }
 

@@ -18,11 +18,10 @@ public class UserDTO {
     private boolean enabled;
     private List<String> roles;
 
-
     public UserDTO(){ }
 
     public UserDTO(String accessToken, String refreshToken, Date tokenExpirationDate, Date refreshTokenExpirationDate, Integer id, String username, String email, String name, String lastName,
-                       boolean enabled, List<String> roles) {
+                   boolean enabled, List<String> roles) {
         this.token = accessToken;
         this.refreshToken = refreshToken;
         this.tokenExpirationDate = tokenExpirationDate;

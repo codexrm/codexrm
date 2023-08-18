@@ -15,7 +15,8 @@ public class ConferencePaperReferenceDTO extends ReferenceDTO{
 
     public ConferencePaperReferenceDTO() {}
 
-    public ConferencePaperReferenceDTO(String title, String year, String month, String note, Integer id, String author, String bookTitle, String editor, String volume, String number, String series, String pages, String address, String organization, String publisher) {
+    public ConferencePaperReferenceDTO(String title, String year, String month, String note, Integer id, String author, String bookTitle, String editor, String volume, String number, String series,
+                                       String pages, String address, String organization, String publisher) {
         super(title, year, month, note, id);
         this.author = author;
         this.bookTitle = bookTitle;
@@ -29,7 +30,8 @@ public class ConferencePaperReferenceDTO extends ReferenceDTO{
         this.publisher = publisher;
     }
 
-    public ConferencePaperReferenceDTO(String title, String year, String month, String note, String author, String bookTitle, String editor, String volume, String number, String series, String pages, String address, String organization, String publisher) {
+    public ConferencePaperReferenceDTO(String title, String year, String month, String note, String author, String bookTitle, String editor, String volume, String number, String series, String pages,
+                                       String address, String organization, String publisher) {
         super(title, year, month, note);
         this.author = author;
         this.bookTitle = bookTitle;

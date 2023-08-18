@@ -14,6 +14,7 @@ public class EnumsConverter {
     public EnumsConverter() {
     }
 
+    //Months
     public MonthsLibrary getMonthLibrary(Months months) {
 
         if (months != null) {
@@ -158,6 +159,7 @@ public class EnumsConverter {
         }
     }
 
+    //Format
     public FormatLibrary getFormat(Format format) {
 
         if (format != null) {
@@ -174,6 +176,7 @@ public class EnumsConverter {
         }
     }
 
+    //BookSectionType
     public BookSectionTypeLibrary getBookSectionTypeLibrary(BookSectionType type) {
 
         if (type != null) {
@@ -269,7 +272,7 @@ public class EnumsConverter {
                 case DataCD:
                     return "Data CD";
                 case MATHESIS:
-                    return "Master´s thesis" ;
+                    return "Master´s thesis";
                 case PHDTHESIS:
                     return "PhD thesis";
                 case RESREPORT:
@@ -286,6 +289,7 @@ public class EnumsConverter {
         }
     }
 
+    //ThesisType
     public ThesisTypeLibrary getThesisTypeLibrary(ThesisType type) {
 
         if (type != null) {

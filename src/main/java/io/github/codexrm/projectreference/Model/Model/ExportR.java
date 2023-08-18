@@ -38,36 +38,39 @@ public class ExportR {
 
         if (reference instanceof ArticleReference) {
             ArticleReference article = (ArticleReference) reference;
-            entry = new ArticleR(article.getTitle(), article.getYear(), enumsConverter.getMonthLibrary(article.getMonth()), article.getNote(), article.getId(), article.getAuthor(), article.getJournal(), article.getVolume(), article.getNumber(), article.getPages(), article.getIssn());
+            entry = new ArticleR(article.getTitle(), article.getYear(), enumsConverter.getMonthLibrary(article.getMonth()), article.getNote(), article.getId(), article.getAuthor(), article.getJournal(), article.getVolume(),
+                    article.getNumber(), article.getPages(), article.getIssn());
 
         } else {
             if (reference instanceof BookSectionReference) {
                 BookSectionReference section = (BookSectionReference) reference;
-                entry = new BookSectionR( section.getTitle(),  section.getYear(), enumsConverter.getMonthLibrary(section.getMonth()),  section.getNote(),  section.getId(),  section.getAuthor(),  section.getEditor(),  section.getPublisher(),  section.getVolume(), section.getNumber(),
-                        section.getSeries(),  section.getAddress(),  section.getEdition(),  section.getIsbn(),  section.getChapter(), section.getPages(), enumsConverter.getBookSectionTypeLibrary(section.getType()));
+                entry = new BookSectionR( section.getTitle(),  section.getYear(), enumsConverter.getMonthLibrary(section.getMonth()),  section.getNote(),  section.getId(),  section.getAuthor(),  section.getEditor(),
+                        section.getPublisher(),  section.getVolume(), section.getNumber(), section.getSeries(),  section.getAddress(),  section.getEdition(),  section.getIsbn(),  section.getChapter(), section.getPages(),
+                        enumsConverter.getBookSectionTypeLibrary(section.getType()));
 
             } else {
                 if (reference instanceof BookReference) {
                     BookReference book = (BookReference) reference;
-                    entry = new BookR(book.getTitle(), book.getYear(), enumsConverter.getMonthLibrary(book.getMonth()), book.getNote(), book.getId(), book.getAuthor(), book.getEditor(), book.getPublisher(), book.getVolume(), book.getNumber(), book.getSeries(), book.getAddress(),
-                            book.getEdition(), book.getIsbn());
+                    entry = new BookR(book.getTitle(), book.getYear(), enumsConverter.getMonthLibrary(book.getMonth()), book.getNote(), book.getId(), book.getAuthor(), book.getEditor(), book.getPublisher(), book.getVolume(),
+                            book.getNumber(), book.getSeries(), book.getAddress(), book.getEdition(), book.getIsbn());
 
                 } else {
                     if (reference instanceof ThesisReference) {
                         ThesisReference thesis = (ThesisReference) reference;
-                        entry = new ThesisR(thesis.getTitle(), thesis.getYear(), enumsConverter.getMonthLibrary(thesis.getMonth()), thesis.getNote(), thesis.getId(), thesis.getAuthor(), thesis.getSchool(), enumsConverter.getThesisTypeLibrary(thesis.getType()), thesis.getAddress());
+                        entry = new ThesisR(thesis.getTitle(), thesis.getYear(), enumsConverter.getMonthLibrary(thesis.getMonth()), thesis.getNote(), thesis.getId(), thesis.getAuthor(), thesis.getSchool(),
+                                enumsConverter.getThesisTypeLibrary(thesis.getType()), thesis.getAddress());
 
                     } else {
                         if (reference instanceof ConferenceProceedingsReference) {
                             ConferenceProceedingsReference proceedings = (ConferenceProceedingsReference) reference;
-                            entry = new ConferenceProceedingsR(proceedings.getTitle(), proceedings.getYear(), enumsConverter.getMonthLibrary(proceedings.getMonth()), proceedings.getNote(), proceedings.getId(), proceedings.getEditor(), proceedings.getVolume(), proceedings.getNumber(),
-                                    proceedings.getSeries(), proceedings.getAddress(), proceedings.getPublisher(), proceedings.getOrganization(), proceedings.getIsbn());
+                            entry = new ConferenceProceedingsR(proceedings.getTitle(), proceedings.getYear(), enumsConverter.getMonthLibrary(proceedings.getMonth()), proceedings.getNote(), proceedings.getId(), proceedings.getEditor(),
+                                    proceedings.getVolume(), proceedings.getNumber(), proceedings.getSeries(), proceedings.getAddress(), proceedings.getPublisher(), proceedings.getOrganization(), proceedings.getIsbn());
 
                         } else {
                             if (reference instanceof ConferencePaperReference) {
                                 ConferencePaperReference paper = (ConferencePaperReference) reference;
-                                entry = new ConferencePaperR(paper.getTitle(), paper.getYear(), enumsConverter.getMonthLibrary(paper.getMonth()), paper.getNote(), paper.getId(), paper.getAuthor(), paper.getBookTitle(), paper.getEditor(), paper.getVolume(), paper.getNumber(),
-                                        paper.getSeries(), paper.getPages(), paper.getAddress(), paper.getOrganization(), paper.getPublisher());
+                                entry = new ConferencePaperR(paper.getTitle(), paper.getYear(), enumsConverter.getMonthLibrary(paper.getMonth()), paper.getNote(), paper.getId(), paper.getAuthor(), paper.getBookTitle(), paper.getEditor(),
+                                        paper.getVolume(), paper.getNumber(), paper.getSeries(), paper.getPages(), paper.getAddress(), paper.getOrganization(), paper.getPublisher());
 
                             } else {
                                 if (reference instanceof WebPageReference) {

@@ -44,4 +44,5 @@ public class TokenRefreshResponse {
   public Date getTokenExpirationDate() { return tokenExpirationDate; }
 
   public void setTokenExpirationDate(Date tokenExpirationDate) { this.tokenExpirationDate = tokenExpirationDate; }
+
 }

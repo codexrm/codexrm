@@ -1,6 +1,7 @@
 package io.github.codexrm.projectreference.model.model;
 
 import io.github.codexrm.projectreference.model.enums.Months;
+import io.github.codexrm.projectreference.model.utils.FieldValidations;
 
 import java.util.Objects;
 
@@ -16,6 +17,8 @@ public class BookReference extends Reference {
     protected String edition;
     protected String isbn;
 
+    private final FieldValidations validations = new FieldValidations();
+
     public BookReference() {
         super();
         this.author = "";
@@ -29,26 +32,49 @@ public class BookReference extends Reference {
         this.isbn = "";
     }
 
-    public BookReference(String title, String year, Months month, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String author, String editor, String publisher, String volume, String number, String series, String address, String edition, String isbn) {
+    public BookReference(String title, String year, Months month, String note, Integer id, boolean isFromServer, boolean isModified, boolean isActive, String author, String editor, String publisher,
+                         String volume, String number, String series, String address, String edition, String isbn) {
         super(title, year, month, note, id, isFromServer, isModified, isActive);
-        this.author = author;
-        this.editor = editor;
         this.publisher = publisher;
-        this.volume = volume;
-        this.number = number;
-        this.series = series;
-        this.address = address;
-        this.edition = edition;
-        this.isbn = isbn;
+
+        if(validations.validateAuthorOrEditor(author))
+            this.author = author;
+
+        if(validations.validateAuthorOrEditor(editor))
+            this.editor = editor;
+
+        if(validations.isNumber(volume))
+            this.volume = volume;
+
+        if(validations.validateNumber(number))
+            this.number = number;
+
+        if(validations.validateSeries(series))
+            this.series = series;
+
+        if(validations.validateAddress(address))
+            this.address = address;
+
+        if(validations.validateEdition(edition))
+            this.edition = edition;
+
+        if(validations.validateIsbn(isbn))
+            this.isbn = isbn;
     }
 
     public String getAuthor() { return author; }
 
-    public void setAuthor(String author) { this.author = author; }
+    public void setAuthor(String author) {
+        if(validations.validateAuthorOrEditor(author))
+        this.author = author;
+    }
 
     public String getEditor() { return editor; }
 
-    public void setEditor(String editor) { this.editor = editor; }
+    public void setEditor(String editor) {
+        if(validations.validateAuthorOrEditor(editor))
+        this.editor = editor;
+    }
 
     public String getPublisher() {
         return publisher;
@@ -58,23 +84,26 @@ public class BookReference extends Reference {
         this.publisher = publisher;
     }
 
-    public String getVolume() {
-        return volume;
-    }
+    public String getVolume() { return volume; }
 
     public void setVolume(String volume) {
+        if(validations.isNumber(volume))
         this.volume = volume;
     }
 
     public String getNumber() { return number; }
 
-    public void setNumber(String number) { this.number = number; }
+    public void setNumber(String number) {
+        if(validations.validateNumber(number))
+        this.number = number;
+    }
 
     public String getSeries() {
         return series;
     }
 
     public void setSeries(String series) {
+        if(validations.validateSeries(series))
         this.series = series;
     }
 
@@ -83,7 +112,8 @@ public class BookReference extends Reference {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        if(validations.validateAddress(address))
+            this.address = address;
     }
 
     public String getEdition() {
@@ -91,12 +121,16 @@ public class BookReference extends Reference {
     }
 
     public void setEdition(String edition) {
+        if(validations.validateEdition(edition))
         this.edition = edition;
     }
 
     public String getIsbn() { return isbn; }
 
-    public void setIsbn(String isbn) { this.isbn = isbn; }
+    public void setIsbn(String isbn) {
+        if(validations.validateIsbn(isbn))
+            this.isbn = isbn;
+    }
 
     @Override
     public boolean equals(Object o) {

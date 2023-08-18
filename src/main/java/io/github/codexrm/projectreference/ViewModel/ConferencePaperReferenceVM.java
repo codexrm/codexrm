@@ -26,7 +26,8 @@ public class ConferencePaperReferenceVM extends ReferenceVM {
     }
 
     public ConferencePaperReferenceVM(ConferencePaperReference conferencePaperReference) {
-        super(conferencePaperReference.getId(), conferencePaperReference.getTitle(), conferencePaperReference.getYear(), conferencePaperReference.getMonth(), conferencePaperReference.getNote(), conferencePaperReference.isFromServer(), conferencePaperReference.isActive(), conferencePaperReference.isModified());
+        super(conferencePaperReference.getId(), conferencePaperReference.getTitle(), conferencePaperReference.getYear(), conferencePaperReference.getMonth(), conferencePaperReference.getNote(),
+                conferencePaperReference.isFromServer(), conferencePaperReference.isActive(), conferencePaperReference.isModified());
 
         createEmptyConferencePaperReferenceVM();
 

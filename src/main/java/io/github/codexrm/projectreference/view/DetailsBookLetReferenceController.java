@@ -121,14 +121,18 @@ public class DetailsBookLetReferenceController implements Initializable {
 
     public void setReferenceType(ComboBox<ReferenceType> referenceType) { this.referenceType = referenceType; }
 
+    public ValidationSupport getValidationSupport() { return validationSupport; }
+
+    public void setValidationSupport(ValidationSupport validationSupport) { this.validationSupport = validationSupport; }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         validationSupport.registerValidator(title,true, Validator.createEmptyValidator("Campo requerido"));
 
         validationSupport.registerValidator(author, false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*", Severity.ERROR));
-        validationSupport.registerValidator(address,false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s]+[,\\s*[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*", Severity.ERROR));
-        validationSupport.registerValidator(year,false, Validator.createRegexValidator("Solo se pueden introducir un año o un rango de años", "^$|\\d{4}|\\d{4}-\\d{4}|\\d{4}--\\d{4}", Severity.ERROR));
+        validationSupport.registerValidator(address,false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*", Severity.ERROR));
+        validationSupport.registerValidator(year,false, Validator.createRegexValidator("Solo se pueden introducir un año o un rango de años", "^$|\\d{4}|\\d{4}--\\d{4}", Severity.ERROR));
 
         loadReferenceType();
         loadMonths();
