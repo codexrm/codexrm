@@ -39,7 +39,7 @@ public class ConferenceProceedingsReference extends Reference {
         if(validations.validateAuthorOrEditor(editor))
             this.editor = editor;
 
-        if(validations.isNumber(volume))
+        if(validations.validateChapterOrVolume(volume))
             this.volume = volume;
 
         if(validations.validateNumber(number))
@@ -67,7 +67,7 @@ public class ConferenceProceedingsReference extends Reference {
     }
 
     public void setVolume(String volume) {
-        if(validations.isNumber(volume))
+        if(validations.validateChapterOrVolume(volume))
         this.volume = volume;
     }
 

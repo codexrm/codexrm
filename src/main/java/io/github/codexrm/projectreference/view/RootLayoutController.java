@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -186,7 +187,7 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     public void deleteReference(){
-        Alert altDelete = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "Desea eliminar las referencias que han sido seleccionadas ?" );
+      Alert altDelete = alert.getAlert(stage, Alert.AlertType.CONFIRMATION, "Atención","", "Desea eliminar las referencias que han sido seleccionadas ?" );
         if (alert.getResult(altDelete).equals(ButtonType.OK)) {
             ObservableList<ReferenceVM> referenceList = referenceTable.getSelectionModel().getSelectedItems();
             if (referenceList != null) {
@@ -205,16 +206,17 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     private void save() {
-        Alert altSave = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "Desea salvar la lista de referencias ?" );
+        Alert altSave = alert.getAlert(stage, Alert.AlertType.CONFIRMATION, "Atención","", "Desea salvar la lista de referencias ?" );
         if (alert.getResult(altSave).equals(ButtonType.OK)) {
             if(!verificateValidations()){
-                alert.getAlert(Alert.AlertType.ERROR, "Error de Validacion", "Referencias invalidas", "Verifique los campos de las referencias. Es posible que alguna no sea valida");
+                alert.getAlert(stage, Alert.AlertType.ERROR, "Error de Validacion", "Referencias invalidas", "Verifique los campos de las referencias. Es posible que alguna no sea valida." +
+                        " Los campos invalidos fueron susrituidos con el siguiente texto: CodexRM:Error");
             }else{
                 try {
                     managerVM.saveDataToModel();
 
                 } catch (IOException e) {
-                    alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar salvar las referencias" );
+                   alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar salvar las referencias" );
                 }
             }
         }
@@ -222,21 +224,20 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     public void sync() {
-
         try {
             if(!managerVM.verificateAutentication()){
                 if(login()){
                     if(!managerVM.userLogin(loginDialogController.getUser())){
-                        alert.getAlert(Alert.AlertType.ERROR, "Error de Acceso al usuario", "Usuario no autorizado", "Verifique nombre de usuario y contraseña nuevamente. Es posible que el usuario se encuentre deshabilitado o no exista");
+                        alert.getAlert(stage, Alert.AlertType.ERROR, "Error de Acceso al usuario", "Usuario no autorizado", "Verifique nombre de usuario y contraseña nuevamente. Es posible que el usuario se encuentre deshabilitado o no exista");
                     }else{
                         if(!managerVM.syncDB())
-                            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar sincronizar las referencias con el servidor");
+                            alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar sincronizar las referencias con el servidor");
                     }
                 }
             }
 
         } catch (IOException e) {
-            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar sincronizar las referencias con el servidor");
+           alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar sincronizar las referencias con el servidor");
 
         }
     }
@@ -246,7 +247,7 @@ public class RootLayoutController implements Initializable {
         try {
             exportTo(Format.RIS);
         } catch (IOException e) {
-            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar exportar las referencias" );
+          alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar exportar las referencias" );
         }
     }
 
@@ -255,7 +256,7 @@ public class RootLayoutController implements Initializable {
         try {
             exportTo(Format.BIBTEX);
         } catch (IOException e) {
-            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar exportar las referencias" );
+           alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar exportar las referencias" );
         }
     }
 
@@ -264,7 +265,7 @@ public class RootLayoutController implements Initializable {
         try {
             importTo(Format.RIS);
         } catch (IOException | ParseException e) {
-            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar importar las referencias" );
+            alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar importar las referencias" );
         }
     }
 
@@ -273,22 +274,22 @@ public class RootLayoutController implements Initializable {
         try {
             importTo(Format.BIBTEX);
         } catch (IOException | ParseException e) {
-            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar importar las referencias" );
+            alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar importar las referencias" );
         }
     }
 
     //User
     @FXML
     public void logout(){
-        Alert altSave = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "Desea cerrar la sesion ?" );
+        Alert altSave = alert.getAlert(stage, Alert.AlertType.CONFIRMATION, "Atención","", "Desea cerrar la sesion ?" );
         if (alert.getResult(altSave).equals(ButtonType.OK)) {
             try {
                 if(!managerVM.userLogout())
-                    alert.getAlert(Alert.AlertType.ERROR, "Error","", "No fue posible cerrar la sesion" );
+                    alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "No fue posible cerrar la sesion" );
 
             } catch (ExecutionException | InterruptedException | IOException e) {
                 e.printStackTrace();
-                alert.getAlert(Alert.AlertType.ERROR, "Error","", "No fue posible cerrar la sesion" );
+                alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "No fue posible cerrar la sesion" );
             }
 
         }
@@ -392,32 +393,32 @@ public class RootLayoutController implements Initializable {
            }
     }
 
-    private boolean verificateValidations() {
+   private boolean verificateValidations() {
         boolean validation = true;
         ObservableList<ReferenceVM> referenceList = referenceTable.getItems();
         for(ReferenceVM reference: referenceList){
-            if(reference instanceof BookSectionReferenceVM && bookSectionDetailViewController.getValidationSupport().isInvalid()){
+            if(reference instanceof BookSectionReferenceVM && !bookSectionDetailViewController.validateFields((BookSectionReferenceVM) reference)){
                 validation = false;
             }else{
-                if(reference instanceof ArticleReferenceVM && articleDetailViewController.getValidationSupport().isInvalid()){
+                if(reference instanceof ArticleReferenceVM && !articleDetailViewController.validateFields((ArticleReferenceVM) reference)){
                     validation = false;
                 }else{
-                    if(reference instanceof BookReferenceVM && bookDetailViewController.getValidationSupport().isInvalid()){
+                    if(reference instanceof BookReferenceVM && !bookDetailViewController.validateFields((BookReferenceVM) reference)){
                         validation = false;
                     } else{
-                        if(reference instanceof BookLetReferenceVM && bookLetDetailViewController.getValidationSupport().isInvalid()){
+                        if(reference instanceof BookLetReferenceVM && !bookLetDetailViewController.validateFields((BookLetReferenceVM) reference)){
                             validation = false;
                         } else{
-                            if(reference instanceof ThesisReferenceVM && thesisDetailViewController.getValidationSupport().isInvalid()){
+                            if(reference instanceof ThesisReferenceVM && !thesisDetailViewController.validateFields((ThesisReferenceVM) reference)){
                                 validation = false;
                             } else{
-                                if(reference instanceof ConferencePaperReferenceVM && conferencePaperDetailViewController.getValidationSupport().isInvalid()){
+                                if(reference instanceof ConferencePaperReferenceVM && !conferencePaperDetailViewController.validateFields((ConferencePaperReferenceVM) reference)){
                                     validation = false;
                                 } else{
-                                    if(reference instanceof ConferenceProceedingsReferenceVM && conferenceProceedingsDetailViewController.getValidationSupport().isInvalid()){
+                                    if(reference instanceof ConferenceProceedingsReferenceVM && !conferenceProceedingsDetailViewController.validateFields((ConferenceProceedingsReferenceVM) reference)){
                                         validation = false;
                                     } else{
-                                        if(reference instanceof WebPageReferenceVM && webPageDetailViewController.getValidationSupport().isInvalid()){
+                                        if(reference instanceof WebPageReferenceVM && !webPageDetailViewController.validateFields((WebPageReferenceVM) reference)){
                                             validation = false;
                                         }
                                     }
@@ -442,7 +443,7 @@ public class RootLayoutController implements Initializable {
         loginStage.showAndWait();
 
         loginStage.setOnCloseRequest(e -> {
-            Alert altClosed = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "No se desea autenticar ?" );
+            Alert altClosed = alert.getAlert(stage, Alert.AlertType.CONFIRMATION, "Atención","", "No se desea autenticar ?" );
             if (alert.getResult(altClosed).equals(ButtonType.OK)) {
                 loginStage.setScene(null);
                 loginStage.close();
@@ -456,6 +457,7 @@ public class RootLayoutController implements Initializable {
         // Create the dialog Stage.
 
         loginStage.setTitle("Login");
+        loginStage.getIcons().add(new Image("file:Logo.jpg"));
         loginStage.initModality(Modality.WINDOW_MODAL);
         loginStage.initOwner(stage);
         Scene scene = new Scene(login);

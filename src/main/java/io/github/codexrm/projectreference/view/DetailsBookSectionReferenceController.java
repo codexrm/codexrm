@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.model.enums.*;
+import io.github.codexrm.projectreference.model.utils.FieldValidations;
 import io.github.codexrm.projectreference.viewmodel.BookSectionReferenceVM;
 import io.github.codexrm.projectreference.viewmodel.ReferenceLibraryManagerVM;
 import io.github.codexrm.projectreference.viewmodel.ReferenceVM;
@@ -12,66 +13,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import org.controlsfx.validation.Severity;
-import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
 
 public class DetailsBookSectionReferenceController implements Initializable {
 
     @FXML
-    private TextField chapter;
-
-    @FXML
-    private TextField pages;
-
-    @FXML
-    private TextField author;
-
-    @FXML
-    private TextField editor;
-
-    @FXML
-    private TextField title;
-
-    @FXML
-    private TextField publisher;
-
-    @FXML
-    private TextField year;
-
-    @FXML
-    private TextField volume;
-
-    @FXML
-    private TextField number;
-
-    @FXML
-    private TextField series;
+    private TextField chapter, pages, author, editor, title, publisher, year, volume, number, series, address, edition, isbn, note;
 
     @FXML
     private ComboBox<BookSectionType> type;
 
     @FXML
-    private TextField address;
-
-    @FXML
-    private TextField edition;
-
-    @FXML
     private ComboBox<Months> month;
-
-    @FXML
-    private TextField isbn;
-
-    @FXML
-    private TextField note;
 
     @FXML
     private ComboBox<ReferenceType> referenceType;
 
     private ReferenceLibraryManagerVM managerVM;
 
-    private ValidationSupport validationSupport = new ValidationSupport();
+    private FieldValidations validations = new FieldValidations();
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 
@@ -141,96 +100,144 @@ public class DetailsBookSectionReferenceController implements Initializable {
         }
     };
 
-    public TextField getChapter() { return chapter; }
+    public TextField getChapter() {
+        return chapter;
+    }
 
-    public void setChapter(TextField chapter) { this.chapter = chapter; }
+    public void setChapter(TextField chapter) {
+        this.chapter = chapter;
+    }
 
-    public TextField getPages() { return pages; }
+    public TextField getPages() {
+        return pages;
+    }
 
-    public void setPages(TextField pages) { this.pages = pages; }
+    public void setPages(TextField pages) {
+        this.pages = pages;
+    }
 
-    public TextField getAuthor() { return author; }
+    public TextField getAuthor() {
+        return author;
+    }
 
-    public void setAuthor(TextField author) { this.author = author; }
+    public void setAuthor(TextField author) {
+        this.author = author;
+    }
 
-    public TextField getEditor() { return editor; }
+    public TextField getEditor() {
+        return editor;
+    }
 
-    public void setEditor(TextField editor) { this.editor = editor; }
+    public void setEditor(TextField editor) {
+        this.editor = editor;
+    }
 
-    public TextField getTitle() { return title; }
+    public TextField getTitle() {
+        return title;
+    }
 
-    public void setTitle(TextField title) { this.title = title; }
+    public void setTitle(TextField title) {
+        this.title = title;
+    }
 
-    public TextField getPublisher() { return publisher; }
+    public TextField getPublisher() {
+        return publisher;
+    }
 
-    public void setPublisher(TextField publisher) { this.publisher = publisher; }
+    public void setPublisher(TextField publisher) {
+        this.publisher = publisher;
+    }
 
-    public TextField getYear() { return year; }
+    public TextField getYear() {
+        return year;
+    }
 
-    public void setYear(TextField year) { this.year = year; }
+    public void setYear(TextField year) {
+        this.year = year;
+    }
 
-    public TextField getVolume() { return volume; }
+    public TextField getVolume() {
+        return volume;
+    }
 
-    public void setVolume(TextField volume) { this.volume = volume; }
+    public void setVolume(TextField volume) {
+        this.volume = volume;
+    }
 
-    public TextField getNumber() { return number; }
+    public TextField getNumber() {
+        return number;
+    }
 
-    public void setNumber(TextField number) { this.number = number; }
+    public void setNumber(TextField number) {
+        this.number = number;
+    }
 
-    public TextField getSeries() { return series; }
+    public TextField getSeries() {
+        return series;
+    }
 
-    public void setSeries(TextField series) { this.series = series; }
+    public void setSeries(TextField series) {
+        this.series = series;
+    }
 
-    public ComboBox<BookSectionType> getType() { return type; }
+    public ComboBox<BookSectionType> getType() {
+        return type;
+    }
 
-    public void setType(ComboBox<BookSectionType> type) { this.type = type; }
+    public void setType(ComboBox<BookSectionType> type) {
+        this.type = type;
+    }
 
-    public TextField getAddress() { return address; }
+    public TextField getAddress() {
+        return address;
+    }
 
-    public void setAddress(TextField address) { this.address = address; }
+    public void setAddress(TextField address) {
+        this.address = address;
+    }
 
-    public TextField getEdition() { return edition; }
+    public TextField getEdition() {
+        return edition;
+    }
 
-    public void setEdition(TextField edition) { this.edition = edition; }
+    public void setEdition(TextField edition) {
+        this.edition = edition;
+    }
 
-    public ComboBox<Months> getMonth() { return month; }
+    public ComboBox<Months> getMonth() {
+        return month;
+    }
 
-    public void setMonth(ComboBox<Months> month) { this.month = month; }
+    public void setMonth(ComboBox<Months> month) {
+        this.month = month;
+    }
 
-    public TextField getIsbn() { return isbn; }
+    public TextField getIsbn() {
+        return isbn;
+    }
 
-    public void setIsbn(TextField isbn) { this.isbn = isbn; }
+    public void setIsbn(TextField isbn) {
+        this.isbn = isbn;
+    }
 
-    public TextField getNote() { return note; }
+    public TextField getNote() {
+        return note;
+    }
 
-    public void setNote(TextField note) { this.note = note; }
+    public void setNote(TextField note) {
+        this.note = note;
+    }
 
-    public ComboBox<ReferenceType> getReferenceType() { return referenceType; }
+    public ComboBox<ReferenceType> getReferenceType() {
+        return referenceType;
+    }
 
-    public void setReferenceType(ComboBox<ReferenceType> referenceType) { this.referenceType = referenceType; }
-
-    public ValidationSupport getValidationSupport() { return validationSupport; }
-
-    public void setValidationSupport(ValidationSupport validationSupport) { this.validationSupport = validationSupport; }
+    public void setReferenceType(ComboBox<ReferenceType> referenceType) {
+        this.referenceType = referenceType;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        validationSupport.registerValidator(chapter,true, Validator.createRegexValidator("Solo se puede introduccir números", "[\\d]*", Severity.ERROR));
-        validationSupport.registerValidator(pages,true,  Validator.createRegexValidator("Solo se puede introducir número(incluido romano) y los caracteres '-', ','", "[IVXMLCD]+|[IVXMLCD]+,[IVXMLCD]+|[IVXMLCD]+-[IVXMLCD]+|[0-9]+|[0-9]+,[0-9]+|[0-9]+-[0-9]+", Severity.ERROR));
-        validationSupport.registerValidator(author, true, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*", Severity.ERROR));
-        validationSupport.registerValidator(editor, true, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*", Severity.ERROR));
-        validationSupport.registerValidator(title,true, Validator.createEmptyValidator("Campo requerido"));
-        validationSupport.registerValidator(publisher,true, Validator.createEmptyValidator("Campo requerido"));
-        validationSupport.registerValidator(year,true,  Validator.createRegexValidator("Solo se pueden introducir un año o un rango de años", "\\d{4}|\\d{4}--\\d{4}", Severity.ERROR));
-
-        validationSupport.registerValidator(volume, false, Validator.createRegexValidator("Solo se puede introduccir números", "^$|[\\d]*", Severity.ERROR));
-        validationSupport.registerValidator(series, false, Validator.createRegexValidator("Solo se puede introduccir letras", "^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s]+", Severity.ERROR));
-        validationSupport.registerValidator(address, false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*", Severity.ERROR));
-        validationSupport.registerValidator(number, false, Validator.createRegexValidator("Solo se puede introducir números, letras y el caracter '-'", "^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0-9\\s-]+", Severity.ERROR));
-        validationSupport.registerValidator(edition, false, Validator.createRegexValidator("Solo se puede introducir números, letras y el caracter '.'", "^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0]+|\\d+\\.", Severity.ERROR));
-        validationSupport.registerValidator(isbn, false, Validator.createRegexValidator("El texto no cumple con la sintaxis de un ISBN", "^$|^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$", Severity.ERROR));
-
         loadReferenceType();
         loadBookSectionType();
         loadMonths();
@@ -246,12 +253,83 @@ public class DetailsBookSectionReferenceController implements Initializable {
         this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
     }
 
-    private void loadMonths(){
+    private void loadMonths() {
         month.getItems().add(null);
         month.getItems().addAll(Months.values());
     }
 
-    private void loadBookSectionType(){
+    public boolean validateFields(BookSectionReferenceVM bookSection) {
+        boolean isValidate = true;
+
+        if (!validations.validateChapterRequired(bookSection.getChapter())) {
+            bookSection.setChapter("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validatePagesRequired(bookSection.getPages())) {
+            bookSection.setPages("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateAuthorOrEditorRequired(bookSection.getAuthor())) {
+            bookSection.setAuthor("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateAuthorOrEditorRequired(bookSection.getEditor())) {
+            bookSection.setEditor("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (bookSection.getTitle().equals("No Title") || bookSection.getTitle().isBlank() || bookSection.getTitle().equals("CodexRM:Error")) {
+            bookSection.setTitle("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateFieldRequired(bookSection.getPublisher())) {
+            bookSection.setPublisher("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateYearRequired(bookSection.getYear())) {
+            bookSection.setYear("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if(!validations.validateChapterOrVolume(bookSection.getVolume())){
+            bookSection.setVolume("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if(!validations.validateSeries(bookSection.getSeries())){
+            bookSection.setSeries("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if(!validations.validateAddress(bookSection.getAddress())){
+            bookSection.setAddress("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateNumber(bookSection.getNumber())) {
+            bookSection.setNumber("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateEdition(bookSection.getEdition())) {
+            bookSection.setEdition("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateIsbn(bookSection.getIsbn())) {
+            bookSection.setIsbn("CodexRM:Error");
+            isValidate = false;
+        }
+
+        return isValidate;
+    }
+
+    private void loadBookSectionType() {
         type.getItems().add(null);
         type.getItems().addAll(BookSectionType.values());
     }
@@ -266,4 +344,5 @@ public class DetailsBookSectionReferenceController implements Initializable {
             }
         };
         referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
-    }}
+    }
+}

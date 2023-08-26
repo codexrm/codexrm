@@ -2,15 +2,13 @@ package io.github.codexrm.projectreference.view;
 
 import io.github.codexrm.projectreference.model.enums.Months;
 import io.github.codexrm.projectreference.model.enums.ReferenceType;
+import io.github.codexrm.projectreference.model.utils.FieldValidations;
 import io.github.codexrm.projectreference.viewmodel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import org.controlsfx.validation.Severity;
-import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,29 +16,17 @@ import java.util.ResourceBundle;
 public class DetailsWebPageReferenceController implements Initializable {
 
     @FXML
-    private TextField author;
-
-    @FXML
-    private TextField title;
+    private TextField author, title, year, url, note;
 
     @FXML
     private ComboBox<Months> month;
-
-    @FXML
-    private TextField year;
-
-    @FXML
-    private TextField url;
-
-    @FXML
-    private TextField note;
 
     @FXML
     private ComboBox<ReferenceType> referenceType;
 
     private ReferenceLibraryManagerVM managerVM;
 
-    private ValidationSupport validationSupport = new ValidationSupport();
+    private FieldValidations validations = new FieldValidations();
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 
@@ -109,17 +95,8 @@ public class DetailsWebPageReferenceController implements Initializable {
 
     public void setReferenceType(ComboBox<ReferenceType> referenceType) { this.referenceType = referenceType; }
 
-    public ValidationSupport getValidationSupport() { return validationSupport; }
-
-    public void setValidationSupport(ValidationSupport validationSupport) { this.validationSupport = validationSupport; }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        validationSupport.registerValidator(author, false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*", Severity.ERROR));
-        validationSupport.registerValidator(year,false,  Validator.createRegexValidator("Solo se pueden introducir un año o un rango de años", "^$|\\d{4}|\\d{4}--\\d{4}", Severity.ERROR));
-        validationSupport.registerValidator(url, false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|^https://.*", Severity.ERROR));
-
         loadReferenceType();
         loadMonths();
     }
@@ -132,6 +109,27 @@ public class DetailsWebPageReferenceController implements Initializable {
 
         this.managerVM = dataViewModel;
         this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
+    }
+
+    public boolean validateFields(WebPageReferenceVM webPage) {
+        boolean isValidate = true;
+
+        if (!validations.validateAuthorOrEditor(webPage.getAuthor())) {
+            webPage.setAuthor("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateYear(webPage.getYear())) {
+            webPage.setYear("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateUrl(webPage.getUrl())) {
+            webPage.setUrl("CodexRM:Error");
+            isValidate = false;
+        }
+
+        return isValidate;
     }
 
     private void loadMonths(){

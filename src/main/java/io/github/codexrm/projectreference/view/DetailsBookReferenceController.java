@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.model.enums.Months;
+import io.github.codexrm.projectreference.model.utils.FieldValidations;
 import io.github.codexrm.projectreference.viewmodel.BookReferenceVM;
 import io.github.codexrm.projectreference.viewmodel.ReferenceLibraryManagerVM;
 import io.github.codexrm.projectreference.model.enums.ReferenceType;
@@ -14,57 +15,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import org.controlsfx.validation.Severity;
-import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
 
 public class DetailsBookReferenceController implements Initializable {
 
     @FXML
-    private TextField author;
-
-    @FXML
-    private TextField editor;
-
-    @FXML
-    private TextField title;
-
-    @FXML
-    private TextField publisher;
-
-    @FXML
-    private TextField year;
-
-    @FXML
-    private TextField volume;
-
-    @FXML
-    private TextField number;
-
-    @FXML
-    private TextField series;
-
-    @FXML
-    private TextField address;
-
-    @FXML
-    private TextField edition;
+    private TextField author, editor, title, publisher, year, volume, number, series, address, edition, isbn, note;
 
     @FXML
     private ComboBox<Months> month;
-
-    @FXML
-    private TextField isbn;
-
-    @FXML
-    private TextField note;
 
     @FXML
     private ComboBox<ReferenceType> referenceType;
 
     private ReferenceLibraryManagerVM maganerVM;
 
-    private ValidationSupport validationSupport = new ValidationSupport();
+    private FieldValidations validations = new FieldValidations();
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 
@@ -180,26 +145,8 @@ public class DetailsBookReferenceController implements Initializable {
 
     public void setReferenceType(ComboBox<ReferenceType> referenceType) { this.referenceType = referenceType; }
 
-    public ValidationSupport getValidationSupport() { return validationSupport; }
-
-    public void setValidationSupport(ValidationSupport validationSupport) { this.validationSupport = validationSupport; }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        validationSupport.registerValidator(author, true, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*", Severity.ERROR));
-        validationSupport.registerValidator(editor, true, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*", Severity.ERROR));
-        validationSupport.registerValidator(title,true, Validator.createEmptyValidator("Campo requerido"));
-        validationSupport.registerValidator(publisher,true, Validator.createEmptyValidator("Campo requerido"));
-        validationSupport.registerValidator(year,true,  Validator.createRegexValidator("Solo se pueden introducir un año o un rango de años", "\\d{4}|\\d{4}--\\d{4}", Severity.ERROR));
-
-        validationSupport.registerValidator(volume, false, Validator.createRegexValidator("Solo se puede introduccir números", "^$|[\\d]*", Severity.ERROR));
-        validationSupport.registerValidator(series, false, Validator.createRegexValidator("Solo se puede introduccir letras", "^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s]+", Severity.ERROR));
-        validationSupport.registerValidator(address, false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*", Severity.ERROR));
-        validationSupport.registerValidator(number, false, Validator.createRegexValidator("Solo se puede introducir números, letras y el caracter '-'", "^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0-9\\s-]+", Severity.ERROR));
-        validationSupport.registerValidator(edition, false, Validator.createRegexValidator("Solo se puede introducir números, letras y el caracter '.'", "^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0]+|\\d+\\.", Severity.ERROR));
-        validationSupport.registerValidator(isbn, false, Validator.createRegexValidator("El texto no cumple con la sintaxis de un ISBN", "^$|^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$", Severity.ERROR));
-
         loadReferenceType();
         loadMonths();
     }
@@ -211,6 +158,67 @@ public class DetailsBookReferenceController implements Initializable {
         }
         this.maganerVM = dataViewModel;
         this.maganerVM.currentReferenceProperty().addListener(referenceVMListener);
+    }
+
+    public boolean validateFields(BookReferenceVM book) {
+        boolean isValidate = true;
+
+        if (!validations.validateAuthorOrEditorRequired(book.getAuthor())) {
+            book.setAuthor("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateAuthorOrEditorRequired(book.getEditor())) {
+            book.setEditor("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (book.getTitle().equals("No Title") || book.getTitle().isBlank() || book.getTitle().equals("CodexRM:Error")) {
+            book.setTitle("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateFieldRequired(book.getPublisher())) {
+            book.setPublisher("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateYearRequired(book.getYear())) {
+            book.setYear("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if(!validations.validateChapterOrVolume(book.getVolume())){
+            book.setVolume("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if(!validations.validateSeries(book.getSeries())){
+            book.setSeries("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if(!validations.validateAddress(book.getAddress())){
+            book.setAddress("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateNumber(book.getNumber())) {
+            book.setNumber("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateEdition(book.getEdition())) {
+            book.setEdition("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateIsbn(book.getIsbn())) {
+            book.setIsbn("CodexRM:Error");
+            isValidate = false;
+        }
+
+        return isValidate;
     }
 
     private void loadMonths(){

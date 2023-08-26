@@ -26,7 +26,9 @@ public class ImportR {
         ArrayList<BaseR> list = manager.importReferences(path, enumsConverter.getFormat(format));
 
         for (BaseR entry : list) {
-            referenceList.add(createReference(entry));
+            Reference reference = createReference(entry);
+            if(reference != null)
+            referenceList.add(reference);
         }
         return referenceList;
     }
@@ -89,7 +91,11 @@ public class ImportR {
         article.setPages(entry.getPages());
         article.setIssn(entry.getIssn());
 
-        return article;
+        if (article.getAuthor() == null || article.getTitle() == null || article.getJournal() == null || article.getYear() == null) {
+            return null;
+        } else {
+            return article;
+        }
     }
 
     private Reference readBookReference(BookR entry) {
@@ -107,7 +113,11 @@ public class ImportR {
         book.setEdition(entry.getEdition());
         book.setIsbn(entry.getIsbn());
 
-        return book;
+        if (book.getAuthor() == null || book.getEditor() == null || book.getTitle() == null || book.getPublisher() == null || book.getYear() == null) {
+            return null;
+        } else {
+            return book;
+        }
     }
 
     private Reference readBookSectionReference(BookSectionR entry) {
@@ -128,7 +138,11 @@ public class ImportR {
         section.setEdition(entry.getEdition());
         section.setIsbn(entry.getIsbn());
 
-        return section;
+        if (section.getChapter() == null || section.getPages() == null || section.getAuthor() == null || section.getEditor() == null || section.getTitle() == null || section.getPublisher() == null || section.getYear() == null) {
+            return null;
+        } else {
+            return section;
+        }
     }
 
     private Reference readBookLetReference(BookLetR entry) {
@@ -140,8 +154,13 @@ public class ImportR {
         let.setHowpublished(entry.getHowpublished());
         let.setAddress(entry.getAddress());
 
-        return let;
+        if (let.getTitle() == null || let.getAuthor() == null) {
+            return null;
+        } else {
+            return let;
+        }
     }
+
 
     private Reference readThesisReference(ThesisR entry) {
 
@@ -153,7 +172,11 @@ public class ImportR {
         thesis.setType(enumsConverter.getThesisType(entry.getType()));
         thesis.setAddress(entry.getAddress());
 
-        return thesis;
+        if (thesis.getAuthor() == null || thesis.getTitle() == null || thesis.getSchool() == null || thesis.getYear() == null) {
+            return null;
+        } else {
+            return thesis;
+        }
     }
 
     private Reference readConferenceProceedingsReference(ConferenceProceedingsR entry) {
@@ -170,7 +193,11 @@ public class ImportR {
         proceedings.setOrganization(entry.getOrganization());
         proceedings.setIsbn(entry.getIsbn());
 
-        return proceedings;
+        if (proceedings.getTitle() == null || proceedings.getYear() == null) {
+            return null;
+        } else {
+            return proceedings;
+        }
     }
 
     private Reference readConferencePaperReference(ConferencePaperR entry) {
@@ -189,7 +216,11 @@ public class ImportR {
         paper.setOrganization(entry.getOrganization());
         paper.setPublisher(entry.getPublisher());
 
-        return paper;
+        if (paper.getAuthor() == null || paper.getTitle() == null  || paper.getBookTitle() == null  || paper.getYear() == null) {
+            return null;
+        } else {
+            return paper;
+        }
     }
 
     private Reference readWebPageReference(WebPageR entry) {

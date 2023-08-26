@@ -5,54 +5,28 @@ import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.model.enums.Months;
 import io.github.codexrm.projectreference.model.enums.ReferenceType;
+import io.github.codexrm.projectreference.model.utils.FieldValidations;
 import io.github.codexrm.projectreference.viewmodel.*;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import org.controlsfx.validation.Severity;
-import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
 
 public class DetailsArticleReferenceController implements Initializable {
 
     @FXML
-    private TextField author;
-
-    @FXML
-    private TextField title;
-
-    @FXML
-    private TextField journal;
-
-    @FXML
-    private TextField year;
-
-    @FXML
-    private TextField volume;
-
-    @FXML
-    private TextField number;
-
-    @FXML
-    private TextField pages;
+    private TextField author, title, journal, year, volume, number, pages, issn, note;
 
     @FXML
     private ComboBox<Months> month;
-
-    @FXML
-    private TextField issn;
-
-    @FXML
-    private TextField note;
 
     @FXML
     private ComboBox<ReferenceType> referenceType;
 
     private ReferenceLibraryManagerVM managerVM;
 
-    private ValidationSupport validationSupport = new ValidationSupport();
+    private FieldValidations validations = new FieldValidations();
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 
@@ -149,23 +123,8 @@ public class DetailsArticleReferenceController implements Initializable {
 
     public void setReferenceType(ComboBox<ReferenceType> referenceType) { this.referenceType = referenceType; }
 
-    public ValidationSupport getValidationSupport() { return validationSupport; }
-
-    public void setValidationSupport(ValidationSupport validationSupport) { this.validationSupport = validationSupport; }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        validationSupport.registerValidator(author, true, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*", Severity.ERROR));
-        validationSupport.registerValidator(title,true, Validator.createEmptyValidator("Campo requerido"));
-        validationSupport.registerValidator(journal,true, Validator.createEmptyValidator("Campo requerido"));
-        validationSupport.registerValidator(year,true, Validator.createRegexValidator("Solo se pueden introducir un año o un rango de años", "\\d{4}|\\d{4}--\\d{4}", Severity.ERROR));
-
-        validationSupport.registerValidator(volume, false, Validator.createRegexValidator("Solo se puede introduccir números", "^$|[\\d]*", Severity.ERROR));
-        validationSupport.registerValidator(number, false, Validator.createRegexValidator("Solo se puede introducir números, letras y el caracter '-'", "^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0-9\\s-]+", Severity.ERROR));
-        validationSupport.registerValidator(pages, false, Validator.createRegexValidator("Solo se puede introducir número(incluido romano) y los caracteres '-', ','", "^$|[IVXMLCD]+|[IVXMLCD]+,[IVXMLCD]+|[IVXMLCD]+-[IVXMLCD]+|[0-9]+|[0-9]+,[0-9]+|[0-9]+-[0-9]+", Severity.ERROR));
-        validationSupport.registerValidator(issn, false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|\\d{4}-\\d{4}|\\d{4}-\\d{3}X", Severity.ERROR));
-
         loadReferenceType();
         loadMonths();
     }
@@ -177,6 +136,52 @@ public class DetailsArticleReferenceController implements Initializable {
         }
         this.managerVM = dataViewModel;
         this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
+    }
+
+    public boolean validateFields(ArticleReferenceVM article) {
+        boolean isValidate = true;
+
+        if (!validations.validateAuthorOrEditorRequired(article.getAuthor())) {
+            article.setAuthor("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (article.getTitle().equals("No Title") || article.getTitle().isBlank() || article.getTitle().equals("CodexRM:Error")) {
+            article.setTitle("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateFieldRequired(article.getJournal())) {
+            article.setJournal("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateYearRequired(article.getYear())) {
+            article.setYear("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if(!validations.validateChapterOrVolume(article.getVolume())){
+            article.setVolume("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateNumber(article.getNumber())) {
+            article.setNumber("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validatePages(article.getPages())) {
+            article.setPages("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateIssn(article.getIssn())) {
+            article.setIssn("CodexRM:Error");
+            isValidate = false;
+        }
+
+        return isValidate;
     }
 
     private void loadMonths(){
@@ -195,5 +200,6 @@ public class DetailsArticleReferenceController implements Initializable {
         };
         referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
     }
+
 }
 

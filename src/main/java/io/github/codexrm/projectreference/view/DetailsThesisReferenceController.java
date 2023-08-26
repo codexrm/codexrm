@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import io.github.codexrm.projectreference.model.enums.*;
+import io.github.codexrm.projectreference.model.utils.FieldValidations;
 import io.github.codexrm.projectreference.viewmodel.ReferenceLibraryManagerVM;
 import io.github.codexrm.projectreference.viewmodel.ReferenceVM;
 import io.github.codexrm.projectreference.viewmodel.ThesisReferenceVM;
@@ -12,42 +13,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import org.controlsfx.validation.Severity;
-import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
 
 public class DetailsThesisReferenceController implements Initializable {
 
     @FXML
-    private TextField author;
-
-    @FXML
-    private TextField title;
-
-    @FXML
-    private TextField school;
-
-    @FXML
-    private TextField year;
+    private TextField author, title, school, year, address, note;
 
     @FXML
     private ComboBox<ThesisType> type;
 
     @FXML
-    private TextField address;
-
-    @FXML
     private ComboBox<Months> month;
-
-    @FXML
-    private TextField note;
 
     @FXML
     private ComboBox<ReferenceType> referenceType;
 
     private ReferenceLibraryManagerVM managerVM;
 
-    private ValidationSupport validationSupport = new ValidationSupport();
+    private FieldValidations validations = new FieldValidations();
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 
@@ -129,20 +112,8 @@ public class DetailsThesisReferenceController implements Initializable {
 
     public void setReferenceType(ComboBox<ReferenceType> referenceType) { this.referenceType = referenceType; }
 
-    public ValidationSupport getValidationSupport() { return validationSupport; }
-
-    public void setValidationSupport(ValidationSupport validationSupport) { this.validationSupport = validationSupport; }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        validationSupport.registerValidator(author, true, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*", Severity.ERROR));
-        validationSupport.registerValidator(title,true, Validator.createEmptyValidator("Campo requerido"));
-        validationSupport.registerValidator(school,true, Validator.createEmptyValidator("Campo requerido"));
-        validationSupport.registerValidator(year,true,  Validator.createRegexValidator("Solo se pueden introducir un año o un rango de años", "\\d{4}|\\d{4}--\\d{4}", Severity.ERROR));
-
-        validationSupport.registerValidator(address, false, Validator.createRegexValidator("El texto no cumple con la sintaxis requerida", "^$|^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*", Severity.ERROR));
-
         loadReferenceType();
         loadThesisType();
         loadMonths();
@@ -156,6 +127,37 @@ public class DetailsThesisReferenceController implements Initializable {
 
         this.managerVM = dataViewModel;
         this.managerVM.currentReferenceProperty().addListener(referenceVMListener);
+    }
+
+    public boolean validateFields(ThesisReferenceVM thesis) {
+        boolean isValidate = true;
+
+        if (!validations.validateAuthorOrEditorRequired(thesis.getAuthor())) {
+            thesis.setAuthor("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (thesis.getTitle().equals("No Title") || thesis.getTitle().isBlank() || thesis.getTitle().equals("CodexRM:Error")) {
+            thesis.setTitle("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateFieldRequired(thesis.getSchool())) {
+            thesis.setSchool("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if (!validations.validateYearRequired(thesis.getYear())) {
+            thesis.setYear("CodexRM:Error");
+            isValidate = false;
+        }
+
+        if(!validations.validateAddress(thesis.getAddress())){
+            thesis.setAddress("CodexRM:Error");
+            isValidate = false;
+        }
+
+        return isValidate;
     }
 
     private void loadThesisType(){
@@ -178,6 +180,8 @@ public class DetailsThesisReferenceController implements Initializable {
         };
         referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
     }
+
+
 }
 
 

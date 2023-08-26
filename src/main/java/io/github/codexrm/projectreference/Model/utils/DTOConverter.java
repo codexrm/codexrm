@@ -65,37 +65,69 @@ public class DTOConverter {
         Reference reference;
 
         if(referenceDTO.getClass() == ArticleReferenceDTO.class){
-            reference = modelMapper.map(referenceDTO,ArticleReference.class);
-            reference.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
+            ArticleReference article = modelMapper.map(referenceDTO,ArticleReference.class);
+            article.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
+            if (article.getAuthor() == null || article.getTitle() == null || article.getJournal() == null || article.getYear() == null) {
+                reference = null;
+            } else {
+                reference = article;
+            }
         }
         else if(referenceDTO.getClass() == BookSectionReferenceDTO.class){
             BookSectionReference section = modelMapper.map(referenceDTO,BookSectionReference.class);
             section.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
             section.setType(enumsConverter.getBookSectionType(((BookSectionReferenceDTO) referenceDTO).getType()));
-            reference = section;
-
+            if (section.getChapter() == null || section.getPages() == null || section.getAuthor() == null || section.getEditor() == null || section.getTitle() == null || section.getPublisher() == null || section.getYear() == null) {
+                reference = null;
+            } else {
+                reference = section;
+            }
         }
         else if(referenceDTO.getClass() == BookReferenceDTO.class){
-            reference =  modelMapper.map(referenceDTO,BookReference.class);
-            reference.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
+            BookReference book = modelMapper.map(referenceDTO,BookReference.class);
+            book.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
+            if (book.getAuthor() == null || book.getEditor() == null || book.getTitle() == null || book.getPublisher() == null || book.getYear() == null) {
+                reference = null;
+            } else {
+                reference = book;
+            }
         }
         else if(referenceDTO.getClass() == BookLetReferenceDTO.class){
-            reference =  modelMapper.map(referenceDTO,BookLetReference.class);
-            reference.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
+            BookLetReference let = modelMapper.map(referenceDTO,BookLetReference.class);
+            let.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
+            if (let.getTitle() == null || let.getAuthor() == null) {
+                reference = null;
+            } else {
+                reference = let;
+            }
         }
         else if(referenceDTO.getClass() == ConferenceProceedingsReferenceDTO.class){
-            reference =  modelMapper.map(referenceDTO,ConferenceProceedingsReference.class);
-            reference.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
+            ConferenceProceedingsReference proceedings = modelMapper.map(referenceDTO,ConferenceProceedingsReference.class);
+            proceedings.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
+            if (proceedings.getTitle() == null || proceedings.getYear() == null) {
+                reference = null;
+            } else {
+                reference = proceedings;
+            }
         }
         else if(referenceDTO.getClass() == ThesisReferenceDTO.class){
              ThesisReference thesis = modelMapper.map(referenceDTO,ThesisReference.class);
              thesis.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
              thesis.setType(enumsConverter.getThesisType(((ThesisReferenceDTO) referenceDTO).getType()));
-            reference = thesis;
+            if (thesis.getAuthor() == null || thesis.getTitle() == null || thesis.getSchool() == null || thesis.getYear() == null) {
+                reference = null;
+            } else {
+                reference = thesis;
+            }
         }
         else if(referenceDTO.getClass() == ConferencePaperReferenceDTO.class){
-            reference = modelMapper.map(referenceDTO,ConferencePaperReference.class);
-            reference.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
+            ConferencePaperReference paper = modelMapper.map(referenceDTO,ConferencePaperReference.class);
+            paper.setMonth(enumsConverter.getMonth(referenceDTO.getMonth()));
+            if (paper.getAuthor() == null || paper.getTitle() == null  || paper.getBookTitle() == null  || paper.getYear() == null) {
+                reference = null;
+            } else {
+                reference = paper;
+            }
         }else{
             reference = modelMapper.map(referenceDTO,WebPageReference.class);
         }
@@ -108,9 +140,11 @@ public class DTOConverter {
         List<Reference> referenceList = new ArrayList<>();
         for (ReferenceDTO referenceDTO: referenceDTOList){
             Reference ref = toReference(referenceDTO);
-            ref.setFromServer(true);
-            ref.setActive(true);
-            referenceList.add(ref);
+            if(ref != null){
+                ref.setFromServer(true);
+                ref.setActive(true);
+                referenceList.add(ref);
+            }
         }
         return referenceList;
     }

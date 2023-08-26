@@ -53,7 +53,7 @@ public class ConferencePaperReference extends Reference {
         if(validations.validateSeries(series))
             this.series = series;
 
-        if(validations.isNumber(volume))
+        if(validations.validateChapterOrVolume(volume))
             this.volume = volume;
 
         if(validations.validateAddress(address))
@@ -85,7 +85,7 @@ public class ConferencePaperReference extends Reference {
     public String getVolume() { return volume; }
 
     public void setVolume(String volume) {
-        if(validations.isNumber(volume))
+        if(validations.validateChapterOrVolume(volume))
         this.volume = volume;
     }
 

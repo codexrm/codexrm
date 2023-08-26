@@ -33,7 +33,7 @@ public class RestService {
         try {
             referencePageDTO = JsonUtils.convertFromJsonToObject(response.get().body(), ReferencePageDTO.class);
         } catch (InterruptedException | ExecutionException e) {
-            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error en el servidor. Intentelo mas tarde" );
+            alert.getAlert(null, Alert.AlertType.ERROR, "Error","", "Hubo un error en el servidor. Intentelo mas tarde" );
         }
         response.join();
         return referencePageDTO;
@@ -59,7 +59,7 @@ public class RestService {
             }
 
         } catch (InterruptedException | ExecutionException e) {
-            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error en el servidor. Intentelo mas tarde" );
+            alert.getAlert(null, Alert.AlertType.ERROR, "Error","", "Hubo un error en el servidor. Intentelo mas tarde" );
         }
         response.join();
         String token = userDTO.getTokenType() + " " + userDTO.getAccessToken();
@@ -90,7 +90,7 @@ public class RestService {
         try {
             tokenRefreshResponse =  JsonUtils.convertFromJsonToObject(response.get().body(), TokenRefreshResponse.class);
         } catch (InterruptedException | ExecutionException e) {
-            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error en el servidor. Intentelo mas tarde" );
+            alert.getAlert(null, Alert.AlertType.ERROR, "Error","", "Hubo un error en el servidor. Intentelo mas tarde" );
         }
 
         response.join();

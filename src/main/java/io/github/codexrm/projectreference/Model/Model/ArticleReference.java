@@ -34,7 +34,7 @@ public class ArticleReference extends Reference {
         if(validations.validateAuthorOrEditor(author))
             this.author = author;
 
-        if(validations.isNumber(volume))
+        if(validations.validateChapterOrVolume(volume))
             this.volume = volume;
 
         if(validations.validateNumber(number))
@@ -67,7 +67,7 @@ public class ArticleReference extends Reference {
     }
 
     public void setVolume(String volume) {
-        if(validations.isNumber(volume))
+        if(validations.validateChapterOrVolume(volume))
         this.volume = volume;
     }
 

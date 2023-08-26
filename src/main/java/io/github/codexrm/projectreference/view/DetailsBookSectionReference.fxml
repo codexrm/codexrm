@@ -8,15 +8,16 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="317.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="317.0" style="-fx-background-color: #F4F4F4;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="329.0" prefWidth="301.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="329.0" prefWidth="301.0" style="-fx-background-color: #F4F4F4;">
             <children>
-                <GridPane layoutX="14.0" layoutY="21.0" prefHeight="486.0" prefWidth="293.0" AnchorPane.rightAnchor="-6.0">
+                <GridPane layoutX="14.0" layoutY="21.0" prefHeight="591.0" prefWidth="293.0" style="-fx-background-color: #F4F4F4;" AnchorPane.rightAnchor="-6.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.0" minWidth="10.0" prefWidth="81.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.0" minWidth="10.0" prefWidth="221.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="221.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -38,40 +39,91 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Capítulo:" GridPane.rowIndex="1" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Páginas:" GridPane.rowIndex="2" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Autor:" GridPane.rowIndex="3" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Editorial:" GridPane.rowIndex="6" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Título:" GridPane.rowIndex="5" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Editor:" GridPane.rowIndex="4" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Volumen:" GridPane.rowIndex="8" />
-                        <Label prefHeight="66.0" prefWidth="118.0" text="Año:" GridPane.rowIndex="7" />
-                        <TextField fx:id="chapter" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField fx:id="pages" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField fx:id="publisher" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <TextField fx:id="title" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <TextField fx:id="editor" promptText="Apellido,Nombre;Aplellido2,Nombre2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <TextField fx:id="volume" prefHeight="48.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <TextField fx:id="year" prefHeight="43.0" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label prefHeight="31.0" prefWidth="82.0" text="Número:" GridPane.rowIndex="9" />
-                        <Label prefHeight="40.0" prefWidth="88.0" text="Serie:" GridPane.rowIndex="10" />
-                        <Label prefHeight="36.0" prefWidth="85.0" text="Tipo:" GridPane.rowIndex="11" />
-                        <TextField fx:id="number" prefHeight="55.0" prefWidth="234.0" promptText="No. de volúmenes" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                        <TextField fx:id="series" prefHeight="49.0" prefWidth="224.0" promptText="Nombre de la serie" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                        <TextField fx:id="address" prefHeight="50.0" prefWidth="225.0" promptText="Ciudad, País (Dirección del autor)" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-                        <ComboBox fx:id="referenceType" prefHeight="31.0" prefWidth="223.0" GridPane.columnIndex="1" />
-                        <Label prefHeight="45.0" prefWidth="119.0" text="Tipo:" />
-                  <Label prefHeight="65.0" prefWidth="125.0" text="Dirección:" GridPane.rowIndex="12" />
-                  <Label prefHeight="65.0" prefWidth="133.0" text="Edición:" GridPane.rowIndex="13" />
-                  <Label prefHeight="57.0" prefWidth="106.0" text="Mes:" GridPane.rowIndex="14" />
-                  <Label prefHeight="53.0" prefWidth="96.0" text="ISBN:" GridPane.rowIndex="15" />
-                  <Label prefHeight="48.0" prefWidth="127.0" text="Nota:" GridPane.rowIndex="16" />
-                  <ComboBox fx:id="type" prefHeight="41.0" prefWidth="244.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                  <ComboBox fx:id="month" prefHeight="57.0" prefWidth="340.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                  <TextField fx:id="author" promptText="Apellido,Nombre;Aplellido2,Nombre2" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="isbn" prefHeight="50.0" prefWidth="236.0" GridPane.columnIndex="1" GridPane.rowIndex="15" />
-                  <TextField fx:id="note" prefHeight="49.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="16" />
-                  <TextField fx:id="edition" prefHeight="53.0" prefWidth="239.0" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Capítulo:" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Páginas:" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Autor:" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Editorial:" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Título:" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Editor:" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Volumen:" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                        <Label prefHeight="66.0" prefWidth="118.0" text="Año:" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                        <TextField fx:id="chapter" prefHeight="76.0" prefWidth="217.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="pages" prefHeight="82.0" prefWidth="217.0" style="-fx-background-color: #b2dafa;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="publisher" prefHeight="98.0" prefWidth="231.0" style="-fx-background-color: #b2dafa;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <TextField fx:id="title" prefHeight="59.0" prefWidth="231.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <TextField fx:id="editor" prefHeight="176.0" prefWidth="231.0" promptText="Apellido,Nombre;Aplellido2,Nombre2" style="-fx-background-color: #b2dafa;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextField fx:id="volume" prefHeight="48.0" prefWidth="230.0" style="-fx-background-color: #b2dafa;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <TextField fx:id="year" prefHeight="43.0" prefWidth="231.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Label prefHeight="31.0" prefWidth="82.0" text="Número:" GridPane.rowIndex="9">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                        <Label prefHeight="40.0" prefWidth="88.0" text="Serie:" GridPane.rowIndex="10">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                        <Label prefHeight="36.0" prefWidth="85.0" text="Tipo:" GridPane.rowIndex="11">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                        <TextField fx:id="number" prefHeight="55.0" prefWidth="234.0" promptText="No. de volúmenes" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <TextField fx:id="series" prefHeight="49.0" prefWidth="231.0" promptText="Nombre de la serie" style="-fx-background-color: #b2dafa;" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                        <TextField fx:id="address" prefHeight="50.0" prefWidth="231.0" promptText="Ciudad, País (Dirección del autor)" style="-fx-background-color: #b2dafa;" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                        <ComboBox fx:id="referenceType" prefHeight="31.0" prefWidth="231.0" style="-fx-background-color: #b2dafa;" GridPane.columnIndex="1" />
+                        <Label prefHeight="45.0" prefWidth="119.0" text="Tipo:">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label prefHeight="65.0" prefWidth="125.0" text="Dirección:" GridPane.rowIndex="12">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label prefHeight="65.0" prefWidth="133.0" text="Edición:" GridPane.rowIndex="13">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label prefHeight="57.0" prefWidth="106.0" text="Mes:" GridPane.rowIndex="14">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label prefHeight="53.0" prefWidth="96.0" text="ISBN:" GridPane.rowIndex="15">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label prefHeight="48.0" prefWidth="127.0" text="Nota:" GridPane.rowIndex="16">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <ComboBox fx:id="type" prefHeight="41.0" prefWidth="231.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                  <ComboBox fx:id="month" prefHeight="57.0" prefWidth="231.0" style="-fx-background-color: #b2dafa;" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                  <TextField fx:id="author" prefHeight="100.0" prefWidth="231.0" promptText="Apellido,Nombre;Aplellido2,Nombre2" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="isbn" prefHeight="50.0" prefWidth="231.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                  <TextField fx:id="note" prefHeight="49.0" prefWidth="231.0" style="-fx-background-color: #b2dafa;" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                  <TextField fx:id="edition" prefHeight="53.0" prefWidth="231.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="13" />
                     </children>
                 </GridPane>
             </children>

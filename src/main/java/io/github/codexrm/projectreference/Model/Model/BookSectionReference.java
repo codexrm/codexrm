@@ -26,7 +26,7 @@ public class BookSectionReference extends BookReference {
         super(title, year, month, note, id, isFromServer, isModified, isActive, author, editor, publisher, volume, number, series, address, edition, isbn);
         this.type = type;
 
-        if(validations.isNumber(chapter))
+        if(validations.validateChapterRequired(chapter))
             this.chapter = chapter;
 
         if(validations.validatePages(pages))
@@ -38,7 +38,7 @@ public class BookSectionReference extends BookReference {
     }
 
     public void setChapter(String chapter) {
-        if(validations.isNumber(chapter))
+        if(validations.validateChapterRequired(chapter))
         this.chapter = chapter;
     }
 

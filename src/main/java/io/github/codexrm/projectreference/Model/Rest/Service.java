@@ -59,7 +59,6 @@ public class Service {
         return new ReferenceLibrary(referenceTableSync, authenticationData);
     }
 
-
     private void addToLibraryDTO(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData) {
 
         Enumeration<Reference> e = referenceTable.elements();

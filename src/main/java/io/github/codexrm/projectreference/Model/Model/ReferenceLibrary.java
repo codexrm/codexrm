@@ -1,7 +1,6 @@
 package io.github.codexrm.projectreference.model.model;
 
 import io.github.codexrm.projectreference.model.Rest.AuthenticationData;
-
 import java.util.*;
 
 public class ReferenceLibrary {
@@ -32,7 +31,7 @@ public class ReferenceLibrary {
     }
 
     public void addListReference(ArrayList<Reference> list) {
-        for (Reference reference : list) {
+        for(Reference reference: list){
             int id = maxValueKeys() + 1;
             reference.setId(id);
             reference.setFromServer(false);

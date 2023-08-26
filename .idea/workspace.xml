@@ -43,6 +43,7 @@
         <option value="Enum" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -77,11 +78,19 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../codexrm-server" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/images" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.3643678" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mary\Documents\Proyecto\CodexRM" />
+      <recent name="C:\Users\mary\Documents\Proyecto\CodexRM\src\main\java\io\github\codexrm\projectreference" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="io.github.codexrm.projectreference.model.utils" />
       <recent name="io.github.codexrm.projectreference.model.enums" />
@@ -89,11 +98,11 @@
       <recent name="io.github.codexrm.projectreference.Model.Controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mary\Documents\Proyecto\CodexRM\images" />
       <recent name="C:\Users\mary\Documents\Proyecto\CodexRM\src\main\java\io\github\codexrm\projectreference\model\Rest" />
       <recent name="C:\Users\mary\Documents\Proyecto\CodexRM\src\main\java\io\github\codexrm\projectreference\model\dto" />
       <recent name="D:\Proyecto\CodexRM\src\main\java\io\github\codexrm\projectreference\model" />
       <recent name="D:\Proyecto\CodexRM\src\main\java\io\github\codexrm\projectreference\model\utils" />
-      <recent name="D:\Proyecto\CodexRM\src\main\java\io\github\codexrm\projectreference\model\dto" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -250,6 +259,16 @@
       <workItem from="1692309007288" duration="10146000" />
       <workItem from="1692375876555" duration="10428000" />
       <workItem from="1692397622240" duration="4724000" />
+      <workItem from="1692723094547" duration="4667000" />
+      <workItem from="1692729057591" duration="1783000" />
+      <workItem from="1692738566053" duration="4280000" />
+      <workItem from="1692824635229" duration="11893000" />
+      <workItem from="1692895255619" duration="9754000" />
+      <workItem from="1692911232608" duration="9524000" />
+      <workItem from="1693000667883" duration="4646000" />
+      <workItem from="1693005430469" duration="289000" />
+      <workItem from="1693005732106" duration="1337000" />
+      <workItem from="1693007100511" duration="4963000" />
     </task>
     <servers />
   </component>
@@ -269,66 +288,70 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="915" y="150" key="#com.intellij.ide.util.MemberChooser" timestamp="1692318397672">
+    <state x="760" y="274" key="#Project_Structure" timestamp="1692834970844">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="915" y="150" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1692318397672" />
-    <state x="525" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1684278035348">
+    <state x="760" y="274" key="#Project_Structure/0.0.2560.1400@0.0.2560.1400" timestamp="1692834970844" />
+    <state x="915" y="150" key="#com.intellij.ide.util.MemberChooser" timestamp="1692836856578">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="525" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1684278035348" />
+    <state x="915" y="150" key="#com.intellij.ide.util.MemberChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1692836856578" />
     <state x="774" y="210" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1684520547906">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="774" y="210" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1684520547906" />
-    <state width="859" height="843" key="DebuggerActiveHint" timestamp="1692401180552">
+    <state width="1486" height="843" key="DebuggerActiveHint" timestamp="1693010266156">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="859" height="843" key="DebuggerActiveHint/0.0.2560.1400@0.0.2560.1400" timestamp="1692401180552" />
+    <state width="1486" height="843" key="DebuggerActiveHint/0.0.2560.1400@0.0.2560.1400" timestamp="1693010266156" />
     <state x="566" y="235" key="FileChooserDialogImpl" timestamp="1686782363908">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="566" y="235" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1686782363908" />
-    <state width="2517" height="230" key="GridCell.Tab.0.bottom" timestamp="1692402439507">
+    <state width="2517" height="333" key="GridCell.Tab.0.bottom" timestamp="1693012110911">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1306" height="177" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1686783120730" />
-    <state width="2517" height="230" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1692402439507" />
-    <state width="2517" height="230" key="GridCell.Tab.0.center" timestamp="1692402439507">
+    <state width="2517" height="333" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1693012110911" />
+    <state width="2517" height="333" key="GridCell.Tab.0.center" timestamp="1693012110911">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1306" height="177" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1686783120730" />
-    <state width="2517" height="230" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1692402439507" />
-    <state width="2517" height="230" key="GridCell.Tab.0.left" timestamp="1692402439507">
+    <state width="2517" height="333" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1693012110911" />
+    <state width="2517" height="333" key="GridCell.Tab.0.left" timestamp="1693012110911">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1306" height="177" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1686783120730" />
-    <state width="2517" height="230" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1692402439507" />
-    <state width="2517" height="230" key="GridCell.Tab.0.right" timestamp="1692402439507">
+    <state width="2517" height="333" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1693012110911" />
+    <state width="2517" height="333" key="GridCell.Tab.0.right" timestamp="1693012110911">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1306" height="177" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1686783120730" />
-    <state width="2517" height="230" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1692402439507" />
-    <state width="1234" height="502" key="GridCell.Tab.1.bottom" timestamp="1692402439507">
+    <state width="2517" height="333" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1693012110911" />
+    <state width="2517" height="303" key="GridCell.Tab.1.bottom" timestamp="1693012110911">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1234" height="502" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1692402439507" />
-    <state width="1234" height="502" key="GridCell.Tab.1.center" timestamp="1692402439507">
+    <state width="2517" height="303" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1693012110911" />
+    <state width="2517" height="303" key="GridCell.Tab.1.center" timestamp="1693012110911">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1234" height="502" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1692402439507" />
-    <state width="1234" height="502" key="GridCell.Tab.1.left" timestamp="1692402439507">
+    <state width="2517" height="303" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1693012110911" />
+    <state width="2517" height="303" key="GridCell.Tab.1.left" timestamp="1693012110911">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1234" height="502" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1692402439507" />
-    <state width="1234" height="502" key="GridCell.Tab.1.right" timestamp="1692402439507">
+    <state width="2517" height="303" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1693012110911" />
+    <state width="2517" height="303" key="GridCell.Tab.1.right" timestamp="1693012110911">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1234" height="502" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1692402439507" />
+    <state width="2517" height="303" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1693012110911" />
     <state width="1288" height="708" key="XDebugger.FullValuePopup" timestamp="1692318847670">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1288" height="708" key="XDebugger.FullValuePopup/0.0.2560.1400@0.0.2560.1400" timestamp="1692318847670" />
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1692836699562">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="943" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1692836699562" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -347,21 +370,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ModelA/LibraryFiles.java</url>
           <line>54</line>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/model/Rest/Service.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/model/Rest/RestService.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="61" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayoutController.java</url>
-          <line>395</line>
-          <option name="timeStamp" value="62" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
