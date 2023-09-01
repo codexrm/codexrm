@@ -10,13 +10,13 @@ public class AlertMessage {
 
     public AlertMessage() {}
 
-    public Alert getAlert(Stage stage, Alert.AlertType type, String title, String headerTest, String contentText){
+    public Alert getAlert(Alert.AlertType type, String title, String headerTest, String contentText){
         Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(headerTest);
         alert.setContentText(contentText);
 
-        stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
         stage.getIcons().add(new Image("file:Logo.jpg"));
 
         Button okButton = (Button) alert.getDialogPane().lookupButton( ButtonType.OK );

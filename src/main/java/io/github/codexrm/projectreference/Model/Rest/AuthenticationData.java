@@ -15,7 +15,6 @@ public class AuthenticationData {
     private Date tokenExpirationDate;
     private Date refreshTokenExpirationDate;
 
-
     public AuthenticationData() { }
 
     public AuthenticationData(Integer id, String username, String name, String lastName, String email, boolean enabled, String token, String refreshToken, Date tokenExpirationDate, Date refreshTokenExpirationDate) {

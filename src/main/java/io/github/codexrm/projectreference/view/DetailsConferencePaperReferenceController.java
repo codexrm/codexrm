@@ -26,7 +26,7 @@ public class DetailsConferencePaperReferenceController implements Initializable 
 
     private ReferenceLibraryManagerVM managerVM;
 
-    private FieldValidations validations = new FieldValidations();
+    private final FieldValidations validations = new FieldValidations();
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 

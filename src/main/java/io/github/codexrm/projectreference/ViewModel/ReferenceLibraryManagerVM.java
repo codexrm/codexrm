@@ -21,8 +21,7 @@ public class ReferenceLibraryManagerVM {
     private final ObjectProperty<ReferenceVM> currentReference;
     private final ReferenceLibraryManager manager;
     private final BooleanProperty referenceTypeReplaced;
-    private  ArrayList<ReferenceVM> referenceDeleteList;
-    private UserLoginVM userLoginVM;
+    private  final ArrayList<ReferenceVM> referenceDeleteList;
 
     public ReferenceLibraryManagerVM() throws IOException {
 
@@ -31,13 +30,8 @@ public class ReferenceLibraryManagerVM {
         manager = ReferenceLibraryManager.getReferenceLibraryManager();
         referenceTypeReplaced = new SimpleBooleanProperty(false);
         referenceDeleteList = new ArrayList<>();
-        userLoginVM = new UserLoginVM();
 
         loadDataFromModel();
-    }
-
-    public boolean isReferenceTypeReplaced() {
-        return referenceTypeReplaced.get();
     }
 
     public void setReferenceTypeReplaced(final boolean referenceTypeReplaced) { this.referenceTypeReplaced.set(referenceTypeReplaced); }
@@ -52,10 +46,6 @@ public class ReferenceLibraryManagerVM {
 
     public ReferenceVM getCurrentReference() {
         return currentReference.get();
-    }
-
-    public void setCurrentReference(final ReferenceVM currentReference) {
-        this.currentReference.set(currentReference);
     }
 
     public ObjectProperty<ReferenceVM> currentReferenceProperty() {

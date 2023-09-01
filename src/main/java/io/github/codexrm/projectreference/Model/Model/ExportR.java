@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ExportR {
 
-    EnumsConverter enumsConverter;
+    private final EnumsConverter enumsConverter;
 
     public ExportR() {
         this.enumsConverter = new EnumsConverter();

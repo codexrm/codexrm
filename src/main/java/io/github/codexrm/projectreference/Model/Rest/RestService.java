@@ -17,13 +17,14 @@ public class RestService {
     private static final HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build();
     private static final String ReferenceURL = "http://localhost:8081/api/Reference/";
     private static final String authURL = "http://localhost:8081/api/auth/";
-    private AlertMessage alert = new AlertMessage();
+    private final AlertMessage alert = new AlertMessage();
 
     //Reference
     public ReferencePageDTO syncReferences(ReferenceLibraryDTO referenceLibraryDTO, Integer page, String token) {
 
         String  inputJson = JsonUtils.convertFromObjectToJson(referenceLibraryDTO);
 
+        assert inputJson != null;
         HttpRequest req = HttpRequest.newBuilder(URI.create(ReferenceURL + "Sync?page=" + page)).header("Content-Type","application/json").header("Authorization", token).
                 POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
         CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
@@ -33,7 +34,7 @@ public class RestService {
         try {
             referencePageDTO = JsonUtils.convertFromJsonToObject(response.get().body(), ReferencePageDTO.class);
         } catch (InterruptedException | ExecutionException e) {
-            alert.getAlert(null, Alert.AlertType.ERROR, "Error","", "Hubo un error en el servidor. Intentelo mas tarde" );
+            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error en el servidor. Intentelo mas tarde" );
         }
         response.join();
         return referencePageDTO;
@@ -44,6 +45,7 @@ public class RestService {
 
         String  inputJson = JsonUtils.convertFromObjectToJson(userLogin);
 
+        assert inputJson != null;
         HttpRequest req = HttpRequest.newBuilder(URI.create(authURL + "signin")).header("Content-Type","application/json").POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
         CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
 
@@ -59,9 +61,10 @@ public class RestService {
             }
 
         } catch (InterruptedException | ExecutionException e) {
-            alert.getAlert(null, Alert.AlertType.ERROR, "Error","", "Hubo un error en el servidor. Intentelo mas tarde" );
+            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error en el servidor. Intentelo mas tarde" );
         }
         response.join();
+        assert userDTO != null;
         String token = userDTO.getTokenType() + " " + userDTO.getAccessToken();
 
         return new AuthenticationData( userDTO.getId(),  userDTO.getUsername(),  userDTO.getName(),  userDTO.getLastName(),  userDTO.getEmail(), userDTO.isEnabled(), token, userDTO.getRefreshToken(),
@@ -82,6 +85,7 @@ public class RestService {
 
         String  inputJson = JsonUtils.convertFromObjectToJson(refreshToken);
 
+        assert inputJson != null;
         HttpRequest req = HttpRequest.newBuilder(URI.create(authURL + "refreshtoken")).header("Content-Type","application/json").POST(HttpRequest.BodyPublishers.ofString(inputJson)).build();
         CompletableFuture<HttpResponse<String>> response = client.sendAsync(req, HttpResponse.BodyHandlers.ofString());
 
@@ -90,7 +94,7 @@ public class RestService {
         try {
             tokenRefreshResponse =  JsonUtils.convertFromJsonToObject(response.get().body(), TokenRefreshResponse.class);
         } catch (InterruptedException | ExecutionException e) {
-            alert.getAlert(null, Alert.AlertType.ERROR, "Error","", "Hubo un error en el servidor. Intentelo mas tarde" );
+            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error en el servidor. Intentelo mas tarde" );
         }
 
         response.join();

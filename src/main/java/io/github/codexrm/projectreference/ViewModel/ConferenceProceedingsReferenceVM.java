@@ -16,7 +16,6 @@ public class ConferenceProceedingsReferenceVM extends ReferenceVM {
     private StringProperty organization;
     private StringProperty isbn;
 
-
     public ConferenceProceedingsReferenceVM() {
         super();
         createEmptyConferenceProceedingsReferenceVM();

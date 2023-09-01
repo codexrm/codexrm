@@ -18,8 +18,6 @@ public class ConferencePaperReferenceVM extends ReferenceVM {
     private StringProperty organization;
     private StringProperty publisher;
 
-
-
     public ConferencePaperReferenceVM() {
         super();
         createEmptyConferencePaperReferenceVM();

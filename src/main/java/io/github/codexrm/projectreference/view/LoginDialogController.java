@@ -76,7 +76,6 @@ public class LoginDialogController implements Initializable {
         } else {
             password.setStyle(null);
         }
-
         return isValidate;
     }
 }

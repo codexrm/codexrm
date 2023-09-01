@@ -4,12 +4,12 @@ public enum ReferenceType {
 
     ARTICLE("Referencia de Artículo"),
     BOOK("Referencia de Libro"),
-    BOOKSECTION("Referencia de Sección de Libro"),
+    BOOKSECTION("Referencia de Sección de libro"),
     BOOKLET("Referencia de Folleto"),
-    CONFERENCEPROCEEDINGS("Referencia de Acta de Congreso"),
+    CONFERENCEPROCEEDINGS("Referencia de Acta de congreso"),
     THESIS("Referencia de Tesis"),
-    CONFERENCEPAPER("Referencia de Doc. de Sesión"),
-    WEBPAGE("Referencia de Página Web");
+    CONFERENCEPAPER("Referencia de Doc. de sesión"),
+    WEBPAGE("Referencia de Página web");
 
     private final String description;
 

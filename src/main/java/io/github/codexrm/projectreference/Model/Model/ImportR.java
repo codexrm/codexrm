@@ -4,6 +4,7 @@ import io.github.codexrm.EILibrary.controller.EIManager;
 import io.github.codexrm.EILibrary.model.*;
 import io.github.codexrm.projectreference.model.enums.Format;
 import io.github.codexrm.projectreference.model.utils.EnumsConverter;
+import io.github.codexrm.projectreference.model.utils.ValidateReference;
 import org.jbibtex.ParseException;
 import org.jbibtex.TokenMgrException;
 
@@ -12,10 +13,12 @@ import java.util.ArrayList;
 
 public class ImportR {
 
-    EnumsConverter enumsConverter;
+   private final EnumsConverter enumsConverter;
+   private final ValidateReference validation;
 
     public ImportR() {
         this.enumsConverter = new EnumsConverter();
+        this.validation = new ValidateReference();
     }
 
     public ArrayList<Reference> importReferences(String path, Format format) throws IOException, TokenMgrException, ParseException {
@@ -91,11 +94,7 @@ public class ImportR {
         article.setPages(entry.getPages());
         article.setIssn(entry.getIssn());
 
-        if (article.getAuthor() == null || article.getTitle() == null || article.getJournal() == null || article.getYear() == null) {
-            return null;
-        } else {
-            return article;
-        }
+        return validation.validateRequiredArticle(article);
     }
 
     private Reference readBookReference(BookR entry) {
@@ -113,11 +112,7 @@ public class ImportR {
         book.setEdition(entry.getEdition());
         book.setIsbn(entry.getIsbn());
 
-        if (book.getAuthor() == null || book.getEditor() == null || book.getTitle() == null || book.getPublisher() == null || book.getYear() == null) {
-            return null;
-        } else {
-            return book;
-        }
+        return validation.validateRequiredBook(book);
     }
 
     private Reference readBookSectionReference(BookSectionR entry) {
@@ -138,11 +133,7 @@ public class ImportR {
         section.setEdition(entry.getEdition());
         section.setIsbn(entry.getIsbn());
 
-        if (section.getChapter() == null || section.getPages() == null || section.getAuthor() == null || section.getEditor() == null || section.getTitle() == null || section.getPublisher() == null || section.getYear() == null) {
-            return null;
-        } else {
-            return section;
-        }
+        return validation.validateRequiredBookSection(section);
     }
 
     private Reference readBookLetReference(BookLetR entry) {
@@ -154,13 +145,8 @@ public class ImportR {
         let.setHowpublished(entry.getHowpublished());
         let.setAddress(entry.getAddress());
 
-        if (let.getTitle() == null || let.getAuthor() == null) {
-            return null;
-        } else {
-            return let;
-        }
+        return validation.validateRequiredBookLet(let);
     }
-
 
     private Reference readThesisReference(ThesisR entry) {
 
@@ -172,11 +158,7 @@ public class ImportR {
         thesis.setType(enumsConverter.getThesisType(entry.getType()));
         thesis.setAddress(entry.getAddress());
 
-        if (thesis.getAuthor() == null || thesis.getTitle() == null || thesis.getSchool() == null || thesis.getYear() == null) {
-            return null;
-        } else {
-            return thesis;
-        }
+        return validation.validateRequiredThesis(thesis);
     }
 
     private Reference readConferenceProceedingsReference(ConferenceProceedingsR entry) {
@@ -193,11 +175,7 @@ public class ImportR {
         proceedings.setOrganization(entry.getOrganization());
         proceedings.setIsbn(entry.getIsbn());
 
-        if (proceedings.getTitle() == null || proceedings.getYear() == null) {
-            return null;
-        } else {
-            return proceedings;
-        }
+        return validation.validateRequiredConferenceProceedings(proceedings);
     }
 
     private Reference readConferencePaperReference(ConferencePaperR entry) {
@@ -216,11 +194,7 @@ public class ImportR {
         paper.setOrganization(entry.getOrganization());
         paper.setPublisher(entry.getPublisher());
 
-        if (paper.getAuthor() == null || paper.getTitle() == null  || paper.getBookTitle() == null  || paper.getYear() == null) {
-            return null;
-        } else {
-            return paper;
-        }
+        return validation.validateRequiredConferencePaper(paper);
     }
 
     private Reference readWebPageReference(WebPageR entry) {

@@ -33,7 +33,7 @@ public class App extends Application {
             rootLayoutLoader.setController(rootLayoutController);
             rootLayout = rootLayoutLoader.load();
         } catch (IOException e) {
-            alert.getAlert(null, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar cargar aplicacion. Los sentimos" );
+            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar cargar aplicación. Los sentimos" );
             e.printStackTrace();
         }
     }
@@ -64,13 +64,13 @@ public class App extends Application {
 
         // cierra la aplicaión y el programa previa confirmacion de alert
         stage.setOnCloseRequest(e -> {
-           Alert altClosed = alert.getAlert(stage, Alert.AlertType.CONFIRMATION, "Atención","", "Desea salir de la aplicaión ?" );
+           Alert altClosed = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "Desea salir de la aplicaión?" );
             if (alert.getResult(altClosed).equals(ButtonType.OK)) {
                 if(rootLayoutController.closeApp()){
                     stage.close();
                     Platform.exit();
                 }else{
-                   alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar cerrar de la aplicacion ?" );
+                   alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar cerrar de la aplicaión?" );
                 }
 
             }

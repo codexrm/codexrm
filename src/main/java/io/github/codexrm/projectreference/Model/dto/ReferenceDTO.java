@@ -3,7 +3,7 @@ package io.github.codexrm.projectreference.model.dto;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({@JsonSubTypes.Type(value = ArticleReferenceDTO.class, name = "articleDTO"),
         @JsonSubTypes.Type(value = BookReferenceDTO.class, name = "bookDTO"),
         @JsonSubTypes.Type(value = BookSectionReferenceDTO.class, name = "bookSectionDTO"),

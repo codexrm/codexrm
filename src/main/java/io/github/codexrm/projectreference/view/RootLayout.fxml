@@ -64,7 +64,7 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#save" text="Salvar" />
                         <MenuItem mnemonicParsing="false" onAction="#sync" text="Sincronizar Librería" />
-                        <MenuItem mnemonicParsing="false" onAction="#logout" text="Cerrar Sesion" />
+                        <MenuItem mnemonicParsing="false" onAction="#logout" text="Cerrar Sesión" />
                     </items>
                 </Menu>
             </menus>
@@ -118,7 +118,7 @@
                </children></AnchorPane>
                 <AnchorPane fx:id="referenceDetail" prefHeight="545.0" prefWidth="412.0" style="-fx-background-color: #c9c9c9;">
                <children>
-                  <Label fx:id="noReferenceDetailInfo" prefHeight="547.0" prefWidth="306.0" style="-fx-alignment: center;" text="No reference selected" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Label fx:id="noReferenceDetailInfo" prefHeight="547.0" prefWidth="306.0" style="-fx-alignment: center;" text="No hay referencia seleccionada" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children></AnchorPane>
             </items>
         </SplitPane>

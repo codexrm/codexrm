@@ -61,7 +61,7 @@
                      <font>
                         <Font size="14.0" />
                      </font></Label>
-                        <TextField fx:id="author" prefHeight="47.0" prefWidth="231.0" promptText="Apellido,Nombre;Aplellido2,Nombre2" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="author" prefHeight="47.0" prefWidth="231.0" promptText="Apellido,Nombre;AplellidoN,NombreN" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="title" prefHeight="54.0" prefWidth="231.0" style="-fx-background-color: #b2dafa;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="number" prefHeight="51.0" prefWidth="231.0" promptText="No. del Artículo" style="-fx-background-color: #b2dafa;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <TextField fx:id="volume" prefHeight="55.0" prefWidth="231.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="5" />

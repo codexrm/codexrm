@@ -14,11 +14,7 @@ public class FieldValidations {
 
             final Pattern pat = Pattern.compile("^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*");
             final Matcher mat = pat.matcher(author);
-            if (mat.matches()) {
-                return true;
-            } else {
-                return false;
-            }
+            return mat.matches();
         }
 
     public boolean validateAuthorOrEditor(String author) {
@@ -30,11 +26,7 @@ public class FieldValidations {
 
         final Pattern pat = Pattern.compile("^$|^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+[;(?=[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+)[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+,[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]+]*");
         final Matcher mat = pat.matcher(author);
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public boolean validateAddress(String address) {
@@ -46,11 +38,7 @@ public class FieldValidations {
 
         final Pattern pat = Pattern.compile("^$|^[A-ZÁÉÍÓÚÜÑ][A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s]*[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+,\\s[[A-Za-záéíóúüñÁÉÍÓÚÜÑ]+]*");
         final Matcher mat = pat.matcher(address);
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public boolean validateChapterRequired(final String chpater) {
@@ -60,14 +48,10 @@ public class FieldValidations {
         if(chpater.equals("CodexRM:Error"))
             return false;
 
-            final Pattern pat = Pattern.compile("[\\d]*");
-            final Matcher mat = pat.matcher(chpater);
-            if (mat.matches()) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+        final Pattern pat = Pattern.compile("[\\d]*");
+        final Matcher mat = pat.matcher(chpater);
+        return mat.matches();
+    }
 
     public boolean validateChapterOrVolume(final String number) {
         if(number == null)
@@ -78,11 +62,7 @@ public class FieldValidations {
 
         final Pattern pat = Pattern.compile("^$|[\\d]*");
         final Matcher mat = pat.matcher(number);
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public boolean validateEdition(String edition) {
@@ -94,11 +74,7 @@ public class FieldValidations {
 
         final Pattern pat = Pattern.compile("^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+|\\d+\\.");
         final Matcher mat = pat.matcher(edition);
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public boolean validateIssn(String issn) {
@@ -110,11 +86,7 @@ public class FieldValidations {
 
         final Pattern pat = Pattern.compile("^$|\\d{4}-\\d{4}|\\d{4}-\\d{3}X");
         final Matcher mat = pat.matcher(issn);
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public boolean validateIsbn(String isbn) {
@@ -126,11 +98,7 @@ public class FieldValidations {
 
         final Pattern pat = Pattern.compile("^$|^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$");
         final Matcher mat = pat.matcher(isbn);
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public boolean validateNumber(String number) {
@@ -142,11 +110,7 @@ public class FieldValidations {
 
         final Pattern pat = Pattern.compile("^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ0-9\\s-]+");
         final Matcher mat = pat.matcher(number);
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public boolean validatePagesRequired(String pages) {
@@ -156,13 +120,9 @@ public class FieldValidations {
         if(pages.equals("CodexRM:Error"))
             return false;
 
-            final Pattern pat = Pattern.compile("[IVXMLCD]+|[IVXMLCD]+,[IVXMLCD]+|[IVXMLCD]+-[IVXMLCD]+|[0-9]+|[0-9]+,[0-9]+|[0-9]+-[0-9]+");
-            final Matcher mat = pat.matcher(pages);
-            if (mat.matches()) {
-                return true;
-            } else {
-                return false;
-            }
+        final Pattern pat = Pattern.compile("[IVXMLCD]+|[IVXMLCD]+,[IVXMLCD]+|[IVXMLCD]+-[IVXMLCD]+|[0-9]+|[0-9]+,[0-9]+|[0-9]+-[0-9]+");
+        final Matcher mat = pat.matcher(pages);
+        return mat.matches();
     }
 
     public boolean validatePages(String pages) {
@@ -174,11 +134,7 @@ public class FieldValidations {
 
         final Pattern pat = Pattern.compile("^$|[IVXMLCD]+|[IVXMLCD]+,[IVXMLCD]+|[IVXMLCD]+-[IVXMLCD]+|[0-9]+|[0-9]+,[0-9]+|[0-9]+-[0-9]+");
         final Matcher mat = pat.matcher(pages);
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public boolean validateSeries(String series) {
@@ -190,11 +146,7 @@ public class FieldValidations {
 
         final Pattern pat = Pattern.compile("^$|[A-ZÁÉÍÓÚÜÑa-záéíóúüñ\\s]+");
         final Matcher mat = pat.matcher(series);
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public boolean validateUrl(String url) {
@@ -206,11 +158,7 @@ public class FieldValidations {
 
         final Pattern pat = Pattern.compile("^$|^https://.*");
         final Matcher mat = pat.matcher(url);
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public boolean validateYear(String year) {
@@ -222,11 +170,7 @@ public class FieldValidations {
 
         final Pattern pat = Pattern.compile("^$|\\d{4}|\\d{4}--\\d{4}");
         final Matcher mat = pat.matcher(year);
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public boolean validateYearRequired(String year) {
@@ -238,11 +182,7 @@ public class FieldValidations {
 
         final Pattern pat = Pattern.compile("\\d{4}|\\d{4}--\\d{4}");
         final Matcher mat = pat.matcher(year);
-        if (mat.matches()) {
-            return true;
-        } else {
-            return false;
-        }
+        return mat.matches();
     }
 
     public boolean validateFieldRequired(String field) {

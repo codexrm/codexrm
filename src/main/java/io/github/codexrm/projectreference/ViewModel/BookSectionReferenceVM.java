@@ -1,7 +1,6 @@
 package io.github.codexrm.projectreference.viewmodel;
 
 import io.github.codexrm.projectreference.model.enums.BookSectionType;
-import io.github.codexrm.projectreference.model.enums.Months;
 import io.github.codexrm.projectreference.model.enums.ReferenceType;
 import io.github.codexrm.projectreference.model.model.BookSectionReference;
 import javafx.beans.property.*;

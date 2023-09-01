@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.github.codexrm.projectreference.model.enums.Months;
 import io.github.codexrm.projectreference.model.utils.FieldValidations;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({@Type(value = ArticleReference.class, name = "article"),
         @Type(value = BookReference.class, name = "book"),
         @Type(value = BookSectionReference.class, name = "bookSection"),

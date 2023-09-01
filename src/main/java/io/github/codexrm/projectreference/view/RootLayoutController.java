@@ -3,11 +3,8 @@ package io.github.codexrm.projectreference.view;
 import io.github.codexrm.projectreference.model.enums.Format;
 import io.github.codexrm.projectreference.model.utils.AlertMessage;
 import io.github.codexrm.projectreference.viewmodel.*;
-import javafx.application.Platform;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,13 +17,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import org.jbibtex.ParseException;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
@@ -79,10 +74,10 @@ public class RootLayoutController implements Initializable {
 
     public RootLayoutController() throws IOException {
 
-        managerVM = new ReferenceLibraryManagerVM();
-        stage = new Stage();
-        loginStage = new Stage();
-        alert = new AlertMessage();
+        this.managerVM = new ReferenceLibraryManagerVM();
+        this.stage = new Stage();
+        this.loginStage = new Stage();
+        this.alert = new AlertMessage();
 
         FXMLLoader bookDetailLoader = new FXMLLoader();
         FXMLLoader articleDetailLoader = new FXMLLoader();
@@ -187,7 +182,7 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     public void deleteReference(){
-      Alert altDelete = alert.getAlert(stage, Alert.AlertType.CONFIRMATION, "Atención","", "Desea eliminar las referencias que han sido seleccionadas ?" );
+      Alert altDelete = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "Desea eliminar las referencias que han sido seleccionadas?" );
         if (alert.getResult(altDelete).equals(ButtonType.OK)) {
             ObservableList<ReferenceVM> referenceList = referenceTable.getSelectionModel().getSelectedItems();
             if (referenceList != null) {
@@ -206,17 +201,17 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     private void save() {
-        Alert altSave = alert.getAlert(stage, Alert.AlertType.CONFIRMATION, "Atención","", "Desea salvar la lista de referencias ?" );
+        Alert altSave = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "Desea salvar la lista de referencias?" );
         if (alert.getResult(altSave).equals(ButtonType.OK)) {
             if(!verificateValidations()){
-                alert.getAlert(stage, Alert.AlertType.ERROR, "Error de Validacion", "Referencias invalidas", "Verifique los campos de las referencias. Es posible que alguna no sea valida." +
-                        " Los campos invalidos fueron susrituidos con el siguiente texto: CodexRM:Error");
+                alert.getAlert(Alert.AlertType.ERROR, "Error de Validación", "Referencias inválidas", "Verifique los campos de las referencias. Es posible que algúna no sea válida." +
+                        " Los campos inválidos fueron susrituidos con el siguiente texto: CodexRM:Error");
             }else{
                 try {
                     managerVM.saveDataToModel();
 
                 } catch (IOException e) {
-                   alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar salvar las referencias" );
+                   alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar salvar las referencias" );
                 }
             }
         }
@@ -228,16 +223,16 @@ public class RootLayoutController implements Initializable {
             if(!managerVM.verificateAutentication()){
                 if(login()){
                     if(!managerVM.userLogin(loginDialogController.getUser())){
-                        alert.getAlert(stage, Alert.AlertType.ERROR, "Error de Acceso al usuario", "Usuario no autorizado", "Verifique nombre de usuario y contraseña nuevamente. Es posible que el usuario se encuentre deshabilitado o no exista");
+                        alert.getAlert(Alert.AlertType.ERROR, "Error de Acceso al usuario", "Usuario no autorizado", "Verifique nombre de usuario y contraseña nuevamente. Es posible que el usuario se encuentre deshabilitado o no exista");
                     }else{
                         if(!managerVM.syncDB())
-                            alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar sincronizar las referencias con el servidor");
+                            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar sincronizar las referencias");
                     }
                 }
             }
 
         } catch (IOException e) {
-           alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar sincronizar las referencias con el servidor");
+           alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar sincronizar las referencias");
 
         }
     }
@@ -247,7 +242,7 @@ public class RootLayoutController implements Initializable {
         try {
             exportTo(Format.RIS);
         } catch (IOException e) {
-          alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar exportar las referencias" );
+          alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar exportar las referencias" );
         }
     }
 
@@ -256,7 +251,7 @@ public class RootLayoutController implements Initializable {
         try {
             exportTo(Format.BIBTEX);
         } catch (IOException e) {
-           alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar exportar las referencias" );
+           alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar exportar las referencias" );
         }
     }
 
@@ -265,7 +260,7 @@ public class RootLayoutController implements Initializable {
         try {
             importTo(Format.RIS);
         } catch (IOException | ParseException e) {
-            alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar importar las referencias" );
+            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar importar las referencias" );
         }
     }
 
@@ -274,22 +269,22 @@ public class RootLayoutController implements Initializable {
         try {
             importTo(Format.BIBTEX);
         } catch (IOException | ParseException e) {
-            alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar importar las referencias" );
+            alert.getAlert(Alert.AlertType.ERROR, "Error","", "Hubo un error al intentar importar las referencias" );
         }
     }
 
     //User
     @FXML
     public void logout(){
-        Alert altSave = alert.getAlert(stage, Alert.AlertType.CONFIRMATION, "Atención","", "Desea cerrar la sesion ?" );
+        Alert altSave = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "Desea cerrar la sesión?" );
         if (alert.getResult(altSave).equals(ButtonType.OK)) {
             try {
                 if(!managerVM.userLogout())
-                    alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "No fue posible cerrar la sesion" );
+                    alert.getAlert(Alert.AlertType.ERROR, "Error","", "No fue posible cerrar la sesión." );
 
             } catch (ExecutionException | InterruptedException | IOException e) {
                 e.printStackTrace();
-                alert.getAlert(stage, Alert.AlertType.ERROR, "Error","", "No fue posible cerrar la sesion" );
+                alert.getAlert(Alert.AlertType.ERROR, "Error","", "No fue posible cerrar la sesión." );
             }
 
         }
@@ -443,7 +438,7 @@ public class RootLayoutController implements Initializable {
         loginStage.showAndWait();
 
         loginStage.setOnCloseRequest(e -> {
-            Alert altClosed = alert.getAlert(stage, Alert.AlertType.CONFIRMATION, "Atención","", "No se desea autenticar ?" );
+            Alert altClosed = alert.getAlert(Alert.AlertType.CONFIRMATION, "Atención","", "No se desea autenticar?" );
             if (alert.getResult(altClosed).equals(ButtonType.OK)) {
                 loginStage.setScene(null);
                 loginStage.close();

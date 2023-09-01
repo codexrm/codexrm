@@ -29,7 +29,7 @@ public class DetailsBookReferenceController implements Initializable {
 
     private ReferenceLibraryManagerVM maganerVM;
 
-    private FieldValidations validations = new FieldValidations();
+    private final FieldValidations validations = new FieldValidations();
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 

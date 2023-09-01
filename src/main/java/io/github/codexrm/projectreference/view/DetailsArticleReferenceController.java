@@ -26,7 +26,7 @@ public class DetailsArticleReferenceController implements Initializable {
 
     private ReferenceLibraryManagerVM managerVM;
 
-    private FieldValidations validations = new FieldValidations();
+    private final FieldValidations validations = new FieldValidations();
 
     private final ChangeListener<ReferenceVM> referenceVMListener = (obs, oldReference, newReference) -> {
 
@@ -200,6 +200,5 @@ public class DetailsArticleReferenceController implements Initializable {
         };
         referenceType.getSelectionModel().selectedItemProperty().addListener(referenceTypeListener);
     }
-
 }
 

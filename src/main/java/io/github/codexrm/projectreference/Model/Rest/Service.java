@@ -40,26 +40,28 @@ public class Service {
         ReferencePageDTO referencePageDTO = new ReferencePageDTO();
         Hashtable<Integer, Reference> referenceTableSync = new Hashtable<>();
 
-        addToLibraryDTO(referenceTable, authenticationData);
+        addToLibraryDTO(referenceTable);
 
         do {
             referencePageDTO = restService.syncReferences(libraryDTO, referencePageDTO.getPageDTO().getCurrentPage(), authenticationData.getToken());
             if (referencePageDTO == null) {
                 break;
             }
+
             temporalList = (ArrayList<Reference>) dtoConverter.toReferenceList(referencePageDTO.getReferenceDTOList());
-            for (Reference reference : temporalList) {
-                referenceList.add(reference);
-            }
+            referenceList.addAll(temporalList);
             referencePageDTO.getPageDTO().setCurrentPage(referencePageDTO.getPageDTO().getCurrentPage() + 1);
+
         } while (referenceList.size() != referencePageDTO.getPageDTO().getTotalElement());
+
         for (Reference reference : referenceList) {
             referenceTableSync.put(reference.getId(), reference);
         }
+
         return new ReferenceLibrary(referenceTableSync, authenticationData);
     }
 
-    private void addToLibraryDTO(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData) {
+    private void addToLibraryDTO(Hashtable<Integer, Reference> referenceTable) {
 
         Enumeration<Reference> e = referenceTable.elements();
         ArrayList<Reference> referenceList = new ArrayList<>();
@@ -81,7 +83,6 @@ public class Service {
                 }
             }
         }
-        libraryDTO.setUserId(authenticationData.getId());
         libraryDTO.setSort(SortReference.idAsc);
     }
 }
