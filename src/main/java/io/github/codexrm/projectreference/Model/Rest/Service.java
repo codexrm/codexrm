@@ -4,8 +4,10 @@ import io.github.codexrm.projectreference.model.dto.ReferenceDTO;
 import io.github.codexrm.projectreference.model.dto.ReferenceLibraryDTO;
 import io.github.codexrm.projectreference.model.dto.ReferencePageDTO;
 import io.github.codexrm.projectreference.model.enums.SortReference;
+import io.github.codexrm.projectreference.model.model.AuthenticationData;
 import io.github.codexrm.projectreference.model.model.Reference;
 import io.github.codexrm.projectreference.model.model.ReferenceLibrary;
+import io.github.codexrm.projectreference.model.model.UserLogin;
 import io.github.codexrm.projectreference.model.utils.DTOConverter;
 
 import java.util.ArrayList;
@@ -26,33 +28,40 @@ public class Service {
     }
 
     //User
-    public AuthenticationData login(UserLogin userLogin) { return restService.userLogin(userLogin); }
+    public AuthenticationData login(UserLogin userLogin) {
+        return restService.userLogin(userLogin);
+    }
 
-    public boolean logout(String token) throws ExecutionException, InterruptedException { return restService.userLogout(token); }
+    public boolean logout(String token) throws ExecutionException, InterruptedException {
+        return restService.userLogout(token);
+    }
 
-    public TokenRefreshResponse refreshToken(TokenRefreshRequest refreshToken) { return restService.refreshToken(refreshToken); }
+    public TokenRefreshResponse refreshToken(TokenRefreshRequest refreshToken) {
+        return restService.refreshToken(refreshToken);
+    }
 
     //Reference
     public ReferenceLibrary syncReferences(Hashtable<Integer, Reference> referenceTable, AuthenticationData authenticationData) {
 
-        ArrayList<Reference> temporalList;
         ArrayList<Reference> referenceList = new ArrayList<>();
         ReferencePageDTO referencePageDTO = new ReferencePageDTO();
         Hashtable<Integer, Reference> referenceTableSync = new Hashtable<>();
 
         addToLibraryDTO(referenceTable);
+        referencePageDTO = restService.syncReferences(libraryDTO, referencePageDTO.getPageDTO().getCurrentPage(), authenticationData.getToken());
 
-        do {
-            referencePageDTO = restService.syncReferences(libraryDTO, referencePageDTO.getPageDTO().getCurrentPage(), authenticationData.getToken());
-            if (referencePageDTO == null) {
-                break;
+        if (referencePageDTO != null) {
+            referenceList.addAll(dtoConverter.toReferenceList(referencePageDTO.getReferenceDTOList()));
+
+            while (referenceList.size() != referencePageDTO.getPageDTO().getTotalElement()) {
+                referencePageDTO.getPageDTO().setCurrentPage(referencePageDTO.getPageDTO().getCurrentPage() + 1);
+                referencePageDTO = restService.syncReferences(new ReferenceLibraryDTO(), referencePageDTO.getPageDTO().getCurrentPage(), authenticationData.getToken());
+
+                if (referencePageDTO == null) break;
+
+                referenceList.addAll(dtoConverter.toReferenceList(referencePageDTO.getReferenceDTOList()));
             }
-
-            temporalList = (ArrayList<Reference>) dtoConverter.toReferenceList(referencePageDTO.getReferenceDTOList());
-            referenceList.addAll(temporalList);
-            referencePageDTO.getPageDTO().setCurrentPage(referencePageDTO.getPageDTO().getCurrentPage() + 1);
-
-        } while (referenceList.size() != referencePageDTO.getPageDTO().getTotalElement());
+        }
 
         for (Reference reference : referenceList) {
             referenceTableSync.put(reference.getId(), reference);

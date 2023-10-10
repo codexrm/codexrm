@@ -1,4 +1,4 @@
-package io.github.codexrm.projectreference.model.Rest;
+package io.github.codexrm.projectreference.model.model;
 
 import java.util.Date;
 

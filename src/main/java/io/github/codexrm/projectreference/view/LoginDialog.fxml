@@ -19,7 +19,7 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <MFXButton fx:id="Login" buttonType="RAISED" depthLevel="LEVEL5" layoutX="271.0" layoutY="399.0" onAction="#handleOk" prefHeight="55.0" prefWidth="123.0" rippleColor="#4ec8eda3" style="-fx-background-color: #0cb7f2;" text="Log in" textAlignment="CENTER" wrapText="true">
+      <MFXButton fx:id="Login" buttonType="RAISED" depthLevel="LEVEL5" layoutX="271.0" layoutY="399.0" onAction="#handleOk" prefHeight="55.0" prefWidth="123.0" rippleColor="#4ec8eda3" style="-fx-background-color: #0cb7f2;" text="Aceptar" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

@@ -1,6 +1,6 @@
 package io.github.codexrm.projectreference.model.model;
 
-import io.github.codexrm.projectreference.model.Rest.AuthenticationData;
+import io.github.codexrm.projectreference.model.model.AuthenticationData;
 import java.util.*;
 
 public class ReferenceLibrary {

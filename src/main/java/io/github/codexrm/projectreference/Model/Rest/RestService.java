@@ -1,6 +1,8 @@
 package io.github.codexrm.projectreference.model.Rest;
 
 import io.github.codexrm.projectreference.model.dto.*;
+import io.github.codexrm.projectreference.model.model.AuthenticationData;
+import io.github.codexrm.projectreference.model.model.UserLogin;
 import io.github.codexrm.projectreference.model.utils.AlertMessage;
 import io.github.codexrm.projectreference.model.utils.JsonUtils;
 import javafx.scene.control.Alert;

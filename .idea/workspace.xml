@@ -23,14 +23,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94da447b-1750-4e71-bb76-a8caf0b49cce" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Rest/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Rest/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Rest/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Rest/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Rest/Rest.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/AuthenticationData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ReferenceLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Model/ReferenceLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Rest/AuthenticationData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Rest/RestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Rest/RestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Rest/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Rest/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/Model/Rest/UserLogin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/UserLoginVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/ViewModel/UserLoginVM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/LoginDialog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/LoginDialog.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayout.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/codexrm/projectreference/view/RootLayoutController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ProjectOfReferences-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/ProjectOfReferences-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ProjectOfReferences-0.0.1-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testFile/referenceL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testFile/referenceL.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,6 +290,15 @@
       <workItem from="1693591193806" duration="16000" />
       <workItem from="1693592522507" duration="18000" />
       <workItem from="1693606984618" duration="761000" />
+      <workItem from="1693846434634" duration="746000" />
+      <workItem from="1694543260409" duration="2317000" />
+      <workItem from="1695853414589" duration="1717000" />
+      <workItem from="1695920054150" duration="26000" />
+      <workItem from="1695922835984" duration="642000" />
+      <workItem from="1696105117616" duration="572000" />
+      <workItem from="1696717799383" duration="5208000" />
+      <workItem from="1696725028647" duration="1333000" />
+      <workItem from="1696958882692" duration="1490000" />
     </task>
     <servers />
   </component>
@@ -315,45 +330,45 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1486" height="843" key="DebuggerActiveHint/0.0.2560.1400@0.0.2560.1400" timestamp="1693010266156" />
-    <state x="566" y="235" key="FileChooserDialogImpl" timestamp="1686782363908">
+    <state width="1322" height="227" key="GridCell.Tab.0.bottom" timestamp="1696964684736">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="566" y="235" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1686782363908" />
-    <state width="1234" height="332" key="GridCell.Tab.0.bottom" timestamp="1693591156696">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1306" height="177" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1686783120730" />
+    <state width="1322" height="227" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1696964684736" />
     <state width="1234" height="332" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1693591156696" />
-    <state width="1234" height="332" key="GridCell.Tab.0.center" timestamp="1693591156696">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1322" height="227" key="GridCell.Tab.0.center" timestamp="1696964684736">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="177" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1686783120730" />
+    <state width="1322" height="227" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1696964684736" />
     <state width="1234" height="332" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1693591156696" />
-    <state width="1234" height="332" key="GridCell.Tab.0.left" timestamp="1693591156696">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1322" height="227" key="GridCell.Tab.0.left" timestamp="1696964684736">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="177" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1686783120730" />
+    <state width="1322" height="227" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1696964684736" />
     <state width="1234" height="332" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1693591156696" />
-    <state width="1234" height="332" key="GridCell.Tab.0.right" timestamp="1693591156696">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1322" height="227" key="GridCell.Tab.0.right" timestamp="1696964684736">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1306" height="177" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1686783120730" />
+    <state width="1322" height="227" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1696964684736" />
     <state width="1234" height="332" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1693591156696" />
-    <state width="2517" height="303" key="GridCell.Tab.1.bottom" timestamp="1693012110911">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1322" height="83" key="GridCell.Tab.1.bottom" timestamp="1696727037440">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1322" height="83" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1696727037440" />
     <state width="2517" height="303" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1693012110911" />
-    <state width="2517" height="303" key="GridCell.Tab.1.center" timestamp="1693012110911">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1322" height="83" key="GridCell.Tab.1.center" timestamp="1696727037440">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1322" height="83" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1696727037440" />
     <state width="2517" height="303" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1693012110911" />
-    <state width="2517" height="303" key="GridCell.Tab.1.left" timestamp="1693012110911">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1322" height="83" key="GridCell.Tab.1.left" timestamp="1696727037440">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1322" height="83" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1696727037440" />
     <state width="2517" height="303" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1693012110911" />
-    <state width="2517" height="303" key="GridCell.Tab.1.right" timestamp="1693012110911">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state width="1322" height="83" key="GridCell.Tab.1.right" timestamp="1696727037440">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state width="1322" height="83" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1696727037440" />
     <state width="2517" height="303" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1693012110911" />
     <state width="1288" height="708" key="XDebugger.FullValuePopup" timestamp="1692318847670">
       <screen x="0" y="0" width="2560" height="1400" />
